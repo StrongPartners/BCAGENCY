@@ -36,6 +36,7 @@ const Header = () => {
                         alt="BC Creative Agency"
                         className="h-20 md:h-24 w-auto object-contain relative z-10"
                     />
+                    <span className="ml-3 text-[#1e3a8a] font-black text-lg md:text-xl tracking-widest uppercase whitespace-nowrap">BC CREATIVE AGENCY</span>
                 </motion.div>
 
                 {/* Desktop Navigation */}
