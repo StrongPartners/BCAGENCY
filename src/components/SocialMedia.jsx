@@ -62,7 +62,7 @@ const SocialMedia = () => {
                                 Markanızın sosyal medyadaki sesini güçlendirin, kitlenizle gerçek bağlar kurun.
                             </motion.p>
                             <motion.button
-                                onClick={() => window.location.href = '/contact'}
+                                onClick={() => window.open('https://wa.me/905488755461', '_blank')}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 className="mt-8 bg-brand-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-brand-700 transition-colors"

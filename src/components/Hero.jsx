@@ -135,7 +135,7 @@ const Hero = () => {
                         className="pt-10"
                     >
                         <button
-                            onClick={() => window.location.href = '/contact'}
+                            onClick={() => window.open('https://wa.me/905488755461', '_blank')}
                             className="bg-brand-600 hover:bg-brand-700 text-white text-lg md:text-xl px-12 py-4 rounded-full font-bold transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 cursor-pointer"
                         >
                             Çalışmaya Başlayalım

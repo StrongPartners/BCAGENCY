@@ -115,7 +115,7 @@ const Header = () => {
                 {/* Social & Contact - Desktop */}
                 <div className="hidden lg:flex items-center gap-3">
                     <motion.button
-                        onClick={() => window.location.href = 'tel:+905488755461'}
+                        onClick={() => window.open('https://wa.me/905488755461', '_blank')}
                         whileHover={{ scale: 1.1, rotate: -5 }}
                         whileTap={{ scale: 0.9 }}
                         className="w-10 h-10 flex items-center justify-center rounded-full bg-brand-600 text-white shadow-md cursor-pointer"
@@ -140,7 +140,7 @@ const Header = () => {
                         whileTap={{ scale: 0.95 }}
                         className="bg-[#25D366] text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-lg hover:shadow-[#25D366]/40 cursor-pointer flex items-center gap-2 group"
                     >
-                        Bize Ulaş
+                        Teklif Al
                     </motion.button>
                 </div>
 
