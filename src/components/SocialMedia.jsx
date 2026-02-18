@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Camera, Share2, Users, Heart, MessageSquare } from 'lucide-react';
 import ColorfulBlobs from './ColorfulBlobs';
@@ -26,6 +27,15 @@ const SocialMedia = () => {
 
     return (
         <div className="pt-20">
+            <Helmet>
+                <title>Sosyal Medya Yönetimi KKTC | Instagram & Facebook – BC Creative Agency Girne</title>
+                <meta name="description" content="KKTC'de sosyal medya hesaplarınızı profesyonelce yönetiyoruz. Instagram, Facebook ve diğer platformlarda markanızı büyütün. Kuzey Kıbrıs'ın en iyi sosyal medya ajansı." />
+                <meta name="keywords" content="KKTC sosyal medya yönetimi, Kuzey Kıbrıs Instagram yönetimi, Girne sosyal medya ajansı, KKTC Facebook reklamları, Kuzey Kıbrıs içerik üretimi" />
+                <link rel="canonical" href="https://bccreative.agency/hizmetler/sosyal-medya" />
+                <meta property="og:title" content="Sosyal Medya Yönetimi KKTC | BC Creative Agency – Girne" />
+                <meta property="og:description" content="KKTC'de Instagram ve Facebook hesaplarınızı profesyonelce yönetiyoruz." />
+                <meta property="og:url" content="https://bccreative.agency/hizmetler/sosyal-medya" />
+            </Helmet>
             {/* Hero Section */}
             <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden py-20">
                 <div className="absolute inset-0 z-0">

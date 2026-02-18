@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://bccreative.agency/sitemap.xml
+
+# Engellenenler
+Disallow: /api/
+Disallow: /*.json$

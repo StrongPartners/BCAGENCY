@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Layout, Smartphone, Globe, Code2, Sparkles } from 'lucide-react';
 import ColorfulBlobs from './ColorfulBlobs';
@@ -26,6 +27,15 @@ const WebDesign = () => {
 
     return (
         <div className="pt-20">
+            <Helmet>
+                <title>Web Tasarım KKTC | Profesyonel Web Sitesi – BC Creative Agency Girne</title>
+                <meta name="description" content="KKTC'de modern, hızlı ve mobil uyumlu web siteleri tasarlıyoruz. Kuzey Kıbrıs'taki işletmeniz için profesyonel web tasarım ve geliştirme hizmetleri. SEO uyumlu siteler." />
+                <meta name="keywords" content="KKTC web tasarım, Kuzey Kıbrıs web sitesi, Girne web tasarım ajansı, KKTC e-ticaret sitesi, Kuzey Kıbrıs yazılım geliştirme" />
+                <link rel="canonical" href="https://bccreative.agency/hizmetler/web-tasarim" />
+                <meta property="og:title" content="Web Tasarım KKTC | BC Creative Agency – Girne" />
+                <meta property="og:description" content="KKTC'de modern ve mobil uyumlu web siteleri tasarlıyoruz." />
+                <meta property="og:url" content="https://bccreative.agency/hizmetler/web-tasarim" />
+            </Helmet>
             {/* Hero Section */}
             <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden py-20">
                 <div className="absolute inset-0 z-0">
