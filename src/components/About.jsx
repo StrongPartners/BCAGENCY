@@ -122,7 +122,7 @@ const About = () => {
                                 </span>
                             </h1>
                             <p className="text-gray-700 text-xl md:text-2xl font-medium leading-relaxed">
-                                BC Medya olarak, dijital dünyada markanızın sesini en gür şekilde duyurmak için tecrübe ve yaratıcılığımızı birleştiriyoruz.
+                                BC Creative Agency olarak, dijital dünyada markanızın sesini en gür şekilde duyurmak için tecrübe ve yaratıcılığımızı birleştiriyoruz.
                             </p>
                         </div>
                         <div className="lg:w-1/2 relative">
@@ -170,7 +170,7 @@ const About = () => {
                             <div className="w-32 h-2 bg-brand-600 rounded-full mb-8" />
                             <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
                                 <p>
-                                    BC Medya Dijital Reklam Pazarlama İç ve Dış Tic. LTD. ŞTİ. olarak, teknoloji ve veriyi yaratıcılıkla harmanlayan yeni nesil bir dijital performans ajansıyız.
+                                    BC Creative Agency olarak, teknoloji ve veriyi yaratıcılıkla harmanlayan yeni nesil bir dijital performans ajansıyız.
                                 </p>
                                 <p>
                                     İş ortaklarımızın dijital dönüşüm yolculuklarında yanlarında yer alarak, sadece reklam yönetimi değil, ölçülebilir büyüme stratejileri geliştiriyoruz.
@@ -181,7 +181,7 @@ const About = () => {
                             <div className="aspect-video rounded-[2rem] border border-brand-600/20 overflow-hidden shadow-2xl group">
                                 <img
                                     src="/about-rocket.jpg"
-                                    alt="BC MEDYA"
+                                    alt="BC Creative Agency"
                                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                                 />
                                 <div className="absolute inset-0 bg-brand-600/5 group-hover:bg-transparent transition-colors duration-500" />

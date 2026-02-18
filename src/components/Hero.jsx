@@ -125,7 +125,7 @@ const Hero = () => {
                         transition={{ duration: 0.6, delay: 0.4 }}
                         className="text-base md:text-xl text-gray-600 leading-relaxed max-w-6xl mx-auto pt-8"
                     >
-                        <span className="font-bold text-gray-900">BC MEDYA</span>, dijital pazarlama alanında markalara ölçülebilir büyüme sağlayan bir performans ajansıdır. Reklam, sosyal medya ve strateji süreçlerini tek merkezden yönetir, harcadığınız bütçeyi gerçek sonuçlara dönüştürürüz.
+                        <span className="font-bold text-gray-900">BC Creative Agency</span>, dijital pazarlama alanında markalara ölçülebilir büyüme sağlayan bir performans ajansıdır. Reklam, sosyal medya ve strateji süreçlerini tek merkezden yönetir, harcadığınız bütçeyi gerçek sonuçlara dönüştürürüz.
                     </motion.p>
 
                     <motion.div

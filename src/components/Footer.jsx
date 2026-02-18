@@ -10,12 +10,12 @@ const Footer = () => {
                     <div className="mb-6">
                         <img
                             src="/logo-white.png"
-                            alt="BC MEDYA"
-                            className="h-10 w-auto object-contain"
+                            alt="BC Creative Agency"
+                            className="h-20 w-auto object-contain"
                         />
                     </div>
                     <p className="leading-relaxed mb-6 max-w-xs text-gray-400 font-normal tracking-normal">
-                        BC Medya, dijital pazarlama ve reklam alanında öncü bir ajansdır. Yaratıcı yaklaşımı ve uzman ekibiyle markanızı dijital dünyada öne çıkarmak için en etkili stratejileri sunar. Dijitalin dalgalarında sıçrayın, BC Medya ile başarıya ulaşın.
+                        BC Creative Agency, dijital pazarlama ve reklam alanında öncü bir ajansdır. Yaratıcı yaklaşımı ve uzman ekibiyle markanızı dijital dünyada öne çıkarmak için en etkili stratejileri sunar. Dijitalin dalgalarında sıçrayın, BC Creative Agency ile başarıya ulaşın.
                     </p>
                 </div>
 
@@ -56,7 +56,7 @@ const Footer = () => {
             </div>
 
             <div className="container mx-auto px-4 md:px-8 mt-16 pt-8 border-t border-gray-800 text-center text-xs text-gray-500">
-                © 2017 – 2026 BC Medya Dijital Reklam Pazarlama İç ve Dış Tic. LTD. ŞTİ.
+                © 2017 – 2026 BC Creative Agency
             </div>
         </footer>
     );

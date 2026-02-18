@@ -33,8 +33,8 @@ const Header = () => {
                 >
                     <img
                         src="/logo.png"
-                        alt="BC MEDYA"
-                        className="h-8 md:h-12 w-auto object-contain relative z-10"
+                        alt="BC Creative Agency"
+                        className="h-14 md:h-20 w-auto object-contain relative z-10"
                     />
                 </motion.div>
 
