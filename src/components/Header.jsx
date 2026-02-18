@@ -41,22 +41,22 @@ const Header = () => {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden lg:flex items-center gap-8 xl:gap-12">
-                    {['Ana Sayfa', 'Hakkımızda'].map((item) => (
+                    {[
+                        { label: 'Ana Sayfa', path: '/' },
+                        { label: 'Hakkımızda', path: '/about' },
+                        { label: 'Blog', path: '/blog' },
+                    ].map((item) => (
                         <a
-                            key={item}
-                            href={item === 'Ana Sayfa' ? '/' : '#'}
+                            key={item.label}
+                            href={item.path}
                             onClick={(e) => {
                                 e.preventDefault();
-                                if (item === 'Ana Sayfa') {
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                    navigate('/');
-                                } else {
-                                    navigate('/about');
-                                }
+                                navigate(item.path);
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
                             }}
                             className="relative text-gray-800 font-normal hover:text-brand-600 transition-all duration-300 hover:translate-y-1 inline-block group text-[16px] xl:text-[18px]"
                         >
-                            {item}
+                            {item.label}
                             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-600 transition-all duration-300 group-hover:w-full"></span>
                         </a>
                     ))}
@@ -167,6 +167,7 @@ const Header = () => {
                             <div className="flex flex-col p-6 space-y-6">
                                 <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); setIsMobileMenuOpen(false); }} className="text-xl font-medium text-gray-800">Ana Sayfa</a>
                                 <a href="/about" onClick={(e) => { e.preventDefault(); navigate('/about'); setIsMobileMenuOpen(false); }} className="text-xl font-medium text-gray-800">Hakkımızda</a>
+                                <a href="/blog" onClick={(e) => { e.preventDefault(); navigate('/blog'); setIsMobileMenuOpen(false); }} className="text-xl font-medium text-gray-800">Blog</a>
 
                                 <div className="space-y-4">
                                     <div className="text-sm font-bold text-gray-400 uppercase tracking-wider">Hizmetlerimiz</div>

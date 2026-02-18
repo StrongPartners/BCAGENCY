@@ -8,6 +8,8 @@ import SEO from './components/SEO';
 import GoogleAds from './components/GoogleAds';
 import SocialMedia from './components/SocialMedia';
 import WebDesign from './components/WebDesign';
+import Blog from './components/Blog';
+import BlogPost from './components/BlogPost';
 import Footer from './components/Footer';
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
         <Route path="/hizmetler/google-ads" element={<GoogleAds />} />
         <Route path="/hizmetler/sosyal-medya" element={<SocialMedia />} />
         <Route path="/hizmetler/web-tasarim" element={<WebDesign />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
       </Routes>
       <Footer />
     </div>
