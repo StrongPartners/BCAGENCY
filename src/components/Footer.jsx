@@ -29,7 +29,7 @@ const Footer = () => {
                         </li>
                         <li className="flex items-center gap-3">
                             <Mail size={18} className="text-white shrink-0" />
-                            <a href="mailto:info@bcmedya.com" className="hover:text-white transition-colors">info@bcmedya.com</a>
+                            <a href="mailto:info@bccreative.agency" className="hover:text-white transition-colors">info@bccreative.agency</a>
                         </li>
                     </ul>
                 </div>
@@ -48,7 +48,7 @@ const Footer = () => {
                 {/* Social Media Column */}
                 <div>
                     <h3 className="text-white text-lg font-bold mb-6">Sosyal Medya</h3>
-                    <a href="#" className="flex items-center gap-3 hover:text-white transition-colors group">
+                    <a href="https://www.instagram.com/bccreative.agency/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors group">
                         <Instagram size={20} className="text-white group-hover:text-brand-400 transition-colors" />
                         <span>Instagram'da takip edin</span>
                     </a>

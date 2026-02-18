@@ -121,7 +121,7 @@ const Header = () => {
                         </svg>
                     </motion.button>
                     <motion.button
-                        onClick={() => window.open('https://instagram.com', '_blank')}
+                        onClick={() => window.open('https://www.instagram.com/bccreative.agency/', '_blank')}
                         whileHover={{ scale: 1.1, rotate: 5 }}
                         whileTap={{ scale: 0.9 }}
                         className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white shadow-md cursor-pointer"
