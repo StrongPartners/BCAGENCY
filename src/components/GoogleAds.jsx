@@ -1,5 +1,5 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
+﻿import React from 'react';
+import useSEO from '../hooks/useSEO';
 import { motion } from 'framer-motion';
 import { Target, TrendingUp, BarChart3, MousePointer2, Megaphone } from 'lucide-react';
 import ColorfulBlobs from './ColorfulBlobs';
@@ -25,17 +25,17 @@ const GoogleAds = () => {
         }
     ];
 
+    useSEO({
+        title: 'Google Ads Yönetimi KKTC | Reklam Ajansı - BC Creative Agency Girne',
+        description: 'KKTC\'de Google Ads reklamlarınızı profesyonelce yönetiyoruz. Kuzey Kıbrıs\'ta potansiyel müşterilerinize doğru zamanda ulaşın. Ölçülebilir sonuçlar, şeffaf raporlama.',
+        keywords: 'KKTC Google Ads, Kuzey Kıbrıs Google reklamları, Girne reklam ajansı, KKTC PPC yönetimi, Kuzey Kıbrıs dijital reklam',
+        canonical: 'https://bccreative.agency/hizmetler/google-ads',
+        ogTitle: 'Google Ads Yönetimi KKTC | BC Creative Agency - Girne',
+        ogDescription: 'KKTC\'de Google Ads reklamlarınızı profesyonelce yönetiyoruz.',
+        ogUrl: 'https://bccreative.agency/hizmetler/google-ads',
+    });
     return (
         <div className="pt-20">
-            <Helmet>
-                <title>Google Ads Yönetimi KKTC | Reklam Ajansı – BC Creative Agency Girne</title>
-                <meta name="description" content="KKTC'de Google Ads reklamlarınızı profesyonelce yönetiyoruz. Kuzey Kıbrıs'ta potansiyel müşterilerinize doğru zamanda ulaşın. Ölçülebilir sonuçlar, şeffaf raporlama." />
-                <meta name="keywords" content="KKTC Google Ads, Kuzey Kıbrıs Google reklamları, Girne reklam ajansı, KKTC PPC yönetimi, Kuzey Kıbrıs dijital reklam" />
-                <link rel="canonical" href="https://bccreative.agency/hizmetler/google-ads" />
-                <meta property="og:title" content="Google Ads Yönetimi KKTC | BC Creative Agency – Girne" />
-                <meta property="og:description" content="KKTC'de Google Ads reklamlarınızı profesyonelce yönetiyoruz." />
-                <meta property="og:url" content="https://bccreative.agency/hizmetler/google-ads" />
-            </Helmet>
             {/* Hero Section */}
             <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden py-20">
                 <div className="absolute inset-0 z-0">

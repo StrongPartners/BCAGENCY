@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+﻿import React, { useState, useEffect } from 'react';
+import useSEO from '../hooks/useSEO';
 import { motion, AnimatePresence } from 'framer-motion';
 import ColorfulBlobs from './ColorfulBlobs';
 
@@ -47,17 +47,17 @@ const About = () => {
         return () => clearInterval(timer);
     }, []);
 
+    useSEO({
+        title: 'Hakkımızda | BC Creative Agency - KKTC Girne Dijital Pazarlama Ajansı',
+        description: 'BC Creative Agency hakkında bilgi edinin. Kuzey Kıbrıs Türk Cumhuriyeti Girne\'de kurulu dijital pazarlama ajansımız, 2017\'den bu yana markalara SEO, Google Ads, sosyal medya ve web tasarım hizmetleri sunmaktadır.',
+        keywords: 'BC Creative Agency hakkında, KKTC dijital ajans ekibi, Kuzey Kıbrıs pazarlama ajansı, Girne reklam ajansı kimdir',
+        canonical: 'https://bccreative.agency/about',
+        ogTitle: 'Hakkımızda | BC Creative Agency - KKTC Girne',
+        ogDescription: '2017\'den bu yana KKTC\'de dijital pazarlama hizmetleri sunan BC Creative Agency ekibini tanıyın.',
+        ogUrl: 'https://bccreative.agency/about',
+    });
     return (
         <div className="min-h-screen bg-white">
-            <Helmet>
-                <title>Hakkımızda | BC Creative Agency – KKTC Girne Dijital Pazarlama Ajansı</title>
-                <meta name="description" content="BC Creative Agency hakkında bilgi edinin. Kuzey Kıbrıs Türk Cumhuriyeti Girne'de kurulu dijital pazarlama ajansımız, 2017'den bu yana markalara SEO, Google Ads, sosyal medya ve web tasarım hizmetleri sunmaktadır." />
-                <meta name="keywords" content="BC Creative Agency hakkında, KKTC dijital ajans ekibi, Kuzey Kıbrıs pazarlama ajansı, Girne reklam ajansı kimdir" />
-                <link rel="canonical" href="https://bccreative.agency/about" />
-                <meta property="og:title" content="Hakkımızda | BC Creative Agency – KKTC Girne" />
-                <meta property="og:description" content="2017'den bu yana KKTC'de dijital pazarlama hizmetleri sunan BC Creative Agency ekibini tanıyın." />
-                <meta property="og:url" content="https://bccreative.agency/about" />
-            </Helmet>
             {/* Hero Section */}
             <section className="relative py-32 md:py-48 px-4 md:px-8 overflow-hidden bg-gray-50">
                 {/* Background Video Layer */}

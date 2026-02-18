@@ -1,5 +1,5 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
+﻿import React from 'react';
+import useSEO from '../hooks/useSEO';
 import { motion } from 'framer-motion';
 import { Rocket, Target, TrendingUp, Search, CheckCircle2 } from 'lucide-react';
 import ColorfulBlobs from './ColorfulBlobs';
@@ -25,17 +25,17 @@ const SEO = () => {
         }
     ];
 
+    useSEO({
+        title: 'SEO Hizmetleri KKTC | Arama Motoru Optimizasyonu - BC Creative Agency Girne',
+        description: 'Kuzey Kıbrıs\'ta Google\'da üst sıralara çıkın. BC Creative Agency\'nin profesyonel SEO hizmetleriyle KKTC ve uluslararası pazarda rakiplerinizin önüne geçin.',
+        keywords: 'KKTC SEO, Kuzey Kıbrıs arama motoru optimizasyonu, Girne SEO ajansı, KKTC Google sıralaması, Kuzey Kıbrıs dijital pazarlama SEO',
+        canonical: 'https://bccreative.agency/hizmetler/seo',
+        ogTitle: 'SEO Hizmetleri KKTC | BC Creative Agency - Girne',
+        ogDescription: 'KKTC\'de Google\'da üst sıralara çıkmak için profesyonel SEO hizmetleri.',
+        ogUrl: 'https://bccreative.agency/hizmetler/seo',
+    });
     return (
         <div className="pt-20">
-            <Helmet>
-                <title>SEO Hizmetleri KKTC | Arama Motoru Optimizasyonu – BC Creative Agency Girne</title>
-                <meta name="description" content="Kuzey Kıbrıs'ta Google'da üst sıralara çıkın. BC Creative Agency'nin profesyonel SEO hizmetleriyle KKTC ve uluslararası pazarda rakiplerinizin önüne geçin." />
-                <meta name="keywords" content="KKTC SEO, Kuzey Kıbrıs arama motoru optimizasyonu, Girne SEO ajansı, KKTC Google sıralaması, Kuzey Kıbrıs dijital pazarlama SEO" />
-                <link rel="canonical" href="https://bccreative.agency/hizmetler/seo" />
-                <meta property="og:title" content="SEO Hizmetleri KKTC | BC Creative Agency – Girne" />
-                <meta property="og:description" content="KKTC'de Google'da üst sıralara çıkmak için profesyonel SEO hizmetleri." />
-                <meta property="og:url" content="https://bccreative.agency/hizmetler/seo" />
-            </Helmet>
             {/* Hero Section */}
             <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden py-20">
                 <div className="absolute inset-0 z-0">

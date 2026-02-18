@@ -1,5 +1,5 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
+﻿import React from 'react';
+import useSEO from '../hooks/useSEO';
 import { motion } from 'framer-motion';
 import ColorfulBlobs from './ColorfulBlobs';
 
@@ -66,17 +66,17 @@ const Contact = () => {
         }
     };
 
+    useSEO({
+        title: 'İletişim | BC Creative Agency - KKTC Girne Dijital Ajans',
+        description: 'BC Creative Agency ile iletişime geçin. KKTC Girne\'de dijital pazarlama, SEO, Google Ads ve sosyal medya hizmetleri için teklif alın. WhatsApp: +90 548 875 54 61',
+        keywords: 'BC Creative Agency iletişim, KKTC dijital ajans iletişim, Girne reklam ajansı telefon, KKTC SEO teklif',
+        canonical: 'https://bccreative.agency/contact',
+        ogTitle: 'İletişim | BC Creative Agency - KKTC Girne',
+        ogDescription: 'KKTC\'nin lider dijital ajansı BC Creative Agency ile iletişime geçin.',
+        ogUrl: 'https://bccreative.agency/contact',
+    });
     return (
         <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#F4F5F7]">
-            <Helmet>
-                <title>İletişim | BC Creative Agency – KKTC Girne Dijital Ajans</title>
-                <meta name="description" content="BC Creative Agency ile iletişime geçin. KKTC Girne'de dijital pazarlama, SEO, Google Ads ve sosyal medya hizmetleri için teklif alın. WhatsApp: +90 548 875 54 61" />
-                <meta name="keywords" content="BC Creative Agency iletişim, KKTC dijital ajans iletişim, Girne reklam ajansı telefon, KKTC SEO teklif" />
-                <link rel="canonical" href="https://bccreative.agency/contact" />
-                <meta property="og:title" content="İletişim | BC Creative Agency – KKTC Girne" />
-                <meta property="og:description" content="KKTC'nin lider dijital ajansı BC Creative Agency ile iletişime geçin." />
-                <meta property="og:url" content="https://bccreative.agency/contact" />
-            </Helmet>
             {/* Background Decoration */}
             <div className="absolute inset-0 pointer-events-none">
                 <ColorfulBlobs variant="hero" />

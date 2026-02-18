@@ -1,22 +1,23 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import useSEO from '../hooks/useSEO';
 import Hero from './Hero';
 import ServiceBanner from './ServiceBanner';
 import Services from './Services';
 import WhyChooseUs from './WhyChooseUs';
 
 const Home = () => {
+    useSEO({
+        title: 'BC Creative Agency | KKTC Dijital Pazarlama, SEO, Google Ads, Sosyal Medya Ajansı – Girne',
+        description: "BC Creative Agency, Kuzey Kıbrıs Türk Cumhuriyeti'nin Girne şehrinde hizmet veren profesyonel dijital pazarlama ajansıdır. SEO, Google Ads, sosyal medya yönetimi ve web tasarım hizmetleri.",
+        keywords: 'KKTC dijital ajans, Kuzey Kıbrıs reklam ajansı, KKTC SEO, Girne dijital pazarlama, Kuzey Kıbrıs Google Ads, KKTC sosyal medya',
+        canonical: 'https://bccreative.agency/',
+        ogTitle: 'BC Creative Agency | KKTC Dijital Pazarlama Ajansı – Girne',
+        ogDescription: "KKTC Girne'de hizmet veren profesyonel dijital ajans. SEO, Google Ads, sosyal medya, web tasarım.",
+        ogUrl: 'https://bccreative.agency/',
+    });
+
     return (
         <main>
-            <Helmet>
-                <title>BC Creative Agency | KKTC Dijital Pazarlama, SEO, Google Ads, Sosyal Medya Ajansı – Girne</title>
-                <meta name="description" content="BC Creative Agency, Kuzey Kıbrıs Türk Cumhuriyeti'nin Girne şehrinde hizmet veren profesyonel dijital pazarlama ajansıdır. SEO, Google Ads, sosyal medya yönetimi ve web tasarım hizmetleri." />
-                <meta name="keywords" content="KKTC dijital ajans, Kuzey Kıbrıs reklam ajansı, KKTC SEO, Girne dijital pazarlama, Kuzey Kıbrıs Google Ads, KKTC sosyal medya" />
-                <link rel="canonical" href="https://bccreative.agency/" />
-                <meta property="og:title" content="BC Creative Agency | KKTC Dijital Pazarlama Ajansı – Girne" />
-                <meta property="og:description" content="KKTC Girne'de hizmet veren profesyonel dijital ajans. SEO, Google Ads, sosyal medya, web tasarım." />
-                <meta property="og:url" content="https://bccreative.agency/" />
-            </Helmet>
             <Hero />
             <ServiceBanner />
             <Services />
