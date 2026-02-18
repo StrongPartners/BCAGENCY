@@ -7,12 +7,16 @@ const Footer = () => {
             <div className="container mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
                 {/* Brand Column */}
                 <div>
-                    <div className="mb-6">
+                    <div className="mb-6 flex items-center gap-2">
                         <img
-                            src="/logo-white.png"
+                            src="/logo-icon.png"
                             alt="BC Creative Agency"
-                            className="h-20 w-auto object-contain"
+                            className="h-12 w-auto object-contain"
                         />
+                        <div className="leading-tight">
+                            <span className="block text-white font-black text-lg tracking-tight">BC</span>
+                            <span className="block text-gray-400 font-semibold text-[10px] tracking-widest uppercase">Creative Agency</span>
+                        </div>
                     </div>
                     <p className="leading-relaxed mb-6 max-w-xs text-gray-400 font-normal tracking-normal">
                         BC Creative Agency, dijital pazarlama ve reklam alanında öncü bir ajansdır. Yaratıcı yaklaşımı ve uzman ekibiyle markanızı dijital dünyada öne çıkarmak için en etkili stratejileri sunar. Dijitalin dalgalarında sıçrayın, BC Creative Agency ile başarıya ulaşın.

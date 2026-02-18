@@ -32,10 +32,14 @@ const Header = () => {
                     whileHover={{ scale: 1.05 }}
                 >
                     <img
-                        src="/logo.png"
+                        src="/logo-icon.png"
                         alt="BC Creative Agency"
-                        className="h-14 md:h-20 w-auto object-contain relative z-10"
+                        className="h-10 md:h-12 w-auto object-contain relative z-10"
                     />
+                    <div className="ml-2 leading-tight">
+                        <span className="block text-[#1e3a8a] font-black text-base md:text-lg tracking-tight">BC</span>
+                        <span className="block text-[#1e3a8a] font-semibold text-[10px] md:text-xs tracking-widest uppercase">Creative Agency</span>
+                    </div>
                 </motion.div>
 
                 {/* Desktop Navigation */}
