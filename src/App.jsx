@@ -11,6 +11,7 @@ import WebDesign from './components/WebDesign';
 import Blog from './components/Blog';
 import BlogPost from './components/BlogPost';
 import Footer from './components/Footer';
+import WhatsAppButton from './components/WhatsAppButton';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/blog/:slug" element={<BlogPost />} />
       </Routes>
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }

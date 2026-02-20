@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
 const Header = () => {
     const [isHovering, setIsHovering] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
+    const { lang, toggleLang, t } = useLanguage();
 
     return (
         <motion.header
@@ -42,9 +44,9 @@ const Header = () => {
                 {/* Desktop Navigation */}
                 <nav className="hidden lg:flex items-center gap-8 xl:gap-12">
                     {[
-                        { label: 'Ana Sayfa', path: '/' },
-                        { label: 'Hakkımızda', path: '/about' },
-                        { label: 'Blog', path: '/blog' },
+                        { label: t('nav_home'), path: '/' },
+                        { label: t('nav_about'), path: '/about' },
+                        { label: t('nav_blog'), path: '/blog' },
                     ].map((item) => (
                         <a
                             key={item.label}
@@ -68,7 +70,7 @@ const Header = () => {
                         onMouseLeave={() => setIsHovering(false)}
                     >
                         <div className="flex items-center gap-1 text-gray-800 font-normal hover:text-brand-600 cursor-pointer transition-all duration-300 hover:translate-y-1 py-2 text-[16px] xl:text-[18px]">
-                            <span>Hizmetlerimiz</span>
+                            <span>{t('nav_services')}</span>
                             <ChevronDown size={16} className={`transition-transform duration-200 ${isHovering ? 'rotate-180' : ''}`} />
                             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-600 transition-all duration-300 group-hover:w-full"></span>
                         </div>
@@ -84,10 +86,10 @@ const Header = () => {
                                 >
                                     <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden py-1">
                                         {[
-                                            { name: 'Arama Motoru Optimizasyonu', path: '/hizmetler/seo' },
-                                            { name: 'Sosyal Medya Yönetimi', path: '/hizmetler/sosyal-medya' },
-                                            { name: 'Google Ads Yönetimi', path: '/hizmetler/google-ads' },
-                                            { name: 'Web Tasarım', path: '/hizmetler/web-tasarim' }
+                                            { name: t('nav_seo'), path: '/hizmetler/seo' },
+                                            { name: t('nav_social'), path: '/hizmetler/sosyal-medya' },
+                                            { name: t('nav_ads'), path: '/hizmetler/google-ads' },
+                                            { name: t('nav_web'), path: '/hizmetler/web-tasarim' }
                                         ].map((service, index) => (
                                             <a
                                                 key={service.name}
@@ -111,6 +113,19 @@ const Header = () => {
 
                 {/* Social & Contact - Desktop */}
                 <div className="hidden lg:flex items-center gap-3">
+                    {/* Dil Toggle */}
+                    <motion.button
+                        onClick={toggleLang}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex items-center gap-1.5 px-3 py-2 rounded-full border border-gray-200 hover:border-brand-300 transition-all text-sm font-semibold text-gray-600 hover:text-brand-600 bg-white"
+                    >
+                        <span className="text-base">{lang === 'tr' ? '🇹🇷' : '🇬🇧'}</span>
+                        <span>{lang === 'tr' ? 'TR' : 'EN'}</span>
+                        <span className="text-gray-300">|</span>
+                        <span className="text-gray-400">{lang === 'tr' ? 'EN' : 'TR'}</span>
+                    </motion.button>
+
                     <motion.button
                         onClick={() => window.open('https://wa.me/905488755461', '_blank')}
                         whileHover={{ scale: 1.1, rotate: -5 }}
@@ -137,7 +152,7 @@ const Header = () => {
                         whileTap={{ scale: 0.95 }}
                         className="bg-[#25D366] text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-lg hover:shadow-[#25D366]/40 cursor-pointer flex items-center gap-2 group"
                     >
-                        Teklif Al
+                        {t('btn_offer')}
                     </motion.button>
                 </div>
 
@@ -165,20 +180,36 @@ const Header = () => {
                             className="absolute top-full left-0 right-0 bg-white border-t border-gray-100 shadow-xl overflow-hidden lg:hidden"
                         >
                             <div className="flex flex-col p-6 space-y-6">
-                                <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); setIsMobileMenuOpen(false); }} className="text-xl font-medium text-gray-800">Ana Sayfa</a>
-                                <a href="/about" onClick={(e) => { e.preventDefault(); navigate('/about'); setIsMobileMenuOpen(false); }} className="text-xl font-medium text-gray-800">Hakkımızda</a>
-                                <a href="/blog" onClick={(e) => { e.preventDefault(); navigate('/blog'); setIsMobileMenuOpen(false); }} className="text-xl font-medium text-gray-800">Blog</a>
+                                {/* Mobil Dil Toggle */}
+                                <div className="flex items-center gap-2">
+                                    <button
+                                        onClick={toggleLang}
+                                        className={`flex-1 py-2 rounded-xl font-semibold text-sm transition-all ${lang === 'tr' ? 'bg-brand-600 text-white' : 'bg-gray-100 text-gray-500'}`}
+                                    >
+                                        🇹🇷 Türkçe
+                                    </button>
+                                    <button
+                                        onClick={toggleLang}
+                                        className={`flex-1 py-2 rounded-xl font-semibold text-sm transition-all ${lang === 'en' ? 'bg-brand-600 text-white' : 'bg-gray-100 text-gray-500'}`}
+                                    >
+                                        🇬🇧 English
+                                    </button>
+                                </div>
+
+                                <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); setIsMobileMenuOpen(false); }} className="text-xl font-medium text-gray-800">{t('nav_home')}</a>
+                                <a href="/about" onClick={(e) => { e.preventDefault(); navigate('/about'); setIsMobileMenuOpen(false); }} className="text-xl font-medium text-gray-800">{t('nav_about')}</a>
+                                <a href="/blog" onClick={(e) => { e.preventDefault(); navigate('/blog'); setIsMobileMenuOpen(false); }} className="text-xl font-medium text-gray-800">{t('nav_blog')}</a>
 
                                 <div className="space-y-4">
-                                    <div className="text-sm font-bold text-gray-400 uppercase tracking-wider">Hizmetlerimiz</div>
+                                    <div className="text-sm font-bold text-gray-400 uppercase tracking-wider">{t('nav_services')}</div>
                                     <a href="/hizmetler/seo" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/seo'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">SEO</a>
-                                    <a href="/hizmetler/sosyal-medya" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/sosyal-medya'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">Sosyal Medya</a>
+                                    <a href="/hizmetler/sosyal-medya" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/sosyal-medya'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">{lang === 'tr' ? 'Sosyal Medya' : 'Social Media'}</a>
                                     <a href="/hizmetler/google-ads" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/google-ads'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">Google Ads</a>
-                                    <a href="/hizmetler/web-tasarim" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/web-tasarim'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">Web Tasarım</a>
+                                    <a href="/hizmetler/web-tasarim" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/web-tasarim'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">{lang === 'tr' ? 'Web Tasarım' : 'Web Design'}</a>
                                 </div>
 
                                 <div className="pt-6 border-t border-gray-100 flex flex-col gap-4">
-                                    <button onClick={() => window.open('https://wa.me/905488755461', '_blank')} className="w-full bg-[#25D366] text-white py-3 rounded-xl font-bold text-lg">WhatsApp İle Ulaş</button>
+                                    <button onClick={() => window.open('https://wa.me/905488755461', '_blank')} className="w-full bg-[#25D366] text-white py-3 rounded-xl font-bold text-lg">{t('btn_whatsapp')}</button>
                                     <div className="flex justify-center gap-6">
                                         <button onClick={() => window.location.href = 'tel:+905488755461'} className="w-12 h-12 flex items-center justify-center rounded-full bg-brand-50 text-brand-600">
                                             <svg viewBox="0 0 24 24" className="w-6 h-6 fill-none stroke-current stroke-2" xmlns="http://www.w3.org/2000/svg"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.81 12.81 0 00.62 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l2.27-2.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.62A2 2 0 0122 16.92z" /></svg>

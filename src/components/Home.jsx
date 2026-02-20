@@ -4,6 +4,7 @@ import Hero from './Hero';
 import ServiceBanner from './ServiceBanner';
 import Services from './Services';
 import WhyChooseUs from './WhyChooseUs';
+import FAQ from './FAQ';
 
 const Home = () => {
     useSEO({
@@ -22,6 +23,7 @@ const Home = () => {
             <ServiceBanner />
             <Services />
             <WhyChooseUs />
+            <FAQ />
         </main>
     );
 };
