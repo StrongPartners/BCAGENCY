@@ -8,6 +8,7 @@ export default defineConfig({
     react(),
     sitemap({
       hostname: 'https://bccreative.agency',
+      generateRobotsTxt: false,
       dynamicRoutes: [
         '/',
         '/about',

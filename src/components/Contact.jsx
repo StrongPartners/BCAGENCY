@@ -76,6 +76,7 @@ const Contact = () => {
         ogUrl: 'https://bccreative.agency/contact',
     });
     return (
+        <>
         <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#F4F5F7]">
             {/* Background Decoration */}
             <div className="absolute inset-0 pointer-events-none">
@@ -290,6 +291,7 @@ const Contact = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 
