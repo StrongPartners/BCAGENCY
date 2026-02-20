@@ -1,35 +1,21 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ColorfulBlobs from './ColorfulBlobs';
+import { useLanguage } from '../context/LanguageContext';
 
 const Services = () => {
     const navigate = useNavigate();
-    const services = [
-        {
-            title: "Arama Motoru Optimizasyonu",
-            description: "İnternet sitenizi arama sonuçlarında en üst sıralara çıkaralım.",
-            number: "01",
-            path: "/hizmetler/seo"
-        },
-        {
-            title: "Google Ads Yönetimi",
-            description: "Reklamlarınızı gelişmiş hedefleme ve bütçe optimizasyonu ile yayınlayalım.",
-            number: "02",
-            path: "/hizmetler/google-ads"
-        },
-        {
-            title: "Sosyal Medya Yönetimi",
-            description: "Sosyal Medya Hesaplarınızı daha geniş kitlelere, profesyonel çalışmalarla ulaştıralım.",
-            number: "03",
-            path: "/hizmetler/sosyal-medya"
-        },
-        {
-            title: "Web Tasarım",
-            description: "Markanızı dijital dünyada en iyi yansıtacak modern ve kullanıcı dostu web siteleri tasarlayalım.",
-            number: "04",
-            path: "/hizmetler/web-tasarim"
-        }
-    ];
+    const { t } = useLanguage();
+
+    const paths = ['/hizmetler/seo', '/hizmetler/google-ads', '/hizmetler/sosyal-medya', '/hizmetler/web-tasarim'];
+    const numbers = ['01', '02', '03', '04'];
+    const servicesList = t('services_list');
+
+    const services = servicesList.map((s, i) => ({
+        ...s,
+        number: numbers[i],
+        path: paths[i]
+    }));
 
     return (
         <section className="relative py-24 px-4 md:px-8 bg-gray-50 overflow-hidden">
@@ -56,7 +42,7 @@ const Services = () => {
                 {/* Section Header */}
                 <div className="mb-20">
                     <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-4 leading-none tracking-tight">
-                        Sunduğumuz <span className="text-brand-600">Hizmetler</span>
+                        {t('services_heading_1')} <span className="text-brand-600">{t('services_heading_2')}</span>
                     </h2>
                     <div className="w-32 h-2 bg-brand-600 rounded-full" />
                 </div>
@@ -93,7 +79,7 @@ const Services = () => {
 
                                 {/* Arrow Icon */}
                                 <div className="inline-flex items-center text-brand-600 font-semibold group-hover:translate-x-2 transition-transform">
-                                    <span>Detayları Gör</span>
+                                    <span>{t('services_see_details')}</span>
                                     <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                     </svg>

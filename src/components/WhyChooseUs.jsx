@@ -1,28 +1,11 @@
 import React from 'react';
 import { Hash } from 'lucide-react';
 import ColorfulBlobs from './ColorfulBlobs';
+import { useLanguage } from '../context/LanguageContext';
 
 const WhyChooseUs = () => {
-    const features = [
-        {
-            icon: "🚀",
-            title: "Sonuç Odaklı Deneyim",
-            description: "Sadece iş yapmayız, sonuç üretiriz. Reklam, e-ticaret ve dijital pazarlamada edindiğimiz tecrübeyi ölçülebilir büyümeye dönüştürürüz.",
-            number: "01"
-        },
-        {
-            icon: "📊",
-            title: "Strateji + Performans",
-            description: "Her markaya aynı yolu çizmeyiz. Veriye dayalı strateji kurar, reklam ve sosyal medyayı performans hedefleriyle yönetiriz.",
-            number: "02"
-        },
-        {
-            icon: "🤝",
-            title: "Gerçek İş Ortağı",
-            description: "Biz sadece ajans değil, büyüme partneriyiz. Sürecin her adımında ulaşılabilir, şeffaf ve çözüm odaklı çalışırız.",
-            number: "03"
-        }
-    ];
+    const { t } = useLanguage();
+    const features = t('why_features').map((f, i) => ({ ...f, number: `0${i + 1}` }));
 
     return (
         <section className="relative py-24 px-4 md:px-8 bg-gray-50 overflow-hidden">
@@ -60,7 +43,7 @@ const WhyChooseUs = () => {
                 {/* Section Header */}
                 <div className="mb-20 text-left">
                     <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-4 leading-none tracking-tight">
-                        Neden Bizi <span className="text-brand-600">Tercih Etmelisiniz?</span>
+                        {t('why_heading')} <span className="text-brand-600">{t('why_heading_2')}</span>
                     </h2>
                     <div className="w-32 h-2 bg-brand-600 rounded-full" />
                 </div>

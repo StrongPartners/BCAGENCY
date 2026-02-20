@@ -114,17 +114,24 @@ const Header = () => {
                 {/* Social & Contact - Desktop */}
                 <div className="hidden lg:flex items-center gap-3">
                     {/* Dil Toggle */}
-                    <motion.button
-                        onClick={toggleLang}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="flex items-center gap-1.5 px-3 py-2 rounded-full border border-gray-200 hover:border-brand-300 transition-all text-sm font-semibold text-gray-600 hover:text-brand-600 bg-white"
-                    >
-                        <span className="text-base">{lang === 'tr' ? '🇹🇷' : '🇬🇧'}</span>
-                        <span>{lang === 'tr' ? 'TR' : 'EN'}</span>
-                        <span className="text-gray-300">|</span>
-                        <span className="text-gray-400">{lang === 'tr' ? 'EN' : 'TR'}</span>
-                    </motion.button>
+                    <div className="flex items-center bg-gray-100 rounded-full p-1 gap-0.5">
+                        <motion.button
+                            onClick={() => lang !== 'tr' && toggleLang()}
+                            whileTap={{ scale: 0.95 }}
+                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-bold transition-all duration-200 ${lang === 'tr' ? 'bg-white text-brand-600 shadow-sm' : 'text-gray-400 hover:text-gray-600'}`}
+                        >
+                            <span>🇹🇷</span>
+                            <span>TR</span>
+                        </motion.button>
+                        <motion.button
+                            onClick={() => lang !== 'en' && toggleLang()}
+                            whileTap={{ scale: 0.95 }}
+                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-bold transition-all duration-200 ${lang === 'en' ? 'bg-white text-brand-600 shadow-sm' : 'text-gray-400 hover:text-gray-600'}`}
+                        >
+                            <span>🇬🇧</span>
+                            <span>EN</span>
+                        </motion.button>
+                    </div>
 
                     <motion.button
                         onClick={() => window.open('https://wa.me/905488755461', '_blank')}

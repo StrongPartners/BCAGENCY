@@ -1,9 +1,11 @@
-﻿import React from 'react';
+import React from 'react';
 import useSEO from '../hooks/useSEO';
 import { motion } from 'framer-motion';
 import ColorfulBlobs from './ColorfulBlobs';
+import { useLanguage } from '../context/LanguageContext';
 
 const Contact = () => {
+    const { t } = useLanguage();
     const [captcha, setCaptcha] = React.useState({ num1: 0, num2: 0, result: 0 });
     const [captchaInput, setCaptchaInput] = React.useState('');
     const [formStatus, setFormStatus] = React.useState(null);
@@ -35,7 +37,7 @@ const Contact = () => {
 
         if (parseInt(captchaInput) !== captcha.result) {
             setFormStatus('error');
-            alert('Güvenlik sorusu yanlış! Lütfen tekrar deneyin.');
+            alert(t('contact_captcha_error'));
             generateCaptcha();
             return;
         }
@@ -43,24 +45,21 @@ const Contact = () => {
         try {
             const response = await fetch('/mail.php', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
 
             if (response.ok) {
                 setFormStatus('success');
-                alert('Mesajınız başarıyla gönderildi!');
+                alert(t('contact_success'));
                 setFormData({ name: '', phone: '', email: '', service: '', message: '' });
                 generateCaptcha();
             } else {
-                throw new Error('Gönderim hatası');
+                throw new Error('Submit error');
             }
         } catch (error) {
             console.error('Error:', error);
-            // Fallback for demo/localhost where mail.php might not work
-            alert('Mesajınız alındı! (Demo Modu - Backend bağlantısı sunucuda aktif olacaktır)');
+            alert(t('contact_demo'));
             setFormData({ name: '', phone: '', email: '', service: '', message: '' });
             generateCaptcha();
         }
@@ -75,6 +74,9 @@ const Contact = () => {
         ogDescription: 'KKTC\'nin lider dijital ajansı BC Creative Agency ile iletişime geçin.',
         ogUrl: 'https://bccreative.agency/contact',
     });
+
+    const contactServices = t('contact_services');
+
     return (
         <>
         <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#F4F5F7]">
@@ -92,12 +94,12 @@ const Contact = () => {
                     className="lg:w-1/2 text-left"
                 >
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 tracking-tight">
-                        <span className="text-[#6B46C1] block mb-2">Markan İçin En Doğru</span>
-                        <span className="text-[#1A202C]">Dijital Yol Haritasını <br />
-                            Birlikte Çıkaralım.</span>
+                        <span className="text-[#6B46C1] block mb-2">{t('contact_heading_1')}</span>
+                        <span className="text-[#1A202C]">{t('contact_heading_2')} <br />
+                            {t('contact_heading_3')}</span>
                     </h1>
                     <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl font-medium">
-                        Sizlere hangi konuda yardımcı olabiliriz? Almak istediğiniz hizmetimiz hakkında bizlerden fiyat teklifi isteyin; sizlere en uygun teklifi hazırlayalım.
+                        {t('contact_sub')}
                     </p>
                 </motion.div>
 
@@ -117,7 +119,7 @@ const Contact = () => {
                                     name="name"
                                     value={formData.name}
                                     onChange={handleChange}
-                                    placeholder="Adınız & Soyadınız"
+                                    placeholder={t('contact_name')}
                                     className="w-full bg-[#F8FAFC] border border-gray-100 rounded-xl px-4 py-4 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-[#6B46C1]/20 focus:border-[#6B46C1] transition-all outline-none"
                                 />
                             </div>
@@ -128,7 +130,7 @@ const Contact = () => {
                                     name="phone"
                                     value={formData.phone}
                                     onChange={handleChange}
-                                    placeholder="Telefon Numaranız"
+                                    placeholder={t('contact_phone')}
                                     className="w-full bg-[#F8FAFC] border border-gray-100 rounded-xl px-4 py-4 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-[#6B46C1]/20 focus:border-[#6B46C1] transition-all outline-none"
                                 />
                             </div>
@@ -139,7 +141,7 @@ const Contact = () => {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    placeholder="E-Mail Adresiniz"
+                                    placeholder={t('contact_email')}
                                     className="w-full bg-[#F8FAFC] border border-gray-100 rounded-xl px-4 py-4 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-[#6B46C1]/20 focus:border-[#6B46C1] transition-all outline-none"
                                 />
                             </div>
@@ -150,12 +152,10 @@ const Contact = () => {
                                     onChange={handleChange}
                                     className="w-full bg-[#F8FAFC] border border-gray-100 rounded-xl px-4 py-4 text-gray-500 focus:ring-2 focus:ring-[#6B46C1]/20 focus:border-[#6B46C1] transition-all outline-none appearance-none cursor-pointer"
                                 >
-                                    <option value="" disabled selected>Hizmet Seçiniz</option>
-                                    <option value="Sosyal Medya Yönetimi">Sosyal Medya Yönetimi</option>
-                                    <option value="Arama Motoru Optimizasyonu">Arama Motoru Optimizasyonu</option>
-                                    <option value="Google Ads Yönetimi">Google Ads Yönetimi</option>
-                                    <option value="Web Tasarım">Web Tasarım</option>
-                                    <option value="Diğer">Diğer</option>
+                                    <option value="" disabled>{t('contact_service_placeholder')}</option>
+                                    {contactServices.map((svc, i) => (
+                                        <option key={i} value={svc}>{svc}</option>
+                                    ))}
                                 </select>
                                 <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
                                     <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
@@ -170,7 +170,7 @@ const Contact = () => {
                                     name="message"
                                     value={formData.message}
                                     onChange={handleChange}
-                                    placeholder="Almak istediğiniz hizmeti biraz açıklar mısınız?"
+                                    placeholder={t('contact_message')}
                                     className="w-full bg-[#F8FAFC] border border-gray-100 rounded-xl px-4 py-4 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-[#6B46C1]/20 focus:border-[#6B46C1] transition-all outline-none resize-none"
                                 ></textarea>
                             </div>
@@ -178,12 +178,12 @@ const Contact = () => {
                             {/* Math CAPTCHA */}
                             <div className="bg-[#F8FAFC] p-4 rounded-xl border border-gray-100 flex flex-col gap-2">
                                 <label className="text-sm font-medium text-gray-600 block">
-                                    Güvenlik Sorusu: <span className="font-bold text-[#6B46C1] text-lg select-none">{captcha.num1} + {captcha.num2} = ?</span>
+                                    {t('contact_captcha')} <span className="font-bold text-[#6B46C1] text-lg select-none">{captcha.num1} + {captcha.num2} = ?</span>
                                 </label>
                                 <input
                                     required
                                     type="number"
-                                    placeholder="Sonucu yazınız"
+                                    placeholder={t('contact_captcha_placeholder')}
                                     value={captchaInput}
                                     onChange={(e) => setCaptchaInput(e.target.value)}
                                     className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-700 focus:ring-2 focus:ring-[#6B46C1]/20 focus:border-[#6B46C1] transition-all outline-none"
@@ -194,7 +194,7 @@ const Contact = () => {
                                 type="submit"
                                 className="w-full bg-[#4C3BCA] hover:bg-[#3f31a8] text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
                             >
-                                Teklif İste
+                                {t('contact_submit')}
                             </button>
                         </form>
                     </div>
@@ -213,7 +213,7 @@ const Contact = () => {
                         transition={{ duration: 0.6 }}
                     >
                         <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-8">
-                            Bizi <span className="text-brand-600">Ziyaret Edin</span>
+                            {t('contact_visit')} <span className="text-brand-600">{t('contact_visit_2')}</span>
                         </h2>
                         <div className="space-y-6">
                             <div className="flex items-start gap-4">
@@ -224,8 +224,8 @@ const Contact = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-gray-900 mb-1">Adres</h3>
-                                    <p className="text-gray-600">Girne, Kuzey Kıbrıs Türk Cumhuriyeti</p>
+                                    <h3 className="font-bold text-gray-900 mb-1">{t('contact_address_label')}</h3>
+                                    <p className="text-gray-600">{t('contact_address_val')}</p>
                                 </div>
                             </div>
                             <div className="flex items-start gap-4">
@@ -235,7 +235,7 @@ const Contact = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-gray-900 mb-1">Telefon / WhatsApp</h3>
+                                    <h3 className="font-bold text-gray-900 mb-1">{t('contact_phone_label')}</h3>
                                     <a href="tel:+905488755461" className="text-gray-600 hover:text-brand-600 transition-colors">+90 548 875 54 61</a>
                                 </div>
                             </div>
@@ -246,7 +246,7 @@ const Contact = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-gray-900 mb-1">E-posta</h3>
+                                    <h3 className="font-bold text-gray-900 mb-1">{t('contact_email_label')}</h3>
                                     <a href="mailto:info@bccreative.agency" className="text-gray-600 hover:text-brand-600 transition-colors">info@bccreative.agency</a>
                                 </div>
                             </div>
@@ -257,8 +257,8 @@ const Contact = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-gray-900 mb-1">Çalışma Saatleri</h3>
-                                    <p className="text-gray-600">Pazartesi – Cuma: 09:00 – 18:00</p>
+                                    <h3 className="font-bold text-gray-900 mb-1">{t('contact_hours_label')}</h3>
+                                    <p className="text-gray-600">{t('contact_hours_val')}</p>
                                 </div>
                             </div>
                         </div>
@@ -266,7 +266,7 @@ const Contact = () => {
                             onClick={() => window.open('https://www.google.com/maps/search/Girne,+Kuzey+K%C4%B1br%C4%B1s+T%C3%BCrk+Cumhuriyeti/@35.3401,33.32,15z', '_blank')}
                             className="mt-8 bg-brand-600 text-white font-bold px-8 py-3 rounded-full hover:bg-brand-700 transition-all shadow-lg hover:-translate-y-0.5"
                         >
-                            Google Maps'te Aç →
+                            {t('contact_maps_btn')}
                         </button>
                     </motion.div>
 
@@ -278,7 +278,7 @@ const Contact = () => {
                         className="rounded-3xl overflow-hidden shadow-2xl border border-gray-100 h-80 lg:h-96"
                     >
                         <iframe
-                            title="BC Creative Agency Konum – Girne KKTC"
+                            title={t('contact_map_title')}
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52487.63!2d33.2700!3d35.3401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14de175f0dd27c8b%3A0x8deafed20e7dc0c0!2sGirne%2C%20Kuzey%20K%C4%B1br%C4%B1s%20T%C3%BCrk%20Cumhuriyeti!5e0!3m2!1str!2str!4v1700000000000"
                             width="100%"
                             height="100%"

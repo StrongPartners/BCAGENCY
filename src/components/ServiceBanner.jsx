@@ -1,14 +1,9 @@
 import { motion } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
 const ServiceBanner = () => {
-    const services = [
-        "#Web Tasarım",
-        "#Sosyal Medya Yönetimi",
-        "#Google Ads Yönetimi",
-        "#Meta Ads Yönetimi",
-        "#Grafik Tasarım",
-        "#İçerik Üretimi"
-    ];
+    const { t } = useLanguage();
+    const services = t('banner_services');
 
     // Duplicate the services to create a seamless loop
     const tickerItems = [...services, ...services, ...services];
@@ -24,7 +19,7 @@ const ServiceBanner = () => {
                     x: {
                         repeat: Infinity,
                         repeatType: "loop",
-                        duration: 40, // Slower for refinement
+                        duration: 40,
                         ease: "linear",
                     },
                 }}

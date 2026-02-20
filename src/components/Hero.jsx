@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ColorfulBlobs from './ColorfulBlobs';
+import { useLanguage } from '../context/LanguageContext';
 
 const Hero = () => {
-    const titles = [
-        "Google Ads Yönetimi",
-        "Sosyal Medya Yönetimi",
-        "Web Tasarım",
-        "Arama Motoru Optimizasyonu"
-    ];
-
+    const { t } = useLanguage();
+    const titles = t('hero_titles');
     const [index, setIndex] = useState(0);
 
     useEffect(() => {
@@ -81,7 +77,7 @@ const Hero = () => {
                         transition={{ duration: 0.6 }}
                     >
                         <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-gray-900 leading-none">
-                            Sizlere
+                            {t('hero_top')}
                         </h2>
                     </motion.div>
 
@@ -110,14 +106,16 @@ const Hero = () => {
                         </AnimatePresence>
                     </div>
 
-                    <motion.h2
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-2xl sm:text-4xl md:text-6xl font-black text-gray-900 leading-none px-4"
-                    >
-                        konusunda nasıl yardımcı olabiliriz?
-                    </motion.h2>
+                    {t('hero_bottom') && (
+                        <motion.h2
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="text-2xl sm:text-4xl md:text-6xl font-black text-gray-900 leading-none px-4"
+                        >
+                            {t('hero_bottom')}
+                        </motion.h2>
+                    )}
 
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -125,7 +123,7 @@ const Hero = () => {
                         transition={{ duration: 0.6, delay: 0.4 }}
                         className="text-base md:text-xl text-gray-600 leading-relaxed max-w-6xl mx-auto pt-8"
                     >
-                        <span className="font-bold text-gray-900">BC Creative Agency</span>, dijital pazarlama alanında markalara ölçülebilir büyüme sağlayan bir performans ajansıdır. Reklam, sosyal medya ve strateji süreçlerini tek merkezden yönetir, harcadığınız bütçeyi gerçek sonuçlara dönüştürürüz.
+                        <span className="font-bold text-gray-900">BC Creative Agency</span>, {t('hero_desc')}
                     </motion.p>
 
                     <motion.div
@@ -138,7 +136,7 @@ const Hero = () => {
                             onClick={() => window.open('https://wa.me/905488755461', '_blank')}
                             className="bg-brand-600 hover:bg-brand-700 text-white text-lg md:text-xl px-12 py-4 rounded-full font-bold transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 cursor-pointer"
                         >
-                            Çalışmaya Başlayalım
+                            {t('hero_cta')}
                         </button>
                     </motion.div>
                 </div>
