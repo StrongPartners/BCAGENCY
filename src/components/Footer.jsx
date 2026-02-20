@@ -44,7 +44,14 @@ const Footer = () => {
                     <ul className="space-y-6">
                         <li className="flex gap-3">
                             <MapPin size={20} className="text-white shrink-0 mt-1" />
-                            <span>{t('footer_address')}</span>
+                            <a
+                                href="https://www.google.com/maps/search/Fatih+Sokak+Ardem+11+Apartman%C4%B1+Kat+3+No+14+Girne+Kuzey+K%C4%B1br%C4%B1s/@35.3421,33.3184,17z"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-white transition-colors leading-relaxed"
+                            >
+                                {t('footer_address')}
+                            </a>
                         </li>
                     </ul>
                 </div>

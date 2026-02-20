@@ -24,17 +24,20 @@ export const translations = {
     hero_titles: ['Google Ads Yönetimi', 'Sosyal Medya Yönetimi', 'Web Tasarım', 'Arama Motoru Optimizasyonu'],
 
     // Service Banner
-    banner_services: ['#Web Tasarım', '#Sosyal Medya Yönetimi', '#Google Ads Yönetimi', '#Meta Ads Yönetimi', '#Grafik Tasarım', '#İçerik Üretimi'],
+    banner_services: ['#Web Tasarım', '#Sosyal Medya Yönetimi', '#Google Ads Yönetimi', '#Meta Ads Yönetimi', '#Grafik Tasarım', '#İçerik Üretimi', '#Prodüksiyon', '#Drone Çekim', '#Fotoğraf & Video'],
 
     // Services section
     services_heading_1: 'Sunduğumuz',
     services_heading_2: 'Hizmetler',
     services_see_details: 'Detayları Gör',
     services_list: [
-      { title: 'Arama Motoru Optimizasyonu', description: 'İnternet sitenizi arama sonuçlarında en üst sıralara çıkaralım.' },
-      { title: 'Google Ads Yönetimi', description: 'Reklamlarınızı gelişmiş hedefleme ve bütçe optimizasyonu ile yayınlayalım.' },
-      { title: 'Sosyal Medya Yönetimi', description: 'Sosyal Medya Hesaplarınızı daha geniş kitlelere, profesyonel çalışmalarla ulaştıralım.' },
-      { title: 'Web Tasarım', description: 'Markanızı dijital dünyada en iyi yansıtacak modern ve kullanıcı dostu web siteleri tasarlayalım.' }
+      { icon: '🔍', title: 'Arama Motoru Optimizasyonu', description: 'İnternet sitenizi arama sonuçlarında en üst sıralara çıkaralım. KKTC\'ye özel anahtar kelime stratejileriyle organik trafiğinizi artırıyoruz.', path: '/hizmetler/seo' },
+      { icon: '📢', title: 'Google Ads Yönetimi', description: 'Reklamlarınızı gelişmiş hedefleme ve bütçe optimizasyonu ile yayınlayalım. Her TL\'nizi doğru kitleye ulaştırıyoruz.', path: '/hizmetler/google-ads' },
+      { icon: '📱', title: 'Sosyal Medya Yönetimi', description: 'Instagram, Facebook ve TikTok hesaplarınızı profesyonel içeriklerle büyütüyor, marka bilinirliğinizi artırıyoruz.', path: '/hizmetler/sosyal-medya' },
+      { icon: '💻', title: 'Web Tasarım', description: 'Markanızı dijital dünyada en iyi yansıtacak modern, hızlı ve kullanıcı dostu web siteleri tasarlıyoruz.', path: '/hizmetler/web-tasarim' },
+      { icon: '🎬', title: 'Prodüksiyon', description: 'Tanıtım filmleri, reklam spotları ve kurumsal videolar hazırlıyoruz. Fikir aşamasından post-prodüksiyona kadar tüm süreci yönetiyoruz.', path: null },
+      { icon: '🚁', title: 'Drone Çekim', description: 'Nefes kesen hava fotoğrafı ve video çekimleriyle markanıza sinematik bir vizyon katıyoruz. Turizm, gayrimenkul ve etkinlikler için ideal.', path: null },
+      { icon: '📸', title: 'Fotoğraf & Video', description: 'Ürün fotoğrafçılığı, kurumsal çekim ve sosyal medya içerikleri için profesyonel fotoğraf ve video prodüksiyonu sağlıyoruz.', path: null },
     ],
 
     // Why Choose Us
@@ -57,7 +60,7 @@ export const translations = {
     footer_desc: 'BC Creative Agency, dijital pazarlama ve reklam alanında öncü bir ajansdır. Yaratıcı yaklaşımı ve uzman ekibiyle markanızı dijital dünyada öne çıkarmak için en etkili stratejileri sunar.',
     footer_contact_title: 'Bize Ulaşın',
     footer_address_title: 'Adres',
-    footer_address: 'Kıbrıs / Girne',
+    footer_address: 'Fatih Sk, Aşağı Girne Mah. Ardem 11 Apt. Kat:3 No:14, Girne, KKTC',
     footer_social: 'Sosyal Medya',
     footer_instagram: "Instagram'da takip edin",
 
@@ -76,7 +79,10 @@ export const translations = {
       { title: 'Google Ads', description: 'Google reklamlarınızı optimize ederek en yüksek dönüşüm oranını sağlıyoruz.' },
       { title: 'SEO', description: 'Web sitenizin arama motorlarında üst sıralarda yer almasını sağlıyoruz.' },
       { title: 'Web Tasarım', description: 'Modern ve kullanıcı dostu web siteleri tasarlıyoruz.' },
-      { title: 'İçerik Üretimi', description: 'Markanıza özel, etkileyici ve özgün içerikler üretiyoruz.' }
+      { title: 'İçerik Üretimi', description: 'Markanıza özel, etkileyici ve özgün içerikler üretiyoruz.' },
+      { title: 'Prodüksiyon', description: 'Tanıtım filmleri, reklam spotları ve kurumsal videolar hazırlıyoruz.' },
+      { title: 'Drone Çekim', description: 'Hava fotoğrafı ve video çekimleriyle markanıza sinematik bir vizyon katıyoruz.' },
+      { title: 'Fotoğraf & Video', description: 'Ürün fotoğrafçılığı ve sosyal medya için profesyonel görsel içerikler üretiyoruz.' }
     ],
     about_vision_title: 'Vizyonumuz',
     about_vision_desc: 'Dijital pazarlama alanında öncü olmak ve müşterilerimize sürdürülebilir büyüme ve rekabet avantajı sağlamak için ileri düzey stratejiler geliştiren bir ajansız. Her geçen gün daha fazla marka ve işletme için değer yaratmayı sürdürüyoruz.',
@@ -116,13 +122,14 @@ export const translations = {
     contact_visit: 'Bizi',
     contact_visit_2: 'Ziyaret Edin',
     contact_address_label: 'Adres',
-    contact_address_val: 'Girne, Kuzey Kıbrıs Türk Cumhuriyeti',
+    contact_address_val: 'Fatih Sk, Aşağı Girne Mah. Ardem 11 Apt. Kat:3 No:14, Girne, KKTC',
     contact_phone_label: 'Telefon / WhatsApp',
     contact_email_label: 'E-posta',
     contact_hours_label: 'Çalışma Saatleri',
     contact_hours_val: 'Pazartesi – Cuma: 09:00 – 18:00',
     contact_maps_btn: "Google Maps'te Aç →",
     contact_map_title: 'BC Creative Agency Konum – Girne KKTC',
+    contact_map_url: 'https://www.google.com/maps/search/Fatih+Sokak+Ardem+11+Apartman%C4%B1+Kat+3+No+14+Girne+Kuzey+K%C4%B1br%C4%B1s/@35.3421,33.3184,17z',
   },
 
   en: {
@@ -146,17 +153,20 @@ export const translations = {
     hero_titles: ['Google Ads Management', 'Social Media Management', 'Web Design', 'Search Engine Optimization'],
 
     // Service Banner
-    banner_services: ['#Web Design', '#Social Media Management', '#Google Ads Management', '#Meta Ads Management', '#Graphic Design', '#Content Creation'],
+    banner_services: ['#Web Design', '#Social Media Management', '#Google Ads Management', '#Meta Ads Management', '#Graphic Design', '#Content Creation', '#Production', '#Drone Shots', '#Photo & Video'],
 
     // Services section
     services_heading_1: 'Our',
     services_heading_2: 'Services',
     services_see_details: 'View Details',
     services_list: [
-      { title: 'Search Engine Optimization', description: 'Let us rank your website to the top of search results.' },
-      { title: 'Google Ads Management', description: 'Run your ads with advanced targeting and budget optimization.' },
-      { title: 'Social Media Management', description: 'Reach wider audiences with professional social media management.' },
-      { title: 'Web Design', description: 'We design modern, user-friendly websites that best reflect your brand.' }
+      { icon: '🔍', title: 'Search Engine Optimization', description: 'Rank your website at the top of search results. We grow your organic traffic with TRNC-specific keyword strategies.', path: '/hizmetler/seo' },
+      { icon: '📢', title: 'Google Ads Management', description: 'Run your ads with advanced targeting and budget optimization. We ensure every cent reaches the right audience.', path: '/hizmetler/google-ads' },
+      { icon: '📱', title: 'Social Media Management', description: 'We grow your Instagram, Facebook, and TikTok accounts with professional content, increasing brand awareness.', path: '/hizmetler/sosyal-medya' },
+      { icon: '💻', title: 'Web Design', description: 'We design modern, fast, and user-friendly websites that best reflect your brand in the digital world.', path: '/hizmetler/web-tasarim' },
+      { icon: '🎬', title: 'Production', description: 'We create promotional films, advertising spots, and corporate videos. We manage the entire process from concept to post-production.', path: null },
+      { icon: '🚁', title: 'Drone Shooting', description: 'We add a cinematic vision to your brand with breathtaking aerial photography and video. Ideal for tourism, real estate, and events.', path: null },
+      { icon: '📸', title: 'Photo & Video', description: 'We provide professional photography and video production for product photography, corporate shoots, and social media content.', path: null },
     ],
 
     // Why Choose Us
@@ -179,7 +189,7 @@ export const translations = {
     footer_desc: 'BC Creative Agency is a leading digital marketing and advertising agency. With a creative approach and expert team, it offers the most effective strategies to make your brand stand out in the digital world.',
     footer_contact_title: 'Contact Us',
     footer_address_title: 'Address',
-    footer_address: 'Cyprus / Kyrenia',
+    footer_address: 'Fatih St, Aşağı Girne Dist. Ardem 11 Apt. Floor:3 No:14, Kyrenia, TRNC',
     footer_social: 'Social Media',
     footer_instagram: 'Follow us on Instagram',
 
@@ -198,7 +208,10 @@ export const translations = {
       { title: 'Google Ads', description: 'We optimize your Google ads to achieve the highest conversion rates.' },
       { title: 'SEO', description: 'We ensure your website ranks at the top of search engines.' },
       { title: 'Web Design', description: 'We design modern, user-friendly websites.' },
-      { title: 'Content Creation', description: 'We create compelling and original content tailored to your brand.' }
+      { title: 'Content Creation', description: 'We create compelling and original content tailored to your brand.' },
+      { title: 'Production', description: 'We create promotional films, ad spots and corporate videos from concept to post-production.' },
+      { title: 'Drone Shooting', description: 'We add a cinematic vision to your brand with breathtaking aerial photography and video.' },
+      { title: 'Photo & Video', description: 'We provide professional photo and video production for product and social media content.' }
     ],
     about_vision_title: 'Our Vision',
     about_vision_desc: "We are an agency that develops advanced strategies to be a pioneer in digital marketing and to provide our clients with sustainable growth and competitive advantage. We continue to create value for more brands and businesses every day.",
@@ -238,13 +251,14 @@ export const translations = {
     contact_visit: 'Visit',
     contact_visit_2: 'Us',
     contact_address_label: 'Address',
-    contact_address_val: 'Kyrenia, Northern Cyprus',
+    contact_address_val: 'Fatih St, Aşağı Girne Dist. Ardem 11 Apt. Floor:3 No:14, Kyrenia, TRNC',
     contact_phone_label: 'Phone / WhatsApp',
     contact_email_label: 'Email',
     contact_hours_label: 'Working Hours',
     contact_hours_val: 'Monday – Friday: 09:00 – 18:00',
     contact_maps_btn: 'Open in Google Maps →',
     contact_map_title: 'BC Creative Agency Location – Kyrenia TRNC',
+    contact_map_url: 'https://www.google.com/maps/search/Fatih+Sokak+Ardem+11+Apartman%C4%B1+Kat+3+No+14+Girne+Kuzey+K%C4%B1br%C4%B1s/@35.3421,33.3184,17z',
   }
 };
 

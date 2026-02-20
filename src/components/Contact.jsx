@@ -263,14 +263,14 @@ const Contact = () => {
                             </div>
                         </div>
                         <button
-                            onClick={() => window.open('https://www.google.com/maps/search/Girne,+Kuzey+K%C4%B1br%C4%B1s+T%C3%BCrk+Cumhuriyeti/@35.3401,33.32,15z', '_blank')}
+                            onClick={() => window.open(t('contact_map_url'), '_blank')}
                             className="mt-8 bg-brand-600 text-white font-bold px-8 py-3 rounded-full hover:bg-brand-700 transition-all shadow-lg hover:-translate-y-0.5"
                         >
                             {t('contact_maps_btn')}
                         </button>
                     </motion.div>
 
-                    {/* Map Embed */}
+                    {/* Map Embed — Fatih Sk, Aşağı Girne Mah. Ardem 11 Apt. Kat:3 No:14 */}
                     <motion.div
                         initial={{ opacity: 0, x: 30 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -279,7 +279,7 @@ const Contact = () => {
                     >
                         <iframe
                             title={t('contact_map_title')}
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52487.63!2d33.2700!3d35.3401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14de175f0dd27c8b%3A0x8deafed20e7dc0c0!2sGirne%2C%20Kuzey%20K%C4%B1br%C4%B1s%20T%C3%BCrk%20Cumhuriyeti!5e0!3m2!1str!2str!4v1700000000000"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.8!2d33.3184!3d35.3421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14de1763498dfb09%3A0x0!2sFatih+Sk%2C+A%C5%9Fa%C4%9F%C4%B1+Girne+Mahallesi%2C+Girne!5e0!3m2!1str!2str!4v1700000000001"
                             width="100%"
                             height="100%"
                             style={{ border: 0 }}
