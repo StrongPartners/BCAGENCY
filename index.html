@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- ✅ Favicon -->
-  <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+  <link rel="icon" type="image/png" href="/logo-icon.png" />
+  <link rel="shortcut icon" type="image/png" href="/logo-icon.png" />
   <link rel="apple-touch-icon" href="/logo-icon.png" />
 
   <!-- ✅ Primary SEO -->
@@ -207,7 +208,11 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-TT5PBXR1TQ');
+    gtag('config', 'G-TT5PBXR1TQ', {
+      'linker': {
+        'domains': ['bccreative.agency', 'www.bccreative.agency']
+      }
+    });
   </script>
 
   <!-- ✅ Google Fonts -->
