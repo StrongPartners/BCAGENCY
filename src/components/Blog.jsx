@@ -5,6 +5,7 @@ import { Clock, ArrowRight, Tag } from 'lucide-react';
 import { blogPosts } from '../data/blogPosts';
 import useSEO from '../hooks/useSEO';
 import ColorfulBlobs from './ColorfulBlobs';
+import { useLanguage } from '../context/LanguageContext';
 
 const categoryColors = {
   'SEO': 'bg-blue-100 text-blue-700',
@@ -14,17 +15,23 @@ const categoryColors = {
   'Web Tasarım': 'bg-green-100 text-green-700',
 };
 
+const categoryLabels = {
+  'SEO': { tr: 'SEO', en: 'SEO' },
+  'Google Ads': { tr: 'Google Ads', en: 'Google Ads' },
+  'Sosyal Medya': { tr: 'Sosyal Medya', en: 'Social Media' },
+  'Dijital Pazarlama': { tr: 'Dijital Pazarlama', en: 'Digital Marketing' },
+  'Web Tasarım': { tr: 'Web Tasarım', en: 'Web Design' },
+};
+
 const Blog = () => {
   const navigate = useNavigate();
+  const { lang, t } = useLanguage();
 
   useSEO({
-    title: 'Blog | KKTC Dijital Pazarlama, SEO ve Reklam Rehberleri – BC Creative Agency',
-    description: "KKTC'de dijital pazarlama, SEO, Google Ads, sosyal medya ve web tasarım hakkında uzman içerikler. Kuzey Kıbrıs işletmeleri için kapsamlı rehberler.",
+    title: t('blog_heading_1') + ' ' + t('blog_heading_2') + ' | BC Creative Agency',
+    description: t('blog_sub'),
     keywords: 'KKTC dijital pazarlama blog, Kuzey Kıbrıs SEO rehberi, KKTC Google Ads, Girne dijital ajans blog',
     canonical: 'https://bccreative.agency/blog',
-    ogTitle: 'Blog | BC Creative Agency – KKTC Dijital Pazarlama Rehberleri',
-    ogDescription: "KKTC işletmeleri için dijital pazarlama, SEO ve reklam rehberleri.",
-    ogUrl: 'https://bccreative.agency/blog',
   });
 
   return (
@@ -41,14 +48,14 @@ const Blog = () => {
             transition={{ duration: 0.6 }}
           >
             <span className="inline-block bg-brand-600/10 text-brand-600 font-semibold text-sm px-4 py-2 rounded-full mb-4 tracking-wider uppercase">
-              Blog
+              {t('blog_badge')}
             </span>
             <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-6 leading-tight">
-              KKTC Dijital Pazarlama<br />
-              <span className="text-brand-600">Rehberleri</span>
+              {t('blog_heading_1')}<br />
+              <span className="text-brand-600">{t('blog_heading_2')}</span>
             </h1>
             <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto">
-              Kuzey Kıbrıs işletmeleri için SEO, Google Ads, sosyal medya ve web tasarım konularında uzman içerikler.
+              {t('blog_sub')}
             </p>
           </motion.div>
         </div>
@@ -71,12 +78,12 @@ const Blog = () => {
                 <div className="relative h-52 overflow-hidden">
                   <img
                     src={post.image}
-                    alt={post.title}
+                    alt={post.title[lang] || post.title.tr}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                   <span className={`absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-full ${categoryColors[post.category] || 'bg-gray-100 text-gray-700'}`}>
-                    {post.category}
+                    {categoryLabels[post.category]?.[lang] || post.category}
                   </span>
                 </div>
 
@@ -85,18 +92,18 @@ const Blog = () => {
                   <div className="flex items-center gap-4 text-xs text-gray-400 mb-3">
                     <span className="flex items-center gap-1">
                       <Clock size={12} />
-                      {post.readTime} okuma
+                      {post.readTime[lang] || post.readTime.tr} {t('blog_read_time')}
                     </span>
-                    <span>{post.date}</span>
+                    <span>{post.date[lang] || post.date.tr}</span>
                   </div>
                   <h2 className="text-lg font-bold text-gray-900 mb-3 leading-snug group-hover:text-brand-600 transition-colors line-clamp-2">
-                    {post.title}
+                    {post.title[lang] || post.title.tr}
                   </h2>
                   <p className="text-gray-500 text-sm leading-relaxed mb-4 line-clamp-3">
-                    {post.excerpt}
+                    {post.excerpt[lang] || post.excerpt.tr}
                   </p>
                   <div className="flex items-center gap-2 text-brand-600 font-semibold text-sm group-hover:gap-3 transition-all">
-                    Devamını Oku <ArrowRight size={16} />
+                    {t('blog_read_more')} <ArrowRight size={16} />
                   </div>
                 </div>
               </motion.article>
@@ -109,16 +116,16 @@ const Blog = () => {
       <section className="py-20 px-4 md:px-8 bg-brand-600">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl md:text-5xl font-black text-white mb-6">
-            KKTC'de Dijital Büyüme için<br />Hazır mısınız?
+            {t('blog_cta_title')}
           </h2>
           <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-            BC Creative Agency olarak Girne ve tüm KKTC'deki işletmelere özel dijital pazarlama çözümleri sunuyoruz.
+            {t('blog_cta_sub')}
           </p>
           <button
             onClick={() => window.open('https://wa.me/905488755461', '_blank')}
             className="bg-white text-brand-600 font-black text-lg px-10 py-4 rounded-full hover:bg-gray-100 transition-all shadow-xl hover:-translate-y-1"
           >
-            Ücretsiz Teklif Al
+            {t('btn_offer')}
           </button>
         </div>
       </section>

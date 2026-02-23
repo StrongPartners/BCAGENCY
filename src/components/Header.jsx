@@ -89,20 +89,37 @@ const Header = () => {
                                             { name: t('nav_seo'), path: '/hizmetler/seo' },
                                             { name: t('nav_social'), path: '/hizmetler/sosyal-medya' },
                                             { name: t('nav_ads'), path: '/hizmetler/google-ads' },
-                                            { name: t('nav_web'), path: '/hizmetler/web-tasarim' }
-                                        ].map((service, index) => (
-                                            <a
-                                                key={service.name}
-                                                href={service.path}
-                                                onClick={(e) => {
-                                                    e.preventDefault();
-                                                    navigate(service.path);
-                                                    setIsHovering(false);
-                                                }}
-                                                className={`block px-5 py-3 text-gray-600 hover:text-brand-600 hover:bg-gray-50 transition-colors text-[15px] ${index !== 3 ? 'border-b border-gray-100' : ''}`}
-                                            >
-                                                {service.name}
-                                            </a>
+                                            { name: t('nav_web'), path: '/hizmetler/web-tasarim' },
+                                            { name: t('nav_production'), path: null },
+                                            { name: t('nav_drone'), path: null },
+                                            { name: t('nav_photo'), path: null },
+                                        ].map((service, index, arr) => (
+                                            service.path ? (
+                                                <a
+                                                    key={service.name}
+                                                    href={service.path}
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        navigate(service.path);
+                                                        setIsHovering(false);
+                                                    }}
+                                                    className={`block px-5 py-3 text-gray-600 hover:text-brand-600 hover:bg-gray-50 transition-colors text-[15px] ${index !== arr.length - 1 ? 'border-b border-gray-100' : ''}`}
+                                                >
+                                                    {service.name}
+                                                </a>
+                                            ) : (
+                                                <button
+                                                    key={service.name}
+                                                    onClick={() => {
+                                                        window.open('https://wa.me/905488755461', '_blank');
+                                                        setIsHovering(false);
+                                                    }}
+                                                    className={`w-full text-left px-5 py-3 text-gray-600 hover:text-brand-600 hover:bg-gray-50 transition-colors text-[15px] flex items-center justify-between ${index !== arr.length - 1 ? 'border-b border-gray-100' : ''}`}
+                                                >
+                                                    {service.name}
+                                                    <span className="text-xs text-green-500 font-semibold">WhatsApp</span>
+                                                </button>
+                                            )
                                         ))}
                                     </div>
                                 </motion.div>
@@ -210,9 +227,12 @@ const Header = () => {
                                 <div className="space-y-4">
                                     <div className="text-sm font-bold text-gray-400 uppercase tracking-wider">{t('nav_services')}</div>
                                     <a href="/hizmetler/seo" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/seo'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">SEO</a>
-                                    <a href="/hizmetler/sosyal-medya" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/sosyal-medya'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">{lang === 'tr' ? 'Sosyal Medya' : 'Social Media'}</a>
+                                    <a href="/hizmetler/sosyal-medya" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/sosyal-medya'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">{t('nav_social')}</a>
                                     <a href="/hizmetler/google-ads" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/google-ads'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">Google Ads</a>
-                                    <a href="/hizmetler/web-tasarim" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/web-tasarim'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">{lang === 'tr' ? 'Web Tasarım' : 'Web Design'}</a>
+                                    <a href="/hizmetler/web-tasarim" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/web-tasarim'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">{t('nav_web')}</a>
+                                    <button onClick={() => { window.open('https://wa.me/905488755461', '_blank'); setIsMobileMenuOpen(false); }} className="block w-full text-left text-lg text-gray-600 pl-4 border-l-2 border-green-200">{t('nav_production')}</button>
+                                    <button onClick={() => { window.open('https://wa.me/905488755461', '_blank'); setIsMobileMenuOpen(false); }} className="block w-full text-left text-lg text-gray-600 pl-4 border-l-2 border-green-200">{t('nav_drone')}</button>
+                                    <button onClick={() => { window.open('https://wa.me/905488755461', '_blank'); setIsMobileMenuOpen(false); }} className="block w-full text-left text-lg text-gray-600 pl-4 border-l-2 border-green-200">{t('nav_photo')}</button>
                                 </div>
 
                                 <div className="pt-6 border-t border-gray-100 flex flex-col gap-4">

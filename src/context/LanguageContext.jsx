@@ -13,15 +13,18 @@ export const translations = {
     nav_social: 'Sosyal Medya Yönetimi',
     nav_ads: 'Google Ads Yönetimi',
     nav_web: 'Web Tasarım',
+    nav_production: 'Prodüksiyon',
+    nav_drone: 'Drone Çekim',
+    nav_photo: 'Fotoğraf & Video',
     btn_offer: 'Teklif Al',
     btn_whatsapp: 'WhatsApp İle Ulaş',
 
     // Hero
-    hero_top: 'Sizlere',
-    hero_bottom: 'konusunda nasıl yardımcı olabiliriz?',
-    hero_desc: 'BC Creative Agency, dijital pazarlama alanında markalara ölçülebilir büyüme sağlayan bir performans ajansıdır. Reklam, sosyal medya ve strateji süreçlerini tek merkezden yönetir, harcadığınız bütçeyi gerçek sonuçlara dönüştürürüz.',
-    hero_cta: 'Çalışmaya Başlayalım',
-    hero_titles: ['Google Ads Yönetimi', 'Sosyal Medya Yönetimi', 'Web Tasarım', 'Arama Motoru Optimizasyonu'],
+    hero_top: 'KKTC Dijital Pazarlama &',
+    hero_bottom: 'İle Markanızı Zirveye Taşıyın',
+    hero_desc: 'BC Creative Agency, Kuzey Kıbrıs (KKTC) genelinde markalara ölçülebilir büyüme sağlayan bir performans ajansıdır. SEO, Google Ads ve Sosyal Medya yönetimi süreçlerini Girne merkezli ofisimizden profesyonelce yönetiyoruz.',
+    hero_cta: 'Ücretsiz Teklif Alın',
+    hero_titles: ['Google Ads Uzmanlığı', 'Sosyal Medya Yönetimi', 'Profesyonel Web Tasarım', 'KKTC SEO Hizmetleri'],
 
     // Service Banner
     banner_services: ['#Web Tasarım', '#Sosyal Medya Yönetimi', '#Google Ads Yönetimi', '#Meta Ads Yönetimi', '#Grafik Tasarım', '#İçerik Üretimi', '#Prodüksiyon', '#Drone Çekim', '#Fotoğraf & Video'],
@@ -130,6 +133,19 @@ export const translations = {
     contact_maps_btn: "Google Maps'te Aç →",
     contact_map_title: 'BC Creative Agency Konum – Girne KKTC',
     contact_map_url: 'https://www.google.com/maps/search/Fatih+Sokak+Ardem+11+Apartman%C4%B1+Kat+3+No+14+Girne+Kuzey+K%C4%B1br%C4%B1s/@35.3421,33.3184,17z',
+
+    // Blog
+    blog_badge: 'Blog',
+    blog_heading_1: 'KKTC Dijital Pazarlama',
+    blog_heading_2: 'Rehberleri',
+    blog_sub: 'Kuzey Kıbrıs işletmeleri için SEO, Google Ads, sosyal medya ve web tasarım konularında uzman içerikler.',
+    blog_read_more: 'Devamını Oku',
+    blog_read_time: 'okuma',
+    blog_back: "Blog'a Dön",
+    blog_other_posts: 'Diğer Yazılar',
+    blog_cta_title: "KKTC'de Dijital Büyüme için Hazır mısınız?",
+    blog_cta_sub: 'BC Creative Agency olarak Girne ve tüm KKTC\'deki işletmelere özel çözümler sunuyoruz.',
+    blog_not_found: 'Yazı Bulunamadı',
   },
 
   en: {
@@ -142,15 +158,18 @@ export const translations = {
     nav_social: 'Social Media Management',
     nav_ads: 'Google Ads Management',
     nav_web: 'Web Design',
+    nav_production: 'Production',
+    nav_drone: 'Drone Shooting',
+    nav_photo: 'Photo & Video',
     btn_offer: 'Get a Quote',
     btn_whatsapp: 'Contact via WhatsApp',
 
     // Hero
-    hero_top: 'How can we help you with',
-    hero_bottom: '',
-    hero_desc: 'BC Creative Agency is a performance-driven digital marketing agency delivering measurable growth for brands. We manage advertising, social media, and strategy from a single hub — turning your budget into real results.',
-    hero_cta: "Let's Get Started",
-    hero_titles: ['Google Ads Management', 'Social Media Management', 'Web Design', 'Search Engine Optimization'],
+    hero_top: 'TRNC Digital Marketing &',
+    hero_bottom: 'Take Your Brand to the Top',
+    hero_desc: 'BC Creative Agency is a performance-driven digital marketing agency providing measurable growth for brands across Northern Cyprus (TRNC). We professionally manage SEO, Google Ads, and Social Media from our Kyrenia-based office.',
+    hero_cta: 'Get a Free Quote',
+    hero_titles: ['Google Ads Expertise', 'Social Media Management', 'Professional Web Design', 'TRNC SEO Services'],
 
     // Service Banner
     banner_services: ['#Web Design', '#Social Media Management', '#Google Ads Management', '#Meta Ads Management', '#Graphic Design', '#Content Creation', '#Production', '#Drone Shots', '#Photo & Video'],
@@ -259,13 +278,29 @@ export const translations = {
     contact_maps_btn: 'Open in Google Maps →',
     contact_map_title: 'BC Creative Agency Location – Kyrenia TRNC',
     contact_map_url: 'https://www.google.com/maps/search/Fatih+Sokak+Ardem+11+Apartman%C4%B1+Kat+3+No+14+Girne+Kuzey+K%C4%B1br%C4%B1s/@35.3421,33.3184,17z',
+
+    // Blog
+    blog_badge: 'Blog',
+    blog_heading_1: 'TRNC Digital Marketing',
+    blog_heading_2: 'Guides',
+    blog_sub: 'Expert content on SEO, Google Ads, social media, and web design for Northern Cyprus businesses.',
+    blog_read_more: 'Read More',
+    blog_read_time: 'read',
+    blog_back: 'Back to Blog',
+    blog_other_posts: 'Other Posts',
+    blog_cta_title: 'Ready for Digital Growth in TRNC?',
+    blog_cta_sub: 'We offer specialized solutions for businesses in Kyrenia and all across TRNC.',
+    blog_not_found: 'Post Not Found',
   }
 };
 
 export const LanguageProvider = ({ children }) => {
   const [lang, setLang] = useState('tr');
 
-  const t = (key) => translations[lang][key] || key;
+  const t = (key) => {
+    const val = translations[lang]?.[key];
+    return val !== undefined ? val : key;
+  };
 
   const toggleLang = () => setLang(prev => prev === 'tr' ? 'en' : 'tr');
 
