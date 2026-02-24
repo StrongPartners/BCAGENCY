@@ -1,0 +1,54 @@
+name: 📝 Günlük Blog Yazısı Üret
+
+on:
+  # Hafta içi her gün 07:00 UTC = 10:00 KKTC saati
+  schedule:
+    - cron: '0 7 * * 1-5'
+
+  # GitHub arayüzünden elle tetikleme için
+  workflow_dispatch:
+    inputs:
+      post_count:
+        description: 'Kaç yazı üretilsin? (varsayılan: 2)'
+        required: false
+        default: '2'
+
+permissions:
+  contents: write
+
+jobs:
+  generate-blog:
+    name: Blog Yazısı Üret & Deploy Et
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Repoyu çek
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: ⚙️ Node.js 20 kur
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 📦 Anthropic SDK'yı yükle
+        run: npm install @anthropic-ai/sdk
+
+      - name: 🤖 Blog yazılarını üret
+        run: node scripts/generate-blog.mjs
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: 💾 Değişiklikleri commit et ve push yap
+        run: |
+          git config user.email "blogbot@bccreative.agency"
+          git config user.name "BC Blog Bot"
+          git add src/data/blogPosts.js
+          if git diff --staged --quiet; then
+            echo "Eklenecek yeni yazı yok."
+          else
+            git commit -m "chore: günlük blog yazıları $(date +'%Y-%m-%d')"
+            git push
+            echo "✅ Yazılar commit edildi, Vercel deploy başlıyor."
+          fi
