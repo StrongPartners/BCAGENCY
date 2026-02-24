@@ -14,9 +14,10 @@ import { readFileSync, writeFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
-// ── Dosya yolu ──────────────────────────────────────────────────────────────
+// ── Dosya yolları ────────────────────────────────────────────────────────────
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const POSTS_FILE = join(__dirname, '../src/data/blogPosts.js');
+const POSTS_FILE  = join(__dirname, '../src/data/blogPosts.js');
+const VITE_CONFIG = join(__dirname, '../vite.config.js');
 
 // ── API İstemcisi ────────────────────────────────────────────────────────────
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
@@ -200,6 +201,34 @@ const updated =
     postsContent.substring(insertAt);
 
 writeFileSync(POSTS_FILE, updated, 'utf-8');
+
+// ── vite.config.js sitemap'ini güncelle ──────────────────────────────────────
+const viteContent = readFileSync(VITE_CONFIG, 'utf-8');
+
+// Yeni slug satırlarını oluştur
+const newSlugLines = newPosts
+    .map(post => {
+        const slug = post.slug
+            .toLowerCase()
+            .replace(/[^a-z0-9-]/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '');
+        return `        '/blog/${slug}',`;
+    })
+    .join('\n');
+
+// "otomatik eklenir" yorumunun hemen öncesine yeni slug'ları ekle
+const sitemapInsertMarker = '        // Yeni blog yazıları generate-blog.mjs tarafından buraya otomatik eklenir';
+if (viteContent.includes(sitemapInsertMarker)) {
+    const updatedVite = viteContent.replace(
+        sitemapInsertMarker,
+        newSlugLines + '\n' + sitemapInsertMarker
+    );
+    writeFileSync(VITE_CONFIG, updatedVite, 'utf-8');
+    console.log('📍 vite.config.js sitemap güncellendi.');
+} else {
+    console.warn('⚠️ vite.config.js içinde sitemap marker bulunamadı, atlandı.');
+}
 
 // ── Rapor ────────────────────────────────────────────────────────────────────
 console.log(`\n✅ ${entries.length} yeni blog yazısı eklendi (ID: ${maxId + 1}–${maxId + entries.length}):`);

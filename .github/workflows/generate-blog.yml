@@ -44,7 +44,7 @@ jobs:
         run: |
           git config user.email "blogbot@bccreative.agency"
           git config user.name "BC Blog Bot"
-          git add src/data/blogPosts.js
+          git add src/data/blogPosts.js vite.config.js
           if git diff --staged --quiet; then
             echo "Eklenecek yeni yazı yok."
           else
