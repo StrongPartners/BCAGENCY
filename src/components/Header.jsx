@@ -90,9 +90,9 @@ const Header = () => {
                                             { name: t('nav_social'), path: '/hizmetler/sosyal-medya' },
                                             { name: t('nav_ads'), path: '/hizmetler/google-ads' },
                                             { name: t('nav_web'), path: '/hizmetler/web-tasarim' },
-                                            { name: t('nav_production'), path: null },
-                                            { name: t('nav_drone'), path: null },
-                                            { name: t('nav_photo'), path: null },
+                                            { name: t('nav_production'), path: '/hizmetler/produksiyon' },
+                                            { name: t('nav_drone'), path: '/hizmetler/drone-cekim' },
+                                            { name: t('nav_photo'), path: '/hizmetler/fotograf-video' },
                                         ].map((service, index, arr) => (
                                             service.path ? (
                                                 <a
@@ -230,9 +230,9 @@ const Header = () => {
                                     <a href="/hizmetler/sosyal-medya" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/sosyal-medya'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">{t('nav_social')}</a>
                                     <a href="/hizmetler/google-ads" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/google-ads'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">Google Ads</a>
                                     <a href="/hizmetler/web-tasarim" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/web-tasarim'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">{t('nav_web')}</a>
-                                    <button onClick={() => { window.open('https://wa.me/905488755461', '_blank'); setIsMobileMenuOpen(false); }} className="block w-full text-left text-lg text-gray-600 pl-4 border-l-2 border-green-200">{t('nav_production')}</button>
-                                    <button onClick={() => { window.open('https://wa.me/905488755461', '_blank'); setIsMobileMenuOpen(false); }} className="block w-full text-left text-lg text-gray-600 pl-4 border-l-2 border-green-200">{t('nav_drone')}</button>
-                                    <button onClick={() => { window.open('https://wa.me/905488755461', '_blank'); setIsMobileMenuOpen(false); }} className="block w-full text-left text-lg text-gray-600 pl-4 border-l-2 border-green-200">{t('nav_photo')}</button>
+                                    <a href="/hizmetler/produksiyon" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/produksiyon'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">{t('nav_production')}</a>
+                                    <a href="/hizmetler/drone-cekim" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/drone-cekim'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">{t('nav_drone')}</a>
+                                    <a href="/hizmetler/fotograf-video" onClick={(e) => { e.preventDefault(); navigate('/hizmetler/fotograf-video'); setIsMobileMenuOpen(false); }} className="block text-lg text-gray-600 pl-4 border-l-2 border-brand-100">{t('nav_photo')}</a>
                                 </div>
 
                                 <div className="pt-6 border-t border-gray-100 flex flex-col gap-4">
