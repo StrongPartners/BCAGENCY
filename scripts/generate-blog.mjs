@@ -1,127 +1,213 @@
 /**
- * BC Creative Agency — Gemini-Powered Automated Blog Engine (Aggressive SEO Version)
- * 
- * Generates 10 hyper-optimized bilingual (TR/EN) posts daily.
- * Focused on Cyprus Real Estate, Digital Ads, and Local SEO Dominance.
+ * BC Creative Agency — Gemini-Powered Automated Blog Engine
+ * Refactored to Clean Architecture as per CORE_ARCHITECTURE.md
  */
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const POSTS_FILE = join(__dirname, '../src/data/blogPosts.js');
-const VITE_CONFIG = join(__dirname, '../vite.config.js');
+// --- 1. MODEL KATMANI (Entity / Domain Model) ---
+class BlogPost {
+    constructor(data) {
+        this.id = data.id;
+        this.slug = data.slug;
+        this.title = { tr: data.title_tr, en: data.title_en };
+        this.excerpt = { tr: data.excerpt_tr, en: data.excerpt_en };
+        this.category = data.category;
+        this.date = data.date;
+        this.readTime = data.readTime;
+        this.image = data.image;
+        this.imageAlt = { tr: data.image_alt_tr, en: data.image_alt_en };
+        this.content = { tr: data.content_tr, en: data.content_en };
+    }
 
-if (!process.env.GEMINI_API_KEY) {
-    console.error("❌ Error: GEMINI_API_KEY is not set.");
-    process.exit(1);
+    static toRawObject(post) {
+        return `    {
+        id: ${post.id},
+        slug: ${JSON.stringify(post.slug)},
+        title: { tr: ${JSON.stringify(post.title.tr)}, en: ${JSON.stringify(post.title.en)} },
+        excerpt: { tr: ${JSON.stringify(post.excerpt.tr)}, en: ${JSON.stringify(post.excerpt.en)} },
+        category: ${JSON.stringify(post.category)},
+        date: { tr: ${JSON.stringify(post.date.tr)}, en: ${JSON.stringify(post.date.en)} },
+        readTime: { tr: ${JSON.stringify(post.readTime.tr)}, en: ${JSON.stringify(post.readTime.en)} },
+        image: ${JSON.stringify(post.image)},
+        imageAlt: { tr: ${JSON.stringify(post.imageAlt.tr)}, en: ${JSON.stringify(post.imageAlt.en)} },
+        content: { tr: ${JSON.stringify(post.content.tr)}, en: ${JSON.stringify(post.content.en)} },
+    }`;
+    }
 }
 
-const geminiAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const postsContent = readFileSync(POSTS_FILE, 'utf-8');
-const existingSlugs = [...postsContent.matchAll(/slug:\s*["']([^"']+)["']/g)].map(m => m[1]);
-const ids = [...postsContent.matchAll(/\bid:\s*(\d+)/g)].map(m => parseInt(m[1]));
-const maxId = ids.length > 0 ? Math.max(...ids) : 0;
+// --- 2. REPOSITORY INTERFACE (Sözleşme Katmanı) ---
+// JavaScript'te interface olmadığı için dokümante ediyoruz.
+// IBlogRepository: { getExistingSlugs(), getMaxId(), savePosts(posts) }
 
-const now = new Date();
-const months_tr = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
-const months_en = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const dateTr = `${now.getDate()} ${months_tr[now.getMonth()]} ${now.getFullYear()}`;
-const dateEn = `${months_en[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+// --- 3. REPOSITORY IMPLEMENTATION (Data Access Layer) ---
+class FileBlogRepository {
+    constructor(filePath) {
+        this.filePath = filePath;
+    }
 
-async function generateBatch(batchSize) {
-    console.log(`--- Generating ${batchSize} Competitive SEO posts with Gemini ---`);
-    const model = geminiAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+    _readFile() {
+        if (!existsSync(this.filePath)) {
+            throw new Error(`Blog dosyası bulunamadı: ${this.filePath}`);
+        }
+        return readFileSync(this.filePath, 'utf-8');
+    }
 
-    const prompt = `Sen BC Creative Agency adlı, KKTC'nin en iddialı dijital pazarlama ajansının Baş İçerik Stratejistisin.
-Merkezin Girne, ancak tüm Kuzey Kıbrıs'ı dijitalde domine ediyorsun.
+    getExistingSlugs() {
+        const content = this._readFile();
+        return [...content.matchAll(/slug:\s*["']([^"']+)["']/g)].map(m => m[1]);
+    }
 
-HEDEF: Google aramalarında (hem Türkçe hem İngilizce) rakipleri ezerek 1. sıraya çıkacak ${batchSize} adet blog yazısı üret.
+    getMaxId() {
+        const content = this._readFile();
+        const ids = [...content.matchAll(/\bid:\s*(\d+)/g)].map(m => parseInt(m[1]));
+        return ids.length > 0 ? Math.max(...ids) : 0;
+    }
 
-Mevcut slug'lar: ${existingSlugs.join(', ')} (ASLA TEKRARLAMA!)
+    savePosts(newPosts) {
+        let content = this._readFile();
+        const entries = newPosts.map(post => BlogPost.toRawObject(post));
 
-KRİTİK ODAK NOKTALARI:
-1. KKTC Gayrimenkul Pazarlaması (Yabancı yatırımcı çekme, villa satışı, Girne/İskele emlak reklamları).
-2. Google & Meta Ads (KKTC'de en düşük maliyetle en yüksek dönüşüm).
-3. Turizm ve Otel SEO (Kıbrıs tatil aramalarında zirve).
-4. Yerel İşletme Büyütme (Restoranlar, kafeler, butikler için dijital dönüşüm).
-5. Kurumsal Kimlik & Web Tasarım (Kıbrıs'ın en modern web projeleri).
+        const insertAt = content.lastIndexOf('];');
+        if (insertAt === -1) throw new Error("Dosya yapısı geçersiz: '];' bulunamadı.");
 
-İSTEK: SADECE geçerli bir JSON dizisi döndür:
+        const updatedContent = content.substring(0, insertAt) + entries.join(',\n') + ',\n' + content.substring(insertAt);
+        writeFileSync(this.filePath, updatedContent, 'utf-8');
+        return entries.length;
+    }
+}
+
+// --- 4. USECASE (Business Logic Katmanı) ---
+class GenerateBlogBatchUseCase {
+    constructor(geminiKey) {
+        this.genAI = new GoogleGenerativeAI(geminiKey);
+        // FIX: gemini-1.5-flash kullanımı 404 hatalarını engellemek için daha güvenlidir
+        this.model = this.genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    }
+
+    async execute(batchSize, existingSlugs) {
+        console.log(`[UseCase] Gemini ile ${batchSize} içerik üretiliyor...`);
+
+        const prompt = `Sen BC Creative Agency adlı, KKTC'nin en iddialı dijital pazarlama ajansının Baş İçerik Stratejistisin.
+Girne merkezli, ancak tüm Kıbrıs'ı domine eden bir vizyonla yazıyorsun.
+
+HEDEF: Google aramalarında (TR/EN) rakipleri geride bırakacak ${batchSize} adet blog yazısı üret.
+Mevcut slug'lar: ${existingSlugs.join(', ')} (TEKRARLAMA!)
+
+KRİTİK ODAK: KKTC Emlak, Google Ads, Turizm SEO, Dijital Dönüşüm.
+
+SADECE geçerli bir JSON dizisi döndür:
 [
   {
-    "slug": "url-dostu-slug-anahtar-kelime-icermeli",
-    "category": "SEO | Google Ads | Sosyal Medya | Dijital Pazarlama | Web Tasarım",
+    "slug": "url-slug",
+    "category": "SEO | Google Ads",
     "readTimeMinutes": 12,
-    "title_tr": "Dikkat Çeken Türkçe Başlık", 
-    "title_en": "High-CTR English Title",
-    "excerpt_tr": "Okuyucuyu hemen içeri çeken zengin Türkçe özet.", 
-    "excerpt_en": "Compelling English excerpt to boost click-through rate.",
+    "title_tr": "...", "title_en": "...",
+    "excerpt_tr": "...", "excerpt_en": "...",
     "image_keyword": "unsplash search term",
-    "image_alt_tr": "SEO odaklı Türkçe resim alt metni",
-    "image_alt_en": "SEO specialized English image alt text",
-    "content_tr": "<p>Giriş...</p><h2>Başlık</h2><p>...</p>",
-    "content_en": "<p>Intro...</p><h2>Heading</h2><p>...</p>"
+    "image_alt_tr": "...", "image_alt_en": "...",
+    "content_tr": "<p>...</p>", "content_en": "<p>...</p>"
   }
 ]
 
 KURALLAR:
-- Her yazı TR ve EN dillerinde minimum 1000 kelime olmalı.
+- Her yazı minimum 1000 kelimeye eşdeğer dolulukta olmalı.
 - En az 4 adet <h2> başlığı olmalı.
-- Kıbrıs yerel isimleri (Girne, Lefkoşa, Mağusa, İskele) geçmeli.
-- Her yazıda BC Creative Agency'den bahset.`;
+- Kıbrıs yerel isimleri (Girne, Lefkoşa vb.) geçmeli.`;
 
-    const result = await model.generateContent(prompt);
-    const responseText = result.response.text();
+        const result = await this.model.generateContent(prompt);
+        const responseText = result.response.text();
+        const jsonTextMatch = responseText.match(/\[[\s\S]*\]/);
+        const jsonText = jsonTextMatch ? jsonTextMatch[0] : responseText;
 
-    const jsonTextMatch = responseText.match(/\[[\s\S]*\]/);
-    const jsonText = jsonTextMatch ? jsonTextMatch[0] : responseText;
-
-    return JSON.parse(jsonText);
+        return JSON.parse(jsonText);
+    }
 }
 
-async function run() {
-    console.log(`🚀 Automated SEO Engine (Gemini Pro) Starting...`);
+// --- 5. MANAGER / SERVICE LAYER (Orkestra Katmanı) ---
+class BlogManager {
+    constructor(repository, useCase) {
+        this.repository = repository;
+        this.useCase = useCase;
+    }
+
+    async runDailyAutomation() {
+        console.log("🚀 [Manager] Günlük otomasyon başlatıldı...");
+
+        try {
+            const existingSlugs = this.repository.getExistingSlugs();
+            const startId = this.repository.getMaxId();
+
+            // 2 batch halinde 10 yazı (AI limitlerine takılmamak için)
+            const batch1 = await this.useCase.execute(5, existingSlugs);
+            const batch2 = await this.useCase.execute(5, [...existingSlugs, ...batch1.map(p => p.slug)]);
+            const rawDataBatch = [...batch1, ...batch2];
+
+            const now = new Date();
+            const months_tr = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+            const months_en = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+            const dateTr = `${now.getDate()} ${months_tr[now.getMonth()]} ${now.getFullYear()}`;
+            const dateEn = `${months_en[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+
+            const finalBlogPosts = rawDataBatch.map((data, index) => {
+                const randomSeed = Math.random().toString(36).substring(7);
+                const imgUrl = `https://images.unsplash.com/photo-dynamic?query=${encodeURIComponent(data.image_keyword || 'marketing')}&sig=${randomSeed}&w=1200&auto=format&fit=crop`;
+
+                return new BlogPost({
+                    id: startId + index + 1,
+                    slug: data.slug.toLowerCase().replace(/[^a-z0-9-]/g, '-'),
+                    title_tr: data.title_tr,
+                    title_en: data.title_en,
+                    excerpt_tr: data.excerpt_tr,
+                    excerpt_en: data.excerpt_en,
+                    category: data.category,
+                    date: { tr: dateTr, en: dateEn },
+                    readTime: { tr: `${data.readTimeMinutes || 12} dk okuma`, en: `${data.readTimeMinutes || 12} min read` },
+                    image: imgUrl,
+                    image_alt_tr: data.image_alt_tr,
+                    image_alt_en: data.image_alt_en,
+                    content_tr: data.content_tr,
+                    content_en: data.content_en
+                });
+            });
+
+            const savedCount = this.repository.savePosts(finalBlogPosts);
+            console.log(`✅ [Manager] İşlem tamam: ${savedCount} yeni yazı eklendi.`);
+
+        } catch (error) {
+            console.error("❌ [Manager] Kritik Hata:", error.message);
+            throw error;
+        }
+    }
+}
+
+// --- 6. ÇALIŞTIRICI SCRIPT (Entry Point) ---
+async function main() {
+    const __dirname = dirname(fileURLToPath(import.meta.url));
+    const POSTS_PATH = join(__dirname, '../src/data/blogPosts.js');
+    const GEMINI_KEY = process.env.GEMINI_API_KEY;
+
+    if (!GEMINI_KEY) {
+        console.error("❌ HATA: GEMINI_API_KEY ortam değişkeni ayarlanmamış.");
+        process.exit(1);
+    }
+
+    const repository = new FileBlogRepository(POSTS_PATH);
+    const useCase = new GenerateBlogBatchUseCase(GEMINI_KEY);
+    const manager = new BlogManager(repository, useCase);
 
     try {
-        const batch1 = await generateBatch(5);
-        const batch2 = await generateBatch(5);
-        const allNewPosts = [...batch1, ...batch2];
-
-        const entries = allNewPosts.map((post, i) => {
-            const id = maxId + i + 1;
-            const mins = post.readTimeMinutes || 12;
-            const randomSeed = Math.random().toString(36).substring(7);
-            const imgUrl = `https://images.unsplash.com/photo-dynamic?query=${encodeURIComponent(post.image_keyword || 'marketing')}&sig=${randomSeed}&w=1200&auto=format&fit=crop`;
-
-            const slug = post.slug.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
-            if (existingSlugs.includes(slug)) return null;
-
-            return `    {
-        id: ${id},
-        slug: ${JSON.stringify(slug)},
-        title: { tr: ${JSON.stringify(post.title_tr)}, en: ${JSON.stringify(post.title_en)} },
-        excerpt: { tr: ${JSON.stringify(post.excerpt_tr)}, en: ${JSON.stringify(post.excerpt_en)} },
-        category: ${JSON.stringify(post.category)},
-        date: { tr: ${JSON.stringify(dateTr)}, en: ${JSON.stringify(dateEn)} },
-        readTime: { tr: ${JSON.stringify(`${mins} dk okuma`)}, en: ${JSON.stringify(`${mins} min read`)} },
-        image: ${JSON.stringify(imgUrl)},
-        imageAlt: { tr: ${JSON.stringify(post.image_alt_tr)}, en: ${JSON.stringify(post.image_alt_en)} },
-        content: { tr: ${JSON.stringify(post.content_tr)}, en: ${JSON.stringify(post.content_en)} },
-    }`;
-        }).filter(Boolean);
-
-        const insertAt = postsContent.lastIndexOf('];');
-        const updatedPosts = postsContent.substring(0, insertAt) + entries.join(',\n') + ',\n' + postsContent.substring(insertAt);
-        writeFileSync(POSTS_FILE, updatedPosts, 'utf-8');
-
-        console.log(`✅ Success! ${entries.length} new bilingual posts added.`);
-    } catch (error) {
-        console.error('❌ Generation Failed:', error);
+        await manager.runDailyAutomation();
+    } catch (err) {
         process.exit(1);
     }
 }
 
-run();
+main();
+
+// Mesaj sonu kuralı:
+// bitti bebeğim kontrol eder misin
