@@ -37,8 +37,7 @@ async function indexUrls() {
             null
         );
     } catch (err) {
-        console.error(`❌ Error: Service Account JSON (${JSON_FILENAME}) not found or invalid.`);
-        console.log('Ensure the file exists in the root directory.');
+        console.error(`❌ Error: Service Account JSON not found or invalid.`);
         return;
     }
 
@@ -57,13 +56,13 @@ async function indexUrls() {
         console.log(`🚀 Notifying Google of URL: ${url}`);
 
         try {
-            const res = await indexing.urlNotifications.publish({
+            await indexing.urlNotifications.publish({
                 requestBody: {
                     url: url,
                     type: 'URL_UPDATED'
                 }
             });
-            console.log(`✅ Success: ${url} (Status: ${res.status})`);
+            console.log(`✅ Success: ${url}`);
         } catch (err) {
             console.error(`❌ Failed to index ${url}:`, err.message);
         }

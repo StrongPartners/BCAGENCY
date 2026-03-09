@@ -55,23 +55,23 @@ KRİTİK ODAK NOKTALARI:
     "slug": "url-dostu-slug-anahtar-kelime-icermeli",
     "category": "SEO | Google Ads | Sosyal Medya | Dijital Pazarlama | Web Tasarım",
     "readTimeMinutes": 12,
-    "title_tr": "Dikkat Çeken Türkçe Başlık (LSI anahtar kelimelerle)", 
-    "title_en": "High-CTR English Title (Keyword rich)",
+    "title_tr": "Dikkat Çeken Türkçe Başlık", 
+    "title_en": "High-CTR English Title",
     "excerpt_tr": "Okuyucuyu hemen içeri çeken zengin Türkçe özet.", 
     "excerpt_en": "Compelling English excerpt to boost click-through rate.",
-    "image_keyword": "specific Unsplash keyword (e.g., 'villa kyrenia', 'digital-marketing', 'money', 'cyprus-landscape')",
+    "image_keyword": "unsplash search term",
     "image_alt_tr": "SEO odaklı Türkçe resim alt metni",
     "image_alt_en": "SEO specialized English image alt text",
-    "content_tr": "<p>Zengin içerikli giriş...</p><h2>Alt Başlık 1</h2><p>...</p><h2>Alt Başlık 2</h2><ul><li>Güçlü Liste 1</li></ul><p><b>Kalın Yazılmış Önemli Yerler</b></p><h2>Sonuç</h2>",
-    "content_en": "<p>Deep-dive intro...</p><h2>Subheading 1</h2><p>...</p>"
+    "content_tr": "<p>Giriş...</p><h2>Başlık</h2><p>...</p>",
+    "content_en": "<p>Intro...</p><h2>Heading</h2><p>...</p>"
   }
 ]
 
-YAZIM KURALLARI:
-- Her yazı TR ve EN dillerinde ayda minumum 1000 kelimeye eşdeğer dolulukta olmalı.
-- En az 4 adet <h2> ve 2 adet <h3> başlığı olmalı.
-- Kıbrıs'ın yerel jargonuna ve iş dünyasına (Girne harbour, Lefkoşa dereboyu, İskele long beach gibi) hakim olmalısın.
-- Her yazıda mutlaka BC Creative Agency'den 'Ücretsiz Strateji Danışmanlığı' almaya davet et.`;
+KURALLAR:
+- Her yazı TR ve EN dillerinde minimum 1000 kelime olmalı.
+- En az 4 adet <h2> başlığı olmalı.
+- Kıbrıs yerel isimleri (Girne, Lefkoşa, Mağusa, İskele) geçmeli.
+- Her yazıda BC Creative Agency'den bahset.`;
 
     const result = await model.generateContent(prompt);
     const responseText = result.response.text();
@@ -93,8 +93,6 @@ async function run() {
         const entries = allNewPosts.map((post, i) => {
             const id = maxId + i + 1;
             const mins = post.readTimeMinutes || 12;
-
-            // Adding unique identifier to Unsplash query for absolute uniqueness
             const randomSeed = Math.random().toString(36).substring(7);
             const imgUrl = `https://images.unsplash.com/photo-dynamic?query=${encodeURIComponent(post.image_keyword || 'marketing')}&sig=${randomSeed}&w=1200&auto=format&fit=crop`;
 
@@ -119,18 +117,7 @@ async function run() {
         const updatedPosts = postsContent.substring(0, insertAt) + entries.join(',\n') + ',\n' + postsContent.substring(insertAt);
         writeFileSync(POSTS_FILE, updatedPosts, 'utf-8');
 
-        let viteContent = readFileSync(VITE_CONFIG, 'utf-8');
-        const newSlugLines = allNewPosts.map(p => `        '/blog/${p.slug}',`).join('\n');
-        const marker = '        // Yeni blog yazıları generate-blog.mjs tarafından buraya otomatik eklenir';
-        if (viteContent.includes(marker)) {
-            viteContent = viteContent.replace(marker, newSlugLines + '\n' + marker);
-            writeFileSync(VITE_CONFIG, viteContent, 'utf-8');
-        }
-
         console.log(`✅ Success! ${entries.length} new bilingual posts added.`);
-        if (entries.length === 0) {
-            console.log("⚠️ No new posts were added (possibly due to duplicate slugs).");
-        }
     } catch (error) {
         console.error('❌ Generation Failed:', error);
         process.exit(1);

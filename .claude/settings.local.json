@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(git config:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git add:*)",
+      "Bash(npm run build:*)",
+      "WebFetch(domain:kibrisdijitalajans.com)",
+      "WebFetch(domain:www.mediagraf.com.tr)",
+      "WebFetch(domain:hibro.co)",
+      "WebFetch(domain:othellodigital.com)",
+      "WebFetch(domain:www.seokibris.com)",
+      "Bash(grep:*)"
+    ]
+  }
+}
