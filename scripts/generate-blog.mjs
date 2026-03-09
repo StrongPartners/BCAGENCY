@@ -116,39 +116,38 @@ KURALLAR:
     }
 
     async execute(batchSize, existingSlugs) {
-        console.log(`[UseCase] Gemini ile ${batchSize} içerik üretimi denemesi başlatıldı...`);
+        console.log(`[UseCase] Gemini ile ${batchSize} içerik üretimi için 'Zırhlı' deneme başlatıldı...`);
 
-        // Denenecek model listesi (En yeni ve kapsayıcıdan en eskiye doğru)
-        const modelsToTry = [
-            "gemini-1.5-flash",
-            "gemini-1.5-pro",
-            "gemini-1.0-pro",
-            "gemini-pro"
-        ];
-
+        const models = ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro"];
+        const versions = ["v1", "v1beta"];
         const prompt = this._getPrompt(batchSize, existingSlugs);
 
-        for (const modelName of modelsToTry) {
-            try {
-                console.log(`[UseCase] Deneniyor: ${modelName}...`);
-                const model = this.genAI.getGenerativeModel({ model: modelName });
-                const result = await model.generateContent(prompt);
-                const responseText = result.response.text();
+        for (const modelName of models) {
+            for (const apiVer of versions) {
+                try {
+                    console.log(`[UseCase] Deneniyor: Model=${modelName}, API=${apiVer}...`);
+                    const model = this.genAI.getGenerativeModel(
+                        { model: modelName },
+                        { apiVersion: apiVer }
+                    );
 
-                const jsonTextMatch = responseText.match(/\[[\s\S]*\]/);
-                const jsonText = jsonTextMatch ? jsonTextMatch[0] : responseText;
+                    const result = await model.generateContent(prompt);
+                    const responseText = result.response.text();
 
-                const data = JSON.parse(jsonText);
-                console.log(`✅ [UseCase] ${modelName} ile içerik başarıyla üretildi.`);
-                return data;
-            } catch (err) {
-                console.warn(`⚠️ [UseCase] ${modelName} başarısız: ${err.message}`);
-                // 404 veya 400 hatalarında bir sonraki modeli dene
-                continue;
+                    const jsonTextMatch = responseText.match(/\[[\s\S]*\]/);
+                    const jsonText = jsonTextMatch ? jsonTextMatch[0] : responseText;
+
+                    const data = JSON.parse(jsonText);
+                    console.log(`✅ [UseCase] BAŞARILI: ${modelName} (${apiVer}) ile içerik üretildi.`);
+                    return data;
+                } catch (err) {
+                    console.warn(`⚠️ [UseCase] Başarısız: ${modelName} (${apiVer}) -> ${err.message}`);
+                    continue;
+                }
             }
         }
 
-        throw new Error("Tüm Gemini model varyasyonları başarısız oldu. Lütfen API anahtarınızın 'Generative Language API' erişimine sahip olduğunu doğrulayın.");
+        throw new Error("Kritik Hata: Hiçbir model/versiyon kombinasyonu çalışmadı. Lütfen API anahtarınızın 'Generative Language API' (Google AI Studio) üzerinde aktif olduğunu ve kotanızın dolmadığını kontrol edin.");
     }
 }
 
