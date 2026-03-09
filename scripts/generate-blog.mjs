@@ -84,18 +84,21 @@ class FileBlogRepository {
 class GenerateBlogBatchUseCase {
     constructor(geminiKey) {
         this.genAI = new GoogleGenerativeAI(geminiKey);
-        // FIX: gemini-1.5-flash kullanımı 404 hatalarını engellemek için daha güvenlidir
-        this.model = this.genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        // Explicitly set apiVersion to 'v1' to avoid v1beta 404 issues
+        this.model = this.genAI.getGenerativeModel(
+            { model: "gemini-1.5-flash" },
+            { apiVersion: "v1" }
+        );
     }
 
     async execute(batchSize, existingSlugs) {
         console.log(`[UseCase] Gemini ile ${batchSize} içerik üretiliyor...`);
 
         const prompt = `Sen BC Creative Agency adlı, KKTC'nin en iddialı dijital pazarlama ajansının Baş İçerik Stratejistisin.
-Girne merkezli, ancak tüm Kıbrıs'ı domine eden bir vizyonla yazıyorsun.
+Merkezin Girne, ancak tüm Kıbrıs'ı domine eden bir vizyonla yazıyorsun.
 
 HEDEF: Google aramalarında (TR/EN) rakipleri geride bırakacak ${batchSize} adet blog yazısı üret.
-Mevcut slug'lar: ${existingSlugs.join(', ')} (TEKRARLAMA!)
+Mevcut slug'lar: ${existingSlugs.join(', ')} (ASLA TEKRARLAMA!)
 
 KRİTİK ODAK: KKTC Emlak, Google Ads, Turizm SEO, Dijital Dönüşüm.
 
@@ -114,16 +117,26 @@ SADECE geçerli bir JSON dizisi döndür:
 ]
 
 KURALLAR:
-- Her yazı minimum 1000 kelimeye eşdeğer dolulukta olmalı.
+- Her yazı TR ve EN dillerinde minimum 1000 kelime olmalı.
 - En az 4 adet <h2> başlığı olmalı.
 - Kıbrıs yerel isimleri (Girne, Lefkoşa vb.) geçmeli.`;
 
-        const result = await this.model.generateContent(prompt);
-        const responseText = result.response.text();
-        const jsonTextMatch = responseText.match(/\[[\s\S]*\]/);
-        const jsonText = jsonTextMatch ? jsonTextMatch[0] : responseText;
+        try {
+            const result = await this.model.generateContent(prompt);
+            const responseText = result.response.text();
+            const jsonTextMatch = responseText.match(/\[[\s\S]*\]/);
+            const jsonText = jsonTextMatch ? jsonTextMatch[0] : responseText;
 
-        return JSON.parse(jsonText);
+            return JSON.parse(jsonText);
+        } catch (err) {
+            console.warn(`⚠️ [UseCase] gemini-1.5-flash başarısız oldu, gemini-1.5-pro-latest deneniyor...`);
+            const fallbackModel = this.genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" }, { apiVersion: "v1" });
+            const result = await fallbackModel.generateContent(prompt);
+            const responseText = result.response.text();
+            const jsonTextMatch = responseText.match(/\[[\s\S]*\]/);
+            const jsonText = jsonTextMatch ? jsonTextMatch[0] : responseText;
+            return JSON.parse(jsonText);
+        }
     }
 }
 
