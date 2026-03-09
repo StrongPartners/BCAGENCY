@@ -10,13 +10,13 @@ export default defineConfig({
       hostname: 'https://bccreative.agency',
       generateRobotsTxt: true,
       dynamicRoutes: [
-        // ── Ana Sayfalar ─────────────────────────────────────────────────────
+        // ── Main Pages ─────────────────────────────────────────────────────
         '/',
         '/about',
         '/contact',
         '/blog',
 
-        // ── Hizmet Sayfaları ─────────────────────────────────────────────────
+        // ── Service Pages ─────────────────────────────────────────────────
         '/hizmetler/seo',
         '/hizmetler/google-ads',
         '/hizmetler/sosyal-medya',
@@ -25,7 +25,7 @@ export default defineConfig({
         '/hizmetler/drone-cekim',
         '/hizmetler/fotograf-video',
 
-        // ── Blog Yazıları ────────────────────────────────────────────────────
+        // ── Blog Posts ────────────────────────────────────────────────────
         '/blog/kktcde-seo-nasil-yapilir',
         '/blog/kktc-google-ads-rehberi',
         '/blog/kktc-sosyal-medya-yonetimi',
@@ -46,7 +46,6 @@ export default defineConfig({
         '/blog/kktc-gayrimenkul-yabanci-aliciya-ulasma',
         '/blog/kktc-dijital-pazarlama-rakip-analizi-ileri',
         '/blog/kktc-gayrimenkul-dijital-pazarlama-rehberi',
-        // Yeni blog yazıları generate-blog.mjs tarafından buraya otomatik eklenir
       ],
     }),
   ],

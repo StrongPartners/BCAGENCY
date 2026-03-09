@@ -101,10 +101,26 @@ const SocialMedia = () => {
     const content = smContent[lang] || smContent.tr;
 
     useSEO({
-        title: isTr ? 'KKTC Sosyal Medya Yönetimi | Instagram & TikTok Ajansı - BC Creative' : 'TRNC Social Media Management | Instagram & TikTok Agency - BC Creative',
-        description: isTr ? 'KKTC\'de profesyonel sosyal medya yönetimi. Instagram, TikTok ve Facebook içerik üretimi. Girne yaratıcı reklam ajansı.' : 'Professional social media management in Northern Cyprus. Instagram, TikTok, and Facebook content creation. Kyrenia creative ad agency.',
+        title: isTr ? 'KKTC Sosyal Medya Yönetimi | Instagram & TikTok Ajansı' : 'TRNC Social Media Management | Instagram & TikTok Agency',
+        description: isTr
+            ? 'KKTC\'de profesyonel sosyal medya yönetimi. Instagram, TikTok ve Facebook içerik üretimi. Girne yaratıcı reklam ajansı.'
+            : 'Professional social media management in Northern Cyprus. Instagram, TikTok, and Facebook content creation. Kyrenia creative ad agency.',
         keywords: 'KKTC sosyal medya, Kuzey Kıbrıs Instagram yönetimi, Girne reklam ajansı, TikTok danışmanlığı KKTC, sosyal medya uzmanı Girne',
         canonical: 'https://bccreative.agency/hizmetler/sosyal-medya',
+        alternates: [
+            { hreflang: 'tr', href: 'https://bccreative.agency/hizmetler/sosyal-medya' },
+            { hreflang: 'en', href: 'https://bccreative.agency/en/hizmetler/sosyal-medya' }
+        ],
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": isTr ? "Sosyal Medya Yönetimi" : "Social Media Management",
+            "description": isTr ? "Instagram, TikTok ve Facebook için profesyonel içerik üretimi ve yönetim." : "Professional content creation and management for Instagram, TikTok, and Facebook.",
+            "provider": {
+                "@type": "MarketingAgency",
+                "name": "BC Creative Agency"
+            }
+        }
     });
 
     return (

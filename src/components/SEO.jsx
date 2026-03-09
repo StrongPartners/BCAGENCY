@@ -101,10 +101,32 @@ const SEO = () => {
     const content = seoContent[lang] || seoContent.tr;
 
     useSEO({
-        title: isTr ? 'KKTC SEO Ajansı | Kuzey Kıbrıs SEO Hizmetleri - BC Creative' : 'TRNC SEO Agency | North Cyprus SEO Services - BC Creative',
-        description: isTr ? 'KKTC odaklı profesyonel SEO hizmetleri. Google\'da ilk sırada yer alarak müşterilerinizi yakalayın. Girne ve Lefkoşa reklam ajansı.' : 'Professional SEO services focused on Northern Cyprus. Rank first on Google and capture your customers. Kyrenia and Nicosia advertising agency.',
+        title: isTr ? 'KKTC SEO Ajansı | Kuzey Kıbrıs SEO Hizmetleri' : 'TRNC SEO Agency | North Cyprus SEO Services',
+        description: isTr
+            ? 'KKTC odaklı profesyonel SEO hizmetleri. Google\'da ilk sırada yer alarak müşterilerinizi yakalayın. Girne ve Lefkoşa reklam ajansı.'
+            : 'Professional SEO services focused on Northern Cyprus. Rank first on Google and capture your customers. Kyrenia and Nicosia advertising agency.',
         keywords: 'KKTC SEO, Kuzey Kıbrıs SEO, Girne SEO Ajansı, KKTC dijital pazarlama, Lefkoşa reklam ajansı, SEO uzmanı KKTC',
         canonical: 'https://bccreative.agency/hizmetler/seo',
+        alternates: [
+            { hreflang: 'tr', href: 'https://bccreative.agency/hizmetler/seo' },
+            { hreflang: 'en', href: 'https://bccreative.agency/en/hizmetler/seo' }
+        ],
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": isTr ? "KKTC SEO Hizmetleri" : "TRNC SEO Services",
+            "serviceType": "Search Engine Optimization",
+            "provider": {
+                "@type": "MarketingAgency",
+                "name": "BC Creative Agency",
+                "url": "https://bccreative.agency"
+            },
+            "areaServed": {
+                "@type": "State",
+                "name": "Kuzey Kıbrıs Türk Cumhuriyeti"
+            },
+            "description": isTr ? "Profesyonel SEO ve dijital pazarlama çözümleri." : "Professional SEO and digital marketing solutions."
+        }
     });
 
     return (

@@ -1,24 +1,19 @@
-name: 📝 Günlük Blog Yazısı Üret
+name: 📝 Günlük Otomatik SEO Blog Motoru (Gemini Edition)
 
 on:
-  # Hafta içi her gün 07:00 UTC = 10:00 KKTC saati
+  # Her gün saat 07:00 UTC (10:00 KKTC)
   schedule:
-    - cron: '0 7 * * 1-5'
+    - cron: '0 7 * * *'
 
-  # GitHub arayüzünden elle tetikleme için
+  # Manuel tetikleme
   workflow_dispatch:
-    inputs:
-      post_count:
-        description: 'Kaç yazı üretilsin? (varsayılan: 2)'
-        required: false
-        default: '2'
 
 permissions:
   contents: write
 
 jobs:
   generate-blog:
-    name: Blog Yazısı Üret & Deploy Et
+    name: 10 Yeni Blog Yazısı Üret & İndeksle
     runs-on: ubuntu-latest
 
     steps:
@@ -32,23 +27,36 @@ jobs:
         with:
           node-version: '20'
 
-      - name: 📦 Anthropic SDK'yı yükle
-        run: npm install @anthropic-ai/sdk
+      - name: 📦 SDK Kurulumu
+        run: npm install @google/generative-ai googleapis
 
-      - name: 🤖 Blog yazılarını üret
+      - name: 🤖 Gemini ile 10 Blog Yazısı Üret
         run: node scripts/generate-blog.mjs
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
-      - name: 💾 Değişiklikleri commit et ve push yap
+      - name: 💾 Değişiklikleri Kaydet
+        id: commit
         run: |
-          git config user.email "blogbot@bccreative.agency"
-          git config user.name "BC Blog Bot"
+          git config user.email "seo-bot@bccreative.agency"
+          git config user.name "BC SEO Engine"
           git add src/data/blogPosts.js vite.config.js
           if git diff --staged --quiet; then
-            echo "Eklenecek yeni yazı yok."
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "Yeni yazı bulunamadı."
           else
-            git commit -m "chore: günlük blog yazıları $(date +'%Y-%m-%d')"
+            git commit -m "seo: günlük 10 adet zengin içerikli blog yazısı eklendi $(date +'%Y-%m-%d')"
             git push
-            echo "✅ Yazılar commit edildi, Vercel deploy başlıyor."
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "✅ 10 yeni yazı sisteme eklendi."
           fi
+
+      - name: 🔑 Google Service Account JSON Hazırla (Secret'tan)
+        if: steps.commit.outputs.has_changes == 'true' && env.GOOGLE_INDEXING_JSON != ''
+        run: echo "${{ secrets.GOOGLE_INDEXING_JSON }}" > google-service-account.json
+        env:
+          GOOGLE_INDEXING_JSON: ${{ secrets.GOOGLE_INDEXING_JSON }}
+
+      - name: 🚀 Google Indexing API - Hızlı İndeksleme
+        if: steps.commit.outputs.has_changes == 'true'
+        run: node scripts/google-indexing.mjs

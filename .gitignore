@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Security
+bccreative-49a1ba3a3690.json
+google-service-account.json

@@ -120,10 +120,35 @@ const BlogPost = () => {
   const postReadTime = post?.readTime[lang] || post?.readTime.tr;
 
   useSEO({
-    title: post ? `${postTitle} | BC Creative Agency Blog` : 'Blog | BC Creative Agency',
+    title: post ? `${postTitle}` : 'Blog | BC Creative Agency',
     description: postExcerpt || "KKTC dijital pazarlama, SEO ve reklam rehberleri.",
     keywords: `KKTC ${post?.category}, Kuzey Kıbrıs dijital pazarlama, ${postTitle}`,
     canonical: `https://bccreative.agency/blog/${slug}`,
+    ogImage: post?.image,
+    alternates: [
+      { hreflang: 'tr', href: `https://bccreative.agency/blog/${slug}` },
+      { hreflang: 'en', href: `https://bccreative.agency/en/blog/${slug}` }
+    ],
+    schema: post ? {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": postTitle,
+      "image": post.image,
+      "datePublished": post.date.en || post.date.tr,
+      "author": {
+        "@type": "Organization",
+        "name": "BC Creative Agency"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BC Creative Agency",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://bccreative.agency/logo-icon.png"
+        }
+      },
+      "description": postExcerpt
+    } : null
   });
 
   if (!post) {
@@ -145,7 +170,11 @@ const BlogPost = () => {
     <div className="min-h-screen bg-white">
       {/* Hero Image */}
       <div className="relative h-72 md:h-96 overflow-hidden">
-        <img src={post.image} alt={postTitle} className="w-full h-full object-cover" />
+        <img
+          src={post.image}
+          alt={post.imageAlt?.[lang] || post.imageAlt?.tr || postTitle}
+          className="w-full h-full object-cover"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16">
           <div className="container mx-auto">
@@ -217,7 +246,11 @@ const BlogPost = () => {
                   className="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all cursor-pointer group hover:-translate-y-1 border border-gray-100"
                 >
                   <div className="h-48 overflow-hidden">
-                    <img src={other.image} alt={other.title[lang] || other.title.tr} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    <img
+                      src={other.image}
+                      alt={other.imageAlt?.[lang] || other.imageAlt?.tr || other.title[lang] || other.title.tr}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
                   <div className="p-6">
                     <span className={`text-xs font-bold px-3 py-1 rounded-full ${categoryColors[other.category] || 'bg-gray-100 text-gray-700'}`}>

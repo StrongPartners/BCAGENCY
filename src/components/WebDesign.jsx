@@ -101,10 +101,26 @@ const WebDesign = () => {
     const content = webContent[lang] || webContent.tr;
 
     useSEO({
-        title: isTr ? 'KKTC Web Tasarım | Modern & Kurumsal Web Sitesi - BC Creative' : 'TRNC Web Design | Modern & Corporate Website - BC Creative',
-        description: isTr ? 'KKTC\'de profesyonel web tasarım ve yazılım hizmetleri. Mobil uyumlu, hızlı ve SEO odaklı web siteleri. Girne web tasarım ajansı.' : 'Professional web design and software services in Northern Cyprus. Mobile-friendly, fast and SEO-focused websites. Kyrenia web design agency.',
+        title: isTr ? 'KKTC Web Tasarım | Modern & Kurumsal Web Sitesi' : 'TRNC Web Design | Modern & Corporate Website',
+        description: isTr
+            ? 'KKTC\'de profesyonel web tasarım ve yazılım hizmetleri. Mobil uyumlu, hızlı ve SEO odaklı web siteleri. Girne web tasarım ajansı.'
+            : 'Professional web design and software services in Northern Cyprus. Mobile-friendly, fast and SEO-focused websites. Kyrenia web design agency.',
         keywords: 'KKTC web tasarım, Kuzey Kıbrıs web sitesi, Girne yazılım ajansı, KKTC e-ticaret siteleri, kurumsal web tasarım KKTC',
         canonical: 'https://bccreative.agency/hizmetler/web-tasarim',
+        alternates: [
+            { hreflang: 'tr', href: 'https://bccreative.agency/hizmetler/web-tasarim' },
+            { hreflang: 'en', href: 'https://bccreative.agency/en/hizmetler/web-tasarim' }
+        ],
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": isTr ? "Web Tasarım ve Yazılım" : "Web Design and Development",
+            "description": isTr ? "Mobil uyumlu ve SEO odaklı modern web tasarım çözümleri." : "Modern, mobile-friendly and SEO-focused web design solutions.",
+            "provider": {
+                "@type": "MarketingAgency",
+                "name": "BC Creative Agency"
+            }
+        }
     });
 
     return (

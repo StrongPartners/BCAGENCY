@@ -101,10 +101,26 @@ const GoogleAds = () => {
     const content = adsContent[lang] || adsContent.tr;
 
     useSEO({
-        title: isTr ? 'KKTC Google Ads Yönetimi | Profesyonel Reklam Ajansı - BC Creative' : 'TRNC Google Ads Management | Professional Ad Agency - BC Creative',
-        description: isTr ? 'KKTC\'de profesyonel Google Ads yönetimi. Google reklam bütçenizi satışa dönüştürün. Girne ve Lefkoşa performans pazarlama ajansı.' : 'Professional Google Ads management in Northern Cyprus. Turn your ad budget into sales. Kyrenia and Nicosia performance marketing agency.',
+        title: isTr ? 'KKTC Google Ads Yönetimi | Profesyonel Reklam Ajansı' : 'TRNC Google Ads Management | Professional Ad Agency',
+        description: isTr
+            ? 'KKTC\'de profesyonel Google Ads yönetimi. Google reklam bütçenizi satışa dönüştürün. Girne ve Lefkoşa performans pazarlama ajansı.'
+            : 'Professional Google Ads management in Northern Cyprus. Turn your ad budget into sales. Kyrenia and Nicosia performance marketing agency.',
         keywords: 'KKTC Google Ads, Kuzey Kıbrıs reklam ajansı, Girne Google reklamları, KKTC dijital pazarlama, Google Ads uzmanı KKTC, reklam yönetimi Girne',
         canonical: 'https://bccreative.agency/hizmetler/google-ads',
+        alternates: [
+            { hreflang: 'tr', href: 'https://bccreative.agency/hizmetler/google-ads' },
+            { hreflang: 'en', href: 'https://bccreative.agency/en/hizmetler/google-ads' }
+        ],
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": isTr ? "Google Ads Yönetimi" : "Google Ads Management",
+            "description": isTr ? "Profesyonel Google Ads yönetimi ve optimizasyonu." : "Professional Google Ads management and optimization.",
+            "provider": {
+                "@type": "MarketingAgency",
+                "name": "BC Creative Agency"
+            }
+        }
     });
 
     return (
