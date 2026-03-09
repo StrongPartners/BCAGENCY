@@ -1,4 +1,15 @@
+# BC Creative Agency Robots.txt
+# Sitemaps: https://bccreative.agency/sitemap.xml
+
 User-agent: *
+Allow: /
+
+# Specifically Allow Googlebot
+User-agent: Googlebot
+Allow: /
+
+# Specifically Allow Bingbot
+User-agent: Bingbot
 Allow: /
 
 Sitemap: https://bccreative.agency/sitemap.xml

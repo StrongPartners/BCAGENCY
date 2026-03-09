@@ -127,9 +127,13 @@ async function run() {
             writeFileSync(VITE_CONFIG, viteContent, 'utf-8');
         }
 
-        console.log(`✅ Success! ${allNewPosts.length} hyper-aggressive SEO posts added.`);
+        console.log(`✅ Success! ${entries.length} new bilingual posts added.`);
+        if (entries.length === 0) {
+            console.log("⚠️ No new posts were added (possibly due to duplicate slugs).");
+        }
     } catch (error) {
         console.error('❌ Generation Failed:', error);
+        process.exit(1);
     }
 }
 
