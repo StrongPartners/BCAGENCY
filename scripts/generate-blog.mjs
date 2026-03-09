@@ -84,18 +84,11 @@ class FileBlogRepository {
 class GenerateBlogBatchUseCase {
     constructor(geminiKey) {
         this.genAI = new GoogleGenerativeAI(geminiKey);
-        // Explicitly set apiVersion to 'v1' to avoid v1beta 404 issues
-        this.model = this.genAI.getGenerativeModel(
-            { model: "gemini-1.5-flash" },
-            { apiVersion: "v1" }
-        );
     }
 
-    async execute(batchSize, existingSlugs) {
-        console.log(`[UseCase] Gemini ile ${batchSize} içerik üretiliyor...`);
-
-        const prompt = `Sen BC Creative Agency adlı, KKTC'nin en iddialı dijital pazarlama ajansının Baş İçerik Stratejistisin.
-Merkezin Girne, ancak tüm Kıbrıs'ı domine eden bir vizyonla yazıyorsun.
+    _getPrompt(batchSize, existingSlugs) {
+        return `Sen BC Creative Agency adlı, KKTC'nin en iddialı dijital pazarlama ajansının Baş İçerik Stratejistisin.
+Girne merkezli, ancak tüm Kıbrıs'ı domine eden bir vizyonla yazıyorsun.
 
 HEDEF: Google aramalarında (TR/EN) rakipleri geride bırakacak ${batchSize} adet blog yazısı üret.
 Mevcut slug'lar: ${existingSlugs.join(', ')} (ASLA TEKRARLAMA!)
@@ -120,23 +113,42 @@ KURALLAR:
 - Her yazı TR ve EN dillerinde minimum 1000 kelime olmalı.
 - En az 4 adet <h2> başlığı olmalı.
 - Kıbrıs yerel isimleri (Girne, Lefkoşa vb.) geçmeli.`;
+    }
 
-        try {
-            const result = await this.model.generateContent(prompt);
-            const responseText = result.response.text();
-            const jsonTextMatch = responseText.match(/\[[\s\S]*\]/);
-            const jsonText = jsonTextMatch ? jsonTextMatch[0] : responseText;
+    async execute(batchSize, existingSlugs) {
+        console.log(`[UseCase] Gemini ile ${batchSize} içerik üretimi denemesi başlatıldı...`);
 
-            return JSON.parse(jsonText);
-        } catch (err) {
-            console.warn(`⚠️ [UseCase] gemini-1.5-flash başarısız oldu, gemini-1.5-pro-latest deneniyor...`);
-            const fallbackModel = this.genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" }, { apiVersion: "v1" });
-            const result = await fallbackModel.generateContent(prompt);
-            const responseText = result.response.text();
-            const jsonTextMatch = responseText.match(/\[[\s\S]*\]/);
-            const jsonText = jsonTextMatch ? jsonTextMatch[0] : responseText;
-            return JSON.parse(jsonText);
+        // Denenecek model listesi (En yeni ve kapsayıcıdan en eskiye doğru)
+        const modelsToTry = [
+            "gemini-1.5-flash",
+            "gemini-1.5-pro",
+            "gemini-1.0-pro",
+            "gemini-pro"
+        ];
+
+        const prompt = this._getPrompt(batchSize, existingSlugs);
+
+        for (const modelName of modelsToTry) {
+            try {
+                console.log(`[UseCase] Deneniyor: ${modelName}...`);
+                const model = this.genAI.getGenerativeModel({ model: modelName });
+                const result = await model.generateContent(prompt);
+                const responseText = result.response.text();
+
+                const jsonTextMatch = responseText.match(/\[[\s\S]*\]/);
+                const jsonText = jsonTextMatch ? jsonTextMatch[0] : responseText;
+
+                const data = JSON.parse(jsonText);
+                console.log(`✅ [UseCase] ${modelName} ile içerik başarıyla üretildi.`);
+                return data;
+            } catch (err) {
+                console.warn(`⚠️ [UseCase] ${modelName} başarısız: ${err.message}`);
+                // 404 veya 400 hatalarında bir sonraki modeli dene
+                continue;
+            }
         }
+
+        throw new Error("Tüm Gemini model varyasyonları başarısız oldu. Lütfen API anahtarınızın 'Generative Language API' erişimine sahip olduğunu doğrulayın.");
     }
 }
 
