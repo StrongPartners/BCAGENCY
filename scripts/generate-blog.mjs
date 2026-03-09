@@ -87,55 +87,32 @@ class GenerateBlogBatchUseCase {
         this.genAI = new GoogleGenerativeAI(geminiKey);
     }
 
-    _validateKeyFormat() {
+    _detectKeyType() {
         if (this.geminiKey.trim().startsWith('{')) {
-            throw new Error(`
-🚀 BABUŞ TEŞHİSİ:
-'GEMINI_API_KEY' içine bir JSON (Service Account) yapıştırmışsın abuş! 
-Bu kütüphane (@google/generative-ai) sadece Google AI Studio'dan alınan 'AIza...' ile başlayan düz metin anahtarları kabul eder.
-
-Çözüm: 
-1. aistudio.google.com adresine git.
-2. 'AIza...' ile başlayan anahtarı al.
-3. GitHub Secret'ına sadece o metni yapıştır.
-            `);
+            return "SERVICE_ACCOUNT_JSON";
         }
-    }
-
-    _getPrompt(batchSize, existingSlugs) {
-        return `Sen BC Creative Agency adına çalışan, KKTC dijital pazarının lideri bir SEO uzmanısın.
-Merkezin Girne ve vizyonun tüm Kıbrıs'ı dijitalde 1 numara yapmak.
-
-HEDEF: Google (TR/EN) aramalarında rakipleri ezecek ${batchSize} adet, her biri 1000+ kelimelik blog yazısı üret.
-Mevcut sluglar: ${existingSlugs.join(', ')} (ASLA TEKRARLAMA!)
-
-Kategori Odakları: Emlak Yatırımı, Google Ads Stratejileri, Turizm SEO, Yerel İşletme Büyütme.
-
-SADECE geçerli bir JSON dizisi döndür:
-[
-  {
-    "slug": "url-slug",
-    "category": "SEO | Google Ads",
-    "readTimeMinutes": 15,
-    "title_tr": "...", "title_en": "...",
-    "excerpt_tr": "...", "excerpt_en": "...",
-    "image_keyword": "unsplash search term",
-    "image_alt_tr": "...", "image_alt_en": "...",
-    "content_tr": "<p>...</p>", "content_en": "<p>...</p>"
-  }
-]
-
-KURALLAR:
-- Her yazı TR ve EN dillerinde minimum 1000 kelime olmalı.
-- En az 5 adet <h2> ve 2 adet <h3> başlığı olmalı.
-- Kıbrıs yerel isimleri (Girne, Lefkoşa, İskele) mutlaka geçmeli.
-- Markamız 'BC Creative Agency' içeriğe doğal şekilde serpiştirilmeli.`;
+        if (this.geminiKey.trim().startsWith('AIza')) {
+            return "AI_STUDIO_KEY";
+        }
+        return "UNKNOWN";
     }
 
     async execute(batchSize, existingSlugs) {
-        console.log(`[UseCase] Gemini 'Zırhlı' Motoru ateşleniyor... (Batch: ${batchSize})`);
+        const keyType = this._detectKeyType();
+        console.log(`[UseCase] Gemini Motoru Hazırlanıyor... (Anahtar Türü: ${keyType})`);
 
-        this._validateKeyFormat();
+        if (keyType === "SERVICE_ACCOUNT_JSON") {
+            throw new Error(`
+🚀 BABUŞ TEŞHİSİ:
+'GEMINI_API_KEY' secret'ının içine bir JSON dosyası yapıştırmışsın abuş! 
+Ancak şu anki kod (@google/generative-ai) sadece AI Studio anahtarlarını (AIza...) anlar.
+
+Çözüm:
+1. aistudio.google.com adresine git.
+2. Ücretsiz bir API Key al (AIza... ile başlar).
+3. Secret'a sadece anahtarı (metni) yapıştır.
+            `);
+        }
 
         const models = ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro"];
         const versions = ["v1", "v1beta"];
@@ -156,16 +133,29 @@ KURALLAR:
                     const jsonText = jsonTextMatch ? jsonTextMatch[0] : responseText;
 
                     const data = JSON.parse(jsonText);
-                    console.log(`✅ [UseCase] BAŞARILI: ${modelName} (${apiVer}) ile içerik patlatıldı!`);
+                    console.log(`✅ [UseCase] BAŞARILI: ${modelName} aktif!`);
                     return data;
                 } catch (err) {
-                    console.warn(`⚠️ [UseCase] Başarısız: ${modelName} (${apiVer}) -> ${err.message.substring(0, 100)}...`);
-                    continue;
+                    const msg = err.message.toLowerCase();
+                    if (msg.includes("403") || msg.includes("forbidden")) {
+                        throw new Error(`
+🔥 KRİTİK: API KAPALI!
+Görünüşe göre anahtarın doğru ama Google Cloud projenizde 'Generative Language API' etkin değil.
+
+Lütfen buradan aktifleştir:
+https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com
+                        `);
+                    }
+                    console.warn(`[UseCase] ${modelName} (${apiVer}) hata: ${err.message.substring(0, 50)}...`);
                 }
             }
         }
 
-        throw new Error("❌ KRİTİK HATA: Hiçbir model/versiyon kombinasyonu çalışmadı. Lütfen aistudio.google.com'dan aldığın 'AIza...' anahtarını kullandığından emin ol.");
+        throw new Error("❌ Hiçbir model çalışmadı. Lütfen API anahtarının geçerli olduğundan ve Google AI Studio'da test edildiğinden emin ol.");
+    }
+
+    _getPrompt(batchSize, existingSlugs) {
+        return `Sen Kıbrıs SEO uzmanısın. ${batchSize} adet TR/EN blog üret. ${existingSlugs.join(',')} kullanma. SADECE JSON.`;
     }
 }
 
