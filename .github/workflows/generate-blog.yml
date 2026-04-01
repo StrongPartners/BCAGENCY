@@ -40,14 +40,15 @@ jobs:
           node-version: '20'
 
       - name: 📦 SDK Kurulumu
-        run: npm install @google/generative-ai googleapis
+        run: npm install @google/generative-ai @google/genai googleapis
 
-      - name: 🤖 Gemini ile Blog Yazısı Üret
+      - name: 🤖 Gemini ile Blog Yazısı Üret + Görsel Oluştur
         run: node scripts/generate-blog.mjs
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          # Manuel tetiklemede girilen değer, otomatik çalışmada varsayılan 10
           BLOG_COUNT: ${{ github.event.inputs.blog_count || '10' }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_UPLOAD_PRESET: ${{ secrets.CLOUDINARY_UPLOAD_PRESET }}
 
       - name: 💾 Değişiklikleri Kaydet
         id: commit
