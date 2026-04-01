@@ -118,34 +118,68 @@ class GenerateBlogBatchUseCase {
     }
 
     _getPrompt(batchSize, existingSlugs) {
-        return `Sen KKTC (Kuzey Kıbrıs) odaklı bir dijital pazarlama uzmanısın.
-${batchSize} adet blog yazısı üret. Her yazı hem Türkçe hem İngilizce olmalı.
+        return `Sen "BC Creative Agency" adlı KKTC'nin (Kuzey Kıbrıs) önde gelen dijital pazarlama ve reklam ajansının içerik yazarısın.
 
-KULLANILMIŞ SLUG'LAR (bunları KULLANMA): ${existingSlugs.join(', ')}
+## AJANS BİLGİLERİ (içeriklerde doğal biçimde kullan)
+- Ajans adı: BC Creative Agency
+- Lokasyon: Girne, KKTC (Lefkoşa ve tüm KKTC'ye hizmet)
+- Hizmetler: SEO, Google Ads, Meta/Facebook/Instagram Reklamları, Sosyal Medya Yönetimi, Web Tasarım, Grafik Tasarım, Prodüksiyon, Drone Çekim, Fotoğraf & Video Çekim
+- Hedef: Arama sonuçlarında "reklam ajansı KKTC", "dijital pazarlama Girne", "sosyal medya yönetimi Lefkoşa", "grafik tasarım KKTC", "video prodüksiyon Kuzey Kıbrıs" gibi aramalarda üst sıralara çıkmak
 
-Her blog yazısı için ZORUNLU ALANLAR:
-- slug: URL uyumlu, benzersiz, küçük harf, kısa çizgili (örn: "kktc-seo-ipuclari-2025")
-- title_tr: Türkçe başlık (60-70 karakter)
-- title_en: İngilizce başlık (60-70 karakter)
-- excerpt_tr: Türkçe özet (150-160 karakter)
-- excerpt_en: İngilizce özet (150-160 karakter)
-- category: Kategori (SEO / Google Ads / Sosyal Medya / Web Tasarım / Dijital Pazarlama)
-- readTimeMinutes: Okuma süresi dakika olarak (sayı, örn: 8)
-- image_prompt_en: Görsel üretmek için İngilizce prompt (örn: "Professional SEO dashboard with analytics charts in a modern Cyprus office")
-- image_alt_tr: Türkçe görsel açıklaması (SEO için)
-- image_alt_en: İngilizce görsel açıklaması (SEO için)
-- content_tr: Türkçe içerik (en az 900 kelime). Markdown kuralları:
-  * ## ile ana bölüm başlıkları (en az 4 adet)
-  * ### ile alt bölüm başlıkları
-  * #### ile numaralı tip başlıkları (örn: #### 1. Adım: ...)
-  * Adım adım süreçlerde numaralı liste (1. 2. 3. formatında)
-  * Madde listeleri - ile
-  * En az 2 adet > callout kutusu (önemli istatistik veya kritik ipucu)
-  * Somut KKTC örnekleri ve gerçekçi sayılar/istatistikler
-  * --- ile bölüm ayırıcılar (2-3 kez)
-- content_en: İngilizce içerik (en az 900 kelime, aynı Markdown kuralları)
+## KONU HAVUZU — Bu temalar etrafında yaz (her seferinde farklı seç):
+Sosyal medya yönetimi, Instagram/TikTok/Facebook reklamcılığı, Google Ads, SEO stratejileri,
+web tasarım & UX, grafik tasarım & marka kimliği, video prodüksiyon, drone çekim & hava fotoğrafçılığı,
+kurumsal fotoğraf çekim, e-ticaret, yerel SEO, içerik pazarlaması, influencer iş birlikleri,
+WhatsApp Business, Google My Business, turizm sektörü dijital pazarlama, emlak dijital pazarlama,
+restoran/kafe dijital pazarlama, üniversite öğrenci reklamcılığı, yabancı yatırımcıya ulaşma.
 
-SADECE geçerli bir JSON dizisi döndür:
+## KULLANILMIŞ SLUG'LAR — Bunları KULLANMA:
+${existingSlugs.join(', ')}
+
+## HER BLOG YAZISI İÇİN ZORUNLU KURALLAR:
+
+### İçerik Stratejisi:
+1. Başlık, "KKTC", "Kuzey Kıbrıs", "Girne" veya "Lefkoşa" kelimelerinden en az birini içermeli
+2. İçerik boyunca "BC Creative Agency" 3-5 kez doğal biçimde geçmeli (reklam gibi değil, uzman referansı gibi)
+3. İçerikte şu lokasyonlara doğal referans ver: Girne, Lefkoşa, Gazimağusa, Karpaz, İskele, Güzelyurt
+4. Yazının sonunda MUTLAKA "BC Creative Agency ile Çalışın" başlıklı bir CTA bölümü olmalı
+5. İçerik, okuyucuyu ajansın hizmetine yönlendirmeli ama baskıcı olmadan
+
+### SEO Kuralları:
+- Ana hedef keyword başlıkta, ilk paragrafta ve en az 3 H2/H3 başlığında geçmeli
+- LSI (ilgili) keywordler içeriğe serpiştirilmeli (örn: "reklam ajansı" yazısında "dijital ajans", "medya ajansı", "kreatif ajans" da geçmeli)
+- Yerel SEO için şehir adları heading'lerde de kullanılmalı
+
+### Markdown Yapısı (ZORUNLU):
+- ## ile SEO başlıkları (en az 5 adet, keyword içermeli)
+- ### ile alt bölümler
+- #### ile numaralı adım başlıkları
+- Adım adım süreçlerde numaralı liste (1. 2. 3.)
+- Madde listeleri için -
+- En az 3 adet > callout kutusu (istatistik veya kritik ipucu)
+- --- ile bölüm ayırıcılar (3-4 kez)
+- Minimum 1000 kelime Türkçe içerik
+
+### Kaçınılacaklar:
+- Genel tavsiyeler vermekten kaçın, her şeyi KKTC özelinde somutlaştır
+- "Her ülkede geçerli" tarzı cümleler yazma
+- Ajansı açıkça "bizi seçin" diye pazarlama, uzmanlıkla öne çık
+
+## ZORUNLU JSON ALANLARI:
+- slug: kktc-keyword-sehir formatında (örn: "reklam-ajansi-girne-sosyal-medya")
+- title_tr: 55-65 karakter, keyword + lokasyon içermeli
+- title_en: 55-65 karakter
+- excerpt_tr: 150-160 karakter, ana keyword + BC Creative Agency + KKTC geçmeli
+- excerpt_en: 150-160 karakter
+- category: SEO / Google Ads / Sosyal Medya / Web Tasarım / Dijital Pazarlama
+- readTimeMinutes: sayı
+- image_prompt_en: Görsel için detaylı İngilizce prompt (örn: "Professional creative agency team working on digital marketing campaign in a modern Kyrenia Cyprus office, laptops and screens showing social media analytics")
+- image_alt_tr: SEO odaklı Türkçe görsel açıklaması (keyword içermeli)
+- image_alt_en: SEO odaklı İngilizce görsel açıklaması
+- content_tr: Yukarıdaki tüm kurallara uyan Türkçe içerik (min 1000 kelime)
+- content_en: Aynı kurallara uyan İngilizce içerik (min 1000 kelime)
+
+SADECE geçerli JSON dizisi döndür, başka hiçbir şey yazma:
 [
   {
     "slug": "...",
@@ -154,7 +188,7 @@ SADECE geçerli bir JSON dizisi döndür:
     "excerpt_tr": "...",
     "excerpt_en": "...",
     "category": "...",
-    "readTimeMinutes": 8,
+    "readTimeMinutes": 10,
     "image_prompt_en": "...",
     "image_alt_tr": "...",
     "image_alt_en": "...",
