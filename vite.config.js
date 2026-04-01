@@ -62,6 +62,8 @@ export default defineConfig({
         '/blog/kktc-isletmeleri-icin-google-ads-remarketing-taktikleri',
         '/blog/kktc-turizm-isletmesi-dijital-musteri-yolculugu-haritasi',
         '/blog/kktc-drone-cekimi-emlak-turizm-girne',
+        '/blog/kktc-sosyal-medya-icerik-takvimi-girne',
+        '/blog/sosyal-medya-yonetimi-lefko-a-kktc',
       ],
     }),
   ],
