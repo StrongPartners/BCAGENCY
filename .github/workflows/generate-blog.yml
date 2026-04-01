@@ -69,7 +69,8 @@ jobs:
 
       - name: 🔑 Google Service Account JSON Hazırla (Secret'tan)
         if: steps.commit.outputs.has_changes == 'true' && env.GOOGLE_INDEXING_JSON != ''
-        run: echo "${{ secrets.GOOGLE_INDEXING_JSON }}" > google-service-account.json
+        # Node.js ile yazıyoruz — echo özel karakterleri (\n, ") bozar
+        run: node -e "require('fs').writeFileSync('google-service-account.json', process.env.GOOGLE_INDEXING_JSON)"
         env:
           GOOGLE_INDEXING_JSON: ${{ secrets.GOOGLE_INDEXING_JSON }}
 

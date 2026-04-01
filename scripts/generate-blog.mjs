@@ -101,9 +101,17 @@ class GenerateBlogBatchUseCase {
                     console.log(`[BlogUseCase] Deneniyor: ${modelName} (${apiVer})...`);
                     const model = this.genAI.getGenerativeModel({ model: modelName }, { apiVersion: apiVer });
                     const result = await model.generateContent(prompt);
-                    const responseText = result.response.text();
-                    const jsonMatch = responseText.match(/\[[\s\S]*\]/);
-                    const data = JSON.parse(jsonMatch ? jsonMatch[0] : responseText);
+                    const rawText = result.response.text();
+
+                    // Gemini bazen ```json ... ``` bloğu içinde döner — temizle
+                    const cleanText = rawText
+                        .replace(/^```json\s*/m, '')
+                        .replace(/^```\s*/m, '')
+                        .replace(/```\s*$/m, '')
+                        .trim();
+
+                    const jsonMatch = cleanText.match(/\[[\s\S]*\]/);
+                    const data = JSON.parse(jsonMatch ? jsonMatch[0] : cleanText);
                     console.log(`✅ [BlogUseCase] BAŞARILI: ${modelName}`);
                     return data;
                 } catch (err) {
