@@ -22,83 +22,156 @@ const categoryLabels = {
   'Web Tasarım': { tr: 'Web Tasarım', en: 'Web Design' },
 };
 
-// Markdown'u basit HTML'e çevir
+// Inline bold/italic parser
+const parseInline = (text) => {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, j) =>
+    part.startsWith('**') && part.endsWith('**')
+      ? <strong key={j} className="text-gray-900 font-bold">{part.slice(2, -2)}</strong>
+      : part
+  );
+};
+
+// Markdown'u zengin HTML'e çevir
 const renderContent = (content) => {
   if (!content) return null;
   const lines = content.trim().split('\n');
   const result = [];
-  let currentTable = null;
+  let i = 0;
 
-  for (let i = 0; i < lines.length; i++) {
+  while (i < lines.length) {
     const line = lines[i].trim();
 
-    // Table detection
-    if (line.startsWith('|')) {
-      if (!currentTable) {
-        currentTable = [];
+    // ── Tablo ────────────────────────────────────────────────────────────
+    if (line.startsWith('|') && !line.includes('---')) {
+      const tableLines = [];
+      while (i < lines.length && lines[i].trim().startsWith('|')) {
+        if (!lines[i].includes('---')) tableLines.push(lines[i].trim());
+        i++;
       }
-      // Skip separator row (|---|---|)
-      if (line.includes('---')) continue;
-
-      const cells = line.split('|').filter(cell => cell.trim() !== '').map(cell => cell.trim());
-      currentTable.push(cells);
-      continue;
-    } else if (currentTable) {
-      // Table ended
-      const tableRows = currentTable;
-      result.push(
-        <div key={`table-${i}`} className="overflow-x-auto my-8">
-          <table className="min-w-full divide-y divide-gray-200 border border-gray-100 rounded-xl overflow-hidden shadow-sm">
-            <thead className="bg-gray-50">
-              <tr>
-                {tableRows[0].map((cell, idx) => (
-                  <th key={idx} className="px-6 py-4 text-left text-xs font-black text-gray-500 uppercase tracking-wider">
-                    {cell}
-                  </th>
+      if (tableLines.length > 0) {
+        const rows = tableLines.map(r =>
+          r.split('|').filter(c => c.trim() !== '').map(c => c.trim())
+        );
+        result.push(
+          <div key={`tbl-${i}`} className="overflow-x-auto my-8">
+            <table className="min-w-full divide-y divide-gray-200 border border-gray-100 rounded-xl overflow-hidden shadow-sm">
+              <thead className="bg-gray-50">
+                <tr>{rows[0].map((c, idx) => <th key={idx} className="px-6 py-4 text-left text-xs font-black text-gray-500 uppercase tracking-wider">{c}</th>)}</tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {rows.slice(1).map((row, ri) => (
+                  <tr key={ri} className="hover:bg-gray-50/50 transition-colors">
+                    {row.map((c, ci) => <td key={ci} className="px-6 py-4 text-sm font-medium text-gray-600">{c}</td>)}
+                  </tr>
                 ))}
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {tableRows.slice(1).map((row, rowIdx) => (
-                <tr key={rowIdx} className="hover:bg-gray-50/50 transition-colors">
-                  {row.map((cell, idx) => (
-                    <td key={idx} className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600">
-                      {cell}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      );
-      currentTable = null;
+              </tbody>
+            </table>
+          </div>
+        );
+      }
+      continue;
     }
 
-    if (line.startsWith('## ')) {
-      result.push(<h2 key={i} className="text-2xl md:text-3xl font-black text-gray-900 mt-10 mb-4">{line.replace('## ', '')}</h2>);
+    // ── Başlıklar ─────────────────────────────────────────────────────────
+    if (line.startsWith('#### ')) {
+      result.push(<h4 key={i} className="text-lg font-bold text-brand-600 mt-5 mb-2">{line.slice(5)}</h4>);
     } else if (line.startsWith('### ')) {
-      result.push(<h3 key={i} className="text-xl font-bold text-gray-800 mt-6 mb-3">{line.replace('### ', '')}</h3>);
-    } else if (line.startsWith('**') && line.endsWith('**')) {
-      result.push(<p key={i} className="font-bold text-gray-800 my-2">{line.replace(/\*\*/g, '')}</p>);
-    } else if (line.startsWith('- ')) {
-      result.push(<li key={i} className="text-gray-600 ml-4 mb-1 list-disc font-medium">{line.replace('- ', '')}</li>);
-    } else if (line.startsWith('* ')) {
-      result.push(<li key={i} className="text-gray-600 ml-4 mb-1 list-disc font-medium">{line.replace('* ', '')}</li>);
-    } else if (line.startsWith('`') && line.endsWith('`')) {
-      result.push(<code key={i} className="block bg-gray-100 text-brand-600 px-4 py-2 rounded-lg text-sm font-mono my-3">{line.replace(/`/g, '')}</code>);
-    } else if (line === '') {
-      result.push(<br key={i} />);
-    } else if (line.includes('**')) {
-      const parts = line.split('**');
+      result.push(<h3 key={i} className="text-xl font-bold text-gray-800 mt-8 mb-3 border-l-4 border-brand-600 pl-4">{line.slice(4)}</h3>);
+    } else if (line.startsWith('## ')) {
+      result.push(<h2 key={i} className="text-2xl md:text-3xl font-black text-gray-900 mt-12 mb-5">{line.slice(3)}</h2>);
+
+    // ── Alıntı / Callout Kutusu ───────────────────────────────────────────
+    } else if (line.startsWith('> ')) {
       result.push(
-        <p key={i} className="text-gray-600 leading-relaxed mb-3 font-medium">
-          {parts.map((part, j) => j % 2 === 1 ? <strong key={j} className="text-gray-900 font-bold">{part}</strong> : part)}
+        <blockquote key={i} className="border-l-4 border-brand-600 bg-brand-50/60 rounded-r-2xl px-6 py-4 my-6 text-gray-700 font-semibold italic">
+          {parseInline(line.slice(2))}
+        </blockquote>
+      );
+
+    // ── Satır ayırıcı ─────────────────────────────────────────────────────
+    } else if (line === '---') {
+      result.push(<hr key={i} className="my-10 border-gray-100" />);
+
+    // ── Inline görsel ![alt](url) ─────────────────────────────────────────
+    } else if (line.startsWith('![')) {
+      const m = line.match(/!\[([^\]]*)\]\(([^)]+)\)/);
+      if (m) {
+        result.push(
+          <figure key={i} className="my-10">
+            <img
+              src={m[2]}
+              alt={m[1]}
+              className="w-full rounded-2xl shadow-lg object-cover max-h-80"
+              loading="lazy"
+            />
+            {m[1] && <figcaption className="text-center text-sm text-gray-400 mt-3 italic">{m[1]}</figcaption>}
+          </figure>
+        );
+      }
+
+    // ── Madde işaretli liste (ardışık satırları grupla) ───────────────────
+    } else if (line.startsWith('- ') || line.startsWith('* ')) {
+      const items = [];
+      while (i < lines.length && (lines[i].trim().startsWith('- ') || lines[i].trim().startsWith('* '))) {
+        items.push(lines[i].trim().replace(/^[-*]\s/, ''));
+        i++;
+      }
+      result.push(
+        <ul key={`ul-${i}`} className="my-4 space-y-2 pl-2">
+          {items.map((item, idx) => (
+            <li key={idx} className="flex items-start gap-3 text-gray-600 font-medium">
+              <span className="mt-1.5 w-2 h-2 rounded-full bg-brand-600 flex-shrink-0" />
+              <span>{parseInline(item)}</span>
+            </li>
+          ))}
+        </ul>
+      );
+      continue;
+
+    // ── Numaralı liste (ardışık satırları grupla) ─────────────────────────
+    } else if (/^\d+\.\s/.test(line)) {
+      const items = [];
+      while (i < lines.length && /^\d+\.\s/.test(lines[i].trim())) {
+        items.push(lines[i].trim().replace(/^\d+\.\s/, ''));
+        i++;
+      }
+      result.push(
+        <ol key={`ol-${i}`} className="my-4 space-y-3 pl-2 counter-reset-list">
+          {items.map((item, idx) => (
+            <li key={idx} className="flex items-start gap-3 text-gray-600 font-medium">
+              <span className="flex-shrink-0 w-7 h-7 rounded-full bg-brand-600 text-white text-xs font-black flex items-center justify-center mt-0.5">
+                {idx + 1}
+              </span>
+              <span className="pt-0.5">{parseInline(item)}</span>
+            </li>
+          ))}
+        </ol>
+      );
+      continue;
+
+    // ── Kod satırı ────────────────────────────────────────────────────────
+    } else if (line.startsWith('`') && line.endsWith('`')) {
+      result.push(<code key={i} className="block bg-gray-100 text-brand-600 px-4 py-2 rounded-lg text-sm font-mono my-3">{line.slice(1, -1)}</code>);
+
+    // ── Boş satır ─────────────────────────────────────────────────────────
+    } else if (line === '') {
+      // boşluk paragraflar arasında zaten var, br ekleme
+
+    // ── Sadece bold satır ─────────────────────────────────────────────────
+    } else if (line.startsWith('**') && line.endsWith('**') && line.indexOf('**', 2) === line.length - 2) {
+      result.push(<p key={i} className="font-black text-gray-800 my-3 text-lg">{line.slice(2, -2)}</p>);
+
+    // ── Normal paragraf (inline bold destekli) ────────────────────────────
+    } else {
+      result.push(
+        <p key={i} className="text-gray-600 leading-relaxed mb-4 font-medium">
+          {line.includes('**') ? parseInline(line) : line}
         </p>
       );
-    } else {
-      result.push(<p key={i} className="text-gray-600 leading-relaxed mb-3 font-medium">{line}</p>);
     }
+
+    i++;
   }
   return result;
 };

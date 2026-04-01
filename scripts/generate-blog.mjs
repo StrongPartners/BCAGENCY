@@ -171,8 +171,17 @@ Her blog yazısı için ZORUNLU ALANLAR:
 - image_keyword: İngilizce görsel arama kelimesi (örn: "digital marketing cyprus")
 - image_alt_tr: Türkçe görsel açıklaması
 - image_alt_en: İngilizce görsel açıklaması
-- content_tr: Türkçe içerik (en az 800 kelime, Markdown formatında, H2/H3 başlıkları, listeler, somut KKTC örnekleri)
-- content_en: İngilizce içerik (en az 800 kelime, Markdown formatında, H2/H3 başlıkları, listeler, somut KKTC örnekleri)
+- content_tr: Türkçe içerik (en az 900 kelime). Aşağıdaki Markdown kurallarına ZORUNLU uyu:
+  * ## ile ana bölüm başlıkları (en az 4 adet)
+  * ### ile alt bölüm başlıkları
+  * #### ile numbered tip başlıkları (örn: #### 1. Adım: Anahtar Kelime Araştırması)
+  * Adım adım süreçlerde MUTLAKA numaralı liste kullan (1. 2. 3. formatında)
+  * Madde listelerini - ile yaz, her listeyi kendi bloğuna topla
+  * En az 2 adet > callout kutusu ekle (önemli istatistik veya kritik ipucu için)
+  * En az 2 adet inline görsel ekle: ![Türkçe açıklayıcı alt metin](https://source.unsplash.com/800x400/?ingilizce-keyword)
+  * Somut KKTC/Kuzey Kıbrıs örnekleri ve gerçekçi sayılar/istatistikler kullan
+  * --- ile bölümler arasına ayırıcı ekle (2-3 kez)
+- content_en: İngilizce içerik (en az 900 kelime, aynı Markdown kuralları, ![English alt text](https://source.unsplash.com/800x400/?keyword) ile görsel)
 
 SADECE aşağıdaki formatta geçerli bir JSON dizisi döndür, başka hiçbir şey yazma:
 [
