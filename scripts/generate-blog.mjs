@@ -114,8 +114,8 @@ Ancak şu anki kod (@google/generative-ai) sadece AI Studio anahtarlarını (AIz
             `);
         }
 
-        const models = ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro"];
-        const versions = ["v1", "v1beta"];
+        const models = ["gemini-2.0-flash", "gemini-2.5-pro", "gemini-1.5-flash", "gemini-1.5-pro"];
+        const versions = ["v1beta", "v1"];
         const prompt = this._getPrompt(batchSize, existingSlugs);
 
         for (const modelName of models) {
@@ -155,7 +155,42 @@ https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com
     }
 
     _getPrompt(batchSize, existingSlugs) {
-        return `Sen Kıbrıs SEO uzmanısın. ${batchSize} adet TR/EN blog üret. ${existingSlugs.join(',')} kullanma. SADECE JSON.`;
+        return `Sen KKTC (Kuzey Kıbrıs) odaklı bir dijital pazarlama uzmanısın.
+${batchSize} adet blog yazısı üret. Her yazı hem Türkçe hem İngilizce olmalı.
+
+KULLANILMIŞ SLUG'LAR (bunları KULLANMA): ${existingSlugs.join(', ')}
+
+Her blog yazısı için ZORUNLU ALANLAR:
+- slug: URL uyumlu, benzersiz, küçük harf, kısa çizgili (örn: "kktc-seo-ipuclari-2025")
+- title_tr: Türkçe başlık (60-70 karakter)
+- title_en: İngilizce başlık (60-70 karakter)
+- excerpt_tr: Türkçe özet (150-160 karakter)
+- excerpt_en: İngilizce özet (150-160 karakter)
+- category: Kategori (SEO / Google Ads / Sosyal Medya / Web Tasarım / Dijital Pazarlama)
+- readTimeMinutes: Okuma süresi dakika olarak (sayı, örn: 8)
+- image_keyword: İngilizce görsel arama kelimesi (örn: "digital marketing cyprus")
+- image_alt_tr: Türkçe görsel açıklaması
+- image_alt_en: İngilizce görsel açıklaması
+- content_tr: Türkçe içerik (en az 800 kelime, Markdown formatında, H2/H3 başlıkları, listeler, somut KKTC örnekleri)
+- content_en: İngilizce içerik (en az 800 kelime, Markdown formatında, H2/H3 başlıkları, listeler, somut KKTC örnekleri)
+
+SADECE aşağıdaki formatta geçerli bir JSON dizisi döndür, başka hiçbir şey yazma:
+[
+  {
+    "slug": "...",
+    "title_tr": "...",
+    "title_en": "...",
+    "excerpt_tr": "...",
+    "excerpt_en": "...",
+    "category": "...",
+    "readTimeMinutes": 8,
+    "image_keyword": "...",
+    "image_alt_tr": "...",
+    "image_alt_en": "...",
+    "content_tr": "...",
+    "content_en": "..."
+  }
+]`;
     }
 }
 
@@ -186,8 +221,8 @@ class BlogManager {
             const dateEn = `${months_en[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
 
             const finalBlogPosts = rawDataBatch.map((data, index) => {
-                const randomSeed = Math.random().toString(36).substring(7);
-                const imgUrl = `https://images.unsplash.com/photo-dynamic?query=${encodeURIComponent(data.image_keyword || 'marketing')}&sig=${randomSeed}&w=1200&auto=format&fit=crop`;
+                const keyword = encodeURIComponent(data.image_keyword || 'digital marketing');
+                const imgUrl = `https://source.unsplash.com/1200x630/?${keyword}`;
 
                 return new BlogPost({
                     id: startId + index + 1,
@@ -210,9 +245,36 @@ class BlogManager {
             const savedCount = this.repository.savePosts(finalBlogPosts);
             console.log(`✅ [Manager] İşlem tamam: ${savedCount} yeni yazı eklendi.`);
 
+            // vite.config.js'deki dynamicRoutes listesini güncelle
+            this._updateViteConfig(finalBlogPosts);
+            console.log(`✅ [Manager] vite.config.js güncellendi (sitemap için).`);
+
         } catch (error) {
             console.error("❌ [Manager] Kritik Hata:", error.message);
             throw error;
+        }
+    }
+
+    _updateViteConfig(newPosts) {
+        const viteConfigPath = join(dirname(fileURLToPath(import.meta.url)), '../vite.config.js');
+        let content = readFileSync(viteConfigPath, 'utf-8');
+
+        const newRoutes = newPosts.map(p => `        '/blog/${p.slug}',`).join('\n');
+
+        // Son blog rotasının hemen arkasına yeni rotaları ekle
+        const insertMarker = "// ── Blog Posts ────────────────────────────────────────────────────────────────────";
+        const fallbackMarker = "// ── Blog Posts ──────────────────────────────────────────────────";
+
+        // Mevcut son blog route satırını bul ve sonrasına ekle
+        const lastBlogRouteMatch = content.match(/(\/blog\/[a-z0-9-]+',\s*\n)(\s*\],)/);
+        if (lastBlogRouteMatch) {
+            content = content.replace(
+                lastBlogRouteMatch[0],
+                `${lastBlogRouteMatch[1]}${newRoutes}\n${lastBlogRouteMatch[2]}`
+            );
+            writeFileSync(viteConfigPath, content, 'utf-8');
+        } else {
+            console.warn('[Manager] vite.config.js güncellenemedi - pattern bulunamadı.');
         }
     }
 }

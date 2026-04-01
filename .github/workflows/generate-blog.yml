@@ -58,5 +58,7 @@ jobs:
           GOOGLE_INDEXING_JSON: ${{ secrets.GOOGLE_INDEXING_JSON }}
 
       - name: 🚀 Google Indexing API - Hızlı İndeksleme
-        if: steps.commit.outputs.has_changes == 'true'
+        if: steps.commit.outputs.has_changes == 'true' && env.GOOGLE_INDEXING_JSON != ''
         run: node scripts/google-indexing.mjs
+        env:
+          GOOGLE_INDEXING_JSON: ${{ secrets.GOOGLE_INDEXING_JSON }}
