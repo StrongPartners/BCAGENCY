@@ -61,6 +61,7 @@ export default defineConfig({
         '/blog/kktc-markalari-icin-kullanici-uretimi-icerik-ugc-gucu',
         '/blog/kktc-isletmeleri-icin-google-ads-remarketing-taktikleri',
         '/blog/kktc-turizm-isletmesi-dijital-musteri-yolculugu-haritasi',
+        '/blog/kktc-drone-cekimi-emlak-turizm-girne',
       ],
     }),
   ],
