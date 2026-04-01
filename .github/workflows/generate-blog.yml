@@ -1,19 +1,31 @@
 name: 📝 Günlük Otomatik SEO Blog Motoru (Gemini Edition)
 
 on:
-  # Her gün saat 07:00 UTC (10:00 KKTC)
+  # Her gün saat 07:00 UTC (10:00 KKTC) — otomatik 10 yazı
   schedule:
     - cron: '0 7 * * *'
 
-  # Manuel tetikleme
+  # Manuel tetikleme — kaç yazı üretileceğini kendin seç
   workflow_dispatch:
+    inputs:
+      blog_count:
+        description: '📝 Kaç blog yazısı üretilsin? (1-30)'
+        required: false
+        default: '10'
+        type: choice
+        options:
+          - '5'
+          - '10'
+          - '15'
+          - '20'
+          - '30'
 
 permissions:
   contents: write
 
 jobs:
   generate-blog:
-    name: 10 Yeni Blog Yazısı Üret & İndeksle
+    name: Yeni Blog Yazısı Üret & İndeksle
     runs-on: ubuntu-latest
 
     steps:
@@ -30,10 +42,12 @@ jobs:
       - name: 📦 SDK Kurulumu
         run: npm install @google/generative-ai googleapis
 
-      - name: 🤖 Gemini ile 10 Blog Yazısı Üret
+      - name: 🤖 Gemini ile Blog Yazısı Üret
         run: node scripts/generate-blog.mjs
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # Manuel tetiklemede girilen değer, otomatik çalışmada varsayılan 10
+          BLOG_COUNT: ${{ github.event.inputs.blog_count || '10' }}
 
       - name: 💾 Değişiklikleri Kaydet
         id: commit
@@ -45,10 +59,11 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
             echo "Yeni yazı bulunamadı."
           else
-            git commit -m "seo: günlük 10 adet zengin içerikli blog yazısı eklendi $(date +'%Y-%m-%d')"
+            COUNT=${{ github.event.inputs.blog_count || '10' }}
+            git commit -m "seo: ${COUNT} adet blog yazısı eklendi $(date +'%Y-%m-%d')"
             git push
             echo "has_changes=true" >> $GITHUB_OUTPUT
-            echo "✅ 10 yeni yazı sisteme eklendi."
+            echo "✅ ${COUNT} yeni yazı sisteme eklendi."
           fi
 
       - name: 🔑 Google Service Account JSON Hazırla (Secret'tan)

@@ -210,17 +210,27 @@ class BlogManager {
         this.useCase = useCase;
     }
 
-    async runDailyAutomation() {
-        console.log("🚀 [Manager] Günlük otomasyon başlatıldı...");
+    async runDailyAutomation(totalCount = 10) {
+        console.log(`🚀 [Manager] Günlük otomasyon başlatıldı... (Hedef: ${totalCount} yazı)`);
 
         try {
             const existingSlugs = this.repository.getExistingSlugs();
             const startId = this.repository.getMaxId();
 
-            // 2 batch halinde 10 yazı (AI limitlerine takılmamak için)
-            const batch1 = await this.useCase.execute(5, existingSlugs);
-            const batch2 = await this.useCase.execute(5, [...existingSlugs, ...batch1.map(p => p.slug)]);
-            const rawDataBatch = [...batch1, ...batch2];
+            // Batch'lere böl (her batch max 5 yazı — AI limitlerine takılmamak için)
+            const BATCH_SIZE = 5;
+            const batches = Math.ceil(totalCount / BATCH_SIZE);
+            let rawDataBatch = [];
+            let usedSlugs = [...existingSlugs];
+
+            for (let b = 0; b < batches; b++) {
+                const remaining = totalCount - rawDataBatch.length;
+                const thisBatch = Math.min(BATCH_SIZE, remaining);
+                console.log(`[Manager] Batch ${b + 1}/${batches}: ${thisBatch} yazı üretiliyor...`);
+                const result = await this.useCase.execute(thisBatch, usedSlugs);
+                rawDataBatch = [...rawDataBatch, ...result];
+                usedSlugs = [...usedSlugs, ...result.map(p => p.slug)];
+            }
 
             const now = new Date();
             const months_tr = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
@@ -230,8 +240,8 @@ class BlogManager {
             const dateEn = `${months_en[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
 
             const finalBlogPosts = rawDataBatch.map((data, index) => {
-                const keyword = encodeURIComponent(data.image_keyword || 'digital marketing');
-                const imgUrl = `https://source.unsplash.com/1200x630/?${keyword}`;
+                const slug = data.slug.toLowerCase().replace(/[^a-z0-9-]/g, '-');
+                const imgUrl = `https://picsum.photos/seed/${slug}/1200/630`;
 
                 return new BlogPost({
                     id: startId + index + 1,
@@ -294,17 +304,23 @@ async function main() {
     const POSTS_PATH = join(__dirname, '../src/data/blogPosts.js');
     const GEMINI_KEY = process.env.GEMINI_API_KEY;
 
+    // Kaç yazı üretileceği: GitHub Actions input veya varsayılan 10
+    const rawCount = process.env.BLOG_COUNT;
+    const BLOG_COUNT = Math.min(Math.max(parseInt(rawCount) || 10, 1), 30);
+
     if (!GEMINI_KEY) {
         console.error("❌ HATA: GEMINI_API_KEY ortam değişkeni ayarlanmamış.");
         process.exit(1);
     }
+
+    console.log(`📝 [Main] Üretilecek yazı sayısı: ${BLOG_COUNT}`);
 
     const repository = new FileBlogRepository(POSTS_PATH);
     const useCase = new GenerateBlogBatchUseCase(GEMINI_KEY);
     const manager = new BlogManager(repository, useCase);
 
     try {
-        await manager.runDailyAutomation();
+        await manager.runDailyAutomation(BLOG_COUNT);
     } catch (err) {
         process.exit(1);
     }
