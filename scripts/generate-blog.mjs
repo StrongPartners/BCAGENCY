@@ -126,12 +126,90 @@ class GenerateBlogBatchUseCase {
 - Hizmetler: SEO, Google Ads, Meta/Facebook/Instagram Reklamları, Sosyal Medya Yönetimi, Web Tasarım, Grafik Tasarım, Prodüksiyon, Drone Çekim, Fotoğraf & Video Çekim
 - Hedef: Arama sonuçlarında "reklam ajansı KKTC", "dijital pazarlama Girne", "sosyal medya yönetimi Lefkoşa", "grafik tasarım KKTC", "video prodüksiyon Kuzey Kıbrıs" gibi aramalarda üst sıralara çıkmak
 
-## KONU HAVUZU — Bu temalar etrafında yaz (her seferinde farklı seç):
-Sosyal medya yönetimi, Instagram/TikTok/Facebook reklamcılığı, Google Ads, SEO stratejileri,
-web tasarım & UX, grafik tasarım & marka kimliği, video prodüksiyon, drone çekim & hava fotoğrafçılığı,
-kurumsal fotoğraf çekim, e-ticaret, yerel SEO, içerik pazarlaması, influencer iş birlikleri,
-WhatsApp Business, Google My Business, turizm sektörü dijital pazarlama, emlak dijital pazarlama,
-restoran/kafe dijital pazarlama, üniversite öğrenci reklamcılığı, yabancı yatırımcıya ulaşma.
+## KONU HAVUZU — Bir reklam ajansının sunduğu tüm hizmetler (her seferinde farklı, henüz işlenmemiş bir konu seç):
+
+### A) DİJİTAL PAZARLAMA & REKLAM
+- Google Ads kampanya yönetimi, Performance Max, Search/Display/Shopping reklamları
+- Meta Ads (Facebook & Instagram reklamları), hedef kitle oluşturma, retargeting
+- TikTok Ads, Reels reklamları, genç kitleye ulaşma
+- YouTube Ads, video reklam stratejileri, in-stream reklamlar
+- LinkedIn Ads, B2B reklamcılık, profesyonel kitleye ulaşma
+- Programatik reklam, display network, banner tasarım
+- E-posta pazarlama otomasyonu, newsletter stratejisi, Mailchimp/Klaviyo
+- SMS pazarlama, WhatsApp Business API, anlık bildirimler
+- Affiliate/gelir ortaklığı pazarlaması
+- Influencer & mikro-influencer pazarlama stratejisi
+- Reklam bütçesi optimizasyonu, ROAS hesaplama, CPC/CPM analizi
+
+### B) SEO & ARAMA MOTORU OPTİMİZASYONU
+- Teknik SEO (site hızı, Core Web Vitals, schema markup)
+- Yerel SEO, Google My Business optimizasyonu, harita paketi
+- Anahtar kelime araştırması ve içerik stratejisi
+- Backlink inşası ve off-page SEO
+- E-ticaret SEO, ürün sayfası optimizasyonu
+- Sesli arama optimizasyonu
+- Google Search Console ve Analytics kullanımı
+
+### C) SOSYAL MEDYA YÖNETİMİ
+- Instagram hesap yönetimi, grid planlaması, Reels stratejisi
+- TikTok hesap yönetimi, viral içerik formülleri
+- Facebook sayfa yönetimi, topluluk oluşturma
+- LinkedIn şirket sayfası ve kişisel marka yönetimi
+- Twitter/X kullanımı ve kriz iletişimi
+- Sosyal medya içerik takvimi oluşturma
+- Topluluk yönetimi, yorum ve mesaj yanıtlama stratejisi
+- Hashtag stratejisi ve algoritma optimizasyonu
+
+### D) WEB TASARIM & GELİŞTİRME
+- Kurumsal web sitesi tasarımı ve geliştirme
+- E-ticaret sitesi kurulumu (Shopify, WooCommerce)
+- Landing page tasarımı ve dönüşüm optimizasyonu (CRO)
+- Mobil uyumluluk ve hız optimizasyonu
+- UX/UI tasarım prensipleri
+- Web sitesi güvenliği ve bakımı
+
+### E) GRAFİK TASARIM & MARKA KİMLİĞİ
+- Logo tasarımı ve marka kimliği oluşturma
+- Kurumsal kimlik (kartvizit, antet, zarf, broşür)
+- Sosyal medya görsel şablonları ve tasarım rehberi
+- Billboard, tabela ve outdoor reklam tasarımı
+- Ambalaj ve ürün tasarımı
+- Sunum ve katalog tasarımı
+- İnfografik ve data visualization tasarımı
+- Motion design ve animasyon
+
+### F) VİDEO PRODÜKSİYON & FOTOĞRAFÇILIK
+- Kurumsal tanıtım filmi ve reklam filmi çekimi
+- Sosyal medya için kısa video içerik üretimi (Reels, TikTok, YouTube Shorts)
+- Ürün tanıtım videosu ve unboxing içerikleri
+- Etkinlik ve organizasyon video çekimi
+- Belgesel ve röportaj çekimi
+- Drone ile hava fotoğraf ve video çekimi (emlak, turizm, inşaat)
+- Kurumsal fotoğraf çekimi (çalışan, ofis, ekip)
+- Ürün fotoğrafçılığı ve e-ticaret görselleri
+- Mimari fotoğrafçılık (oteller, villalar, projeler)
+- Yemek fotoğrafçılığı (restoran, kafe, catering)
+- Moda ve lifestyle fotoğraf çekimi
+
+### G) SEKTÖR BAZLI DİJİTAL STRATEJİLER
+- Turizm & otel sektörü: rezervasyon artırma, sezonsallık, OTA stratejileri
+- Emlak & inşaat: yabancı alıcıya ulaşma, drone ile tanıtım, çok dilli pazarlama
+- Restoran & kafe: menü fotoğrafçılığı, Google Haritalar, sosyal medya
+- Sağlık & klinik: hasta kazanımı, medikal SEO, HIPAA uyumlu içerik
+- Eğitim & üniversite: öğrenci rekrutmanı, kampüs tanıtımı, uluslararası öğrenci
+- Perakende & mağaza: e-ticaret entegrasyonu, yerel müşteri çekme
+- İnşaat & müteahhit: proje lansman kampanyaları, B2B pazarlama
+- Finans & danışmanlık: otorite içerik, güven inşası, LinkedIn stratejisi
+- Otomotiv & servis: Google Ads, araç fotoğrafçılığı, sosyal medya
+
+### H) STRATEJİ & DANIŞMANLIK
+- Marka stratejisi ve konumlandırma
+- Rakip analizi ve pazar araştırması
+- Dijital pazarlama danışmanlığı ve denetimi
+- Kriz iletişimi ve itibar yönetimi
+- Kampanya planlama ve bütçe yönetimi
+- KPI belirleme ve performans raporlama
+- A/B testi ve dönüşüm optimizasyonu
 
 ## KULLANILMIŞ SLUG'LAR — Bunları KULLANMA:
 ${existingSlugs.join(', ')}
