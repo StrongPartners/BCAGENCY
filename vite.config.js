@@ -70,6 +70,8 @@ export default defineConfig({
         '/blog/google-ads-kampanya-yonetimi-girne',
         '/blog/sosyal-medya-icerik-takvimi-kktc-markalar',
         '/blog/kktc-e-ticaret-seo-urun-sayfasi-optimizasyonu',
+        '/blog/e-ticaret-seo-urun-sayfasi-optimizasyonu-kktc',
+        '/blog/sosyal-medya-icerik-takvimi-kktc-turizm',
       ],
     }),
   ],
