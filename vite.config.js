@@ -80,6 +80,7 @@ export default defineConfig({
         '/blog/instagram-hesap-yonetimi-lefko-a-kktc',
         '/blog/kktc-e-posta-pazarlama-otomasyonu-rehberi',
         '/blog/sosyal-medya-icerik-takvimi-gazimagusa-kktc',
+        '/blog/kktc-tiktok-reklam-stratejileri-gencler',
       ],
     }),
   ],
