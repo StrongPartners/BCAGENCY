@@ -79,6 +79,8 @@ export default defineConfig({
         '/blog/kktc-sms-pazarlama-whatsapp-business-girne',
         '/blog/kktc-outdoor-reklam-tasarimi-billboard-tabela-girne',
         '/blog/instagram-hesap-yonetimi-lefko-a-kktc',
+        '/blog/kktc-e-posta-pazarlama-otomasyonu-rehberi',
+        '/blog/sosyal-medya-icerik-takvimi-gazimagusa-kktc',
       ],
     }),
   ],
