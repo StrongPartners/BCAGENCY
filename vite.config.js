@@ -72,6 +72,7 @@ export default defineConfig({
         '/blog/kktc-e-ticaret-seo-urun-sayfasi-optimizasyonu',
         '/blog/e-ticaret-seo-urun-sayfasi-optimizasyonu-kktc',
         '/blog/sosyal-medya-icerik-takvimi-kktc-turizm',
+        '/blog/sosyal-medya-icerik-takvimi-lefko-a-kktc',
       ],
     }),
   ],
