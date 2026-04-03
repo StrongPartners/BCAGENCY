@@ -61,12 +61,29 @@ class FileBlogRepository {
 
     savePosts(newPosts) {
         let content = this._readFile();
-        const entries = newPosts.map(post => BlogPost.toRawObject(post));
+
+        // Duplicate slug'ları filtrele
+        const existingSlugs = new Set(this.getExistingSlugs());
+        const uniquePosts = newPosts.filter(p => {
+            if (existingSlugs.has(p.slug)) {
+                console.warn(`[Repository] Duplicate slug atlandı: ${p.slug}`);
+                return false;
+            }
+            existingSlugs.add(p.slug);
+            return true;
+        });
+
+        if (uniquePosts.length === 0) {
+            console.warn('[Repository] Eklenecek yeni unique post yok.');
+            return 0;
+        }
+
+        const entries = uniquePosts.map(post => BlogPost.toRawObject(post));
         const insertAt = content.lastIndexOf('];');
         if (insertAt === -1) throw new Error("Dosya yapısı geçersiz: '];' bulunamadı.");
         const updated = content.substring(0, insertAt) + entries.join(',\n') + ',\n' + content.substring(insertAt);
         writeFileSync(this.filePath, updated, 'utf-8');
-        return entries.length;
+        return uniquePosts.length;
     }
 }
 
@@ -404,7 +421,9 @@ class BlogManager {
             for (let b = 0; b < batchCount; b++) {
                 const thisBatch = Math.min(BATCH_SIZE, totalCount - rawDataBatch.length);
                 console.log(`[Manager] Batch ${b + 1}/${batchCount}: ${thisBatch} yazı içerik üretiliyor...`);
-                const result = await this.blogUseCase.execute(thisBatch, usedSlugs);
+                // Son 40 slug'ı geç — çok uzun liste Gemini'yi yavaşlatır
+                const slugsToPass = usedSlugs.slice(-40);
+                const result = await this.blogUseCase.execute(thisBatch, slugsToPass);
                 rawDataBatch = [...rawDataBatch, ...result];
                 usedSlugs = [...usedSlugs, ...result.map(p => p.slug)];
             }
@@ -461,16 +480,35 @@ class BlogManager {
     _updateViteConfig(newPosts) {
         const viteConfigPath = join(dirname(fileURLToPath(import.meta.url)), '../vite.config.js');
         let content = readFileSync(viteConfigPath, 'utf-8');
-        const newRoutes = newPosts.map(p => `        '/blog/${p.slug}',`).join('\n');
+
+        // Zaten var olan route'ları al
+        const existingRoutes = new Set(
+            [...content.matchAll(/'(\/blog\/[^']+)'/g)].map(m => m[1])
+        );
+
+        // Sadece yeni ve unique route'ları ekle
+        const routesToAdd = newPosts
+            .map(p => `/blog/${p.slug}`)
+            .filter(r => !existingRoutes.has(r));
+
+        if (routesToAdd.length === 0) {
+            console.warn('[Manager] vite.config.js: eklenecek yeni route yok.');
+            return;
+        }
+
+        const newRouteLines = routesToAdd.map(r => `        '${r}',`).join('\n');
+
+        // Son blog route'unun hemen sonrasına ekle
         const lastBlogRouteMatch = content.match(/(\/blog\/[a-z0-9-]+',\s*\n)(\s*\],)/);
         if (lastBlogRouteMatch) {
             content = content.replace(
                 lastBlogRouteMatch[0],
-                `${lastBlogRouteMatch[1]}${newRoutes}\n${lastBlogRouteMatch[2]}`
+                `${lastBlogRouteMatch[1]}${newRouteLines}\n${lastBlogRouteMatch[2]}`
             );
             writeFileSync(viteConfigPath, content, 'utf-8');
+            console.log(`[Manager] vite.config.js: ${routesToAdd.length} route eklendi.`);
         } else {
-            console.warn('[Manager] vite.config.js güncellenemedi.');
+            console.warn('[Manager] vite.config.js güncellenemedi — pattern bulunamadı.');
         }
     }
 }

@@ -74,7 +74,6 @@ export default defineConfig({
         '/blog/sosyal-medya-icerik-takvimi-kktc-turizm',
         '/blog/sosyal-medya-icerik-takvimi-lefko-a-kktc',
         '/blog/sosyal-medya-icerik-takvimi-kktc-turizm-isletmeleri',
-        '/blog/e-ticaret-seo-urun-sayfasi-optimizasyonu-kktc',
         '/blog/kktc-instagram-hesap-yonetimi-girne',
         '/blog/kktc-sms-pazarlama-whatsapp-business-girne',
         '/blog/kktc-outdoor-reklam-tasarimi-billboard-tabela-girne',
