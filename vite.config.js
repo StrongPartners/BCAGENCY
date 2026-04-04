@@ -81,6 +81,8 @@ export default defineConfig({
         '/blog/kktc-e-posta-pazarlama-otomasyonu-rehberi',
         '/blog/sosyal-medya-icerik-takvimi-gazimagusa-kktc',
         '/blog/kktc-tiktok-reklam-stratejileri-gencler',
+        '/blog/kktc-influencer-pazarlama-stratejisi-girne',
+        '/blog/kktc-video-prod-ksiyon-reklam-filmi-stratejileri',
       ],
     }),
   ],
