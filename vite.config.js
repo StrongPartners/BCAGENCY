@@ -83,6 +83,8 @@ export default defineConfig({
         '/blog/kktc-tiktok-reklam-stratejileri-gencler',
         '/blog/kktc-influencer-pazarlama-stratejisi-girne',
         '/blog/kktc-video-prod-ksiyon-reklam-filmi-stratejileri',
+        '/blog/kktc-youtube-reklam-stratejileri-girne',
+        '/blog/kktc-sosyal-medya-yonetimi-marka-itibari',
       ],
     }),
   ],
