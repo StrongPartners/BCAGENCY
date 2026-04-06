@@ -85,6 +85,8 @@ export default defineConfig({
         '/blog/kktc-video-prod-ksiyon-reklam-filmi-stratejileri',
         '/blog/kktc-youtube-reklam-stratejileri-girne',
         '/blog/kktc-sosyal-medya-yonetimi-marka-itibari',
+        '/blog/sosyal-medya-yonetimi-kktc-restoran-kafe',
+        '/blog/kktc-logo-tasarimi-marka-kimligi-girne',
       ],
     }),
   ],
