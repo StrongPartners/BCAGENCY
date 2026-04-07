@@ -87,6 +87,7 @@ export default defineConfig({
         '/blog/kktc-sosyal-medya-yonetimi-marka-itibari',
         '/blog/sosyal-medya-yonetimi-kktc-restoran-kafe',
         '/blog/kktc-logo-tasarimi-marka-kimligi-girne',
+        '/blog/linkedin-reklam-kktc-b2b-pazarlama',
       ],
     }),
   ],
