@@ -31,6 +31,31 @@ export const color = Object.freeze({
     800: '#3730a3',
     900: '#312e81',
   },
+  coral: {
+    50:  '#fff1f0',
+    400: '#ff7a6e',
+    500: '#ff6b6b',
+    600: '#ee5a5a',
+  },
+  mint: {
+    50:  '#effefa',
+    400: '#4ecdc4',
+    500: '#2bbab0',
+    600: '#1f9691',
+  },
+  sun: {
+    50:  '#fffdeb',
+    400: '#ffd93d',
+    500: '#fbc71a',
+  },
+  ink: {
+    50:  '#f7f7f8',
+    100: '#eeeef0',
+    400: '#8c8c95',
+    700: '#35353b',
+    800: '#222226',
+    900: '#101014',
+  },
   neutral: {
     0:   '#ffffff',
     50:  '#f9fafb',
@@ -44,10 +69,10 @@ export const color = Object.freeze({
   },
   // Semantic roles (Polaris-inspired)
   semantic: {
-    success: '#10b981',
-    warning: '#f59e0b',
-    danger:  '#ef4444',
-    info:    '#3b82f6',
+    success: '#4ecdc4',
+    warning: '#ffd93d',
+    danger:  '#ff6b6b',
+    info:    '#6366f1',
   },
 });
 
