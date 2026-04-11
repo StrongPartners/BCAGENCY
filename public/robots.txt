@@ -1,15 +1,43 @@
 # BC Creative Agency Robots.txt
 # Sitemaps: https://bccreative.agency/sitemap.xml
+# llms.txt: https://bccreative.agency/llms.txt
 
 User-agent: *
 Allow: /
 
-# Specifically Allow Googlebot
+# Traditional search crawlers
 User-agent: Googlebot
 Allow: /
 
-# Specifically Allow Bingbot
 User-agent: Bingbot
+Allow: /
+
+# Generative AI crawlers (Generative Engine Optimization)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://bccreative.agency/sitemap.xml

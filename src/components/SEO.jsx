@@ -4,6 +4,12 @@ import { motion } from 'framer-motion';
 import { Rocket, Target, TrendingUp, Search, CheckCircle2, Globe, MapPin, BarChart3, Users, Languages, Layout, MessageSquare, Video, ShieldCheck, Zap, ArrowRight } from 'lucide-react';
 import ColorfulBlobs from './ColorfulBlobs';
 import { useLanguage } from '../context/LanguageContext';
+import {
+  buildServiceSchema,
+  buildFAQSchema,
+  buildBreadcrumbSchema,
+  buildOrganizationSchema,
+} from '../lib/geoSchemas';
 
 const SEO = () => {
     const { lang, t } = useLanguage();
@@ -100,33 +106,85 @@ const SEO = () => {
 
     const content = seoContent[lang] || seoContent.tr;
 
+    // GEO-optimized Q/A pairs — these are the kind of citation-worthy
+    // atomic facts that AI answer engines (ChatGPT, Claude, Perplexity)
+    // love to quote. Authored for both languages.
+    const faqItems = isTr
+        ? [
+            {
+                question: 'KKTC\'de SEO neden önemlidir?',
+                answer:
+                    'KKTC\'de potansiyel müşterilerin %90\'ından fazlası satın alma kararını Google aramasıyla başlatıyor. SEO olmadan Girne, Lefkoşa ve Gazimağusa aramalarında rakiplerinize pazar payı bırakırsınız. BC Creative Agency yerel SEO, teknik SEO ve içerik pazarlamasıyla işletmenizi Google\'ın ilk sayfasına taşır.',
+            },
+            {
+                question: 'KKTC SEO hizmetleri ne kadar sürede sonuç verir?',
+                answer:
+                    'Yerel SEO çalışmaları genellikle 2-3 ay içinde Google Haritalar ve Yerel Paket sıralamalarında ölçülebilir iyileşme sağlar. Organik arama sıralamaları için ortalama 4-6 aylık bir süreç gereklidir. BC Creative Agency her ay şeffaf performans raporları sunar.',
+            },
+            {
+                question: 'BC Creative Agency hangi SEO hizmetlerini sunuyor?',
+                answer:
+                    'Sektörel anahtar kelime stratejisi, teknik SEO (Core Web Vitals, sayfa hızı), yerel SEO + Google My Business optimizasyonu, içerik pazarlaması, backlink kazanımı ve aylık performans raporlaması.',
+            },
+            {
+                question: 'KKTC SEO fiyatları nasıl belirleniyor?',
+                answer:
+                    'Fiyatlar rakip yoğunluğu, hedef anahtar kelime sayısı ve sitenin mevcut durumuna göre değişir. Ücretsiz SEO analizi sonrası özel bir teklif sunuyoruz. İletişim: +90 548 875 54 61.',
+            },
+        ]
+        : [
+            {
+                question: 'Why is SEO important in Northern Cyprus (TRNC)?',
+                answer:
+                    'Over 90% of potential customers in the TRNC start their buying decision on Google. Without SEO, you cede market share to competitors in Kyrenia, Nicosia and Famagusta searches. BC Creative Agency brings you to Google\'s first page with local SEO, technical SEO and content marketing.',
+            },
+            {
+                question: 'How long does SEO take to produce results in the TRNC?',
+                answer:
+                    'Local SEO typically produces measurable improvements in Google Maps and the Local Pack within 2-3 months. Organic rankings generally require 4-6 months of consistent work. BC Creative Agency delivers transparent monthly performance reports.',
+            },
+            {
+                question: 'Which SEO services does BC Creative Agency offer?',
+                answer:
+                    'Industry-specific keyword strategy, technical SEO (Core Web Vitals, page speed), local SEO + Google Business Profile optimization, content marketing, link building and monthly performance reporting.',
+            },
+            {
+                question: 'How are TRNC SEO prices determined?',
+                answer:
+                    'Pricing depends on competitive density, the number of target keywords and the current state of your website. We provide a custom quote after a free SEO audit. Contact: +90 548 875 54 61.',
+            },
+        ];
+
+    const serviceUrl = 'https://bccreative.agency/hizmetler/seo';
+
     useSEO({
         title: isTr ? 'KKTC SEO Ajansı | Kuzey Kıbrıs SEO Hizmetleri' : 'TRNC SEO Agency | North Cyprus SEO Services',
         description: isTr
             ? 'KKTC odaklı profesyonel SEO hizmetleri. Google\'da ilk sırada yer alarak müşterilerinizi yakalayın. Girne ve Lefkoşa reklam ajansı.'
             : 'Professional SEO services focused on Northern Cyprus. Rank first on Google and capture your customers. Kyrenia and Nicosia advertising agency.',
         keywords: 'KKTC SEO, Kuzey Kıbrıs SEO, Girne SEO Ajansı, KKTC dijital pazarlama, Lefkoşa reklam ajansı, SEO uzmanı KKTC',
-        canonical: 'https://bccreative.agency/hizmetler/seo',
+        canonical: serviceUrl,
         alternates: [
-            { hreflang: 'tr', href: 'https://bccreative.agency/hizmetler/seo' },
+            { hreflang: 'tr', href: serviceUrl },
             { hreflang: 'en', href: 'https://bccreative.agency/en/hizmetler/seo' }
         ],
-        schema: {
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": isTr ? "KKTC SEO Hizmetleri" : "TRNC SEO Services",
-            "serviceType": "Search Engine Optimization",
-            "provider": {
-                "@type": "MarketingAgency",
-                "name": "BC Creative Agency",
-                "url": "https://bccreative.agency"
-            },
-            "areaServed": {
-                "@type": "State",
-                "name": "Kuzey Kıbrıs Türk Cumhuriyeti"
-            },
-            "description": isTr ? "Profesyonel SEO ve dijital pazarlama çözümleri." : "Professional SEO and digital marketing solutions."
-        }
+        schemas: [
+            buildServiceSchema({
+                name: isTr ? 'KKTC SEO Hizmetleri' : 'TRNC SEO Services',
+                description: isTr
+                    ? 'Profesyonel SEO ve dijital pazarlama çözümleri. Yerel SEO, teknik SEO ve içerik pazarlaması.'
+                    : 'Professional SEO and digital marketing solutions. Local SEO, technical SEO and content marketing.',
+                url: serviceUrl,
+                serviceType: 'Search Engine Optimization',
+            }),
+            buildFAQSchema(faqItems),
+            buildBreadcrumbSchema([
+                { name: isTr ? 'Ana Sayfa' : 'Home', url: 'https://bccreative.agency/' },
+                { name: isTr ? 'Hizmetler' : 'Services', url: 'https://bccreative.agency/hizmetler/seo' },
+                { name: isTr ? 'SEO' : 'SEO', url: serviceUrl },
+            ]),
+            buildOrganizationSchema(),
+        ],
     });
 
     return (
@@ -254,6 +312,46 @@ const SEO = () => {
                             <div className="text-5xl font-black text-brand-600 mb-2">7/24</div>
                             <div className="text-gray-600 font-bold">{isTr ? "Kesintisiz Müşteri Akışı" : "Continuous Customer Flow"}</div>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* FAQ Section — visible content that matches FAQPage JSON-LD (GEO) */}
+            <section className="py-32 bg-gray-50 px-4">
+                <div className="container mx-auto max-w-4xl">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+                            {isTr ? 'Sık Sorulan Sorular' : 'Frequently Asked Questions'}
+                        </h2>
+                        <p className="text-lg text-gray-600 font-medium">
+                            {isTr
+                                ? 'KKTC SEO hizmetlerimiz hakkında merak ettikleriniz'
+                                : 'Everything you need to know about our TRNC SEO services'}
+                        </p>
+                    </div>
+                    <div className="space-y-6">
+                        {faqItems.map((item, idx) => (
+                            <motion.details
+                                key={idx}
+                                className="group bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: idx * 0.05 }}
+                            >
+                                <summary className="cursor-pointer list-none p-6 md:p-8 flex items-start justify-between gap-4">
+                                    <h3 className="text-lg md:text-xl font-black text-gray-900">
+                                        {item.question}
+                                    </h3>
+                                    <span className="text-brand-600 font-black text-2xl group-open:rotate-45 transition-transform flex-shrink-0">
+                                        +
+                                    </span>
+                                </summary>
+                                <div className="px-6 md:px-8 pb-6 md:pb-8 text-gray-600 font-medium leading-relaxed">
+                                    {item.answer}
+                                </div>
+                            </motion.details>
+                        ))}
                     </div>
                 </div>
             </section>
