@@ -1,146 +1,167 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { ArrowDown } from 'lucide-react';
 import ColorfulBlobs from './ColorfulBlobs';
 import { useLanguage } from '../context/LanguageContext';
 
+/**
+ * Hero — Creative Playground hero section.
+ * Big playful type + rotating service chip + colorful blobs.
+ */
 const Hero = () => {
+    const navigate = useNavigate();
     const { t } = useLanguage();
-    const titles = t('hero_titles');
+    const rotating = t('hero_rotating');
     const [index, setIndex] = useState(0);
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setIndex((prevIndex) => (prevIndex + 1) % titles.length);
-        }, 4000);
+            setIndex((i) => (i + 1) % rotating.length);
+        }, 2500);
         return () => clearInterval(timer);
-    }, [titles.length]);
-
-    const containerVariants = {
-        animate: {
-            transition: {
-                staggerChildren: 0.03,
-            }
-        }
-    };
-
-    const letterVariants = {
-        initial: {
-            opacity: 0,
-            rotateY: 90,
-            y: 10,
-            scale: 0.8
-        },
-        animate: {
-            opacity: 1,
-            rotateY: 0,
-            y: 0,
-            scale: 1,
-            transition: {
-                type: "spring",
-                damping: 12,
-                stiffness: 100
-            }
-        },
-        exit: {
-            opacity: 0,
-            rotateY: -90,
-            y: -10,
-            scale: 0.8,
-            transition: { duration: 0.2 }
-        }
-    };
+    }, [rotating.length]);
 
     return (
-        <section className="relative min-h-screen bg-gray-50 overflow-hidden">
-            {/* Background Video */}
-            <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-[0.85]"
-            >
-                <source src="/hero-bg.mp4" type="video/mp4" />
-            </video>
-
-            {/* Colorful Blobs Background */}
-            <div className="absolute inset-0 z-1">
+        <section className="relative min-h-screen flex items-center bg-white overflow-hidden pt-24 pb-16">
+            {/* Colorful blobs background */}
+            <div className="absolute inset-0 z-0">
                 <ColorfulBlobs variant="hero" />
             </div>
 
-            {/* Content Container */}
-            <div className="container mx-auto px-4 md:px-8 h-screen flex items-center justify-center relative z-10">
-                <div className="text-center max-w-7xl w-full space-y-1">
+            {/* Floating stickers */}
+            <motion.div
+                className="absolute top-32 right-12 md:right-32 w-20 h-20 md:w-28 md:h-28 bg-sun-300 rounded-full flex items-center justify-center text-3xl md:text-4xl shadow-sticker-lg border-4 border-ink-900 rotate-neg-3 hidden md:flex"
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            >
+                ✨
+            </motion.div>
+            <motion.div
+                className="absolute bottom-32 left-8 md:left-24 w-16 h-16 md:w-24 md:h-24 bg-coral-400 rounded-full flex items-center justify-center text-2xl md:text-3xl shadow-sticker-lg border-4 border-ink-900 rotate-pos-2 hidden md:flex"
+                animate={{ y: [0, 12, 0], rotate: [0, 5, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+            >
+                🎯
+            </motion.div>
+            <motion.div
+                className="absolute top-1/2 left-4 md:left-16 w-14 h-14 md:w-20 md:h-20 bg-mint-400 rounded-full flex items-center justify-center text-xl md:text-2xl shadow-sticker border-4 border-ink-900 rotate-neg-2 hidden lg:flex"
+                animate={{ x: [0, 8, 0] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+            >
+                💡
+            </motion.div>
+
+            {/* Content */}
+            <div className="container mx-auto px-4 md:px-8 relative z-10">
+                <div className="max-w-5xl">
+                    {/* Greeting bubble */}
                     <motion.div
-                        initial={{ opacity: 0, y: -30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
+                        initial={{ opacity: 0, scale: 0.8, rotate: -8 }}
+                        animate={{ opacity: 1, scale: 1, rotate: -2 }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        className="inline-flex items-center gap-2 bg-white border-2 border-ink-900 rounded-full px-5 py-2 mb-6 shadow-sticker-coral rotate-neg-1"
                     >
-                        <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-gray-900 leading-none">
-                            {t('hero_top')}
-                        </h2>
+                        <span className="w-2 h-2 bg-mint-500 rounded-full animate-pulse" />
+                        <span className="font-black text-ink-900 text-sm tracking-tight">{t('hero_greet')}</span>
                     </motion.div>
 
-                    {/* Rotating Service Title */}
-                    <div className="h-20 sm:h-24 md:h-28 flex items-center justify-center overflow-hidden">
-                        <AnimatePresence mode="wait">
-                            <motion.h1
-                                key={titles[index]}
-                                variants={containerVariants}
-                                initial="initial"
-                                animate="animate"
-                                exit="exit"
-                                className="text-3xl sm:text-5xl md:text-7xl font-black leading-none text-brand-600 flex justify-center flex-wrap px-2"
-                            >
-                                {titles[index].split("").map((char, i) => (
-                                    <motion.span
-                                        key={`${titles[index]}-${i}`}
-                                        variants={letterVariants}
-                                        className="inline-block origin-center"
-                                        style={{ whiteSpace: char === " " ? "pre" : "normal" }}
-                                    >
-                                        {char}
-                                    </motion.span>
-                                ))}
-                            </motion.h1>
-                        </AnimatePresence>
-                    </div>
-
-                    {t('hero_bottom') && (
-                        <motion.h2
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            className="text-2xl sm:text-4xl md:text-6xl font-black text-gray-900 leading-none px-4"
-                        >
-                            {t('hero_bottom')}
-                        </motion.h2>
-                    )}
-
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
+                    {/* Big headline */}
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
-                        className="text-base md:text-xl text-gray-600 leading-relaxed max-w-6xl mx-auto pt-8"
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-ink-900 leading-[0.95] tracking-tighter"
                     >
-                        <span className="font-bold text-gray-900">BC Creative Agency</span>, {t('hero_desc')}
-                    </motion.p>
+                        {t('hero_headline_1')}{' '}
+                        <span className="relative inline-block">
+                            <span className="relative z-10 bg-gradient-to-r from-brand-600 via-coral-500 to-sun-500 bg-clip-text text-transparent animate-gradient-shift">
+                                {t('hero_headline_accent')}
+                            </span>
+                            <motion.span
+                                className="absolute left-0 right-0 bottom-2 h-4 md:h-6 bg-sun-300 -z-0 rounded-sm"
+                                initial={{ scaleX: 0 }}
+                                animate={{ scaleX: 1 }}
+                                transition={{ duration: 0.6, delay: 0.8 }}
+                                style={{ transformOrigin: 'left' }}
+                            />
+                        </span>
+                        <br />
+                        {t('hero_headline_2')}
+                    </motion.h1>
 
+                    {/* Rotating chip */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.6 }}
-                        className="pt-10"
+                        transition={{ duration: 0.5, delay: 0.5 }}
+                        className="mt-6 flex items-center gap-3 flex-wrap"
                     >
-                        <button
+                        <span className="text-ink-400 font-bold text-base md:text-lg">↳</span>
+                        <AnimatePresence mode="wait">
+                            <motion.span
+                                key={rotating[index]}
+                                initial={{ opacity: 0, y: 15, rotateX: -90 }}
+                                animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                                exit={{ opacity: 0, y: -15, rotateX: 90 }}
+                                transition={{ duration: 0.35 }}
+                                className="inline-flex items-center gap-2 bg-ink-900 text-white px-5 py-2 rounded-full font-black text-base md:text-lg"
+                            >
+                                {rotating[index]}
+                            </motion.span>
+                        </AnimatePresence>
+                    </motion.div>
+
+                    {/* Description */}
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.6 }}
+                        className="mt-8 text-lg md:text-xl text-ink-700 leading-relaxed max-w-2xl font-medium"
+                    >
+                        {t('hero_desc')}
+                    </motion.p>
+
+                    {/* CTAs */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.8 }}
+                        className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4"
+                    >
+                        <motion.button
                             onClick={() => window.open('https://wa.me/905488755461', '_blank')}
-                            className="bg-brand-600 hover:bg-brand-700 text-white text-lg md:text-xl px-12 py-4 rounded-full font-bold transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+                            whileHover={{ scale: 1.05, y: -3 }}
+                            whileTap={{ scale: 0.96 }}
+                            className="bg-brand-600 text-white font-black text-lg px-8 py-4 rounded-full shadow-sticker-lg border-2 border-ink-900 hover:bg-brand-700 transition-colors"
                         >
                             {t('hero_cta')}
-                        </button>
+                        </motion.button>
+                        <motion.button
+                            onClick={() => {
+                                const el = document.getElementById('services');
+                                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                            }}
+                            whileHover={{ scale: 1.05 }}
+                            className="inline-flex items-center gap-2 font-black text-ink-900 hover:text-brand-600 transition-colors"
+                        >
+                            <span className="underline decoration-sun-400 decoration-4 underline-offset-4">
+                                {t('hero_cta_secondary')}
+                            </span>
+                            <ArrowDown size={18} strokeWidth={3} />
+                        </motion.button>
                     </motion.div>
                 </div>
             </div>
+
+            {/* Scroll indicator */}
+            <motion.div
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 text-ink-400"
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+            >
+                <ArrowDown size={24} strokeWidth={2.5} />
+            </motion.div>
         </section>
     );
 };

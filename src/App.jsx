@@ -16,6 +16,7 @@ import DroneCekim from './components/DroneCekim';
 import FotografVideo from './components/FotografVideo';
 import { LanguageProvider } from './context/LanguageContext';
 import ScrollToTop from './components/ScrollToTop';
+import WhatsAppButton from './components/WhatsAppButton';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             </Routes>
           </div>
           <Footer />
+          <WhatsAppButton />
         </div>
       </Router>
     </LanguageProvider>

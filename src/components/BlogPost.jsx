@@ -12,11 +12,11 @@ import {
 } from '../lib/geoSchemas';
 
 const categoryColors = {
-  'SEO': 'bg-blue-100 text-blue-700',
-  'Google Ads': 'bg-yellow-100 text-yellow-700',
-  'Sosyal Medya': 'bg-pink-100 text-pink-700',
-  'Dijital Pazarlama': 'bg-purple-100 text-purple-700',
-  'Web Tasarım': 'bg-green-100 text-green-700',
+  'SEO':              'bg-brand-100 text-brand-700',
+  'Google Ads':       'bg-coral-100 text-coral-700',
+  'Sosyal Medya':     'bg-mint-100 text-mint-700',
+  'Dijital Pazarlama':'bg-sun-100 text-sun-700',
+  'Web Tasarım':      'bg-brand-100 text-brand-700',
 };
 
 const categoryLabels = {
@@ -259,25 +259,25 @@ const BlogPost = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Image */}
-      <div className="relative h-72 md:h-96 overflow-hidden">
+      <div className="relative h-80 md:h-[480px] overflow-hidden pt-24">
         <img
           src={post.image}
           alt={post.imageAlt?.[lang] || post.imageAlt?.tr || postTitle}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink-900/85 via-ink-900/40 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16">
-          <div className="container mx-auto">
+          <div className="container mx-auto max-w-4xl">
             <button
               onClick={() => navigate('/blog')}
-              className="flex items-center gap-2 text-white/80 hover:text-white transition-colors mb-4 text-sm"
+              className="inline-flex items-center gap-2 bg-white text-ink-900 font-black text-sm px-4 py-2 rounded-full border-2 border-ink-900 mb-4 hover:bg-sun-200 transition-colors"
             >
-              <ArrowLeft size={16} /> {t('blog_back')}
+              <ArrowLeft size={14} strokeWidth={3} /> {t('blog_back')}
             </button>
-            <span className={`inline-block text-xs font-bold px-3 py-1 rounded-full mb-3 ${categoryColors[post.category] || 'bg-gray-100 text-gray-700'}`}>
+            <span className={`inline-block text-xs font-black px-3 py-1 rounded-full mb-3 border-2 border-ink-900 ${categoryColors[post.category] || 'bg-white text-ink-700'}`}>
               {categoryLabels[post.category]?.[lang] || post.category}
             </span>
-            <h1 className="text-2xl md:text-5xl font-black text-white leading-tight max-w-3xl">
+            <h1 className="text-3xl md:text-6xl font-black text-white leading-[0.95] max-w-4xl tracking-tight">
               {postTitle}
             </h1>
           </div>
@@ -288,10 +288,12 @@ const BlogPost = () => {
       <div className="container mx-auto px-4 md:px-8 py-12">
         <div className="max-w-4xl mx-auto">
           {/* Meta */}
-          <div className="flex items-center gap-6 text-sm text-gray-400 mb-10 pb-8 border-b border-gray-100">
-            <span className="flex items-center gap-1"><Clock size={14} /> {postReadTime} {t('blog_read_time')}</span>
+          <div className="flex items-center gap-4 text-sm text-ink-400 font-bold mb-10 pb-8 border-b-2 border-ink-100">
+            <span className="flex items-center gap-1"><Clock size={14} strokeWidth={2.5} /> {postReadTime} {t('blog_read_time')}</span>
+            <span>·</span>
             <span>{postDate}</span>
-            <span className="flex items-center gap-1"><Tag size={14} /> {categoryLabels[post.category]?.[lang] || post.category}</span>
+            <span>·</span>
+            <span className="flex items-center gap-1"><Tag size={14} strokeWidth={2.5} /> {categoryLabels[post.category]?.[lang] || post.category}</span>
           </div>
 
           {/* Blog Content */}
@@ -299,23 +301,24 @@ const BlogPost = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-600 prose-p:font-medium text-lg leading-relaxed"
+            className="prose prose-lg max-w-none prose-headings:text-ink-900 prose-p:text-ink-700 prose-p:font-medium text-lg leading-relaxed"
           >
             {renderContent(postContent)}
           </motion.div>
 
           {/* CTA */}
-          <div className="mt-20 p-10 md:p-16 bg-gray-900 rounded-[3rem] text-center relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-600/10 blur-3xl pointer-events-none" />
-            <h3 className="text-3xl md:text-5xl font-black text-white mb-6 relative z-10">
+          <div className="mt-20 p-10 md:p-14 bg-ink-900 rounded-[3rem] border-2 border-ink-900 shadow-sticker-sun text-center relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-600/30 blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-coral-500/20 blur-3xl pointer-events-none" />
+            <h3 className="text-3xl md:text-5xl font-black text-white mb-5 relative z-10 leading-tight tracking-tight">
               {t('blog_cta_title')}
             </h3>
-            <p className="text-white/70 text-lg md:text-xl mb-10 max-w-2xl mx-auto relative z-10">
+            <p className="text-white/80 text-lg md:text-xl mb-10 max-w-2xl mx-auto relative z-10 font-medium">
               {t('blog_cta_sub')}
             </p>
             <button
               onClick={() => window.open('https://wa.me/905488755461', '_blank')}
-              className="bg-brand-600 text-white font-black text-xl px-12 py-5 rounded-full hover:bg-brand-700 transition-all shadow-2xl relative z-10"
+              className="bg-mint-400 text-ink-900 font-black text-lg px-10 py-4 rounded-full border-2 border-mint-400 hover:bg-mint-300 transition-colors relative z-10"
             >
               {t('btn_offer')} →
             </button>
@@ -325,36 +328,40 @@ const BlogPost = () => {
 
       {/* Other Posts */}
       {otherPosts.length > 0 && (
-        <section className="py-24 px-4 md:px-8 bg-gray-50">
+        <section className="py-20 md:py-24 px-4 md:px-8 bg-ink-50">
           <div className="container mx-auto">
-            <h2 className="text-3xl font-black text-gray-900 mb-12">{t('blog_other_posts')}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {otherPosts.map(other => (
-                <div
-                  key={other.id}
-                  onClick={() => navigate(`/blog/${other.slug}`)}
-                  className="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all cursor-pointer group hover:-translate-y-1 border border-gray-100"
-                >
-                  <div className="h-48 overflow-hidden">
-                    <img
-                      src={other.image}
-                      alt={other.imageAlt?.[lang] || other.imageAlt?.tr || other.title[lang] || other.title.tr}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <span className={`text-xs font-bold px-3 py-1 rounded-full ${categoryColors[other.category] || 'bg-gray-100 text-gray-700'}`}>
-                      {other.category}
-                    </span>
-                    <h3 className="font-bold text-gray-900 mt-4 text-lg leading-tight group-hover:text-brand-600 transition-colors line-clamp-2">
-                      {other.title[lang] || other.title.tr}
-                    </h3>
-                    <div className="flex items-center gap-1 text-brand-600 text-sm font-bold mt-4">
-                      {t('blog_read_more')} <ChevronRight size={14} />
+            <h2 className="text-3xl md:text-4xl font-black text-ink-900 mb-10 tracking-tight">{t('blog_other_posts')}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+              {otherPosts.map((other, idx) => {
+                const tones = ['shadow-sticker-brand', 'shadow-sticker-coral', 'shadow-sticker-mint'];
+                const tilts = ['rotate-neg-1', 'rotate-pos-1', 'rotate-neg-2'];
+                return (
+                  <div
+                    key={other.id}
+                    onClick={() => navigate(`/blog/${other.slug}`)}
+                    className={`bg-white rounded-3xl overflow-hidden border-2 border-ink-900 ${tones[idx % 3]} ${tilts[idx % 3]} cursor-pointer group hover:-translate-y-2 hover:rotate-0 transition-all`}
+                  >
+                    <div className="h-44 overflow-hidden border-b-2 border-ink-900">
+                      <img
+                        src={other.image}
+                        alt={other.imageAlt?.[lang] || other.imageAlt?.tr || other.title[lang] || other.title.tr}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <span className={`text-xs font-black px-3 py-1 rounded-full border-2 border-ink-900 ${categoryColors[other.category] || 'bg-ink-100 text-ink-700'}`}>
+                        {other.category}
+                      </span>
+                      <h3 className="font-black text-ink-900 mt-3 text-lg leading-tight group-hover:text-brand-600 transition-colors line-clamp-2">
+                        {other.title[lang] || other.title.tr}
+                      </h3>
+                      <div className="flex items-center gap-1 text-brand-600 text-sm font-black mt-4">
+                        {t('blog_read_more')} <ChevronRight size={14} strokeWidth={3} />
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>

@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  /* Primary brand — indigo (unchanged, preserves existing links) */
   --color-brand-50: #eef2ff;
   --color-brand-100: #e0e7ff;
   --color-brand-200: #c7d2fe;
@@ -12,72 +13,158 @@
   --color-brand-800: #3730a3;
   --color-brand-900: #312e81;
 
+  /* Coral accent — energy, warmth, highlight */
+  --color-coral-50:  #fff1f0;
+  --color-coral-100: #ffe0dd;
+  --color-coral-200: #ffc1bb;
+  --color-coral-300: #ff9b91;
+  --color-coral-400: #ff7a6e;
+  --color-coral-500: #ff6b6b;
+  --color-coral-600: #ee5a5a;
+  --color-coral-700: #c94747;
+  --color-coral-800: #9e3838;
+  --color-coral-900: #7a2b2b;
+
+  /* Mint accent — success, calm, trust */
+  --color-mint-50:  #effefa;
+  --color-mint-100: #c7fbef;
+  --color-mint-200: #8ff5df;
+  --color-mint-300: #54e9cc;
+  --color-mint-400: #4ecdc4;
+  --color-mint-500: #2bbab0;
+  --color-mint-600: #1f9691;
+  --color-mint-700: #1d7774;
+  --color-mint-800: #1b5e5d;
+  --color-mint-900: #18504f;
+
+  /* Sun accent — fun, attention, optimism */
+  --color-sun-50:  #fffdeb;
+  --color-sun-100: #fff9c7;
+  --color-sun-200: #fff088;
+  --color-sun-300: #ffe145;
+  --color-sun-400: #ffd93d;
+  --color-sun-500: #fbc71a;
+  --color-sun-600: #df9e0e;
+  --color-sun-700: #b9770f;
+  --color-sun-800: #965d13;
+  --color-sun-900: #7c4c17;
+
+  /* Ink — playful neutral dark */
+  --color-ink-50:  #f7f7f8;
+  --color-ink-100: #eeeef0;
+  --color-ink-200: #d9d9dd;
+  --color-ink-300: #b8b8bf;
+  --color-ink-400: #8c8c95;
+  --color-ink-500: #6b6b74;
+  --color-ink-600: #4b4b53;
+  --color-ink-700: #35353b;
+  --color-ink-800: #222226;
+  --color-ink-900: #101014;
+
   --font-sans: "DM Sans", "Inter", sans-serif;
+  --font-display: "DM Sans", "Inter", sans-serif;
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
-    @apply font-sans antialiased text-gray-900 bg-white;
+    @apply font-sans antialiased text-ink-900 bg-white;
+  }
+  ::selection {
+    background-color: #ffd93d;
+    color: #101014;
   }
 }
 
 @layer utilities {
+
+  /* ───────── Floating blob animation ───────── */
   @keyframes float {
-
-    0%,
-    100% {
-      transform: translate(0, 0) scale(1);
-    }
-
-    25% {
-      transform: translate(20px, -20px) scale(1.1);
-    }
-
-    50% {
-      transform: translate(-15px, 15px) scale(0.9);
-    }
-
-    75% {
-      transform: translate(15px, 10px) scale(1.05);
-    }
+    0%,100% { transform: translate(0, 0) scale(1); }
+    25%     { transform: translate(20px, -20px) scale(1.1); }
+    50%     { transform: translate(-15px, 15px) scale(0.9); }
+    75%     { transform: translate(15px, 10px) scale(1.05); }
   }
-
-  .animate-float {
-    animation: float 20s ease-in-out infinite;
-  }
-
-  @keyframes splash {
-    0% {
-      transform: translate(0, 0) scale(1);
-      opacity: 1;
-    }
-
-    100% {
-      transform: translate(calc(cos(var(--angle)) * var(--velocity) * 100px),
-          calc(sin(var(--angle)) * var(--velocity) * 100px)) scale(0);
-      opacity: 0;
-    }
-  }
-
-  .animate-splash {
-    animation: splash 0.8s ease-out forwards;
-  }
+  .animate-float { animation: float 20s ease-in-out infinite; }
 
   @keyframes pulse-slow {
+    0%,100% { opacity: 0.35; transform: scale(1); }
+    50%     { opacity: 0.5;  transform: scale(1.1); }
+  }
+  .animate-pulse-slow { animation: pulse-slow 4s ease-in-out infinite; }
 
-    0%,
-    100% {
-      opacity: 0.35;
-      transform: scale(1);
-    }
+  /* ───────── Paint splash (retained) ───────── */
+  @keyframes splash {
+    0%   { transform: translate(0,0) scale(1); opacity: 1; }
+    100% { transform: translate(calc(cos(var(--angle)) * var(--velocity) * 100px),
+                                  calc(sin(var(--angle)) * var(--velocity) * 100px)) scale(0); opacity: 0; }
+  }
+  .animate-splash { animation: splash 0.8s ease-out forwards; }
 
-    50% {
-      opacity: 0.5;
-      transform: scale(1.1);
-    }
+  /* ───────── Marquee scroll ───────── */
+  @keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-marquee { animation: marquee 30s linear infinite; }
+  .animate-marquee-fast { animation: marquee 18s linear infinite; }
+  .animate-marquee:hover, .animate-marquee-fast:hover { animation-play-state: paused; }
+
+  /* ───────── Wobble (icon hover) ───────── */
+  @keyframes wobble {
+    0%,100% { transform: rotate(0deg); }
+    25%     { transform: rotate(-8deg); }
+    75%     { transform: rotate(8deg); }
+  }
+  .animate-wobble { animation: wobble 0.6s ease-in-out; }
+  .hover\:animate-wobble:hover { animation: wobble 0.6s ease-in-out; }
+
+  /* ───────── Gradient shimmer on text ───────── */
+  @keyframes gradient-shift {
+    0%,100% { background-position: 0% 50%; }
+    50%     { background-position: 100% 50%; }
+  }
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 6s ease infinite;
   }
 
-  .animate-pulse-slow {
-    animation: pulse-slow 4s ease-in-out infinite;
+  /* ───────── Tape / sticker rotation helper ───────── */
+  .rotate-neg-1 { transform: rotate(-1deg); }
+  .rotate-neg-2 { transform: rotate(-2deg); }
+  .rotate-neg-3 { transform: rotate(-3deg); }
+  .rotate-pos-1 { transform: rotate(1deg); }
+  .rotate-pos-2 { transform: rotate(2deg); }
+  .rotate-pos-3 { transform: rotate(3deg); }
+
+  /* ───────── Sticker-shadow card ───────── */
+  .shadow-sticker {
+    box-shadow: 6px 6px 0 0 #101014;
+  }
+  .shadow-sticker-lg {
+    box-shadow: 10px 10px 0 0 #101014;
+  }
+  .shadow-sticker-brand {
+    box-shadow: 6px 6px 0 0 #4f46e5;
+  }
+  .shadow-sticker-coral {
+    box-shadow: 6px 6px 0 0 #ff6b6b;
+  }
+  .shadow-sticker-mint {
+    box-shadow: 6px 6px 0 0 #4ecdc4;
+  }
+  .shadow-sticker-sun {
+    box-shadow: 6px 6px 0 0 #ffd93d;
+  }
+
+  /* ───────── Playful underline ───────── */
+  .playful-underline {
+    background-image: linear-gradient(to right, #ffd93d 0%, #ffd93d 100%);
+    background-position: 0 92%;
+    background-repeat: no-repeat;
+    background-size: 100% 0.4em;
+    padding: 0 0.1em;
   }
 }

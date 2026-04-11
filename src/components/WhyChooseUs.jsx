@@ -1,93 +1,127 @@
 import React from 'react';
-import { Hash } from 'lucide-react';
-import ColorfulBlobs from './ColorfulBlobs';
+import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 
-const WhyChooseUs = () => {
+/**
+ * Approach section — "how we work" 01-04 process steps.
+ * Re-uses the WhyChooseUs.jsx filename to preserve existing imports.
+ * Creative Playground styling: tilted sticker cards, colorful borders.
+ */
+const TONE_BG     = { brand: 'bg-brand-100',  coral: 'bg-coral-100',  mint: 'bg-mint-100',  sun: 'bg-sun-100'  };
+const TONE_NUMBER = { brand: 'text-brand-600', coral: 'text-coral-500', mint: 'text-mint-500', sun: 'text-sun-500' };
+const TONE_SHADOW = {
+    brand: 'shadow-sticker-brand',
+    coral: 'shadow-sticker-coral',
+    mint:  'shadow-sticker-mint',
+    sun:   'shadow-sticker-sun',
+};
+
+const Approach = () => {
     const { t } = useLanguage();
-    const features = t('why_features').map((f, i) => ({ ...f, number: `0${i + 1}` }));
+    const steps = t('approach_steps');
 
     return (
-        <section className="relative py-24 px-4 md:px-8 bg-gray-50 overflow-hidden">
-            {/* Background Video Layer */}
-            <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-[0.85]"
-            >
-                <source src="/hero-bg.mp4" type="video/mp4" />
-            </video>
+        <section className="relative py-24 md:py-32 bg-ink-50 overflow-hidden">
+            {/* Decorative accents */}
+            <div className="absolute top-20 left-10 w-40 h-40 bg-coral-200 rounded-full blur-3xl opacity-40" />
+            <div className="absolute bottom-20 right-10 w-48 h-48 bg-brand-200 rounded-full blur-3xl opacity-40" />
 
-            {/* Colorful Blobs Layer */}
-            <div className="absolute inset-0 z-1">
-                <ColorfulBlobs variant="hero" />
-            </div>
-
-            {/* Top Gradient Fade */}
-            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-50 to-transparent z-2" />
-
-            {/* Top Curve Transition - Sync with Services Bottom */}
-            <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] z-10">
-                <svg
-                    viewBox="0 0 1200 120"
-                    preserveAspectRatio="none"
-                    className="relative block w-[calc(100%+1.3px)] h-[80px] fill-gray-50/50"
-                >
-                    <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5,73.84-4.36,147.54,16.88,218.32,37.5,102.74,30,204,47.5,310.87,19.25,102.69-27.15,183.23-93.59,306-93.59V0Z" />
-                </svg>
-            </div>
-
-            <div className="container mx-auto relative z-10">
-                {/* Section Header */}
-                <div className="mb-20 text-left">
-                    <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-4 leading-none tracking-tight">
-                        {t('why_heading')} <span className="text-brand-600">{t('why_heading_2')}</span>
-                    </h2>
-                    <div className="w-32 h-2 bg-brand-600 rounded-full" />
+            <div className="container mx-auto px-4 md:px-8 relative z-10">
+                {/* Header */}
+                <div className="max-w-3xl mb-16 md:mb-20">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="inline-block bg-mint-200 border-2 border-ink-900 rounded-full px-4 py-1.5 mb-6 rotate-pos-1"
+                    >
+                        <span className="font-black text-ink-900 text-xs uppercase tracking-wider">{t('approach_eyebrow')}</span>
+                    </motion.div>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-5xl md:text-7xl font-black text-ink-900 leading-[0.95] tracking-tight"
+                    >
+                        {t('approach_heading_1')}{' '}
+                        <span className="relative inline-block">
+                            <span className="relative z-10">{t('approach_heading_2')}</span>
+                            <span className="absolute left-0 right-0 bottom-1 h-4 bg-coral-300 -z-0 rounded-sm" />
+                        </span>
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        className="mt-6 text-lg md:text-xl text-ink-700 font-medium max-w-2xl"
+                    >
+                        {t('approach_sub')}
+                    </motion.p>
                 </div>
 
-                {/* Features Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {features.map((feature, index) => (
-                        <div
-                            key={index}
-                            className="group relative bg-white rounded-3xl p-8 md:p-10 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden"
-                        >
-                            {/* Decorative Orange Element */}
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-brand-400/20 to-brand-600/20 rounded-bl-full transform translate-x-8 -translate-y-8 group-hover:scale-150 transition-transform duration-500" />
+                {/* Steps grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    {steps.map((step, i) => {
+                        const tiltClasses = ['rotate-neg-2', 'rotate-pos-1', 'rotate-neg-1', 'rotate-pos-2'];
+                        const tilt = tiltClasses[i % tiltClasses.length];
+                        const tone = step.tone || 'brand';
 
-                            {/* Number Overlay */}
-                            <div className="absolute top-6 right-6 text-7xl font-black text-brand-600/10 group-hover:text-brand-600/20 transition-colors">
-                                {feature.number}
-                            </div>
-
-                            {/* Content */}
-                            <div className="relative z-10">
-                                {/* Circle Icon Badge */}
-                                <div className="w-14 h-14 rounded-full border-2 border-brand-600 flex items-center justify-center mb-6 text-brand-600 group-hover:bg-brand-600 group-hover:text-white transition-all duration-300">
-                                    <Hash size={24} strokeWidth={2.5} />
+                        return (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                whileHover={{ y: -6, rotate: 0 }}
+                                className={`group bg-white border-2 border-ink-900 rounded-3xl p-8 ${TONE_SHADOW[tone]} ${tilt} transition-transform`}
+                            >
+                                <div className={`w-14 h-14 ${TONE_BG[tone]} border-2 border-ink-900 rounded-xl flex items-center justify-center font-black text-lg text-ink-900 mb-6`}>
+                                    {step.number}
                                 </div>
-
-                                <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3 group-hover:text-brand-600 transition-colors">
-                                    <span>{feature.icon}</span>
-                                    {feature.title}
+                                <h3 className="text-2xl md:text-3xl font-black text-ink-900 mb-4 leading-tight">
+                                    {step.title}
                                 </h3>
-
-                                <p className="text-gray-600 text-lg leading-relaxed mb-4">
-                                    {feature.description}
+                                <p className="text-ink-700 font-medium leading-relaxed">
+                                    {step.desc}
                                 </p>
-                            </div>
+                            </motion.div>
+                        );
+                    })}
+                </div>
 
-                            {/* Bottom Orange Accent */}
-                            <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-brand-600 to-brand-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-b-3xl" />
-                        </div>
-                    ))}
+                {/* Stats */}
+                <div className="mt-24">
+                    <h3 className="text-center text-2xl md:text-3xl font-black text-ink-900 mb-10 tracking-tight">
+                        {t('stats_heading')}
+                    </h3>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        {t('stats').map((stat, i) => {
+                            const tones = ['brand', 'coral', 'mint', 'sun'];
+                            const tone = tones[i % tones.length];
+                            return (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.08 }}
+                                    className="text-center bg-white border-2 border-ink-900 rounded-3xl p-6 shadow-sticker"
+                                >
+                                    <div className={`text-5xl md:text-6xl font-black ${TONE_NUMBER[tone]} mb-2 leading-none`}>
+                                        {stat.value}
+                                    </div>
+                                    <div className="text-sm md:text-base font-bold text-ink-700">
+                                        {stat.label}
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </section>
     );
 };
 
-export default WhyChooseUs;
+export default Approach;

@@ -1,39 +1,33 @@
-import { motion } from 'framer-motion';
+import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
+/**
+ * ServiceBanner — horizontal marquee strip announcing services.
+ * Uses a CSS keyframe marquee (index.css) for GPU-friendly scrolling.
+ * Creative Playground: alternating colors, chunky border, bold type.
+ */
 const ServiceBanner = () => {
     const { t } = useLanguage();
     const services = t('banner_services');
-
-    // Duplicate the services to create a seamless loop
-    const tickerItems = [...services, ...services, ...services];
+    const tickerItems = [...services, ...services];
 
     return (
-        <div className="bg-[#4A59CE]/95 backdrop-blur-sm border-y border-white/10 py-4 overflow-hidden relative">
-            <motion.div
-                className="flex whitespace-nowrap"
-                animate={{
-                    x: [0, -1000],
-                }}
-                transition={{
-                    x: {
-                        repeat: Infinity,
-                        repeatType: "loop",
-                        duration: 40,
-                        ease: "linear",
-                    },
-                }}
-            >
-                {tickerItems.map((item, index) => (
-                    <span
-                        key={index}
-                        className="text-base md:text-lg font-medium text-white/80 tracking-[0.3em] px-12 flex items-center uppercase"
-                    >
-                        {item}
-                        <span className="ml-12 w-1 h-1 rounded-full bg-white/20" />
-                    </span>
-                ))}
-            </motion.div>
+        <div className="relative bg-ink-900 border-y-4 border-ink-900 py-5 overflow-hidden">
+            {/* Animated strip */}
+            <div className="flex whitespace-nowrap animate-marquee">
+                {tickerItems.map((item, index) => {
+                    const tones = ['text-sun-300', 'text-coral-400', 'text-mint-300', 'text-brand-300'];
+                    const tone = tones[index % tones.length];
+                    return (
+                        <span
+                            key={index}
+                            className={`text-2xl md:text-4xl font-black tracking-tight px-8 flex items-center ${tone}`}
+                        >
+                            {item}
+                        </span>
+                    );
+                })}
+            </div>
         </div>
     );
 };
