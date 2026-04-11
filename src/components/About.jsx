@@ -1,256 +1,224 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 import useSEO from '../hooks/useSEO';
-import { motion, AnimatePresence } from 'framer-motion';
 import ColorfulBlobs from './ColorfulBlobs';
 import { useLanguage } from '../context/LanguageContext';
+import { buildOrganizationSchema, buildBreadcrumbSchema } from '../lib/geoSchemas';
+
+const TONE_BG = { brand: 'bg-brand-50', coral: 'bg-coral-50', mint: 'bg-mint-50', sun: 'bg-sun-50' };
+const TONE_SHADOW = {
+    brand: 'shadow-sticker-brand',
+    coral: 'shadow-sticker-coral',
+    mint:  'shadow-sticker-mint',
+    sun:   'shadow-sticker-sun',
+};
 
 const About = () => {
-    const { t } = useLanguage();
-    const actions = t('about_action_words');
-    const [actionIndex, setActionIndex] = useState(0);
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setActionIndex((prev) => (prev + 1) % actions.length);
-        }, 3000);
-        return () => clearInterval(timer);
-    }, [actions.length]);
+    const { lang, t } = useLanguage();
+    const values = t('about_values');
+    const services = t('about_services');
 
     useSEO({
-        title: 'Hakkımızda | BC Creative Agency - KKTC Girne Dijital Pazarlama Ajansı',
-        description: 'BC Creative Agency hakkında bilgi edinin. Kuzey Kıbrıs Türk Cumhuriyeti Girne\'de kurulu dijital pazarlama ajansımız, 2017\'den bu yana markalara SEO, Google Ads, sosyal medya ve web tasarım hizmetleri sunmaktadır.',
-        keywords: 'BC Creative Agency hakkında, KKTC dijital ajans ekibi, Kuzey Kıbrıs pazarlama ajansı, Girne reklam ajansı kimdir',
+        title: lang === 'tr' ? 'Hakkımızda | BC Creative Agency - KKTC Girne' : 'About | BC Creative Agency - Kyrenia TRNC',
+        description: lang === 'tr' ? "BC Creative Agency — 2017'den beri KKTC'de dijital pazarlama. Küçük bir stüdyodan bugünkü 50+ markaya uzanan samimi hikayemiz." : "BC Creative Agency — digital marketing in Northern Cyprus since 2017. Our story from a small studio to working with 50+ brands today.",
+        keywords: 'BC Creative Agency hakkında, KKTC dijital ajans ekibi, Girne reklam ajansı kimdir',
         canonical: 'https://bccreative.agency/about',
-        ogTitle: 'Hakkımızda | BC Creative Agency - KKTC Girne',
-        ogDescription: '2017\'den bu yana KKTC\'de dijital pazarlama hizmetleri sunan BC Creative Agency ekibini tanıyın.',
-        ogUrl: 'https://bccreative.agency/about',
+        schemas: [
+            buildOrganizationSchema(),
+            buildBreadcrumbSchema([
+                { name: t('nav_home'), url: 'https://bccreative.agency/' },
+                { name: t('nav_about'), url: 'https://bccreative.agency/about' },
+            ]),
+        ],
     });
 
-    const aboutServices = t('about_services').map((s, i) => ({ ...s, number: `0${i + 1}` }));
-    const visionItems = t('about_vision_items');
-    const missionItems = t('about_mission_items');
-
     return (
-        <div className="min-h-screen bg-white">
-            {/* Hero Section */}
-            <section className="relative py-32 md:py-48 px-4 md:px-8 overflow-hidden bg-gray-50">
-                {/* Background Video Layer */}
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-[0.85]"
-                >
-                    <source src="/hero-bg.mp4" type="video/mp4" />
-                </video>
+        <div className="bg-white">
 
-                {/* Colorful Blobs Layer */}
-                <div className="absolute inset-0 z-1">
+            {/* Hero */}
+            <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-white">
+                <div className="absolute inset-0 z-0">
                     <ColorfulBlobs variant="hero" />
                 </div>
 
-                <div className="container mx-auto relative z-10">
-                    <div className="flex flex-col lg:flex-row items-center gap-16">
-                        <div className="lg:w-1/2 text-left">
-                            <h1 className="text-6xl md:text-8xl font-black text-gray-900 mb-6 leading-none tracking-tighter min-h-[1.2em] flex flex-wrap items-center">
-                                {t('about_hero_prefix')}&nbsp;
-                                <span className="text-brand-600 inline-block relative">
-                                    <AnimatePresence mode="wait">
-                                        <motion.div
-                                            key={actionIndex}
-                                            initial="initial"
-                                            animate="animate"
-                                            exit="exit"
-                                            className="flex"
-                                        >
-                                            {actions[actionIndex].split("").map((letter, i) => (
-                                                <motion.span
-                                                    key={i}
-                                                    variants={{
-                                                        initial: { opacity: 0, x: -20, rotateY: 90, scale: 0.8 },
-                                                        animate: {
-                                                            opacity: 1, x: 0, rotateY: 0, scale: 1,
-                                                            transition: { type: "spring", damping: 12, stiffness: 100, delay: i * 0.05 }
-                                                        },
-                                                        exit: { opacity: 0, x: 20, rotateY: -90, transition: { duration: 0.2 } }
-                                                    }}
-                                                    className="inline-block"
-                                                    style={{ perspective: "1000px" }}
-                                                >
-                                                    {letter === " " ? "\u00A0" : letter}
-                                                </motion.span>
-                                            ))}
-                                        </motion.div>
-                                    </AnimatePresence>
-                                </span>
-                            </h1>
-                            <p className="text-gray-700 text-xl md:text-2xl font-medium leading-relaxed">
-                                {t('about_hero_desc')}
-                            </p>
-                        </div>
-                        <div className="lg:w-1/2 relative">
-                            <motion.div
-                                animate={{ y: [0, -15, 0], rotate: [0, 1, 0] }}
-                                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                                className="relative z-10"
-                            >
-                                <img
-                                    src="/marketing-hero-v3.jpg"
-                                    alt="Digital Marketing"
-                                    className="rounded-[3rem] shadow-2xl border-4 border-white/50"
-                                />
-                            </motion.div>
-                            <div className="absolute inset-0 bg-brand-600/20 blur-[100px] -z-1 rounded-full" />
-                        </div>
-                    </div>
-                </div>
+                {/* Floating stickers */}
+                <motion.div
+                    className="absolute top-36 right-10 md:right-24 w-24 h-24 md:w-32 md:h-32 bg-sun-300 rounded-full flex items-center justify-center text-4xl md:text-5xl shadow-sticker-lg border-4 border-ink-900 rotate-neg-3 hidden md:flex"
+                    animate={{ y: [0, -14, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                    ☕
+                </motion.div>
+                <motion.div
+                    className="absolute bottom-20 left-10 md:left-24 w-20 h-20 md:w-28 md:h-28 bg-mint-400 rounded-full flex items-center justify-center text-3xl md:text-4xl shadow-sticker-lg border-4 border-ink-900 rotate-pos-2 hidden md:flex"
+                    animate={{ y: [0, 14, 0] }}
+                    transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                    ❤️
+                </motion.div>
 
-                {/* Bottom Curve Transition */}
-                <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-10 transform rotate-180">
-                    <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-[calc(100%+1.3px)] h-[80px] fill-white">
-                        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5,73.84-4.36,147.54,16.88,218.32,37.5,102.74,30,204,47.5,310.87,19.25,102.69-27.15,183.23-93.59,306-93.59V0Z" />
-                    </svg>
+                <div className="container mx-auto px-4 md:px-8 relative z-10">
+                    <div className="max-w-4xl">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8, rotate: -4 }}
+                            animate={{ opacity: 1, scale: 1, rotate: -1 }}
+                            transition={{ duration: 0.5 }}
+                            className="inline-block bg-coral-100 border-2 border-ink-900 rounded-full px-4 py-1.5 mb-6 shadow-sticker"
+                        >
+                            <span className="font-black text-ink-900 text-xs uppercase tracking-wider">{t('about_eyebrow')}</span>
+                        </motion.div>
+
+                        <motion.h1
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.1 }}
+                            className="text-5xl md:text-7xl lg:text-8xl font-black text-ink-900 leading-[0.95] tracking-tighter"
+                        >
+                            {t('about_hero_title_1')}{' '}
+                            <span className="relative inline-block">
+                                <span className="relative z-10 bg-gradient-to-r from-brand-600 via-coral-500 to-sun-500 bg-clip-text text-transparent animate-gradient-shift">
+                                    {t('about_hero_title_accent')}
+                                </span>
+                            </span>{' '}
+                            {t('about_hero_title_2')}
+                        </motion.h1>
+
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.3 }}
+                            className="mt-8 text-lg md:text-xl text-ink-700 font-medium max-w-2xl leading-relaxed"
+                        >
+                            {t('about_hero_desc')}
+                        </motion.p>
+                    </div>
                 </div>
             </section>
 
-            {/* Content Section */}
-            <section className="py-24 px-4 md:px-8 bg-white relative">
-                <div className="container mx-auto">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
+            {/* Story */}
+            <section className="py-20 md:py-28 bg-ink-50 relative overflow-hidden">
+                <div className="absolute top-10 right-10 w-72 h-72 bg-brand-200 rounded-full blur-3xl opacity-50" />
+                <div className="container mx-auto px-4 md:px-8 relative z-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
                         <div>
-                            <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-8 leading-tight">
-                                {t('about_who_title')} <span className="text-brand-600">?</span>
-                            </h2>
-                            <div className="w-32 h-2 bg-brand-600 rounded-full mb-8" />
-                            <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
-                                <p>{t('about_who_p1')}</p>
-                                <p>{t('about_who_p2')}</p>
-                            </div>
-                        </div>
-                        <div className="relative">
-                            <div className="aspect-video rounded-[2rem] border border-brand-600/20 overflow-hidden shadow-2xl group">
-                                <img
-                                    src="/about-rocket.jpg"
-                                    alt="BC Creative Agency"
-                                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                                />
-                                <div className="absolute inset-0 bg-brand-600/5 group-hover:bg-transparent transition-colors duration-500" />
-                            </div>
-                            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-600/10 rounded-full blur-3xl -z-1" />
-                            <div className="absolute -top-10 -left-10 w-40 h-40 bg-brand-400/10 rounded-full blur-3xl -z-1" />
-                        </div>
-                    </div>
-
-                    {/* Services Section */}
-                    <div className="mb-20">
-                        <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-4 leading-none tracking-tight text-center">
-                            {t('about_what_title')} <span className="text-brand-600">{t('about_what_title2')}</span>
-                        </h2>
-                        <div className="w-24 h-2 bg-brand-600 rounded-full mx-auto" />
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {aboutServices.map((service, index) => (
-                            <div
-                                key={index}
-                                className="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-gray-100"
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                className="inline-block bg-mint-200 border-2 border-ink-900 rounded-full px-4 py-1.5 mb-6 rotate-pos-1"
                             >
-                                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-brand-400/20 to-brand-600/20 rounded-bl-full transform translate-x-6 -translate-y-6 group-hover:scale-150 transition-transform duration-500" />
-                                <div className="absolute top-6 right-6 text-6xl font-black text-brand-600/5 group-hover:text-brand-600/10 transition-colors">
-                                    {service.number}
-                                </div>
-                                <div className="relative z-10">
-                                    <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-brand-600 transition-colors">
-                                        {service.title}
-                                    </h3>
-                                    <p className="text-gray-600 leading-relaxed">
-                                        {service.description}
-                                    </p>
-                                </div>
-                                <div className="absolute bottom-0 left-0 w-full h-1.5 bg-gradient-to-r from-brand-600 to-brand-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                                <span className="font-black text-ink-900 text-xs uppercase tracking-wider">Story</span>
+                            </motion.div>
+                            <h2 className="text-4xl md:text-6xl font-black text-ink-900 leading-[0.95] tracking-tight mb-6">
+                                {t('about_story_title')}
+                            </h2>
+                            <p className="text-lg text-ink-700 font-medium leading-relaxed mb-4">
+                                {t('about_story_p1')}
+                            </p>
+                            <p className="text-lg text-ink-700 font-medium leading-relaxed">
+                                {t('about_story_p2')}
+                            </p>
+                        </div>
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9, rotate: -3 }}
+                            whileInView={{ opacity: 1, scale: 1, rotate: 2 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                            className="relative"
+                        >
+                            <div className="rounded-[3rem] overflow-hidden border-4 border-ink-900 shadow-sticker-lg">
+                                <img src="/about-rocket.jpg" alt="BC Creative Agency" className="w-full h-full object-cover" />
                             </div>
-                        ))}
+                            {/* Sticker */}
+                            <div className="absolute -top-6 -right-6 w-24 h-24 bg-sun-300 rounded-full border-4 border-ink-900 flex flex-col items-center justify-center rotate-pos-3 shadow-sticker">
+                                <div className="text-2xl font-black text-ink-900 leading-none">2017</div>
+                                <div className="text-[10px] font-bold text-ink-700 uppercase tracking-wider">Since</div>
+                            </div>
+                        </motion.div>
                     </div>
                 </div>
+            </section>
 
-                {/* Vision Section */}
-                <div className="container mx-auto mt-40">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                        <div className="flex flex-col h-full">
-                            <div>
-                                <div className="w-48 h-1 bg-brand-600/30 mb-8" />
-                                <h2 className="text-5xl md:text-7xl font-black text-brand-600 mb-8 leading-tight tracking-tighter">
-                                    {t('about_vision_title')}
-                                </h2>
-                            </div>
-                            <div className="flex-1 relative rounded-3xl overflow-hidden border border-brand-600/20 shadow-2xl group min-h-[300px] lg:max-h-[600px]">
-                                <img
-                                    src="/about-vision.jpg"
-                                    alt={t('about_vision_title')}
-                                    className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                                />
-                                <div className="absolute inset-0 bg-brand-600/10 mix-blend-overlay group-hover:opacity-0 transition-opacity" />
-                            </div>
+            {/* Values */}
+            <section className="py-20 md:py-28 bg-white">
+                <div className="container mx-auto px-4 md:px-8">
+                    <div className="max-w-3xl mb-14">
+                        <div className="inline-block bg-sun-200 border-2 border-ink-900 rounded-full px-4 py-1.5 mb-6 rotate-neg-1">
+                            <span className="font-black text-ink-900 text-xs uppercase tracking-wider">Values</span>
                         </div>
-                        <div className="space-y-12">
-                            <p className="text-gray-500 text-xl font-medium leading-relaxed italic border-l-4 border-brand-600/20 pl-6">
-                                {t('about_vision_desc')}
-                            </p>
-                            <div className="space-y-8">
-                                {visionItems.map((item, i) => (
-                                    <div key={i} className="flex gap-6 group">
-                                        <span className="text-3xl font-black text-brand-600/20 group-hover:text-brand-600 transition-colors duration-300">
-                                            {i + 1}.
-                                        </span>
-                                        <p className="text-gray-700 text-lg font-bold leading-relaxed pt-1">{item}</p>
+                        <h2 className="text-4xl md:text-6xl font-black text-ink-900 leading-[0.95] tracking-tight">
+                            {t('about_values_title')}
+                        </h2>
+                        <p className="mt-4 text-lg md:text-xl text-ink-700 font-medium">
+                            {t('about_values_sub')}
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {values.map((value, i) => {
+                            const tones = ['brand', 'coral', 'mint', 'sun'];
+                            const tone = tones[i % 4];
+                            const tilts = ['rotate-neg-2', 'rotate-pos-1', 'rotate-neg-1', 'rotate-pos-2'];
+                            return (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.1 }}
+                                    whileHover={{ y: -6, rotate: 0 }}
+                                    className={`bg-white border-2 border-ink-900 rounded-3xl p-7 ${TONE_SHADOW[tone]} ${tilts[i % 4]}`}
+                                >
+                                    <div className={`w-14 h-14 ${TONE_BG[tone]} border-2 border-ink-900 rounded-2xl flex items-center justify-center text-3xl mb-5`}>
+                                        {value.icon}
                                     </div>
-                                ))}
-                            </div>
-                            <p className="text-brand-600/60 font-medium text-lg pt-10 border-t border-gray-100">
-                                {t('about_vision_footer')}
-                            </p>
-                        </div>
+                                    <h3 className="text-2xl font-black text-ink-900 mb-3 leading-tight">{value.title}</h3>
+                                    <p className="text-ink-700 font-medium leading-relaxed text-sm">{value.desc}</p>
+                                </motion.div>
+                            );
+                        })}
                     </div>
                 </div>
+            </section>
 
-                {/* Mission Section */}
-                <div className="container mx-auto mt-40">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                        <div className="flex flex-col h-full">
-                            <div>
-                                <div className="w-48 h-1 bg-brand-600/30 mb-8" />
-                                <h2 className="text-5xl md:text-7xl font-black text-brand-600 mb-8 leading-tight tracking-tighter">
-                                    {t('about_mission_title')}
-                                </h2>
-                            </div>
-                            <div className="flex-1 relative rounded-3xl overflow-hidden border border-brand-600/20 shadow-2xl group min-h-[300px] lg:max-h-[600px]">
-                                <img
-                                    src="/about-mission.jpg"
-                                    alt={t('about_mission_title')}
-                                    className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                                />
-                                <div className="absolute inset-0 bg-brand-600/10 mix-blend-overlay group-hover:opacity-0 transition-opacity" />
-                            </div>
-                        </div>
-                        <div className="space-y-12">
-                            <p className="text-gray-500 text-xl font-medium leading-relaxed italic border-l-4 border-brand-600/20 pl-6">
-                                {t('about_mission_desc')}
-                            </p>
-                            <div className="space-y-8">
-                                {missionItems.map((item, i) => (
-                                    <div key={i} className="flex gap-6 group">
-                                        <span className="text-3xl font-black text-brand-600/20 group-hover:text-brand-600 transition-colors duration-300">
-                                            {i + 1}.
-                                        </span>
-                                        <div>
-                                            <h4 className="text-gray-900 text-xl font-black mb-2">{item.title}</h4>
-                                            <p className="text-gray-600 text-lg leading-relaxed">{item.desc}</p>
-                                        </div>
+            {/* Services grid */}
+            <section className="py-20 md:py-28 bg-ink-50 relative overflow-hidden">
+                <div className="absolute top-10 left-10 w-72 h-72 bg-coral-200 rounded-full blur-3xl opacity-50" />
+                <div className="absolute bottom-10 right-10 w-72 h-72 bg-brand-200 rounded-full blur-3xl opacity-50" />
+
+                <div className="container mx-auto px-4 md:px-8 relative z-10">
+                    <div className="text-center mb-14">
+                        <h2 className="text-4xl md:text-6xl font-black text-ink-900 leading-[0.95] tracking-tight">
+                            {t('about_services_title')}
+                            <span className="relative inline-block">
+                                <span className="relative z-10">{t('about_services_title_accent')}</span>
+                                <span className="absolute left-0 right-0 bottom-1 h-3 bg-sun-300 -z-0 rounded-sm" />
+                            </span>
+                        </h2>
+                        <p className="mt-4 text-lg md:text-xl text-ink-700 font-medium max-w-2xl mx-auto">
+                            {t('about_services_sub')}
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5">
+                        {services.map((service, i) => {
+                            const tones = ['brand', 'coral', 'mint', 'sun'];
+                            const tone = tones[i % 4];
+                            return (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.05 }}
+                                    className="bg-white border-2 border-ink-900 rounded-2xl p-5 shadow-sticker hover:-translate-y-1 transition-transform"
+                                >
+                                    <div className={`w-12 h-12 ${TONE_BG[tone]} border-2 border-ink-900 rounded-xl flex items-center justify-center text-2xl mb-3`}>
+                                        {service.icon}
                                     </div>
-                                ))}
-                            </div>
-                        </div>
+                                    <h3 className="text-lg font-black text-ink-900 mb-1 leading-tight">{service.title}</h3>
+                                    <p className="text-ink-700 text-sm font-medium leading-snug">{service.description}</p>
+                                </motion.div>
+                            );
+                        })}
                     </div>
                 </div>
             </section>
