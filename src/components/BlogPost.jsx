@@ -5,6 +5,11 @@ import { Clock, ArrowLeft, Tag, ChevronRight } from 'lucide-react';
 import { blogPosts } from '../data/blogPosts';
 import useSEO from '../hooks/useSEO';
 import { useLanguage } from '../context/LanguageContext';
+import {
+  buildArticleSchema,
+  buildBreadcrumbSchema,
+  buildOrganizationSchema,
+} from '../lib/geoSchemas';
 
 const categoryColors = {
   'SEO': 'bg-blue-100 text-blue-700',
@@ -192,36 +197,48 @@ const BlogPost = () => {
   const postDate = post?.date[lang] || post?.date.tr;
   const postReadTime = post?.readTime[lang] || post?.readTime.tr;
 
+  const canonicalUrl = `https://bccreative.agency/blog/${slug}`;
+
+  // Build the full schema graph — Organization for E-E-A-T, BlogPosting
+  // for the article itself and BreadcrumbList for navigational context.
+  // This maximizes AI citability (GEO).
+  const articleSchemas = post
+    ? [
+        buildArticleSchema({
+          headline: postTitle,
+          description: postExcerpt,
+          image: post.image,
+          url: canonicalUrl,
+          datePublished: post.date.en || post.date.tr,
+          articleBody: postContent,
+          keywords: [
+            'KKTC',
+            post.category,
+            'Kuzey Kıbrıs',
+            'dijital pazarlama',
+          ],
+        }),
+        buildBreadcrumbSchema([
+          { name: 'Ana Sayfa', url: 'https://bccreative.agency/' },
+          { name: 'Blog',      url: 'https://bccreative.agency/blog' },
+          { name: postTitle,   url: canonicalUrl },
+        ]),
+        buildOrganizationSchema(),
+      ]
+    : null;
+
   useSEO({
     title: post ? `${postTitle}` : 'Blog | BC Creative Agency',
     description: postExcerpt || "KKTC dijital pazarlama, SEO ve reklam rehberleri.",
     keywords: `KKTC ${post?.category}, Kuzey Kıbrıs dijital pazarlama, ${postTitle}`,
-    canonical: `https://bccreative.agency/blog/${slug}`,
+    canonical: canonicalUrl,
+    ogType: 'article',
     ogImage: post?.image,
     alternates: [
-      { hreflang: 'tr', href: `https://bccreative.agency/blog/${slug}` },
+      { hreflang: 'tr', href: canonicalUrl },
       { hreflang: 'en', href: `https://bccreative.agency/en/blog/${slug}` }
     ],
-    schema: post ? {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      "headline": postTitle,
-      "image": post.image,
-      "datePublished": post.date.en || post.date.tr,
-      "author": {
-        "@type": "Organization",
-        "name": "BC Creative Agency"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "BC Creative Agency",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://bccreative.agency/logo-icon.png"
-        }
-      },
-      "description": postExcerpt
-    } : null
+    schemas: articleSchemas,
   });
 
   if (!post) {
