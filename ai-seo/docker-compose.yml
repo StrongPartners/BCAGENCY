@@ -1,0 +1,25 @@
+services:
+  # PostgreSQL Veritabani
+  postgres:
+    image: postgres:16-alpine
+    container_name: ai-seo-postgres
+    environment:
+      POSTGRES_DB: ai_seo_db
+      POSTGRES_USER: seo_user
+      POSTGRES_PASSWORD: seo_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  # Redis (Celery task queue icin)
+  redis:
+    image: redis:7-alpine
+    container_name: ai-seo-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
