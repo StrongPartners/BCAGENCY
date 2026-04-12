@@ -75,82 +75,149 @@
   --font-display: "DM Sans", "Inter", sans-serif;
 }
 
-/* ───────── Theme: Midnight (dark mode) ───────── */
-[data-theme="midnight"] {
-  --color-surface: #0f0f1a;
-  --color-surface-alt: #1a1a2e;
-  --color-surface-card: rgba(255,255,255,0.05);
-  --color-on-surface: #f0f0f5;
-  --color-on-surface-secondary: #c8c8d4;
-  --color-on-surface-muted: #8888a0;
-  --color-border-default: rgba(255,255,255,0.08);
-  --color-border-subtle: rgba(255,255,255,0.05);
-  --color-ink-50: #1a1a2e;
-  --color-ink-100: #24243a;
-  --color-ink-900: #f0f0f5;
-  --color-ink-800: #d8d8e8;
-  --color-ink-700: #c8c8d4;
-  --color-ink-400: #8888a0;
+/* ──────────────────────────────────────────────────────────────────
+   Theme overrides — inspired by design systems from
+   github.com/alexpate/awesome-design-systems
+   ────────────────────────────────────────────────────────────────── */
+
+/* ───────── Material — Google Material Design 3 ─────────
+   Tonal surfaces, purple/indigo primary, soft elevated shadows,
+   large rounded corners. Warm neutral palette.
+   Ref: m3.material.io
+   Default theme — no [data-theme] needed.
+   ────────────────────────────────────────────────────────────────── */
+
+/* ───────── Carbon — IBM Carbon Design System ─────────
+   Dark UI, structured, #0f62fe blue accent, cool gray scale,
+   flat cards with subtle borders, data-density-friendly.
+   Ref: carbondesignsystem.com
+   ────────────────────────────────────────────────────────────────── */
+[data-theme="carbon"] {
+  --color-surface: #161616;
+  --color-surface-alt: #262626;
+  --color-surface-card: #262626;
+  --color-on-surface: #f4f4f4;
+  --color-on-surface-secondary: #c6c6c6;
+  --color-on-surface-muted: #8d8d8d;
+  --color-border-default: #393939;
+  --color-border-subtle: #333333;
+  /* Carbon uses IBM Blue as primary */
+  --color-brand-50: #edf5ff;
+  --color-brand-100: #d0e2ff;
+  --color-brand-200: #a6c8ff;
+  --color-brand-300: #78a9ff;
+  --color-brand-400: #4589ff;
+  --color-brand-500: #0f62fe;
+  --color-brand-600: #0043ce;
+  --color-brand-700: #002d9c;
+  --color-brand-800: #001d6c;
+  --color-brand-900: #001141;
+  /* Carbon secondary = teal */
+  --color-mint-50: #d9fbfb;
+  --color-mint-400: #009d9a;
+  --color-mint-500: #008571;
+  --color-mint-600: #006d5b;
+  /* Carbon support = red/danger */
+  --color-coral-50: #fff1f1;
+  --color-coral-400: #ff8389;
+  --color-coral-500: #da1e28;
+  --color-coral-600: #ba1b23;
+  /* Carbon warning = yellow */
+  --color-sun-50: #fcf4d6;
+  --color-sun-200: #f1c21b;
+  --color-sun-300: #d2a106;
+  --color-sun-400: #f1c21b;
+  /* Carbon ink overrides for dark */
+  --color-ink-50: #262626;
+  --color-ink-100: #333333;
+  --color-ink-400: #8d8d8d;
+  --color-ink-700: #c6c6c6;
+  --color-ink-800: #e0e0e0;
+  --color-ink-900: #f4f4f4;
 }
 
-/* ───────── Theme: Minimal ───────── */
-[data-theme="minimal"] {
-  --color-surface: #fafafa;
-  --color-surface-alt: #f0f0f0;
+/* ───────── Polaris — Shopify Polaris ─────────
+   Clean white surfaces, #008060 green primary, warm grays,
+   practical, accessible, commerce-oriented.
+   Ref: polaris.shopify.com
+   ────────────────────────────────────────────────────────────────── */
+[data-theme="polaris"] {
+  --color-surface: #f6f6f7;
+  --color-surface-alt: #f1f2f4;
   --color-surface-card: #ffffff;
-  --color-on-surface: #111111;
-  --color-on-surface-secondary: #333333;
-  --color-on-surface-muted: #888888;
-  --color-border-default: #e0e0e0;
-  --color-border-subtle: #eaeaea;
-  --color-brand-50: #f5f5f5;
-  --color-brand-100: #ebebeb;
-  --color-brand-400: #555555;
-  --color-brand-500: #333333;
-  --color-brand-600: #111111;
-  --color-brand-700: #000000;
-  --color-coral-50: #fafafa;
-  --color-coral-400: #555555;
-  --color-coral-500: #333333;
-  --color-mint-50: #fafafa;
-  --color-mint-400: #555555;
-  --color-mint-500: #333333;
-  --color-sun-50: #fafafa;
-  --color-sun-200: #eaeaea;
-  --color-sun-300: #d5d5d5;
-  --color-sun-400: #cccccc;
+  --color-on-surface: #202223;
+  --color-on-surface-secondary: #44474a;
+  --color-on-surface-muted: #6d7175;
+  --color-border-default: #c9cccf;
+  --color-border-subtle: #e1e3e5;
+  /* Polaris uses Shopify green */
+  --color-brand-50: #f0fdf4;
+  --color-brand-100: #dbfde6;
+  --color-brand-200: #b3fac9;
+  --color-brand-300: #71f09e;
+  --color-brand-400: #36d46e;
+  --color-brand-500: #008060;
+  --color-brand-600: #006e52;
+  --color-brand-700: #005c45;
+  --color-brand-800: #004637;
+  --color-brand-900: #00382d;
+  /* Polaris accent: highlight/info blue */
+  --color-coral-50: #ebf5fa;
+  --color-coral-400: #00a0ac;
+  --color-coral-500: #007a8a;
+  --color-coral-600: #005e6c;
+  /* Polaris success = green-light */
+  --color-mint-50: #e3f1df;
+  --color-mint-400: #50b83c;
+  --color-mint-500: #3f8f30;
+  --color-mint-600: #2f6f24;
+  /* Polaris warning = yellow */
+  --color-sun-50: #fef8e7;
+  --color-sun-200: #fed95e;
+  --color-sun-300: #ffc107;
+  --color-sun-400: #eec200;
 }
 
-/* ───────── Theme: Corporate ───────── */
-[data-theme="corporate"] {
+/* ───────── Primer — GitHub Primer ─────────
+   Light gray surfaces, #0969da blue primary, minimal,
+   border-focused cards, compact, developer aesthetic.
+   Ref: primer.style
+   ────────────────────────────────────────────────────────────────── */
+[data-theme="primer"] {
   --color-surface: #ffffff;
-  --color-surface-alt: #f8f9fc;
+  --color-surface-alt: #f6f8fa;
   --color-surface-card: #ffffff;
-  --color-on-surface: #0c1b33;
-  --color-on-surface-secondary: #1e3a5f;
-  --color-on-surface-muted: #6b7f99;
-  --color-border-default: #e2e8f0;
-  --color-border-subtle: #edf2f7;
-  --color-brand-50: #eef4ff;
-  --color-brand-100: #dce8ff;
-  --color-brand-200: #b9d1ff;
-  --color-brand-300: #85b0ff;
-  --color-brand-400: #5590ff;
-  --color-brand-500: #1a56db;
-  --color-brand-600: #0c3b8f;
-  --color-brand-700: #0a2d6e;
-  --color-coral-50: #fef9f0;
-  --color-coral-400: #d4a017;
-  --color-coral-500: #b8860b;
-  --color-coral-600: #9a7209;
-  --color-mint-50: #eef8f5;
-  --color-mint-400: #2a9d8f;
-  --color-mint-500: #228176;
-  --color-mint-600: #1b675e;
-  --color-sun-50: #fefcf0;
-  --color-sun-200: #fde68a;
-  --color-sun-300: #fcd34d;
-  --color-sun-400: #f59e0b;
+  --color-on-surface: #1f2328;
+  --color-on-surface-secondary: #3d454d;
+  --color-on-surface-muted: #656d76;
+  --color-border-default: #d0d7de;
+  --color-border-subtle: #d8dee4;
+  /* Primer uses GitHub blue */
+  --color-brand-50: #ddf4ff;
+  --color-brand-100: #b6e3ff;
+  --color-brand-200: #80ccff;
+  --color-brand-300: #54aeff;
+  --color-brand-400: #218bff;
+  --color-brand-500: #0969da;
+  --color-brand-600: #0550ae;
+  --color-brand-700: #033d8b;
+  --color-brand-800: #02306a;
+  --color-brand-900: #012048;
+  /* Primer danger = red */
+  --color-coral-50: #ffebe9;
+  --color-coral-400: #ff8182;
+  --color-coral-500: #cf222e;
+  --color-coral-600: #a40e26;
+  /* Primer success = green */
+  --color-mint-50: #dafbe1;
+  --color-mint-400: #4ac26b;
+  --color-mint-500: #1a7f37;
+  --color-mint-600: #116329;
+  /* Primer attention = yellow */
+  --color-sun-50: #fff8c5;
+  --color-sun-200: #f9e088;
+  --color-sun-300: #d4a72c;
+  --color-sun-400: #bf8700;
 }
 
 @layer base {
