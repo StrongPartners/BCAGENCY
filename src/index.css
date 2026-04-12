@@ -131,33 +131,6 @@
     animation: gradient-shift 6s ease infinite;
   }
 
-  /* ───────── Tape / sticker rotation helper ───────── */
-  .rotate-neg-1 { transform: rotate(-1deg); }
-  .rotate-neg-2 { transform: rotate(-2deg); }
-  .rotate-neg-3 { transform: rotate(-3deg); }
-  .rotate-pos-1 { transform: rotate(1deg); }
-  .rotate-pos-2 { transform: rotate(2deg); }
-  .rotate-pos-3 { transform: rotate(3deg); }
-
-  /* ───────── Sticker-shadow card ───────── */
-  .shadow-sticker {
-    box-shadow: 6px 6px 0 0 #101014;
-  }
-  .shadow-sticker-lg {
-    box-shadow: 10px 10px 0 0 #101014;
-  }
-  .shadow-sticker-brand {
-    box-shadow: 6px 6px 0 0 #4f46e5;
-  }
-  .shadow-sticker-coral {
-    box-shadow: 6px 6px 0 0 #ff6b6b;
-  }
-  .shadow-sticker-mint {
-    box-shadow: 6px 6px 0 0 #4ecdc4;
-  }
-  .shadow-sticker-sun {
-    box-shadow: 6px 6px 0 0 #ffd93d;
-  }
 
   /* ───────── Playful underline ───────── */
   .playful-underline {
