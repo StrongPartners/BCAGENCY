@@ -123,13 +123,13 @@ const Header = () => {
                     <div className={`flex items-center rounded-full p-0.5 ${!isScrolled && isHome ? 'bg-white/15' : 'bg-ink-50'}`}>
                         <button
                             onClick={() => lang !== 'tr' && toggleLang()}
-                            className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${lang === 'tr' ? (!isScrolled && isHome ? 'bg-white text-ink-900 shadow-sm' : 'bg-white text-ink-900 shadow-sm') : (!isScrolled && isHome ? 'text-white/60' : 'text-ink-400')}`}
+                            className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${lang === 'tr' ? 'bg-white text-ink-900 shadow-sm' : (!isScrolled && isHome ? 'text-white/60' : 'text-ink-400')}`}
                         >
                             TR
                         </button>
                         <button
                             onClick={() => lang !== 'en' && toggleLang()}
-                            className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${lang === 'en' ? (!isScrolled && isHome ? 'bg-white text-ink-900 shadow-sm' : 'bg-white text-ink-900 shadow-sm') : (!isScrolled && isHome ? 'text-white/60' : 'text-ink-400')}`}
+                            className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${lang === 'en' ? 'bg-white text-ink-900 shadow-sm' : (!isScrolled && isHome ? 'text-white/60' : 'text-ink-400')}`}
                         >
                             EN
                         </button>
