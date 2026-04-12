@@ -104,24 +104,24 @@ export const translations = {
     about_values_title: 'Değerlerimiz',
     about_values_sub: 'Çalışma şeklimizi belirleyen dört şey:',
     about_values: [
-      { icon: '🤝', title: 'Şeffaflık', desc: 'Ne yapıyoruz, neden yapıyoruz — her ay rakamlarla anlatıyoruz. Sürpriz yok.' },
-      { icon: '❤️', title: 'Gerçek ilgi', desc: 'Her müşterimize sanki kendi markamızmış gibi ilgi gösteriyoruz. Klişe değil, politika.' },
-      { icon: '⚡', title: 'Hız', desc: "WhatsApp mesajlarınıza ortalama 15 dakikada dönüyoruz. Çünkü biz de bekleyen olmayı sevmiyoruz." },
-      { icon: '🎯', title: 'Sonuç odaklılık', desc: 'İş iyi oldu demek yetmez. Ölçüyoruz, raporluyoruz, sonraki adımı planlıyoruz.' },
+      { icon: '', title: 'Şeffaflık', desc: 'Ne yapıyoruz, neden yapıyoruz — her ay rakamlarla anlatıyoruz. Sürpriz yok.' },
+      { icon: '', title: 'Gerçek ilgi', desc: 'Her müşterimize sanki kendi markamızmış gibi ilgi gösteriyoruz. Klişe değil, politika.' },
+      { icon: '', title: 'Hız', desc: "WhatsApp mesajlarınıza ortalama 15 dakikada dönüyoruz. Çünkü biz de bekleyen olmayı sevmiyoruz." },
+      { icon: '', title: 'Sonuç odaklılık', desc: 'İş iyi oldu demek yetmez. Ölçüyoruz, raporluyoruz, sonraki adımı planlıyoruz.' },
     ],
     about_services_title: 'Neler yaptığımız ',
     about_services_title_accent: 'listesi',
     about_services_sub: 'Tek çatı altında tüm dijital pazarlama ihtiyaçlarınız.',
     about_services: [
-      { icon: '🔍', title: 'SEO', description: 'Google aramalarında ilk sayfa hedefi.' },
-      { icon: '📣', title: 'Google Ads', description: 'Performans odaklı reklam yönetimi.' },
-      { icon: '📱', title: 'Sosyal Medya', description: 'Instagram, Facebook, TikTok stratejisi ve içerik.' },
-      { icon: '💻', title: 'Web Tasarım', description: 'Hızlı, modern, SEO-dostu web siteleri.' },
-      { icon: '🎬', title: 'Prodüksiyon', description: 'Reklam filmi, kurumsal video, viral içerik.' },
-      { icon: '🚁', title: 'Drone Çekim', description: 'Havadan profesyonel çekim.' },
-      { icon: '📸', title: 'Fotoğraf & Video', description: 'Ürün, etkinlik, kurumsal çekim.' },
-      { icon: '🎨', title: 'Grafik Tasarım', description: 'Logo, kurumsal kimlik, kampanya grafikleri.' },
-      { icon: '✍️', title: 'İçerik', description: 'Metin yazımı, copywriting, blog içerikleri.' },
+      { icon: '', title: 'SEO', description: 'Google aramalarında ilk sayfa hedefi.' },
+      { icon: '', title: 'Google Ads', description: 'Performans odaklı reklam yönetimi.' },
+      { icon: '', title: 'Sosyal Medya', description: 'Instagram, Facebook, TikTok stratejisi ve içerik.' },
+      { icon: '', title: 'Web Tasarım', description: 'Hızlı, modern, SEO-dostu web siteleri.' },
+      { icon: '', title: 'Prodüksiyon', description: 'Reklam filmi, kurumsal video, viral içerik.' },
+      { icon: '', title: 'Drone Çekim', description: 'Havadan profesyonel çekim.' },
+      { icon: '', title: 'Fotoğraf & Video', description: 'Ürün, etkinlik, kurumsal çekim.' },
+      { icon: '', title: 'Grafik Tasarım', description: 'Logo, kurumsal kimlik, kampanya grafikleri.' },
+      { icon: '', title: 'İçerik', description: 'Metin yazımı, copywriting, blog içerikleri.' },
     ],
 
     // Contact
@@ -139,7 +139,7 @@ export const translations = {
     contact_maps_btn: "Google Maps'te aç →",
     contact_map_title: 'BC Creative Agency – Girne KKTC',
     contact_map_url: 'https://www.google.com/maps/search/Fatih+Sokak+Ardem+11+Apartman%C4%B1+Kat+3+No+14+Girne+Kuzey+K%C4%B1br%C4%B1s/@35.3421,33.3184,17z',
-    contact_response_title: '⚡ Ortalama yanıt süresi',
+    contact_response_title: 'Ortalama yanıt süresi',
     contact_response_desc: "Çalışma saatlerinde WhatsApp mesajlarınıza 15 dakikada dönüyoruz. WhatsApp'a 7/24 yazabilirsiniz.",
     contact_response_btn: "WhatsApp'ı aç",
 
@@ -188,7 +188,7 @@ export const translations = {
     hero_rotating: ['SEO', 'Social', 'Ads', 'Web', 'Production'],
 
     // Service Banner (marquee)
-    banner_services: ['Web Design ✦', 'Social Media ✦', 'Google Ads ✦', 'Meta Ads ✦', 'Graphic Design ✦', 'Content ✦', 'Production ✦', 'Drone ✦', 'Photo & Video ✦', 'SEO ✦', 'Brand Strategy ✦'],
+    banner_services: ['Web Design', 'Social Media', 'Google Ads', 'Meta Ads', 'Graphic Design', 'Content', 'Production', 'Drone', 'Photo & Video', 'SEO', 'Brand Strategy'],
 
     // Services
     services_eyebrow: 'What we do',
@@ -197,13 +197,13 @@ export const translations = {
     services_sub: "Whatever your brand needs — we do it. All under one roof, all measurable, all a little fun.",
     services_see_details: 'See details →',
     services_list: [
-      { icon: '🔍', title: 'SEO', description: "Rank on the first page of Google. Organic and built to last.", path: '/hizmetler/seo', tone: 'brand' },
-      { icon: '📣', title: 'Google Ads', description: 'Flip the ad switch, the phone rings. Every cent of your budget earns its keep.', path: '/hizmetler/google-ads', tone: 'coral' },
-      { icon: '📱', title: 'Social Media', description: 'Instagram, Facebook, TikTok — your brand voice, same warmth on every platform.', path: '/hizmetler/sosyal-medya', tone: 'mint' },
-      { icon: '💻', title: 'Web Design', description: 'Fast, modern, mobile-friendly sites. Born with SEO baked in.', path: '/hizmetler/web-tasarim', tone: 'sun' },
-      { icon: '🎬', title: 'Production', description: 'Ad films and corporate video, from script to post.', path: '/hizmetler/produksiyon', tone: 'brand' },
-      { icon: '🚁', title: 'Drone', description: "We capture the best angles of Northern Cyprus from above. Tourism, real estate, events.", path: '/hizmetler/drone-cekim', tone: 'coral' },
-      { icon: '📸', title: 'Photo & Video', description: 'Product, event, corporate — professional shoots, social-ready output.', path: '/hizmetler/fotograf-video', tone: 'mint' },
+      { icon: '', title: 'SEO', description: "Rank on the first page of Google. Organic and built to last.", path: '/hizmetler/seo', tone: 'brand' },
+      { icon: '', title: 'Google Ads', description: 'Flip the ad switch, the phone rings. Every cent of your budget earns its keep.', path: '/hizmetler/google-ads', tone: 'coral' },
+      { icon: '', title: 'Social Media', description: 'Instagram, Facebook, TikTok — your brand voice, same warmth on every platform.', path: '/hizmetler/sosyal-medya', tone: 'mint' },
+      { icon: '', title: 'Web Design', description: 'Fast, modern, mobile-friendly sites. Born with SEO baked in.', path: '/hizmetler/web-tasarim', tone: 'sun' },
+      { icon: '', title: 'Production', description: 'Ad films and corporate video, from script to post.', path: '/hizmetler/produksiyon', tone: 'brand' },
+      { icon: '', title: 'Drone', description: "We capture the best angles of Northern Cyprus from above. Tourism, real estate, events.", path: '/hizmetler/drone-cekim', tone: 'coral' },
+      { icon: '', title: 'Photo & Video', description: 'Product, event, corporate — professional shoots, social-ready output.', path: '/hizmetler/fotograf-video', tone: 'mint' },
     ],
 
     // Approach
@@ -212,10 +212,10 @@ export const translations = {
     approach_heading_2: 'just good work.',
     approach_sub: 'We keep the process simple — listen, design, make, measure. Rinse and repeat.',
     approach_steps: [
-      { number: '01', title: 'Listen 👂', desc: "First we understand your brand, your goals, your customer. Over plenty of coffee.", tone: 'brand' },
-      { number: '02', title: 'Design ✏️', desc: 'We build a strategy on data and creativity. Short, clear, measurable.', tone: 'coral' },
-      { number: '03', title: 'Make 🛠️', desc: "Ads, content, sites — all built in-house by our team. No outsourcing.", tone: 'mint' },
-      { number: '04', title: 'Measure 📈', desc: 'Every month we share transparent reports showing what worked and what\'s next.', tone: 'sun' },
+      { number: '01', title: 'Listen', desc: "First we understand your brand, your goals, your customer. Over plenty of coffee.", tone: 'brand' },
+      { number: '02', title: 'Design', desc: 'We build a strategy on data and creativity. Short, clear, measurable.', tone: 'coral' },
+      { number: '03', title: 'Make', desc: "Ads, content, sites — all built in-house by our team. No outsourcing.", tone: 'mint' },
+      { number: '04', title: 'Measure', desc: 'Every month we share transparent reports showing what worked and what\'s next.', tone: 'sun' },
     ],
 
     // Stats
@@ -224,7 +224,7 @@ export const translations = {
       { value: '8+', label: 'Years in the game' },
       { value: '50+', label: 'Happy brands' },
       { value: '2M+', label: 'Ad spend managed' },
-      { value: '∞', label: 'Coffee ☕' },
+      { value: '∞', label: 'Coffee' },
     ],
 
     // FAQ
@@ -232,7 +232,7 @@ export const translations = {
     faq_title: 'Frequently asked',
     faq_subtitle: 'The things you probably want to know.',
     faq_no_answer: "Can't find your answer?",
-    faq_whatsapp: 'Message us 👋',
+    faq_whatsapp: 'Message us',
 
     // Footer
     footer_tagline: 'Making ideas visible.',
@@ -259,24 +259,24 @@ export const translations = {
     about_values_title: 'Our values',
     about_values_sub: 'Four things that shape how we work:',
     about_values: [
-      { icon: '🤝', title: 'Transparency', desc: 'What we do, why we do it — every month, in numbers. No surprises.' },
-      { icon: '❤️', title: 'Real care', desc: 'We treat every client as if it were our own brand. It\'s not a cliché, it\'s policy.' },
-      { icon: '⚡', title: 'Speed', desc: 'We answer WhatsApp messages in an average of 15 minutes. Because we hate waiting too.' },
-      { icon: '🎯', title: 'Results', desc: "It\'s not enough to say the work was good. We measure, report, plan the next step." },
+      { icon: '', title: 'Transparency', desc: 'What we do, why we do it — every month, in numbers. No surprises.' },
+      { icon: '', title: 'Real care', desc: 'We treat every client as if it were our own brand. It\'s not a cliché, it\'s policy.' },
+      { icon: '', title: 'Speed', desc: 'We answer WhatsApp messages in an average of 15 minutes. Because we hate waiting too.' },
+      { icon: '', title: 'Results', desc: "It\'s not enough to say the work was good. We measure, report, plan the next step." },
     ],
     about_services_title: 'The ',
     about_services_title_accent: "what-we-do",
     about_services_sub: 'All your digital marketing needs, under one roof.',
     about_services: [
-      { icon: '🔍', title: 'SEO', description: 'First-page Google ranking as the goal.' },
-      { icon: '📣', title: 'Google Ads', description: 'Performance-focused ad management.' },
-      { icon: '📱', title: 'Social Media', description: 'Instagram, Facebook, TikTok strategy & content.' },
-      { icon: '💻', title: 'Web Design', description: 'Fast, modern, SEO-friendly websites.' },
-      { icon: '🎬', title: 'Production', description: 'Ad films, corporate videos, viral content.' },
-      { icon: '🚁', title: 'Drone', description: 'Professional aerial shooting.' },
-      { icon: '📸', title: 'Photo & Video', description: 'Product, event, corporate photography.' },
-      { icon: '🎨', title: 'Graphic Design', description: 'Logos, brand identity, campaign graphics.' },
-      { icon: '✍️', title: 'Content', description: 'Copywriting and blog articles.' },
+      { icon: '', title: 'SEO', description: 'First-page Google ranking as the goal.' },
+      { icon: '', title: 'Google Ads', description: 'Performance-focused ad management.' },
+      { icon: '', title: 'Social Media', description: 'Instagram, Facebook, TikTok strategy & content.' },
+      { icon: '', title: 'Web Design', description: 'Fast, modern, SEO-friendly websites.' },
+      { icon: '', title: 'Production', description: 'Ad films, corporate videos, viral content.' },
+      { icon: '', title: 'Drone', description: 'Professional aerial shooting.' },
+      { icon: '', title: 'Photo & Video', description: 'Product, event, corporate photography.' },
+      { icon: '', title: 'Graphic Design', description: 'Logos, brand identity, campaign graphics.' },
+      { icon: '', title: 'Content', description: 'Copywriting and blog articles.' },
     ],
 
     // Contact
@@ -294,7 +294,7 @@ export const translations = {
     contact_maps_btn: 'Open in Google Maps →',
     contact_map_title: 'BC Creative Agency – Kyrenia TRNC',
     contact_map_url: 'https://www.google.com/maps/search/Fatih+Sokak+Ardem+11+Apartman%C4%B1+Kat+3+No+14+Girne+Kuzey+K%C4%B1br%C4%B1s/@35.3421,33.3184,17z',
-    contact_response_title: '⚡ Average response time',
+    contact_response_title: 'Average response time',
     contact_response_desc: "During business hours we reply to WhatsApp messages within 15 minutes. You can message us 24/7.",
     contact_response_btn: 'Open WhatsApp',
 

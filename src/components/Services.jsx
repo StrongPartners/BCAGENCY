@@ -84,9 +84,13 @@ const Services = () => {
                                 className={`group relative cursor-pointer bg-white border-2 border-ink-900 rounded-3xl p-7 md:p-8 ${TONE_SHADOW[tone]} ${tilt} transition-all`}
                             >
                                 {/* Icon badge */}
-                                <div className={`w-16 h-16 ${TONE_BG[tone]} border-2 border-ink-900 rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:animate-wobble`}>
-                                    {service.icon}
-                                </div>
+                                {service.icon ? (
+                                    <div className={`w-16 h-16 ${TONE_BG[tone]} border-2 border-ink-900 rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:animate-wobble`}>
+                                        {service.icon}
+                                    </div>
+                                ) : (
+                                    <div className={`w-16 h-16 ${TONE_BG[tone]} border-2 border-ink-900 rounded-2xl mb-5 group-hover:animate-wobble`} />
+                                )}
 
                                 {/* Number */}
                                 <span className="absolute top-6 right-6 font-black text-ink-900/10 text-5xl leading-none">

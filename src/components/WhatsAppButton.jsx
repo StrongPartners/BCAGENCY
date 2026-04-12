@@ -36,7 +36,7 @@ const WhatsAppButton = () => {
                 exit={{ opacity: 0, x: 20, scale: 0.9 }}
                 className="bg-white rounded-2xl border-2 border-ink-900 px-4 py-3 max-w-[220px] text-right shadow-sticker-sun rotate-neg-1"
               >
-                <p className="text-ink-900 font-black text-sm">Merhaba! 👋</p>
+                <p className="text-ink-900 font-black text-sm">Merhaba!</p>
                 <p className="text-ink-500 text-xs mt-0.5 font-medium">Ücretsiz danışmanlık için yazın</p>
                 <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-ink-900" />
               </motion.div>
