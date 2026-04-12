@@ -12,7 +12,7 @@ const ServiceBanner = () => {
     const tickerItems = [...services, ...services];
 
     return (
-        <div className="relative bg-ink-900 border-y-4 border-ink-900 py-5 overflow-hidden">
+        <div className="relative bg-ink-900 py-5 overflow-hidden">
             {/* Animated strip */}
             <div className="flex whitespace-nowrap animate-marquee">
                 {tickerItems.map((item, index) => {

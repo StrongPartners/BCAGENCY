@@ -5,16 +5,10 @@ import { useLanguage } from '../context/LanguageContext';
 /**
  * Approach section — "how we work" 01-04 process steps.
  * Re-uses the WhyChooseUs.jsx filename to preserve existing imports.
- * Creative Playground styling: tilted sticker cards, colorful borders.
+ * Modern sleek styling: soft shadows, no tilts, clean cards.
  */
-const TONE_BG     = { brand: 'bg-brand-100',  coral: 'bg-coral-100',  mint: 'bg-mint-100',  sun: 'bg-sun-100'  };
+const TONE_BG     = { brand: 'bg-brand-50',  coral: 'bg-coral-50',  mint: 'bg-mint-50',  sun: 'bg-sun-50'  };
 const TONE_NUMBER = { brand: 'text-brand-600', coral: 'text-coral-500', mint: 'text-mint-500', sun: 'text-sun-500' };
-const TONE_SHADOW = {
-    brand: 'shadow-sticker-brand',
-    coral: 'shadow-sticker-coral',
-    mint:  'shadow-sticker-mint',
-    sun:   'shadow-sticker-sun',
-};
 
 const Approach = () => {
     const { t } = useLanguage();
@@ -33,7 +27,7 @@ const Approach = () => {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="inline-block bg-mint-200 border-2 border-ink-900 rounded-full px-4 py-1.5 mb-6 rotate-pos-1"
+                        className="inline-block bg-mint-200 rounded-full px-4 py-1.5 mb-6"
                     >
                         <span className="font-black text-ink-900 text-xs uppercase tracking-wider">{t('approach_eyebrow')}</span>
                     </motion.div>
@@ -62,8 +56,6 @@ const Approach = () => {
                 {/* Steps grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                     {steps.map((step, i) => {
-                        const tiltClasses = ['rotate-neg-2', 'rotate-pos-1', 'rotate-neg-1', 'rotate-pos-2'];
-                        const tilt = tiltClasses[i % tiltClasses.length];
                         const tone = step.tone || 'brand';
 
                         return (
@@ -73,10 +65,10 @@ const Approach = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
-                                whileHover={{ y: -6, rotate: 0 }}
-                                className={`group bg-white border-2 border-ink-900 rounded-3xl p-8 ${TONE_SHADOW[tone]} ${tilt} transition-transform`}
+                                whileHover={{ y: -6 }}
+                                className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
                             >
-                                <div className={`w-14 h-14 ${TONE_BG[tone]} border-2 border-ink-900 rounded-xl flex items-center justify-center font-black text-lg text-ink-900 mb-6`}>
+                                <div className={`w-14 h-14 ${TONE_BG[tone]} rounded-xl flex items-center justify-center font-black text-lg ${TONE_NUMBER[tone]} mb-6`}>
                                     {step.number}
                                 </div>
                                 <h3 className="text-2xl md:text-3xl font-black text-ink-900 mb-4 leading-tight">
@@ -106,7 +98,7 @@ const Approach = () => {
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.08 }}
-                                    className="text-center bg-white border-2 border-ink-900 rounded-3xl p-6 shadow-sticker"
+                                    className="text-center bg-white rounded-2xl p-6 shadow-sm border border-gray-100"
                                 >
                                     <div className={`text-5xl md:text-6xl font-black ${TONE_NUMBER[tone]} mb-2 leading-none`}>
                                         {stat.value}

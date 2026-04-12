@@ -37,7 +37,7 @@ const Hero = () => {
                         initial={{ opacity: 0, scale: 0.8, rotate: -8 }}
                         animate={{ opacity: 1, scale: 1, rotate: -2 }}
                         transition={{ duration: 0.5, delay: 0.1 }}
-                        className="inline-flex items-center gap-2 bg-white border-2 border-ink-900 rounded-full px-5 py-2 mb-6 shadow-sticker-coral rotate-neg-1"
+                        className="inline-flex items-center gap-2 bg-white border border-gray-200 rounded-full px-5 py-2 mb-6 shadow-lg"
                     >
                         <span className="w-2 h-2 bg-mint-500 rounded-full animate-pulse" />
                         <span className="font-black text-ink-900 text-sm tracking-tight">{t('hero_greet')}</span>
@@ -110,7 +110,7 @@ const Hero = () => {
                             onClick={() => window.open('https://wa.me/905488755461', '_blank')}
                             whileHover={{ scale: 1.05, y: -3 }}
                             whileTap={{ scale: 0.96 }}
-                            className="bg-brand-600 text-white font-black text-lg px-8 py-4 rounded-full shadow-sticker-lg border-2 border-ink-900 hover:bg-brand-700 transition-colors"
+                            className="bg-brand-600 text-white font-black text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-shadow hover:bg-brand-700"
                         >
                             {t('hero_cta')}
                         </motion.button>

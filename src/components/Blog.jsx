@@ -56,7 +56,7 @@ const Blog = () => {
             initial={{ opacity: 0, scale: 0.8, rotate: -3 }}
             animate={{ opacity: 1, scale: 1, rotate: -1 }}
             transition={{ duration: 0.5 }}
-            className="inline-block bg-coral-200 border-2 border-ink-900 rounded-full px-4 py-1.5 mb-6 shadow-sticker"
+            className="inline-block bg-coral-200 rounded-full px-4 py-1.5 mb-6 shadow-md"
           >
             <span className="font-black text-ink-900 text-xs uppercase tracking-wider">{t('blog_badge')}</span>
           </motion.div>
@@ -91,8 +91,6 @@ const Blog = () => {
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {blogPosts.map((post, index) => {
-              const tones = ['shadow-sticker-brand', 'shadow-sticker-coral', 'shadow-sticker-mint', 'shadow-sticker-sun'];
-              const tilts = ['rotate-neg-1', 'rotate-pos-1', 'rotate-neg-2', 'rotate-pos-2'];
               const catTone = categoryTone[post.category] || { bg: 'bg-ink-100', text: 'text-ink-700' };
 
               return (
@@ -102,17 +100,17 @@ const Blog = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: (index % 6) * 0.06 }}
-                  whileHover={{ y: -8, rotate: 0 }}
+                  whileHover={{ y: -8 }}
                   onClick={() => navigate(`/blog/${post.slug}`)}
-                  className={`bg-white rounded-3xl overflow-hidden border-2 border-ink-900 ${tones[index % 4]} ${tilts[index % 4]} cursor-pointer group transition-transform`}
+                  className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 cursor-pointer group transition-all"
                 >
-                  <div className="relative h-48 overflow-hidden border-b-2 border-ink-900">
+                  <div className="relative h-48 overflow-hidden">
                     <img
                       src={post.image}
                       alt={post.title[lang] || post.title.tr}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
-                    <span className={`absolute top-4 left-4 text-xs font-black px-3 py-1 rounded-full border-2 border-ink-900 ${catTone.bg} ${catTone.text}`}>
+                    <span className={`absolute top-4 left-4 text-xs font-black px-3 py-1 rounded-full ${catTone.bg} ${catTone.text}`}>
                       {categoryLabels[post.category]?.[lang] || post.category}
                     </span>
                   </div>
@@ -158,7 +156,7 @@ const Blog = () => {
           </p>
           <button
             onClick={() => window.open('https://wa.me/905488755461', '_blank')}
-            className="inline-flex items-center gap-2 bg-sun-300 text-ink-900 font-black text-lg px-10 py-5 rounded-full border-2 border-ink-900 shadow-sticker-coral hover:bg-sun-400 transition-colors"
+            className="inline-flex items-center gap-2 bg-sun-300 text-ink-900 font-black text-lg px-10 py-5 rounded-full shadow-lg hover:shadow-xl hover:bg-sun-400 transition-all"
           >
             {t('btn_offer')}
             <ArrowUpRight size={20} strokeWidth={3} />

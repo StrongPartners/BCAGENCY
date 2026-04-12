@@ -84,20 +84,13 @@ const faqData = {
 
 const FAQItem = ({ question, answer, index, tone }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const shadowMap = {
-    brand: 'shadow-sticker-brand',
-    coral: 'shadow-sticker-coral',
-    mint:  'shadow-sticker-mint',
-    sun:   'shadow-sticker-sun',
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.04 }}
-      className={`bg-white border-2 border-ink-900 rounded-2xl overflow-hidden ${shadowMap[tone]}`}
+      className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100"
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -149,7 +142,7 @@ const FAQ = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="inline-block bg-sun-200 border-2 border-ink-900 text-ink-900 font-black text-xs px-4 py-1.5 rounded-full mb-6 uppercase tracking-wider rotate-pos-2">
+          <span className="inline-block bg-sun-200 text-ink-900 font-black text-xs px-4 py-1.5 rounded-full mb-6 uppercase tracking-wider">
             {t('faq_label')}
           </span>
           <h2 className="text-5xl md:text-7xl font-black text-ink-900 leading-none tracking-tight">
@@ -176,14 +169,14 @@ const FAQ = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-12 text-center bg-ink-900 rounded-3xl p-10 border-2 border-ink-900 shadow-sticker-sun"
+          className="mt-12 text-center bg-ink-900 rounded-3xl p-10 shadow-xl"
         >
           <p className="text-white font-bold text-lg mb-5">
             {t('faq_no_answer')}
           </p>
           <button
             onClick={() => window.open('https://wa.me/905488755461', '_blank')}
-            className="inline-flex items-center gap-2 bg-mint-400 text-ink-900 px-8 py-3 rounded-full font-black text-base border-2 border-ink-900 hover:bg-mint-500 transition-colors"
+            className="inline-flex items-center gap-2 bg-mint-400 text-ink-900 px-8 py-3 rounded-full font-black text-base hover:bg-mint-500 transition-all shadow-lg hover:shadow-xl"
           >
             {t('faq_whatsapp')}
           </button>
