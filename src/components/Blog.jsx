@@ -121,7 +121,7 @@ const Blog = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-24 md:py-32 bg-ink-900">
+      <section className="py-24 md:py-32 bg-brand-600">
         <div className="container mx-auto px-4 md:px-8 text-center max-w-3xl">
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-5 leading-none tracking-tight">
             {t('blog_cta_title')}
