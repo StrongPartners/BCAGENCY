@@ -11,6 +11,7 @@ const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { lang, toggleLang, t } = useLanguage();
+    const isHome = location.pathname === '/';
 
     useEffect(() => {
         const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -55,7 +56,7 @@ const Header = () => {
                     className="flex items-center gap-2 group"
                 >
                     <img src="/logo-icon.png" alt="BC Creative Agency" className="h-12 md:h-14 w-auto object-contain" />
-                    <span className="hidden sm:block font-bold text-ink-900 text-base md:text-lg tracking-tight leading-none">
+                    <span className={`hidden sm:block font-bold text-base md:text-lg tracking-tight leading-none transition-colors ${!isScrolled && isHome ? 'text-white' : 'text-ink-900'}`}>
                         BC Creative
                     </span>
                 </button>
@@ -64,11 +65,12 @@ const Header = () => {
                 <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
                     {navLinks.map((item) => {
                         const active = location.pathname === item.path;
+                        const lightMode = !isScrolled && isHome;
                         return (
                             <button
                                 key={item.label}
                                 onClick={() => go(item.path)}
-                                className={`font-medium text-[15px] tracking-tight transition-colors ${active ? 'text-ink-900' : 'text-ink-600 hover:text-ink-900'}`}
+                                className={`font-medium text-[15px] tracking-tight transition-colors ${lightMode ? (active ? 'text-white' : 'text-white/80 hover:text-white') : (active ? 'text-ink-900' : 'text-ink-600 hover:text-ink-900')}`}
                             >
                                 {item.label}
                             </button>
@@ -82,7 +84,7 @@ const Header = () => {
                         onMouseLeave={() => setIsHovering(false)}
                     >
                         <button
-                            className="flex items-center gap-1.5 font-medium text-[15px] text-ink-600 hover:text-ink-900 transition-colors py-2"
+                            className={`flex items-center gap-1.5 font-medium text-[15px] transition-colors py-2 ${!isScrolled && isHome ? 'text-white/80 hover:text-white' : 'text-ink-600 hover:text-ink-900'}`}
                         >
                             {t('nav_services')}
                             <ChevronDown size={16} className={`transition-transform ${isHovering ? 'rotate-180' : ''}`} />
@@ -118,16 +120,16 @@ const Header = () => {
                 {/* Desktop right side */}
                 <div className="hidden lg:flex items-center gap-3">
                     {/* Language toggle */}
-                    <div className="flex items-center bg-ink-50 rounded-full p-0.5">
+                    <div className={`flex items-center rounded-full p-0.5 ${!isScrolled && isHome ? 'bg-white/15' : 'bg-ink-50'}`}>
                         <button
                             onClick={() => lang !== 'tr' && toggleLang()}
-                            className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${lang === 'tr' ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-400'}`}
+                            className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${lang === 'tr' ? (!isScrolled && isHome ? 'bg-white text-ink-900 shadow-sm' : 'bg-white text-ink-900 shadow-sm') : (!isScrolled && isHome ? 'text-white/60' : 'text-ink-400')}`}
                         >
                             TR
                         </button>
                         <button
                             onClick={() => lang !== 'en' && toggleLang()}
-                            className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${lang === 'en' ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-400'}`}
+                            className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${lang === 'en' ? (!isScrolled && isHome ? 'bg-white text-ink-900 shadow-sm' : 'bg-white text-ink-900 shadow-sm') : (!isScrolled && isHome ? 'text-white/60' : 'text-ink-400')}`}
                         >
                             EN
                         </button>
@@ -144,7 +146,7 @@ const Header = () => {
 
                 {/* Mobile menu button */}
                 <button
-                    className="lg:hidden p-2 text-ink-900"
+                    className={`lg:hidden p-2 transition-colors ${!isScrolled && isHome ? 'text-white' : 'text-ink-900'}`}
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     aria-label="Menu"
                 >
