@@ -31,7 +31,6 @@ const ServicePageLayout = ({
     headlineRest,
     subheadline,
     description,
-    heroEmoji,
     tone = 'brand',
     features = [],      // [{ icon, title, desc, tone? }]
     steps = [],         // [{ step, title, desc }]
@@ -50,17 +49,6 @@ const ServicePageLayout = ({
                 <div className="absolute inset-0 z-0">
                     <ColorfulBlobs variant="hero" />
                 </div>
-
-                {/* Floating emoji sticker */}
-                {heroEmoji && (
-                    <motion.div
-                        className={`absolute top-32 right-10 md:right-20 w-24 h-24 md:w-32 md:h-32 ${TONE_BG[tone]} rounded-full flex items-center justify-center text-4xl md:text-5xl shadow-sticker-lg border-4 border-ink-900 rotate-neg-3 hidden md:flex`}
-                        animate={{ y: [0, -12, 0] }}
-                        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                    >
-                        {heroEmoji}
-                    </motion.div>
-                )}
 
                 <div className="container mx-auto px-4 md:px-8 relative z-10">
                     <div className="max-w-4xl">
@@ -140,8 +128,7 @@ const ServicePageLayout = ({
                                         whileHover={{ y: -6, rotate: 0 }}
                                         className={`bg-white border-2 border-ink-900 rounded-3xl p-8 ${TONE_SHADOW[featTone]} ${tilt} transition-transform`}
                                     >
-                                        <div className={`w-14 h-14 ${TONE_BG[featTone]} border-2 border-ink-900 rounded-2xl flex items-center justify-center text-2xl mb-5`}>
-                                            {feature.icon}
+                                        <div className={`w-14 h-14 ${TONE_BG[featTone]} border-2 border-ink-900 rounded-2xl mb-5`}>
                                         </div>
                                         <h3 className="text-2xl font-black text-ink-900 mb-3 leading-tight">{feature.title}</h3>
                                         <p className="text-ink-700 font-medium leading-relaxed">{feature.desc}</p>

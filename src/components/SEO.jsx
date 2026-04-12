@@ -21,10 +21,10 @@ const SEO = () => {
         subheadline: 'KKTC\'ye özel SEO stratejileri.',
         description: "Siz uyurken bile müşteri getiren bir sistem kuruyoruz. Yerel SEO, teknik SEO, içerik ve link inşası — hepsi KKTC pazarı için optimize edilmiş.",
         features: [
-            { icon: '🎯', title: 'Sektörel anahtar kelimeler', desc: "KKTC emlak, Girne araba kiralama, Lefkoşa avukat gibi müşterinin tam aradığı kelimelere odaklanıyoruz.", tone: 'brand' },
-            { icon: '⚡', title: 'Sayfa hızı & teknik SEO', desc: 'Core Web Vitals skorlarınızı düzeltiyor, siteyi 2 saniyenin altına çekiyoruz. Google hızı sever.', tone: 'coral' },
-            { icon: '📍', title: 'Yerel SEO & Haritalar', desc: 'Google Business Profile optimizasyonu, NAP tutarlılığı, yerel backlinks — harita aramalarının yıldızı sizsiniz.', tone: 'mint' },
-            { icon: '✍️', title: 'İçerik pazarlaması', desc: 'Hem kullanıcıyı hem Google\'ı ikna eden içerikler. Blog, rehber, kategori sayfaları — hepsi yazımız.', tone: 'sun' },
+            { icon: '', title: 'Sektörel anahtar kelimeler', desc: "KKTC emlak, Girne araba kiralama, Lefkoşa avukat gibi müşterinin tam aradığı kelimelere odaklanıyoruz.", tone: 'brand' },
+            { icon: '', title: 'Sayfa hızı & teknik SEO', desc: 'Core Web Vitals skorlarınızı düzeltiyor, siteyi 2 saniyenin altına çekiyoruz. Google hızı sever.', tone: 'coral' },
+            { icon: '', title: 'Yerel SEO & Haritalar', desc: 'Google Business Profile optimizasyonu, NAP tutarlılığı, yerel backlinks — harita aramalarının yıldızı sizsiniz.', tone: 'mint' },
+            { icon: '', title: 'İçerik pazarlaması', desc: 'Hem kullanıcıyı hem Google\'ı ikna eden içerikler. Blog, rehber, kategori sayfaları — hepsi yazımız.', tone: 'sun' },
         ],
         stats: [
             { value: '+280%', label: 'Ortalama organik trafik' },
@@ -54,10 +54,10 @@ const SEO = () => {
         subheadline: 'SEO strategies tailored for the TRNC market.',
         description: "We build a system that brings customers even while you sleep. Local SEO, technical SEO, content and link building — all optimized for the Northern Cyprus market.",
         features: [
-            { icon: '🎯', title: 'Niche keyword strategy', desc: "We target exactly what your customers search for: 'TRNC real estate', 'Kyrenia car hire', 'Nicosia lawyer'.", tone: 'brand' },
-            { icon: '⚡', title: 'Speed & technical SEO', desc: 'We fix Core Web Vitals and get the site under 2 seconds. Google loves speed.', tone: 'coral' },
-            { icon: '📍', title: 'Local SEO & Maps', desc: 'Google Business Profile optimization, NAP consistency, local backlinks — you rule the map pack.', tone: 'mint' },
-            { icon: '✍️', title: 'Content marketing', desc: "Content that convinces both users and Google. Blogs, guides, category pages — all written in-house.", tone: 'sun' },
+            { icon: '', title: 'Niche keyword strategy', desc: "We target exactly what your customers search for: 'TRNC real estate', 'Kyrenia car hire', 'Nicosia lawyer'.", tone: 'brand' },
+            { icon: '', title: 'Speed & technical SEO', desc: 'We fix Core Web Vitals and get the site under 2 seconds. Google loves speed.', tone: 'coral' },
+            { icon: '', title: 'Local SEO & Maps', desc: 'Google Business Profile optimization, NAP consistency, local backlinks — you rule the map pack.', tone: 'mint' },
+            { icon: '', title: 'Content marketing', desc: "Content that convinces both users and Google. Blogs, guides, category pages — all written in-house.", tone: 'sun' },
         ],
         stats: [
             { value: '+280%', label: 'Avg. organic traffic' },
@@ -114,7 +114,6 @@ const SEO = () => {
     return (
         <ServicePageLayout
             {...content}
-            heroEmoji="🔍"
             tone="brand"
         />
     );

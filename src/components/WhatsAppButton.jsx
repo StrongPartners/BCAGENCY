@@ -34,11 +34,11 @@ const WhatsAppButton = () => {
                 initial={{ opacity: 0, x: 20, scale: 0.9 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
                 exit={{ opacity: 0, x: 20, scale: 0.9 }}
-                className="bg-white rounded-2xl border-2 border-ink-900 px-4 py-3 max-w-[220px] text-right shadow-sticker-sun rotate-neg-1"
+                className="bg-white rounded-xl px-4 py-3 max-w-[220px] text-right shadow-xl border border-gray-200"
               >
-                <p className="text-ink-900 font-black text-sm">Merhaba! 👋</p>
+                <p className="text-ink-900 font-black text-sm">Merhaba!</p>
                 <p className="text-ink-500 text-xs mt-0.5 font-medium">Ücretsiz danışmanlık için yazın</p>
-                <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-ink-900" />
+                <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-gray-200" />
               </motion.div>
             )}
           </AnimatePresence>
@@ -52,7 +52,7 @@ const WhatsAppButton = () => {
             whileTap={{ scale: 0.9 }}
             transition={{ type: 'spring', stiffness: 200 }}
             onClick={() => window.open('https://wa.me/905488755461?text=Merhaba%2C%20dijital%20pazarlama%20hizmetleri%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum.', '_blank')}
-            className="w-16 h-16 bg-mint-400 rounded-full shadow-sticker-lg border-4 border-ink-900 flex items-center justify-center cursor-pointer relative"
+            className="w-16 h-16 bg-mint-400 rounded-full shadow-2xl flex items-center justify-center cursor-pointer relative"
             onMouseEnter={() => setShowTooltip(true)}
             onMouseLeave={() => setShowTooltip(false)}
             aria-label="WhatsApp"

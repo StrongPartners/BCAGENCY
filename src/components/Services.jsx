@@ -1,22 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Search, Megaphone, Smartphone, Monitor, Video, Plane, Camera } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 /**
- * Services — Creative Playground sticker-card grid.
+ * Services — Modern sleek card grid.
  * Each card takes a tone (brand/coral/mint/sun) and gets a
- * matching chunky border + sticker shadow. Hover lifts the card.
+ * matching soft icon background. Hover lifts the card with shadow.
  */
 const TONE_BG  = { brand: 'bg-brand-50',  coral: 'bg-coral-50',  mint: 'bg-mint-50',  sun: 'bg-sun-50'  };
+const TONE_ICON = { brand: 'text-brand-600', coral: 'text-coral-600', mint: 'text-mint-600', sun: 'text-sun-600' };
 const TONE_TXT = { brand: 'text-brand-600', coral: 'text-coral-600', mint: 'text-mint-600', sun: 'text-sun-600' };
-const TONE_SHADOW = {
-    brand: 'shadow-sticker-brand',
-    coral: 'shadow-sticker-coral',
-    mint:  'shadow-sticker-mint',
-    sun:   'shadow-sticker-sun',
-};
+
+const SERVICE_ICONS = [Search, Megaphone, Smartphone, Monitor, Video, Plane, Camera];
 
 const Services = () => {
     const navigate = useNavigate();
@@ -37,7 +34,7 @@ const Services = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
-                        className="inline-block bg-coral-100 border-2 border-ink-900 rounded-full px-4 py-1.5 mb-6 rotate-neg-1"
+                        className="inline-block bg-coral-100 rounded-full px-4 py-1.5 mb-6"
                     >
                         <span className="font-black text-ink-900 text-xs uppercase tracking-wider">{t('services_eyebrow')}</span>
                     </motion.div>
@@ -69,8 +66,7 @@ const Services = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {services.map((service, i) => {
                         const tone = service.tone || 'brand';
-                        const tiltClasses = ['rotate-neg-1', 'rotate-pos-1', 'rotate-neg-2', 'rotate-pos-2'];
-                        const tilt = tiltClasses[i % tiltClasses.length];
+                        const IconComponent = SERVICE_ICONS[i] || Search;
 
                         return (
                             <motion.div
@@ -79,19 +75,14 @@ const Services = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                                whileHover={{ y: -8, rotate: 0 }}
+                                whileHover={{ y: -8 }}
                                 onClick={() => service.path && navigate(service.path)}
-                                className={`group relative cursor-pointer bg-white border-2 border-ink-900 rounded-3xl p-7 md:p-8 ${TONE_SHADOW[tone]} ${tilt} transition-all`}
+                                className="group relative cursor-pointer bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
                             >
                                 {/* Icon badge */}
-                                <div className={`w-16 h-16 ${TONE_BG[tone]} border-2 border-ink-900 rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:animate-wobble`}>
-                                    {service.icon}
+                                <div className={`w-14 h-14 ${TONE_BG[tone]} rounded-xl flex items-center justify-center mb-5`}>
+                                    <IconComponent size={24} className={TONE_ICON[tone]} strokeWidth={2} />
                                 </div>
-
-                                {/* Number */}
-                                <span className="absolute top-6 right-6 font-black text-ink-900/10 text-5xl leading-none">
-                                    0{i + 1}
-                                </span>
 
                                 <h3 className="text-2xl md:text-3xl font-black text-ink-900 mb-3 tracking-tight leading-tight">
                                     {service.title}

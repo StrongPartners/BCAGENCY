@@ -21,10 +21,10 @@ const GoogleAds = () => {
         subheadline: 'Doğru kitle, doğru zaman, en düşük maliyet.',
         description: "Her kuruşun hesabını veriyoruz. Google Arama, Görüntülü Reklam, YouTube ve Performance Max kampanyalarıyla markanızı karlı bir büyüme yolculuğuna çıkarıyoruz.",
         features: [
-            { icon: '🎯', title: 'Hassas hedefleme', desc: 'Tam da sizin verdiğiniz hizmeti arayan kişileri nokta atışı hedefliyoruz. Anlık satın alma niyeti.', tone: 'brand' },
-            { icon: '💸', title: 'Bütçe verimliliği', desc: 'Negatif kelime takibi ve sürekli teklif optimizasyonu ile tıklama başına maliyeti düşürüyoruz.', tone: 'coral' },
-            { icon: '📺', title: 'YouTube & Display', desc: 'Arama dışı: YouTube reklamları, haber sitelerinde görüntülü reklam, yeniden pazarlama kampanyaları.', tone: 'mint' },
-            { icon: '📊', title: 'Şeffaf raporlama', desc: "Her ay nereye harcadık, ne kazandık — detaylı ve anlaşılır raporlar. Sürpriz yok.", tone: 'sun' },
+            { icon: '', title: 'Hassas hedefleme', desc: 'Tam da sizin verdiğiniz hizmeti arayan kişileri nokta atışı hedefliyoruz. Anlık satın alma niyeti.', tone: 'brand' },
+            { icon: '', title: 'Bütçe verimliliği', desc: 'Negatif kelime takibi ve sürekli teklif optimizasyonu ile tıklama başına maliyeti düşürüyoruz.', tone: 'coral' },
+            { icon: '', title: 'YouTube & Display', desc: 'Arama dışı: YouTube reklamları, haber sitelerinde görüntülü reklam, yeniden pazarlama kampanyaları.', tone: 'mint' },
+            { icon: '', title: 'Şeffaf raporlama', desc: "Her ay nereye harcadık, ne kazandık — detaylı ve anlaşılır raporlar. Sürpriz yok.", tone: 'sun' },
         ],
         stats: [
             { value: '10x+', label: 'Ortalama ciro artışı' },
@@ -54,10 +54,10 @@ const GoogleAds = () => {
         subheadline: 'Right audience, right time, lowest cost.',
         description: "We account for every cent. With Google Search, Display, YouTube and Performance Max campaigns we put your brand on a profitable growth path.",
         features: [
-            { icon: '🎯', title: 'Precision targeting', desc: "We pinpoint people searching specifically for your services. Pure buying intent.", tone: 'brand' },
-            { icon: '💸', title: 'Budget efficiency', desc: 'Negative keyword tracking and constant bid optimization to lower cost-per-click.', tone: 'coral' },
-            { icon: '📺', title: 'YouTube & Display', desc: 'Beyond search: YouTube ads, display on news sites, remarketing campaigns.', tone: 'mint' },
-            { icon: '📊', title: 'Transparent reports', desc: "Every month: where did we spend, what did we earn — clear reports. No surprises.", tone: 'sun' },
+            { icon: '', title: 'Precision targeting', desc: "We pinpoint people searching specifically for your services. Pure buying intent.", tone: 'brand' },
+            { icon: '', title: 'Budget efficiency', desc: 'Negative keyword tracking and constant bid optimization to lower cost-per-click.', tone: 'coral' },
+            { icon: '', title: 'YouTube & Display', desc: 'Beyond search: YouTube ads, display on news sites, remarketing campaigns.', tone: 'mint' },
+            { icon: '', title: 'Transparent reports', desc: "Every month: where did we spend, what did we earn — clear reports. No surprises.", tone: 'sun' },
         ],
         stats: [
             { value: '10x+', label: 'Avg. revenue growth' },
@@ -110,7 +110,7 @@ const GoogleAds = () => {
         ],
     });
 
-    return <ServicePageLayout {...content} heroEmoji="📣" tone="coral" />;
+    return <ServicePageLayout {...content} tone="coral" />;
 };
 
 export default GoogleAds;

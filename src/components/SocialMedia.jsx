@@ -21,10 +21,10 @@ const SocialMedia = () => {
         subheadline: 'Instagram, Facebook, TikTok — üçü bir arada.',
         description: "Sadece post atmıyoruz — strateji, içerik, grafik, video ve topluluk yönetimi tek elden. Her ay içerik takvimi + performans raporu.",
         features: [
-            { icon: '📱', title: 'İçerik stratejisi', desc: 'Haftalık içerik takvimi, hikaye serisi, reels planı — hepsi markanızın hedefine göre.', tone: 'brand' },
-            { icon: '🎨', title: 'Görsel & video üretimi', desc: 'Reels, grafik, carousel, story sticker — hepsi ekibimizin elinden.', tone: 'coral' },
-            { icon: '💬', title: 'Topluluk yönetimi', desc: "Yorumlar, DM'ler, şikayetler — hızlı ve marka diline uygun yanıtlar.", tone: 'mint' },
-            { icon: '📈', title: 'Meta Ads entegrasyonu', desc: 'Sosyal medya yönetimi + Meta Ads bir arada. Organik büyüme + ücretli erişim.', tone: 'sun' },
+            { icon: '', title: 'İçerik stratejisi', desc: 'Haftalık içerik takvimi, hikaye serisi, reels planı — hepsi markanızın hedefine göre.', tone: 'brand' },
+            { icon: '', title: 'Görsel & video üretimi', desc: 'Reels, grafik, carousel, story sticker — hepsi ekibimizin elinden.', tone: 'coral' },
+            { icon: '', title: 'Topluluk yönetimi', desc: "Yorumlar, DM'ler, şikayetler — hızlı ve marka diline uygun yanıtlar.", tone: 'mint' },
+            { icon: '', title: 'Meta Ads entegrasyonu', desc: 'Sosyal medya yönetimi + Meta Ads bir arada. Organik büyüme + ücretli erişim.', tone: 'sun' },
         ],
         stats: [
             { value: '3x', label: 'Etkileşim artışı' },
@@ -54,10 +54,10 @@ const SocialMedia = () => {
         subheadline: 'Instagram, Facebook, TikTok — all in one place.',
         description: "We don't just post — strategy, content, graphics, video and community management all handled together. Monthly content calendar + performance report.",
         features: [
-            { icon: '📱', title: 'Content strategy', desc: 'Weekly calendar, story series, reels plan — all aligned to your brand goals.', tone: 'brand' },
-            { icon: '🎨', title: 'Visual & video production', desc: 'Reels, graphics, carousels, story stickers — all built in-house.', tone: 'coral' },
-            { icon: '💬', title: 'Community management', desc: 'Comments, DMs, complaints — fast answers in your brand voice.', tone: 'mint' },
-            { icon: '📈', title: 'Meta Ads integration', desc: 'Social management + Meta Ads together. Organic growth + paid reach.', tone: 'sun' },
+            { icon: '', title: 'Content strategy', desc: 'Weekly calendar, story series, reels plan — all aligned to your brand goals.', tone: 'brand' },
+            { icon: '', title: 'Visual & video production', desc: 'Reels, graphics, carousels, story stickers — all built in-house.', tone: 'coral' },
+            { icon: '', title: 'Community management', desc: 'Comments, DMs, complaints — fast answers in your brand voice.', tone: 'mint' },
+            { icon: '', title: 'Meta Ads integration', desc: 'Social management + Meta Ads together. Organic growth + paid reach.', tone: 'sun' },
         ],
         stats: [
             { value: '3x', label: 'Engagement boost' },
@@ -103,7 +103,7 @@ const SocialMedia = () => {
         ],
     });
 
-    return <ServicePageLayout {...content} heroEmoji="📱" tone="mint" />;
+    return <ServicePageLayout {...content} tone="mint" />;
 };
 
 export default SocialMedia;

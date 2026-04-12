@@ -29,29 +29,6 @@ const Hero = () => {
                 <ColorfulBlobs variant="hero" />
             </div>
 
-            {/* Floating stickers */}
-            <motion.div
-                className="absolute top-32 right-12 md:right-32 w-20 h-20 md:w-28 md:h-28 bg-sun-300 rounded-full flex items-center justify-center text-3xl md:text-4xl shadow-sticker-lg border-4 border-ink-900 rotate-neg-3 hidden md:flex"
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            >
-                ✨
-            </motion.div>
-            <motion.div
-                className="absolute bottom-32 left-8 md:left-24 w-16 h-16 md:w-24 md:h-24 bg-coral-400 rounded-full flex items-center justify-center text-2xl md:text-3xl shadow-sticker-lg border-4 border-ink-900 rotate-pos-2 hidden md:flex"
-                animate={{ y: [0, 12, 0], rotate: [0, 5, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            >
-                🎯
-            </motion.div>
-            <motion.div
-                className="absolute top-1/2 left-4 md:left-16 w-14 h-14 md:w-20 md:h-20 bg-mint-400 rounded-full flex items-center justify-center text-xl md:text-2xl shadow-sticker border-4 border-ink-900 rotate-neg-2 hidden lg:flex"
-                animate={{ x: [0, 8, 0] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-            >
-                💡
-            </motion.div>
-
             {/* Content */}
             <div className="container mx-auto px-4 md:px-8 relative z-10">
                 <div className="max-w-5xl">

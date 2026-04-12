@@ -51,14 +51,6 @@ const Blog = () => {
           <ColorfulBlobs variant="hero" />
         </div>
 
-        <motion.div
-          className="absolute top-36 right-10 md:right-24 w-24 h-24 md:w-32 md:h-32 bg-sun-300 rounded-full flex items-center justify-center text-4xl md:text-5xl shadow-sticker-lg border-4 border-ink-900 rotate-neg-3 hidden md:flex"
-          animate={{ y: [0, -14, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          ✍️
-        </motion.div>
-
         <div className="container mx-auto px-4 md:px-8 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.8, rotate: -3 }}

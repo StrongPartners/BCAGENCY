@@ -21,10 +21,10 @@ const Produksiyon = () => {
         subheadline: 'Reklam filmi, kurumsal tanıtım, sosyal medya videoları.',
         description: "Fikir aşamasından post prodüksiyona kadar tüm süreci biz yönetiyoruz. Senaryo yazımı, storyboard, çekim, kurgu, renk, ses — hepsi tek ekipten.",
         features: [
-            { icon: '🎬', title: 'Reklam filmi', desc: 'Marka hikayenizi anlatan kısa, etkili reklam filmleri. 30–60 saniye TV & dijital.', tone: 'brand' },
-            { icon: '🏢', title: 'Kurumsal video', desc: 'Şirket tanıtımı, röportaj, süreç anlatımı, iç iletişim videoları.', tone: 'coral' },
-            { icon: '🎞️', title: 'Sosyal medya videoları', desc: 'Reels, TikTok, YouTube Shorts — her platform için özelleştirilmiş içerik.', tone: 'mint' },
-            { icon: '✂️', title: 'Post prodüksiyon', desc: 'Kurgu, renk düzenleme, ses tasarımı, motion graphics — hepsi bir arada.', tone: 'sun' },
+            { icon: '', title: 'Reklam filmi', desc: 'Marka hikayenizi anlatan kısa, etkili reklam filmleri. 30–60 saniye TV & dijital.', tone: 'brand' },
+            { icon: '', title: 'Kurumsal video', desc: 'Şirket tanıtımı, röportaj, süreç anlatımı, iç iletişim videoları.', tone: 'coral' },
+            { icon: '', title: 'Sosyal medya videoları', desc: 'Reels, TikTok, YouTube Shorts — her platform için özelleştirilmiş içerik.', tone: 'mint' },
+            { icon: '', title: 'Post prodüksiyon', desc: 'Kurgu, renk düzenleme, ses tasarımı, motion graphics — hepsi bir arada.', tone: 'sun' },
         ],
         stats: [
             { value: '4K', label: 'Çekim kalitesi' },
@@ -54,10 +54,10 @@ const Produksiyon = () => {
         subheadline: 'Ad films, corporate videos, social media content.',
         description: "We manage the entire process from concept to post-production. Script writing, storyboard, shooting, edit, color, sound — all from one team.",
         features: [
-            { icon: '🎬', title: 'Ad films', desc: 'Short, powerful brand films that tell your story. 30–60 seconds for TV & digital.', tone: 'brand' },
-            { icon: '🏢', title: 'Corporate video', desc: 'Company intros, interviews, process explainers, internal comms.', tone: 'coral' },
-            { icon: '🎞️', title: 'Social media video', desc: 'Reels, TikTok, YouTube Shorts — tailored per platform.', tone: 'mint' },
-            { icon: '✂️', title: 'Post production', desc: 'Edit, color, sound design, motion graphics — all in one house.', tone: 'sun' },
+            { icon: '', title: 'Ad films', desc: 'Short, powerful brand films that tell your story. 30–60 seconds for TV & digital.', tone: 'brand' },
+            { icon: '', title: 'Corporate video', desc: 'Company intros, interviews, process explainers, internal comms.', tone: 'coral' },
+            { icon: '', title: 'Social media video', desc: 'Reels, TikTok, YouTube Shorts — tailored per platform.', tone: 'mint' },
+            { icon: '', title: 'Post production', desc: 'Edit, color, sound design, motion graphics — all in one house.', tone: 'sun' },
         ],
         stats: [
             { value: '4K', label: 'Shooting quality' },
@@ -103,7 +103,7 @@ const Produksiyon = () => {
         ],
     });
 
-    return <ServicePageLayout {...content} heroEmoji="🎬" tone="coral" />;
+    return <ServicePageLayout {...content} tone="coral" />;
 };
 
 export default Produksiyon;

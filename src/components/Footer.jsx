@@ -28,7 +28,7 @@ const Footer = () => {
 
                 {/* Big headline / CTA */}
                 <div className="max-w-4xl mb-16">
-                    <div className="inline-block bg-sun-300 text-ink-900 border-2 border-ink-900 px-4 py-1.5 rounded-full font-black text-xs uppercase tracking-wider mb-6 rotate-neg-2">
+                    <div className="inline-block bg-sun-300 text-ink-900 px-4 py-1.5 rounded-full font-black text-xs uppercase tracking-wider mb-6">
                         {t('footer_tagline')}
                     </div>
                     <h2 className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.95] tracking-tight">
@@ -44,7 +44,7 @@ const Footer = () => {
                     <div className="mt-8 flex flex-wrap gap-4">
                         <button
                             onClick={() => window.open('https://wa.me/905488755461', '_blank')}
-                            className="bg-mint-400 text-ink-900 font-black px-7 py-4 rounded-full border-2 border-mint-400 hover:bg-mint-300 transition-colors shadow-sticker-sun"
+                            className="bg-mint-400 text-ink-900 font-black px-7 py-4 rounded-full hover:bg-mint-300 transition-all shadow-lg hover:shadow-xl"
                         >
                             {t('btn_whatsapp')}
                         </button>
@@ -74,7 +74,7 @@ const Footer = () => {
                                 href="https://www.instagram.com/bccreative.agency/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-11 h-11 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] flex items-center justify-center hover:scale-110 transition-transform border-2 border-white"
+                                className="w-11 h-11 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] flex items-center justify-center hover:scale-110 transition-transform border border-white/20"
                             >
                                 <Instagram size={18} className="text-white" />
                             </a>
@@ -82,13 +82,13 @@ const Footer = () => {
                                 href="https://wa.me/905488755461"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-11 h-11 rounded-full bg-mint-400 text-ink-900 flex items-center justify-center hover:scale-110 transition-transform border-2 border-white"
+                                className="w-11 h-11 rounded-full bg-mint-400 text-ink-900 flex items-center justify-center hover:scale-110 transition-transform border border-white/20"
                             >
                                 <Phone size={16} strokeWidth={3} />
                             </a>
                             <a
                                 href="mailto:info@bccreative.agency"
-                                className="w-11 h-11 rounded-full bg-sun-300 text-ink-900 flex items-center justify-center hover:scale-110 transition-transform border-2 border-white"
+                                className="w-11 h-11 rounded-full bg-sun-300 text-ink-900 flex items-center justify-center hover:scale-110 transition-transform border border-white/20"
                             >
                                 <Mail size={16} strokeWidth={3} />
                             </a>

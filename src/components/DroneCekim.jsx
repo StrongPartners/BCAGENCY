@@ -21,10 +21,10 @@ const DroneCekim = () => {
         subheadline: 'Turizm, emlak, etkinlik — havadan profesyonel çekim.',
         description: "Profesyonel drone'larla 4K hava çekimi. Gayrimenkul tanıtımı, otel promosyonu, etkinlik kaydı, reklam filmi için sinematik havadan görüntüler.",
         features: [
-            { icon: '🏖️', title: 'Turizm & otel', desc: 'Otel tesisi, plaj, havuz, manzara — tanıtım için birebir. KKTC\'nin en güzel hali.', tone: 'brand' },
-            { icon: '🏠', title: 'Emlak & gayrimenkul', desc: 'Villa, apartman, site tanıtımı. Havadan görüntü satış ilanlarını 3x daha etkili yapar.', tone: 'coral' },
-            { icon: '🎉', title: 'Etkinlik kaydı', desc: 'Düğün, konser, spor etkinliği — unutulmaz havadan sahneler.', tone: 'mint' },
-            { icon: '🎥', title: 'Reklam filmi', desc: 'Sinematik havadan sekanslarla marka filmlerinize epik bir başlangıç.', tone: 'sun' },
+            { icon: '', title: 'Turizm & otel', desc: 'Otel tesisi, plaj, havuz, manzara — tanıtım için birebir. KKTC\'nin en güzel hali.', tone: 'brand' },
+            { icon: '', title: 'Emlak & gayrimenkul', desc: 'Villa, apartman, site tanıtımı. Havadan görüntü satış ilanlarını 3x daha etkili yapar.', tone: 'coral' },
+            { icon: '', title: 'Etkinlik kaydı', desc: 'Düğün, konser, spor etkinliği — unutulmaz havadan sahneler.', tone: 'mint' },
+            { icon: '', title: 'Reklam filmi', desc: 'Sinematik havadan sekanslarla marka filmlerinize epik bir başlangıç.', tone: 'sun' },
         ],
         stats: [
             { value: '4K', label: 'Çekim kalitesi' },
@@ -54,10 +54,10 @@ const DroneCekim = () => {
         subheadline: 'Tourism, real estate, events — professional aerial footage.',
         description: "4K aerial filming with professional drones. Real estate promos, hotel marketing, event capture, ad films — cinematic footage from above.",
         features: [
-            { icon: '🏖️', title: 'Tourism & hotels', desc: "Hotel grounds, beaches, pools, views — perfect for promos. TRNC at its best.", tone: 'brand' },
-            { icon: '🏠', title: 'Real estate', desc: 'Villa, apartment, complex promos. Aerial shots make listings 3x more effective.', tone: 'coral' },
-            { icon: '🎉', title: 'Event capture', desc: 'Weddings, concerts, sports — unforgettable aerial moments.', tone: 'mint' },
-            { icon: '🎥', title: 'Ad films', desc: 'Epic opening sequences for brand films with cinematic aerial shots.', tone: 'sun' },
+            { icon: '', title: 'Tourism & hotels', desc: "Hotel grounds, beaches, pools, views — perfect for promos. TRNC at its best.", tone: 'brand' },
+            { icon: '', title: 'Real estate', desc: 'Villa, apartment, complex promos. Aerial shots make listings 3x more effective.', tone: 'coral' },
+            { icon: '', title: 'Event capture', desc: 'Weddings, concerts, sports — unforgettable aerial moments.', tone: 'mint' },
+            { icon: '', title: 'Ad films', desc: 'Epic opening sequences for brand films with cinematic aerial shots.', tone: 'sun' },
         ],
         stats: [
             { value: '4K', label: 'Footage quality' },
@@ -103,7 +103,7 @@ const DroneCekim = () => {
         ],
     });
 
-    return <ServicePageLayout {...content} heroEmoji="🚁" tone="brand" />;
+    return <ServicePageLayout {...content} tone="brand" />;
 };
 
 export default DroneCekim;

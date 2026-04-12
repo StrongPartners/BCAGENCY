@@ -114,7 +114,7 @@ const Header = () => {
                                     transition={{ duration: 0.18 }}
                                     className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-72"
                                 >
-                                    <div className="bg-white rounded-2xl shadow-xl border-2 border-ink-900 overflow-hidden py-2 shadow-sticker">
+                                    <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden py-2">
                                         {services.map((s) => (
                                             <button
                                                 key={s.name}
@@ -156,7 +156,7 @@ const Header = () => {
                         onClick={() => window.open('https://wa.me/905488755461', '_blank')}
                         whileHover={{ scale: 1.05, y: -2 }}
                         whileTap={{ scale: 0.95 }}
-                        className="bg-ink-900 text-white font-black text-sm px-5 py-3 rounded-full shadow-sticker-sun hover:shadow-sticker-coral transition-shadow"
+                        className="bg-ink-900 text-white font-black text-sm px-5 py-3 rounded-full shadow-md hover:shadow-lg transition-shadow"
                     >
                         {t('btn_offer')}
                     </motion.button>
@@ -164,7 +164,7 @@ const Header = () => {
 
                 {/* Mobile menu button */}
                 <button
-                    className="lg:hidden p-2 text-ink-900 rounded-full bg-white border-2 border-ink-900 shadow-sticker"
+                    className="lg:hidden p-2 text-ink-900 rounded-full bg-white border border-gray-200 shadow-md"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     aria-label="Menu"
                 >
@@ -180,7 +180,7 @@ const Header = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 right-0 bg-white border-t-2 border-ink-900 shadow-2xl lg:hidden"
+                        className="absolute top-full left-0 right-0 bg-white border-t border-gray-200 shadow-xl lg:hidden"
                     >
                         <div className="flex flex-col p-6 space-y-4 max-h-[85vh] overflow-y-auto">
                             {/* Language toggle */}
@@ -213,7 +213,7 @@ const Header = () => {
 
                             <button
                                 onClick={() => window.open('https://wa.me/905488755461', '_blank')}
-                                className="mt-4 w-full bg-ink-900 text-white font-black py-4 rounded-full shadow-sticker-sun"
+                                className="mt-4 w-full bg-ink-900 text-white font-black py-4 rounded-full shadow-md hover:shadow-lg transition-shadow"
                             >
                                 {t('btn_offer')}
                             </button>

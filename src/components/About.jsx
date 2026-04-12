@@ -41,22 +41,6 @@ const About = () => {
                     <ColorfulBlobs variant="hero" />
                 </div>
 
-                {/* Floating stickers */}
-                <motion.div
-                    className="absolute top-36 right-10 md:right-24 w-24 h-24 md:w-32 md:h-32 bg-sun-300 rounded-full flex items-center justify-center text-4xl md:text-5xl shadow-sticker-lg border-4 border-ink-900 rotate-neg-3 hidden md:flex"
-                    animate={{ y: [0, -14, 0] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                    ☕
-                </motion.div>
-                <motion.div
-                    className="absolute bottom-20 left-10 md:left-24 w-20 h-20 md:w-28 md:h-28 bg-mint-400 rounded-full flex items-center justify-center text-3xl md:text-4xl shadow-sticker-lg border-4 border-ink-900 rotate-pos-2 hidden md:flex"
-                    animate={{ y: [0, 14, 0] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                    ❤️
-                </motion.div>
-
                 <div className="container mx-auto px-4 md:px-8 relative z-10">
                     <div className="max-w-4xl">
                         <motion.div
@@ -169,7 +153,7 @@ const About = () => {
                                     className={`bg-white border-2 border-ink-900 rounded-3xl p-7 ${TONE_SHADOW[tone]} ${tilts[i % 4]}`}
                                 >
                                     <div className={`w-14 h-14 ${TONE_BG[tone]} border-2 border-ink-900 rounded-2xl flex items-center justify-center text-3xl mb-5`}>
-                                        {value.icon}
+                                        {value.icon || ''}
                                     </div>
                                     <h3 className="text-2xl font-black text-ink-900 mb-3 leading-tight">{value.title}</h3>
                                     <p className="text-ink-700 font-medium leading-relaxed text-sm">{value.desc}</p>
@@ -211,8 +195,7 @@ const About = () => {
                                     transition={{ delay: i * 0.05 }}
                                     className="bg-white border-2 border-ink-900 rounded-2xl p-5 shadow-sticker hover:-translate-y-1 transition-transform"
                                 >
-                                    <div className={`w-12 h-12 ${TONE_BG[tone]} border-2 border-ink-900 rounded-xl flex items-center justify-center text-2xl mb-3`}>
-                                        {service.icon}
+                                    <div className={`w-12 h-12 ${TONE_BG[tone]} border-2 border-ink-900 rounded-xl mb-3`}>
                                     </div>
                                     <h3 className="text-lg font-black text-ink-900 mb-1 leading-tight">{service.title}</h3>
                                     <p className="text-ink-700 text-sm font-medium leading-snug">{service.description}</p>
