@@ -96,7 +96,7 @@ const FAQItem = ({ question, answer, index }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="group w-full flex items-center justify-between gap-4 py-6 text-left"
       >
-        <span className="font-semibold text-ink-900 text-base md:text-lg group-hover:translate-x-1 transition-transform">{question}</span>
+        <span className="font-semibold text-ink-900 text-base md:text-lg">{question}</span>
         <motion.div
           animate={{ rotate: isOpen ? 45 : 0 }}
           transition={{ duration: 0.2 }}
@@ -129,7 +129,7 @@ const FAQ = () => {
   const faqs = faqData[lang];
 
   return (
-    <section className="py-40 md:py-56 bg-white" id="faq">
+    <section className="py-24 md:py-32 bg-white" id="faq">
       <div className="container mx-auto px-4 md:px-8 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
