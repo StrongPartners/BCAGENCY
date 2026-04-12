@@ -82,27 +82,27 @@ const faqData = {
   ]
 };
 
-const FAQItem = ({ question, answer, index, tone }) => {
+const FAQItem = ({ question, answer, index }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.04 }}
-      className="bg-surface-card rounded-2xl overflow-hidden shadow-sm border border-gray-100"
+      transition={{ delay: index * 0.03 }}
+      className="border-b border-ink-100"
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-surface-alt transition-colors"
+        className="w-full flex items-center justify-between gap-4 py-6 text-left"
       >
-        <span className="font-black text-ink-900 text-base md:text-lg">{question}</span>
+        <span className="font-semibold text-ink-900 text-base md:text-lg">{question}</span>
         <motion.div
           animate={{ rotate: isOpen ? 45 : 0 }}
           transition={{ duration: 0.2 }}
-          className="flex-shrink-0 w-10 h-10 rounded-full bg-ink-900 text-white flex items-center justify-center"
+          className="flex-shrink-0 text-ink-400"
         >
-          <Plus size={20} strokeWidth={3} />
+          <Plus size={20} strokeWidth={2} />
         </motion.div>
       </button>
 
@@ -114,7 +114,7 @@ const FAQItem = ({ question, answer, index, tone }) => {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
-            <div className="px-6 pb-6 text-ink-700 text-base leading-relaxed font-medium border-t border-ink-100 pt-4">
+            <div className="pb-6 text-ink-500 text-base leading-relaxed">
               {answer}
             </div>
           </motion.div>
@@ -127,40 +127,34 @@ const FAQItem = ({ question, answer, index, tone }) => {
 const FAQ = () => {
   const { lang, t } = useLanguage();
   const faqs = faqData[lang];
-  const tones = ['brand', 'coral', 'mint', 'sun'];
 
   return (
-    <section className="py-24 md:py-32 bg-surface-card relative overflow-hidden" id="faq">
-      {/* Bg accents */}
-      <div className="absolute top-20 -left-20 w-96 h-96 bg-sun-200 rounded-full blur-3xl opacity-40" />
-      <div className="absolute bottom-20 -right-20 w-96 h-96 bg-mint-200 rounded-full blur-3xl opacity-40" />
-
-      <div className="container mx-auto px-4 md:px-8 max-w-4xl relative z-10">
+    <section className="py-32 md:py-48 bg-white" id="faq">
+      <div className="container mx-auto px-4 md:px-8 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="inline-block bg-sun-200 text-ink-900 font-black text-xs px-4 py-1.5 rounded-full mb-6 uppercase tracking-wider">
+          <p className="text-xs font-semibold uppercase tracking-widest text-ink-400 mb-6">
             {t('faq_label')}
-          </span>
-          <h2 className="text-5xl md:text-7xl font-black text-ink-900 leading-none tracking-tight">
+          </p>
+          <h2 className="text-5xl md:text-7xl font-bold text-ink-900 leading-none tracking-tight">
             {t('faq_title')}
           </h2>
-          <p className="mt-4 text-ink-700 text-lg md:text-xl font-medium">
+          <p className="mt-4 text-ink-500 text-lg md:text-xl">
             {t('faq_subtitle')}
           </p>
         </motion.div>
 
-        <div className="space-y-4">
+        <div>
           {faqs.map((faq, index) => (
             <FAQItem
               key={index}
               question={faq.question}
               answer={faq.answer}
               index={index}
-              tone={tones[index % tones.length]}
             />
           ))}
         </div>
@@ -169,14 +163,14 @@ const FAQ = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-12 text-center bg-ink-900 rounded-3xl p-10 shadow-xl"
+          className="mt-16 text-center"
         >
-          <p className="text-white font-bold text-lg mb-5">
+          <p className="text-ink-500 mb-4">
             {t('faq_no_answer')}
           </p>
           <button
             onClick={() => window.open('https://wa.me/905488755461', '_blank')}
-            className="inline-flex items-center gap-2 bg-mint-400 text-ink-900 px-8 py-3 rounded-full font-black text-base hover:bg-mint-500 transition-all shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-2 bg-ink-900 text-white px-8 py-3 rounded-full font-medium text-base hover:bg-ink-800 transition-colors"
           >
             {t('faq_whatsapp')}
           </button>

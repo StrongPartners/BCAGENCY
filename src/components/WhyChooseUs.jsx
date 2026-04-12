@@ -2,113 +2,89 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 
-/**
- * Approach section — "how we work" 01-04 process steps.
- * Re-uses the WhyChooseUs.jsx filename to preserve existing imports.
- * Modern sleek styling: soft shadows, no tilts, clean cards.
- */
-const TONE_BG     = { brand: 'bg-brand-50',  coral: 'bg-coral-50',  mint: 'bg-mint-50',  sun: 'bg-sun-50'  };
-const TONE_NUMBER = { brand: 'text-brand-600', coral: 'text-coral-500', mint: 'text-mint-500', sun: 'text-sun-500' };
-
 const Approach = () => {
     const { t } = useLanguage();
     const steps = t('approach_steps');
 
     return (
-        <section className="relative py-24 md:py-32 bg-surface-alt overflow-hidden">
-            {/* Decorative accents */}
-            <div className="absolute top-20 left-10 w-40 h-40 bg-coral-200 rounded-full blur-3xl opacity-40" />
-            <div className="absolute bottom-20 right-10 w-48 h-48 bg-brand-200 rounded-full blur-3xl opacity-40" />
-
-            <div className="container mx-auto px-4 md:px-8 relative z-10">
+        <section className="relative py-32 md:py-48 bg-white">
+            <div className="container mx-auto px-4 md:px-8">
                 {/* Header */}
-                <div className="max-w-3xl mb-16 md:mb-20">
-                    <motion.div
+                <div className="max-w-3xl mb-20 md:mb-24">
+                    <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="inline-block bg-mint-200 rounded-full px-4 py-1.5 mb-6"
+                        className="text-xs font-semibold uppercase tracking-widest text-ink-400 mb-6"
                     >
-                        <span className="font-black text-ink-900 text-xs uppercase tracking-wider">{t('approach_eyebrow')}</span>
-                    </motion.div>
+                        {t('approach_eyebrow')}
+                    </motion.p>
                     <motion.h2
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-5xl md:text-7xl font-black text-ink-900 leading-[0.95] tracking-tight"
+                        className="text-5xl md:text-7xl font-bold text-ink-900 leading-[0.95] tracking-tight"
                     >
                         {t('approach_heading_1')}{' '}
-                        <span className="relative inline-block">
-                            <span className="relative z-10">{t('approach_heading_2')}</span>
-                            <span className="absolute left-0 right-0 bottom-1 h-4 bg-coral-300 -z-0 rounded-sm" />
-                        </span>
+                        {t('approach_heading_2')}
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
-                        className="mt-6 text-lg md:text-xl text-ink-700 font-medium max-w-2xl"
+                        className="mt-6 text-lg md:text-xl text-ink-500 max-w-2xl leading-relaxed"
                     >
                         {t('approach_sub')}
                     </motion.p>
                 </div>
 
                 {/* Steps grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                    {steps.map((step, i) => {
-                        const tone = step.tone || 'brand';
-
-                        return (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                whileHover={{ y: -6 }}
-                                className="group bg-surface-card rounded-2xl p-8 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
-                            >
-                                <div className={`w-14 h-14 ${TONE_BG[tone]} rounded-xl flex items-center justify-center font-black text-lg ${TONE_NUMBER[tone]} mb-6`}>
-                                    {step.number}
-                                </div>
-                                <h3 className="text-2xl md:text-3xl font-black text-ink-900 mb-4 leading-tight">
-                                    {step.title}
-                                </h3>
-                                <p className="text-ink-700 font-medium leading-relaxed">
-                                    {step.desc}
-                                </p>
-                            </motion.div>
-                        );
-                    })}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16">
+                    {steps.map((step, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: i * 0.1 }}
+                            className="relative"
+                        >
+                            <div className="text-6xl font-bold text-ink-200 leading-none mb-4">
+                                {step.number}
+                            </div>
+                            <h3 className="text-2xl font-bold text-ink-900 mb-3 leading-tight">
+                                {step.title}
+                            </h3>
+                            <p className="text-ink-500 leading-relaxed">
+                                {step.desc}
+                            </p>
+                        </motion.div>
+                    ))}
                 </div>
 
                 {/* Stats */}
-                <div className="mt-24">
-                    <h3 className="text-center text-2xl md:text-3xl font-black text-ink-900 mb-10 tracking-tight">
+                <div className="mt-32 border-t border-ink-100 pt-16">
+                    <h3 className="text-center text-2xl md:text-3xl font-bold text-ink-900 mb-12 tracking-tight">
                         {t('stats_heading')}
                     </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        {t('stats').map((stat, i) => {
-                            const tones = ['brand', 'coral', 'mint', 'sun'];
-                            const tone = tones[i % tones.length];
-                            return (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: i * 0.08 }}
-                                    className="text-center bg-surface-card rounded-2xl p-6 shadow-sm border border-gray-100"
-                                >
-                                    <div className={`text-5xl md:text-6xl font-black ${TONE_NUMBER[tone]} mb-2 leading-none`}>
-                                        {stat.value}
-                                    </div>
-                                    <div className="text-sm md:text-base font-bold text-ink-700">
-                                        {stat.label}
-                                    </div>
-                                </motion.div>
-                            );
-                        })}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                        {t('stats').map((stat, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.08 }}
+                                className="text-center"
+                            >
+                                <div className="text-5xl md:text-6xl font-bold text-ink-900 mb-2 leading-none">
+                                    {stat.value}
+                                </div>
+                                <div className="text-sm font-medium text-ink-500">
+                                    {stat.label}
+                                </div>
+                            </motion.div>
+                        ))}
                     </div>
                 </div>
             </div>
