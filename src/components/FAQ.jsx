@@ -94,9 +94,9 @@ const FAQItem = ({ question, answer, index }) => {
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between gap-4 py-6 text-left"
+        className="group w-full flex items-center justify-between gap-4 py-6 text-left"
       >
-        <span className="font-semibold text-ink-900 text-base md:text-lg">{question}</span>
+        <span className="font-semibold text-ink-900 text-base md:text-lg group-hover:translate-x-1 transition-transform">{question}</span>
         <motion.div
           animate={{ rotate: isOpen ? 45 : 0 }}
           transition={{ duration: 0.2 }}

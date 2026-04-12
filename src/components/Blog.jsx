@@ -89,6 +89,7 @@ const Blog = () => {
                     alt={post.title[lang] || post.title.tr}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
+                  <div className="absolute inset-0 bg-ink-900/0 group-hover:bg-ink-900/40 transition-all duration-500" />
                   <span className="absolute top-4 left-4 text-xs font-medium px-3 py-1 rounded-full bg-white/90 text-ink-700 backdrop-blur-sm">
                     {categoryLabels[post.category]?.[lang] || post.category}
                   </span>
@@ -103,7 +104,7 @@ const Blog = () => {
                     <span>&middot;</span>
                     <span>{post.date[lang] || post.date.tr}</span>
                   </div>
-                  <h2 className="text-xl font-bold text-ink-900 mb-3 leading-snug line-clamp-2 group-hover:text-brand-600 transition-colors">
+                  <h2 className="text-xl font-bold text-ink-900 mb-3 leading-snug line-clamp-2 group-hover:text-brand-600 group-hover:-translate-y-0.5 transition-all duration-300">
                     {post.title[lang] || post.title.tr}
                   </h2>
                   <p className="text-ink-500 text-sm leading-relaxed mb-4 line-clamp-3">

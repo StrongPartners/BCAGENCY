@@ -43,13 +43,13 @@ const Approach = () => {
                     {steps.map((step, i) => (
                         <motion.div
                             key={i}
-                            initial={{ opacity: 0, y: 60 }}
+                            initial={{ opacity: 0, y: 100 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
+                            transition={{ delay: i * 0.2, duration: 0.6 }}
                             className="relative"
                         >
-                            <div className="text-7xl md:text-8xl font-bold text-ink-200 leading-none mb-4">
+                            <div className="text-7xl md:text-8xl font-bold text-brand-500 leading-none mb-4">
                                 {step.number}
                             </div>
                             <h3 className="text-2xl font-bold text-ink-900 mb-3 leading-tight">
