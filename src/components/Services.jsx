@@ -21,7 +21,7 @@ const Services = () => {
     const services = t('services_list');
 
     return (
-        <section id="services" className="relative py-24 md:py-32 bg-white overflow-hidden">
+        <section id="services" className="relative py-24 md:py-32 bg-surface-card overflow-hidden">
             {/* Decorative side strip */}
             <div className="absolute -top-20 -right-20 w-96 h-96 bg-sun-200 rounded-full blur-3xl opacity-50" />
             <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-mint-200 rounded-full blur-3xl opacity-50" />
@@ -77,7 +77,7 @@ const Services = () => {
                                 transition={{ duration: 0.5, delay: i * 0.08 }}
                                 whileHover={{ y: -8 }}
                                 onClick={() => service.path && navigate(service.path)}
-                                className="group relative cursor-pointer bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
+                                className="group relative cursor-pointer bg-surface-card rounded-2xl p-6 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
                             >
                                 {/* Icon badge */}
                                 <div className={`w-14 h-14 ${TONE_BG[tone]} rounded-xl flex items-center justify-center mb-5`}>

@@ -39,7 +39,7 @@ const ServicePageLayout = ({
     return (
         <div>
             {/* Hero */}
-            <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-white">
+            <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-surface-card">
                 <div className="absolute inset-0 z-0">
                     <ColorfulBlobs variant="hero" />
                 </div>
@@ -106,7 +106,7 @@ const ServicePageLayout = ({
 
             {/* Features */}
             {features.length > 0 && (
-                <section className="py-20 md:py-28 bg-white">
+                <section className="py-20 md:py-28 bg-surface-card">
                     <div className="container mx-auto px-4 md:px-8">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
                             {features.map((feature, i) => {
@@ -120,7 +120,7 @@ const ServicePageLayout = ({
                                         viewport={{ once: true }}
                                         transition={{ delay: i * 0.08 }}
                                         whileHover={{ y: -6 }}
-                                        className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
+                                        className="bg-surface-card rounded-2xl p-8 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
                                     >
                                         <div className={`w-14 h-14 ${TONE_BG[featTone]} rounded-xl flex items-center justify-center mb-5`}>
                                             {IconComponent && <IconComponent size={24} className={TONE_ICON[featTone]} strokeWidth={2} />}
@@ -169,7 +169,7 @@ const ServicePageLayout = ({
 
             {/* Process steps */}
             {steps.length > 0 && (
-                <section className="py-20 md:py-28 bg-ink-50 relative overflow-hidden">
+                <section className="py-20 md:py-28 bg-surface-alt relative overflow-hidden">
                     <div className="container mx-auto px-4 md:px-8 relative z-10">
                         <div className="text-center mb-16">
                             <h2 className="text-4xl md:text-6xl font-black text-ink-900 leading-none tracking-tight">
@@ -188,7 +188,7 @@ const ServicePageLayout = ({
                                         viewport={{ once: true }}
                                         transition={{ delay: i * 0.1 }}
                                         whileHover={{ y: -6 }}
-                                        className="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
+                                        className="bg-surface-card rounded-2xl p-7 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
                                     >
                                         <div className={`w-12 h-12 ${TONE_BG[stepTone]} rounded-xl flex items-center justify-center font-black text-sm ${TONE_TEXT[stepTone]} mb-4`}>
                                             {step.step}
@@ -205,7 +205,7 @@ const ServicePageLayout = ({
 
             {/* FAQ */}
             {faqs.length > 0 && (
-                <section className="py-20 md:py-28 bg-white">
+                <section className="py-20 md:py-28 bg-surface-card">
                     <div className="container mx-auto px-4 md:px-8 max-w-4xl">
                         <div className="text-center mb-14">
                             <span className="inline-block bg-sun-200 text-ink-900 font-black text-xs px-4 py-1.5 rounded-full mb-6 uppercase tracking-wider">
@@ -260,11 +260,11 @@ const FAQItem = ({ question, answer, index }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.04 }}
-            className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100"
+            className="bg-surface-card rounded-2xl overflow-hidden shadow-sm border border-gray-100"
         >
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-ink-50 transition-colors"
+                className="w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-surface-alt transition-colors"
             >
                 <span className="font-black text-ink-900 text-base md:text-lg">{question}</span>
                 <motion.div

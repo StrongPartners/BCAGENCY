@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { useTheme, THEMES } from '../context/ThemeContext';
 
 /**
  * Header — Creative Playground top navigation.
@@ -16,6 +17,7 @@ const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { lang, toggleLang, t } = useLanguage();
+    const { theme, setTheme, themes } = useTheme();
 
     useEffect(() => {
         const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -114,12 +116,12 @@ const Header = () => {
                                     transition={{ duration: 0.18 }}
                                     className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-72"
                                 >
-                                    <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden py-2">
+                                    <div className="bg-surface-card rounded-2xl shadow-xl border border-gray-200 overflow-hidden py-2">
                                         {services.map((s) => (
                                             <button
                                                 key={s.name}
                                                 onClick={() => go(s.path)}
-                                                className="w-full flex items-center gap-3 px-5 py-3 text-ink-700 hover:bg-ink-50 transition-colors text-[14px] font-bold group"
+                                                className="w-full flex items-center gap-3 px-5 py-3 text-ink-700 hover:bg-surface-alt transition-colors text-[14px] font-bold group"
                                             >
                                                 <span className={`w-2.5 h-2.5 rounded-full ${dotColors[s.tone]} group-hover:scale-125 transition-transform`} />
                                                 <span className="group-hover:text-brand-600 transition-colors">{s.name}</span>
@@ -135,17 +137,31 @@ const Header = () => {
 
                 {/* Desktop right side */}
                 <div className="hidden lg:flex items-center gap-3">
+                    {/* Theme picker */}
+                    <div className="flex items-center gap-1.5">
+                        {themes.map((t) => (
+                            <button
+                                key={t.id}
+                                onClick={() => setTheme(t.id)}
+                                className={`w-6 h-6 rounded-full ${t.preview} border-2 transition-all ${
+                                    theme === t.id ? 'border-brand-600 scale-110' : 'border-transparent hover:scale-105'
+                                }`}
+                                title={t.name[lang]}
+                            />
+                        ))}
+                    </div>
+
                     {/* Language toggle */}
                     <div className="flex items-center bg-ink-100 rounded-full p-1">
                         <button
                             onClick={() => lang !== 'tr' && toggleLang()}
-                            className={`px-3 py-1 rounded-full text-xs font-black transition-all ${lang === 'tr' ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-400'}`}
+                            className={`px-3 py-1 rounded-full text-xs font-black transition-all ${lang === 'tr' ? 'bg-surface-card text-ink-900 shadow-sm' : 'text-ink-400'}`}
                         >
                             TR
                         </button>
                         <button
                             onClick={() => lang !== 'en' && toggleLang()}
-                            className={`px-3 py-1 rounded-full text-xs font-black transition-all ${lang === 'en' ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-400'}`}
+                            className={`px-3 py-1 rounded-full text-xs font-black transition-all ${lang === 'en' ? 'bg-surface-card text-ink-900 shadow-sm' : 'text-ink-400'}`}
                         >
                             EN
                         </button>
@@ -164,7 +180,7 @@ const Header = () => {
 
                 {/* Mobile menu button */}
                 <button
-                    className="lg:hidden p-2 text-ink-900 rounded-full bg-white border border-gray-200 shadow-md"
+                    className="lg:hidden p-2 text-ink-900 rounded-full bg-surface-card border border-gray-200 shadow-md"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     aria-label="Menu"
                 >
@@ -180,13 +196,13 @@ const Header = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 right-0 bg-white border-t border-gray-200 shadow-xl lg:hidden"
+                        className="absolute top-full left-0 right-0 bg-surface-card border-t border-gray-200 shadow-xl lg:hidden"
                     >
                         <div className="flex flex-col p-6 space-y-4 max-h-[85vh] overflow-y-auto">
                             {/* Language toggle */}
                             <div className="flex items-center gap-2 bg-ink-100 rounded-full p-1 self-start">
-                                <button onClick={toggleLang} className={`px-4 py-1.5 rounded-full text-xs font-black ${lang === 'tr' ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-400'}`}>TR</button>
-                                <button onClick={toggleLang} className={`px-4 py-1.5 rounded-full text-xs font-black ${lang === 'en' ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-400'}`}>EN</button>
+                                <button onClick={toggleLang} className={`px-4 py-1.5 rounded-full text-xs font-black ${lang === 'tr' ? 'bg-surface-card text-ink-900 shadow-sm' : 'text-ink-400'}`}>TR</button>
+                                <button onClick={toggleLang} className={`px-4 py-1.5 rounded-full text-xs font-black ${lang === 'en' ? 'bg-surface-card text-ink-900 shadow-sm' : 'text-ink-400'}`}>EN</button>
                             </div>
 
                             {navLinks.map((item) => (

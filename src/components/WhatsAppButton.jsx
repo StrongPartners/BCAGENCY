@@ -34,7 +34,7 @@ const WhatsAppButton = () => {
                 initial={{ opacity: 0, x: 20, scale: 0.9 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
                 exit={{ opacity: 0, x: 20, scale: 0.9 }}
-                className="bg-white rounded-xl px-4 py-3 max-w-[220px] text-right shadow-xl border border-gray-200"
+                className="bg-surface-card rounded-xl px-4 py-3 max-w-[220px] text-right shadow-xl border border-gray-200"
               >
                 <p className="text-ink-900 font-black text-sm">Merhaba!</p>
                 <p className="text-ink-500 text-xs mt-0.5 font-medium">Ücretsiz danışmanlık için yazın</p>

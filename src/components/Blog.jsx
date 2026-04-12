@@ -43,7 +43,7 @@ const Blog = () => {
   });
 
   return (
-    <div className="bg-white">
+    <div className="bg-surface-card">
 
       {/* Hero */}
       <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden">
@@ -102,7 +102,7 @@ const Blog = () => {
                   transition={{ duration: 0.5, delay: (index % 6) * 0.06 }}
                   whileHover={{ y: -8 }}
                   onClick={() => navigate(`/blog/${post.slug}`)}
-                  className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 cursor-pointer group transition-all"
+                  className="bg-surface-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 cursor-pointer group transition-all"
                 >
                   <div className="relative h-48 overflow-hidden">
                     <img
