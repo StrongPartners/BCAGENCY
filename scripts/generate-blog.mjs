@@ -127,9 +127,12 @@ class GenerateBlogBatchUseCase {
                         .replace(/```\s*$/m, '')
                         .trim();
 
-                    const jsonMatch = cleanText.match(/\[[\s\S]*\]/);
-                    const data = JSON.parse(jsonMatch ? jsonMatch[0] : cleanText);
-                    console.log(`✅ [BlogUseCase] BAŞARILI: ${modelName}`);
+                    // Önce JSON array'i bul, yoksa tek obje de olabilir
+                    const jsonMatch = cleanText.match(/\[[\s\S]*\]/) || cleanText.match(/\{[\s\S]*\}/);
+                    const parsed = JSON.parse(jsonMatch ? jsonMatch[0] : cleanText);
+                    const data = Array.isArray(parsed) ? parsed : [parsed];
+                    if (data.length === 0) throw new Error('Boş JSON dizisi döndü.');
+                    console.log(`✅ [BlogUseCase] BAŞARILI: ${modelName} (${data.length} yazı)`);
                     return data;
                 } catch (err) {
                     if (err.message.toLowerCase().includes("403") || err.message.toLowerCase().includes("forbidden")) {
@@ -144,6 +147,8 @@ class GenerateBlogBatchUseCase {
 
     _getPrompt(batchSize, existingSlugs) {
         return `Sen "BC Creative Agency" adlı KKTC'nin (Kuzey Kıbrıs) önde gelen dijital pazarlama ve reklam ajansının içerik yazarısın.
+
+Tam olarak ${batchSize} adet blog yazısı üret. Her yazı hem Türkçe hem İngilizce olmalı.
 
 ## AJANS BİLGİLERİ (içeriklerde doğal biçimde kullan)
 - Ajans adı: BC Creative Agency
@@ -405,27 +410,70 @@ class BlogManager {
         this.imageService = imageService;
     }
 
+    _validatePost(data) {
+        const MIN_WORD_COUNT = 200;
+        const requiredFields = ['slug', 'title_tr', 'title_en', 'content_tr', 'content_en', 'category'];
+        for (const field of requiredFields) {
+            if (!data[field] || typeof data[field] !== 'string' || data[field].trim().length === 0) {
+                return `Eksik veya boş alan: ${field}`;
+            }
+        }
+        const trWords = data.content_tr.split(/\s+/).filter(w => w).length;
+        const enWords = data.content_en.split(/\s+/).filter(w => w).length;
+        if (trWords < MIN_WORD_COUNT) return `content_tr çok kısa: ${trWords} kelime (min ${MIN_WORD_COUNT})`;
+        if (enWords < MIN_WORD_COUNT) return `content_en çok kısa: ${enWords} kelime (min ${MIN_WORD_COUNT})`;
+        return null;
+    }
+
     async runDailyAutomation(totalCount = 10) {
         console.log(`🚀 [Manager] Günlük otomasyon başlatıldı... (Hedef: ${totalCount} yazı)`);
 
         try {
             const existingSlugs = this.repository.getExistingSlugs();
-            const startId = this.repository.getMaxId();
+            let currentMaxId = this.repository.getMaxId();
 
-            // Batch'lere böl (her batch max 5 yazı)
-            const BATCH_SIZE = 5;
+            // Tek tek üret — Gemini output token limiti 5'li batch'lerde
+            // sadece 1 post döndürmeye yetiyor, bu yüzden BATCH_SIZE = 1
+            const BATCH_SIZE = 1;
             let rawDataBatch = [];
             let usedSlugs = [...existingSlugs];
-            const batchCount = Math.ceil(totalCount / BATCH_SIZE);
+            const MAX_RETRIES = 2;
 
-            for (let b = 0; b < batchCount; b++) {
-                const thisBatch = Math.min(BATCH_SIZE, totalCount - rawDataBatch.length);
-                console.log(`[Manager] Batch ${b + 1}/${batchCount}: ${thisBatch} yazı içerik üretiliyor...`);
-                // Son 40 slug'ı geç — çok uzun liste Gemini'yi yavaşlatır
-                const slugsToPass = usedSlugs.slice(-40);
-                const result = await this.blogUseCase.execute(thisBatch, slugsToPass);
-                rawDataBatch = [...rawDataBatch, ...result];
-                usedSlugs = [...usedSlugs, ...result.map(p => p.slug)];
+            for (let i = 0; i < totalCount; i++) {
+                let success = false;
+                for (let attempt = 0; attempt <= MAX_RETRIES && !success; attempt++) {
+                    try {
+                        console.log(`[Manager] Yazı ${i + 1}/${totalCount} üretiliyor...${attempt > 0 ? ` (deneme ${attempt + 1})` : ''}`);
+                        // Tüm slug'ları gönder — duplicate üretimini önle
+                        const result = await this.blogUseCase.execute(BATCH_SIZE, usedSlugs);
+                        const validPosts = [];
+                        for (const post of result) {
+                            const error = this._validatePost(post);
+                            if (error) {
+                                console.warn(`[Manager] ⚠️ Geçersiz post atlandı (${post.slug || 'unknown'}): ${error}`);
+                            } else {
+                                validPosts.push(post);
+                            }
+                        }
+                        if (validPosts.length > 0) {
+                            rawDataBatch.push(...validPosts);
+                            usedSlugs.push(...validPosts.map(p => p.slug));
+                            success = true;
+                        } else {
+                            console.warn(`[Manager] ⚠️ Batch'ten geçerli post çıkmadı, yeniden deneniyor...`);
+                        }
+                    } catch (err) {
+                        console.warn(`[Manager] ⚠️ Üretim hatası: ${err.message.substring(0, 80)}`);
+                    }
+                }
+                if (!success) {
+                    console.warn(`[Manager] ⚠️ Yazı ${i + 1} üretilemedi, atlanıyor.`);
+                }
+            }
+
+            if (rawDataBatch.length === 0) {
+                console.warn('[Manager] Hiç geçerli yazı üretilemedi.');
+                return;
             }
 
             const now = new Date();
@@ -447,8 +495,9 @@ class BlogManager {
                     slug
                 );
 
+                currentMaxId++;
                 finalBlogPosts.push(new BlogPost({
-                    id: startId + index + 1,
+                    id: currentMaxId,
                     slug,
                     title_tr: data.title_tr,
                     title_en: data.title_en,
@@ -466,7 +515,7 @@ class BlogManager {
             }
 
             const savedCount = this.repository.savePosts(finalBlogPosts);
-            console.log(`✅ [Manager] ${savedCount} yeni yazı eklendi.`);
+            console.log(`✅ [Manager] ${savedCount} yeni yazı eklendi (${totalCount} hedeften ${rawDataBatch.length} üretildi).`);
 
             this._updateViteConfig(finalBlogPosts);
             console.log(`✅ [Manager] vite.config.js güncellendi.`);
