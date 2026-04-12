@@ -14,7 +14,7 @@ const Footer = () => {
     };
 
     return (
-        <footer className="bg-ink-900 text-white">
+        <footer className="bg-brand-600 text-white">
             <div className="container mx-auto px-4 md:px-8 py-20 md:py-28">
 
                 {/* Columns */}

@@ -7,7 +7,7 @@ const Approach = () => {
     const steps = t('approach_steps');
 
     return (
-        <section className="relative py-32 md:py-48 bg-white">
+        <section className="relative py-40 md:py-56 bg-white">
             <div className="container mx-auto px-4 md:px-8">
                 {/* Header */}
                 <div className="max-w-3xl mb-20 md:mb-24">
@@ -43,13 +43,13 @@ const Approach = () => {
                     {steps.map((step, i) => (
                         <motion.div
                             key={i}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 60 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
                             className="relative"
                         >
-                            <div className="text-6xl font-bold text-ink-200 leading-none mb-4">
+                            <div className="text-7xl md:text-8xl font-bold text-ink-200 leading-none mb-4">
                                 {step.number}
                             </div>
                             <h3 className="text-2xl font-bold text-ink-900 mb-3 leading-tight">

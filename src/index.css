@@ -1,19 +1,32 @@
 @import "tailwindcss";
 
 @theme {
-  /* Primary brand — indigo (sole accent color) */
-  --color-brand-50: #eef2ff;
-  --color-brand-100: #e0e7ff;
-  --color-brand-200: #c7d2fe;
-  --color-brand-300: #a5b4fc;
-  --color-brand-400: #818cf8;
-  --color-brand-500: #6366f1;
-  --color-brand-600: #4f46e5;
-  --color-brand-700: #4338ca;
-  --color-brand-800: #3730a3;
-  --color-brand-900: #312e81;
+  /* Brand — Navy Blue (from BC logo) */
+  --color-brand-50: #eef1f8;
+  --color-brand-100: #d4dbed;
+  --color-brand-200: #a9b7db;
+  --color-brand-300: #7e93c9;
+  --color-brand-400: #3d5a9e;
+  --color-brand-500: #1e3a8a;
+  --color-brand-600: #1B2A5C;
+  --color-brand-700: #162247;
+  --color-brand-800: #111a35;
+  --color-brand-900: #0c1224;
 
-  /* Ink — neutral scale */
+  /* Secondary — Light Blue (from BC logo curves) */
+  --color-secondary-50: #f0f7fa;
+  --color-secondary-100: #d6eaf2;
+  --color-secondary-200: #b8dce8;
+  --color-secondary-300: #A8D0E0;
+  --color-secondary-400: #7bb8cd;
+  --color-secondary-500: #5aa0b8;
+
+  /* Accent — Red (from BC logo square) */
+  --color-accent-400: #f04e42;
+  --color-accent-500: #E03C31;
+  --color-accent-600: #c43028;
+
+  /* Keep ink scale unchanged */
   --color-ink-50:  #f7f7f8;
   --color-ink-100: #eeeef0;
   --color-ink-200: #d9d9dd;
@@ -31,7 +44,7 @@
 @layer base {
   html { scroll-behavior: smooth; }
   body { @apply font-sans antialiased text-ink-900 bg-white; }
-  ::selection { background-color: #4f46e5; color: white; }
+  ::selection { background-color: #1B2A5C; color: white; }
 }
 
 @layer utilities {

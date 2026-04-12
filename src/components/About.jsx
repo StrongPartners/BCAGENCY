@@ -83,13 +83,14 @@ const About = () => {
                             </p>
                         </div>
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0, y: 80 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.7 }}
+                            className="lg:col-span-1"
                         >
                             <div className="rounded-2xl shadow-lg overflow-hidden">
-                                <img src="/about-rocket.jpg" alt="BC Creative Agency" className="w-full h-full object-cover" />
+                                <img src="/about-rocket.jpg" alt="BC Creative Agency" className="w-full h-auto object-cover" />
                             </div>
                         </motion.div>
                     </div>
