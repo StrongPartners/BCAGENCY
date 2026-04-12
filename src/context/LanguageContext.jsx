@@ -17,8 +17,8 @@ export const translations = {
     nav_production: 'Prodüksiyon',
     nav_drone: 'Drone Çekim',
     nav_photo: 'Fotoğraf & Video',
-    btn_offer: 'Bir kahve içelim ☕',
-    btn_whatsapp: "WhatsApp'tan yaz 👋",
+    btn_offer: 'Bir kahve içelim',
+    btn_whatsapp: "WhatsApp'tan yaz",
     btn_talk: 'Hadi konuşalım',
     btn_start: 'Başlayalım',
 
@@ -28,12 +28,12 @@ export const translations = {
     hero_headline_accent: 'görünür',
     hero_headline_2: 'kılan ekip.',
     hero_desc: "KKTC'nin yaratıcı motoruyuz. SEO, reklam, sosyal medya, prodüksiyon — ne ihtiyacınız varsa Girne'deki stüdyomuzda pişiriyoruz. 2017'den beri, gülümseyerek.",
-    hero_cta: 'Bir kahve içelim ☕',
+    hero_cta: 'Bir kahve içelim',
     hero_cta_secondary: 'Ne yapıyoruz?',
-    hero_rotating: ['SEO 🔍', 'Sosyal Medya 📱', 'Google Ads 📣', 'Web Tasarım 💻', 'Prodüksiyon 🎬'],
+    hero_rotating: ['SEO', 'Sosyal Medya', 'Google Ads', 'Web Tasarım', 'Prodüksiyon'],
 
     // Service Banner (marquee)
-    banner_services: ['Web Tasarım ✦', 'Sosyal Medya ✦', 'Google Ads ✦', 'Meta Ads ✦', 'Grafik Tasarım ✦', 'İçerik Üretimi ✦', 'Prodüksiyon ✦', 'Drone Çekim ✦', 'Fotoğraf & Video ✦', 'SEO ✦', 'Marka Danışmanlığı ✦'],
+    banner_services: ['Web Tasarım', 'Sosyal Medya', 'Google Ads', 'Meta Ads', 'Grafik Tasarım', 'İçerik Üretimi', 'Prodüksiyon', 'Drone Çekim', 'Fotoğraf & Video', 'SEO', 'Marka Danışmanlığı'],
 
     // Services section
     services_eyebrow: 'Neler yapıyoruz',
@@ -42,13 +42,13 @@ export const translations = {
     services_sub: "Markanız için tam olarak ne lazımsa — biz onu yapıyoruz. Hepsi tek çatı altında, hepsi ölçülebilir, hepsi biraz eğlenceli.",
     services_see_details: 'Detayları gör →',
     services_list: [
-      { icon: '🔍', title: 'SEO', description: 'Google aramalarında ilk sıralara çıkıyorsunuz. Hem de organik, hem de kalıcı.', path: '/hizmetler/seo', tone: 'brand' },
-      { icon: '📣', title: 'Google Ads', description: 'Reklamı açıyorsunuz, telefonu açıyorsunuz. Bütçenizin her kuruşu işine yarıyor.', path: '/hizmetler/google-ads', tone: 'coral' },
-      { icon: '📱', title: 'Sosyal Medya', description: 'Instagram, Facebook, TikTok — marka sesiniz her platformda aynı sıcaklıkta.', path: '/hizmetler/sosyal-medya', tone: 'mint' },
-      { icon: '💻', title: 'Web Tasarım', description: 'Hızlı, modern, akıllı telefonda çakılmayan web siteleri. Üstelik SEO ile doğuyor.', path: '/hizmetler/web-tasarim', tone: 'sun' },
-      { icon: '🎬', title: 'Prodüksiyon', description: 'Senaryodan post prodüksiyona kadar reklam filmleri ve kurumsal videolar.', path: '/hizmetler/produksiyon', tone: 'brand' },
-      { icon: '🚁', title: 'Drone Çekim', description: "KKTC'nin en güzel açılarını havadan yakalıyoruz. Turizm, emlak, etkinlik.", path: '/hizmetler/drone-cekim', tone: 'coral' },
-      { icon: '📸', title: 'Fotoğraf & Video', description: 'Ürün, etkinlik, kurumsal — profesyonel çekim, sosyal medyaya hazır içerik.', path: '/hizmetler/fotograf-video', tone: 'mint' },
+      { icon: '', title: 'SEO', description: 'Google aramalarında ilk sıralara çıkıyorsunuz. Hem de organik, hem de kalıcı.', path: '/hizmetler/seo', tone: 'brand' },
+      { icon: '', title: 'Google Ads', description: 'Reklamı açıyorsunuz, telefonu açıyorsunuz. Bütçenizin her kuruşu işine yarıyor.', path: '/hizmetler/google-ads', tone: 'coral' },
+      { icon: '', title: 'Sosyal Medya', description: 'Instagram, Facebook, TikTok — marka sesiniz her platformda aynı sıcaklıkta.', path: '/hizmetler/sosyal-medya', tone: 'mint' },
+      { icon: '', title: 'Web Tasarım', description: 'Hızlı, modern, akıllı telefonda çakılmayan web siteleri. Üstelik SEO ile doğuyor.', path: '/hizmetler/web-tasarim', tone: 'sun' },
+      { icon: '', title: 'Prodüksiyon', description: 'Senaryodan post prodüksiyona kadar reklam filmleri ve kurumsal videolar.', path: '/hizmetler/produksiyon', tone: 'brand' },
+      { icon: '', title: 'Drone Çekim', description: "KKTC'nin en güzel açılarını havadan yakalıyoruz. Turizm, emlak, etkinlik.", path: '/hizmetler/drone-cekim', tone: 'coral' },
+      { icon: '', title: 'Fotoğraf & Video', description: 'Ürün, etkinlik, kurumsal — profesyonel çekim, sosyal medyaya hazır içerik.', path: '/hizmetler/fotograf-video', tone: 'mint' },
     ],
 
     // Approach (replaces WhyChooseUs)
@@ -57,10 +57,10 @@ export const translations = {
     approach_heading_2: 'sadece iyi iş.',
     approach_sub: 'Süreci basit tutuyoruz — öğreniyoruz, tasarlıyoruz, üretiyoruz, ölçüyoruz. Tekrarlıyoruz.',
     approach_steps: [
-      { number: '01', title: 'Dinle 👂', desc: "Önce markanızı, hedeflerinizi ve müşterinizi anlıyoruz. Bol kahve eşliğinde.", tone: 'brand' },
-      { number: '02', title: 'Tasarla ✏️', desc: 'Veriye ve yaratıcılığa dayalı bir strateji çıkarıyoruz. Kısa, net, ölçülebilir.', tone: 'coral' },
-      { number: '03', title: 'Üret 🛠️', desc: 'Reklamlar, içerikler, siteler — hepsi ekibimizin elinden çıkıyor. Outsource yok.', tone: 'mint' },
-      { number: '04', title: 'Ölç 📈', desc: 'Her ay ne olduğunu, neyin işe yaradığını gösteren şeffaf raporlar paylaşıyoruz.', tone: 'sun' },
+      { number: '01', title: 'Dinle', desc: "Önce markanızı, hedeflerinizi ve müşterinizi anlıyoruz. Bol kahve eşliğinde.", tone: 'brand' },
+      { number: '02', title: 'Tasarla', desc: 'Veriye ve yaratıcılığa dayalı bir strateji çıkarıyoruz. Kısa, net, ölçülebilir.', tone: 'coral' },
+      { number: '03', title: 'Üret', desc: 'Reklamlar, içerikler, siteler — hepsi ekibimizin elinden çıkıyor. Outsource yok.', tone: 'mint' },
+      { number: '04', title: 'Ölç', desc: 'Her ay ne olduğunu, neyin işe yaradığını gösteren şeffaf raporlar paylaşıyoruz.', tone: 'sun' },
     ],
 
     // Stats (new section)
@@ -69,7 +69,7 @@ export const translations = {
       { value: '8+', label: 'Yılı deviriyoruz' },
       { value: '50+', label: 'Mutlu marka' },
       { value: '2M+', label: 'Yönetilen reklam bütçesi' },
-      { value: '∞', label: 'Kahve ☕' },
+      { value: '∞', label: 'Kahve' },
     ],
 
     // FAQ
@@ -77,7 +77,7 @@ export const translations = {
     faq_title: 'Sık sorulanlar',
     faq_subtitle: 'Aklınızdakiler, burada cevabı.',
     faq_no_answer: 'Cevabı burada yok mu?',
-    faq_whatsapp: "WhatsApp'tan sor 👋",
+    faq_whatsapp: "WhatsApp'tan sor",
 
     // Footer
     footer_tagline: 'Fikirleri görünür kılıyoruz.',
@@ -172,8 +172,8 @@ export const translations = {
     nav_production: 'Production',
     nav_drone: 'Drone',
     nav_photo: 'Photo & Video',
-    btn_offer: "Let's grab a coffee ☕",
-    btn_whatsapp: 'Message on WhatsApp 👋',
+    btn_offer: "Let's grab a coffee",
+    btn_whatsapp: 'Message on WhatsApp',
     btn_talk: "Let's talk",
     btn_start: "Let's start",
 
@@ -183,9 +183,9 @@ export const translations = {
     hero_headline_accent: 'ideas',
     hero_headline_2: 'visible.',
     hero_desc: "We're the creative engine of Northern Cyprus (TRNC). SEO, ads, social, production — whatever you need, we cook it up in our Kyrenia studio. Since 2017, with a smile.",
-    hero_cta: "Let's grab a coffee ☕",
+    hero_cta: "Let's grab a coffee",
     hero_cta_secondary: 'What we do',
-    hero_rotating: ['SEO 🔍', 'Social 📱', 'Ads 📣', 'Web 💻', 'Production 🎬'],
+    hero_rotating: ['SEO', 'Social', 'Ads', 'Web', 'Production'],
 
     // Service Banner (marquee)
     banner_services: ['Web Design ✦', 'Social Media ✦', 'Google Ads ✦', 'Meta Ads ✦', 'Graphic Design ✦', 'Content ✦', 'Production ✦', 'Drone ✦', 'Photo & Video ✦', 'SEO ✦', 'Brand Strategy ✦'],
