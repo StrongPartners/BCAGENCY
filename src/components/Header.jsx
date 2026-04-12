@@ -3,13 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
-import { useTheme } from '../context/ThemeContext';
 
-/**
- * Header — Creative Playground top navigation.
- * Rounded pill badge logo, wobbly indigo underline on hover,
- * coral/mint/sun accents for the services dropdown.
- */
 const Header = () => {
     const [isHovering, setIsHovering] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -17,7 +11,6 @@ const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { lang, toggleLang, t } = useLanguage();
-    const { theme, setTheme, themes } = useTheme();
 
     useEffect(() => {
         const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -41,42 +34,31 @@ const Header = () => {
     ];
 
     const services = [
-        { name: t('nav_seo'),        path: '/hizmetler/seo',           tone: 'brand' },
-        { name: t('nav_ads'),        path: '/hizmetler/google-ads',    tone: 'coral' },
-        { name: t('nav_social'),     path: '/hizmetler/sosyal-medya',  tone: 'mint' },
-        { name: t('nav_web'),        path: '/hizmetler/web-tasarim',   tone: 'sun' },
-        { name: t('nav_production'), path: '/hizmetler/produksiyon',   tone: 'brand' },
-        { name: t('nav_drone'),      path: '/hizmetler/drone-cekim',   tone: 'coral' },
-        { name: t('nav_photo'),      path: '/hizmetler/fotograf-video',tone: 'mint' },
+        { name: t('nav_seo'),        path: '/hizmetler/seo' },
+        { name: t('nav_ads'),        path: '/hizmetler/google-ads' },
+        { name: t('nav_social'),     path: '/hizmetler/sosyal-medya' },
+        { name: t('nav_web'),        path: '/hizmetler/web-tasarim' },
+        { name: t('nav_production'), path: '/hizmetler/produksiyon' },
+        { name: t('nav_drone'),      path: '/hizmetler/drone-cekim' },
+        { name: t('nav_photo'),      path: '/hizmetler/fotograf-video' },
     ];
 
-    const dotColors = { brand: 'bg-brand-500', coral: 'bg-coral-500', mint: 'bg-mint-500', sun: 'bg-sun-400' };
-
     return (
-        <motion.header
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ type: 'spring', stiffness: 120, damping: 20 }}
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-lg shadow-sm py-3' : 'bg-transparent py-5'}`}
+        <header
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white border-b border-ink-100 py-3' : 'bg-transparent py-5'}`}
         >
             <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
 
-                {/* Logo pill */}
-                <motion.button
+                {/* Logo */}
+                <button
                     onClick={() => go('/')}
-                    whileHover={{ scale: 1.03, rotate: -1 }}
-                    whileTap={{ scale: 0.97 }}
                     className="flex items-center gap-2 group"
                 >
-                    <div className="relative">
-                        <img src="/logo-icon.png" alt="BC Creative Agency" className="h-14 md:h-16 w-auto object-contain relative z-10" />
-                        <span className="absolute inset-0 bg-sun-300 rounded-full blur-xl opacity-0 group-hover:opacity-60 transition-opacity" />
-                    </div>
-                    <span className="hidden sm:block font-black text-ink-900 text-base md:text-lg tracking-tight leading-none">
-                        BC <span className="text-brand-600">Creative</span>
-                        <span className="block text-[10px] md:text-xs font-bold text-ink-400 tracking-[0.2em] uppercase mt-0.5">Agency · KKTC</span>
+                    <img src="/logo-icon.png" alt="BC Creative Agency" className="h-12 md:h-14 w-auto object-contain" />
+                    <span className="hidden sm:block font-bold text-ink-900 text-base md:text-lg tracking-tight leading-none">
+                        BC Creative
                     </span>
-                </motion.button>
+                </button>
 
                 {/* Desktop Navigation */}
                 <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
@@ -86,10 +68,9 @@ const Header = () => {
                             <button
                                 key={item.label}
                                 onClick={() => go(item.path)}
-                                className={`relative font-bold text-[15px] tracking-tight transition-colors ${active ? 'text-brand-600' : 'text-ink-700 hover:text-brand-600'}`}
+                                className={`font-medium text-[15px] tracking-tight transition-colors ${active ? 'text-ink-900' : 'text-ink-600 hover:text-ink-900'}`}
                             >
                                 {item.label}
-                                <span className={`absolute -bottom-1 left-0 h-[6px] bg-sun-300 -z-10 transition-all rounded-sm ${active ? 'w-full' : 'w-0'}`} />
                             </button>
                         );
                     })}
@@ -101,7 +82,7 @@ const Header = () => {
                         onMouseLeave={() => setIsHovering(false)}
                     >
                         <button
-                            className="flex items-center gap-1.5 font-bold text-[15px] text-ink-700 hover:text-brand-600 transition-colors py-2"
+                            className="flex items-center gap-1.5 font-medium text-[15px] text-ink-600 hover:text-ink-900 transition-colors py-2"
                         >
                             {t('nav_services')}
                             <ChevronDown size={16} className={`transition-transform ${isHovering ? 'rotate-180' : ''}`} />
@@ -114,18 +95,17 @@ const Header = () => {
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                     exit={{ opacity: 0, y: 10, scale: 0.96 }}
                                     transition={{ duration: 0.18 }}
-                                    className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-72"
+                                    className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-64"
                                 >
-                                    <div className="bg-surface-card rounded-2xl shadow-xl border border-gray-200 overflow-hidden py-2">
+                                    <div className="bg-white rounded-xl shadow-lg border border-ink-100 overflow-hidden py-2">
                                         {services.map((s) => (
                                             <button
                                                 key={s.name}
                                                 onClick={() => go(s.path)}
-                                                className="w-full flex items-center gap-3 px-5 py-3 text-ink-700 hover:bg-surface-alt transition-colors text-[14px] font-bold group"
+                                                className="w-full flex items-center justify-between px-5 py-3 text-ink-600 hover:bg-ink-50 transition-colors text-[14px] font-medium group"
                                             >
-                                                <span className={`w-2.5 h-2.5 rounded-full ${dotColors[s.tone]} group-hover:scale-125 transition-transform`} />
-                                                <span className="group-hover:text-brand-600 transition-colors">{s.name}</span>
-                                                <span className="ml-auto opacity-0 group-hover:opacity-100 text-brand-600">→</span>
+                                                <span className="group-hover:text-ink-900 transition-colors">{s.name}</span>
+                                                <span className="opacity-0 group-hover:opacity-100 text-ink-400 transition-opacity">&rarr;</span>
                                             </button>
                                         ))}
                                     </div>
@@ -137,54 +117,38 @@ const Header = () => {
 
                 {/* Desktop right side */}
                 <div className="hidden lg:flex items-center gap-3">
-                    {/* Theme picker */}
-                    <div className="flex items-center gap-1.5">
-                        {themes.map((t) => (
-                            <button
-                                key={t.id}
-                                onClick={() => setTheme(t.id)}
-                                className={`w-6 h-6 rounded-full ${t.preview} border-2 transition-all ${
-                                    theme === t.id ? 'border-brand-600 scale-110' : 'border-transparent hover:scale-105'
-                                }`}
-                                title={t.name[lang]}
-                            />
-                        ))}
-                    </div>
-
                     {/* Language toggle */}
-                    <div className="flex items-center bg-ink-100 rounded-full p-1">
+                    <div className="flex items-center bg-ink-50 rounded-full p-0.5">
                         <button
                             onClick={() => lang !== 'tr' && toggleLang()}
-                            className={`px-3 py-1 rounded-full text-xs font-black transition-all ${lang === 'tr' ? 'bg-surface-card text-ink-900 shadow-sm' : 'text-ink-400'}`}
+                            className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${lang === 'tr' ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-400'}`}
                         >
                             TR
                         </button>
                         <button
                             onClick={() => lang !== 'en' && toggleLang()}
-                            className={`px-3 py-1 rounded-full text-xs font-black transition-all ${lang === 'en' ? 'bg-surface-card text-ink-900 shadow-sm' : 'text-ink-400'}`}
+                            className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${lang === 'en' ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-400'}`}
                         >
                             EN
                         </button>
                     </div>
 
                     {/* CTA pill */}
-                    <motion.button
+                    <button
                         onClick={() => window.open('https://wa.me/905488755461', '_blank')}
-                        whileHover={{ scale: 1.05, y: -2 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="bg-ink-900 text-white font-black text-sm px-5 py-3 rounded-full shadow-md hover:shadow-lg transition-shadow"
+                        className="bg-ink-900 text-white font-medium text-sm px-6 py-2.5 rounded-full hover:bg-ink-800 transition-colors"
                     >
                         {t('btn_offer')}
-                    </motion.button>
+                    </button>
                 </div>
 
                 {/* Mobile menu button */}
                 <button
-                    className="lg:hidden p-2 text-ink-900 rounded-full bg-surface-card border border-gray-200 shadow-md"
+                    className="lg:hidden p-2 text-ink-900"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     aria-label="Menu"
                 >
-                    {isMobileMenuOpen ? <X size={22} strokeWidth={3} /> : <Menu size={22} strokeWidth={3} />}
+                    {isMobileMenuOpen ? <X size={22} strokeWidth={2.5} /> : <Menu size={22} strokeWidth={2.5} />}
                 </button>
             </div>
 
@@ -196,45 +160,30 @@ const Header = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 right-0 bg-surface-card border-t border-gray-200 shadow-xl lg:hidden"
+                        className="absolute top-full left-0 right-0 bg-white border-t border-ink-100 shadow-lg lg:hidden"
                     >
                         <div className="flex flex-col p-6 space-y-4 max-h-[85vh] overflow-y-auto">
-                            {/* Theme picker */}
-                            <div className="flex items-center gap-2 self-start">
-                                {themes.map((t) => (
-                                    <button
-                                        key={t.id}
-                                        onClick={() => setTheme(t.id)}
-                                        className={`w-8 h-8 rounded-full ${t.preview} border-2 transition-all ${
-                                            theme === t.id ? 'border-brand-600 scale-110' : 'border-transparent hover:scale-105'
-                                        }`}
-                                        title={t.name[lang]}
-                                    />
-                                ))}
-                            </div>
-
                             {/* Language toggle */}
-                            <div className="flex items-center gap-2 bg-ink-100 rounded-full p-1 self-start">
-                                <button onClick={toggleLang} className={`px-4 py-1.5 rounded-full text-xs font-black ${lang === 'tr' ? 'bg-surface-card text-ink-900 shadow-sm' : 'text-ink-400'}`}>TR</button>
-                                <button onClick={toggleLang} className={`px-4 py-1.5 rounded-full text-xs font-black ${lang === 'en' ? 'bg-surface-card text-ink-900 shadow-sm' : 'text-ink-400'}`}>EN</button>
+                            <div className="flex items-center gap-2 bg-ink-50 rounded-full p-0.5 self-start">
+                                <button onClick={() => { if (lang !== 'tr') toggleLang(); }} className={`px-4 py-1.5 rounded-full text-xs font-semibold ${lang === 'tr' ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-400'}`}>TR</button>
+                                <button onClick={() => { if (lang !== 'en') toggleLang(); }} className={`px-4 py-1.5 rounded-full text-xs font-semibold ${lang === 'en' ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-400'}`}>EN</button>
                             </div>
 
                             {navLinks.map((item) => (
-                                <button key={item.label} onClick={() => go(item.path)} className="text-left text-xl font-black text-ink-900 hover:text-brand-600 transition-colors">
+                                <button key={item.label} onClick={() => go(item.path)} className="text-left text-lg font-medium text-ink-900 hover:text-brand-600 transition-colors">
                                     {item.label}
                                 </button>
                             ))}
 
                             <div className="pt-4 border-t border-ink-100">
-                                <div className="text-xs font-black text-ink-400 uppercase tracking-wider mb-3">{t('nav_services')}</div>
+                                <div className="text-xs font-semibold text-ink-400 uppercase tracking-wider mb-3">{t('nav_services')}</div>
                                 <div className="space-y-3">
                                     {services.map((s) => (
                                         <button
                                             key={s.name}
                                             onClick={() => go(s.path)}
-                                            className="w-full flex items-center gap-3 text-left text-base font-bold text-ink-700 hover:text-brand-600"
+                                            className="w-full text-left text-base font-medium text-ink-600 hover:text-ink-900 transition-colors"
                                         >
-                                            <span className={`w-2 h-2 rounded-full ${dotColors[s.tone]}`} />
                                             {s.name}
                                         </button>
                                     ))}
@@ -243,7 +192,7 @@ const Header = () => {
 
                             <button
                                 onClick={() => window.open('https://wa.me/905488755461', '_blank')}
-                                className="mt-4 w-full bg-ink-900 text-white font-black py-4 rounded-full shadow-md hover:shadow-lg transition-shadow"
+                                className="mt-4 w-full bg-ink-900 text-white font-medium py-3.5 rounded-full hover:bg-ink-800 transition-colors"
                             >
                                 {t('btn_offer')}
                             </button>
@@ -251,7 +200,7 @@ const Header = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </motion.header>
+        </header>
     );
 };
 
