@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Instagram } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -15,7 +16,13 @@ const Footer = () => {
 
     return (
         <footer className="bg-brand-600 text-white">
-            <div className="container mx-auto px-4 md:px-8 py-20 md:py-28">
+            <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+                className="container mx-auto px-4 md:px-8 py-20 md:py-28"
+            >
 
                 {/* Columns */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
@@ -127,7 +134,7 @@ const Footer = () => {
                     <div>&copy; 2017 &ndash; 2026 BC Creative Agency. {t('footer_rights')}</div>
                     <div>{t('footer_made_with')}</div>
                 </div>
-            </div>
+            </motion.div>
         </footer>
     );
 };

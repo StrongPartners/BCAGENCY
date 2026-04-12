@@ -84,9 +84,9 @@ const About = () => {
                         </div>
                         <motion.div
                             initial={{ opacity: 0, y: 80 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            whileInView={{ opacity: 1, y: 0, scale: 1.05 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.7 }}
+                            transition={{ duration: 1.2, ease: 'easeOut' }}
                             className="lg:col-span-1"
                         >
                             <div className="rounded-2xl shadow-lg overflow-hidden">
@@ -115,10 +115,10 @@ const About = () => {
                             return (
                                 <motion.div
                                     key={i}
-                                    initial={{ opacity: 0, y: 20 }}
+                                    initial={{ opacity: 0, y: 60 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ delay: i * 0.1 }}
+                                    transition={{ delay: i * 0.2, duration: 0.6 }}
                                 >
                                     <IconComponent size={28} className="text-ink-400 mb-5" strokeWidth={1.5} />
                                     <h3 className="text-2xl font-bold text-ink-900 mb-3 leading-tight">{value.title}</h3>

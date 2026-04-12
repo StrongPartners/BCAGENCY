@@ -47,9 +47,9 @@ const ServicePageLayout = ({
                         </motion.div>
 
                         <motion.h1
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 80 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.1 }}
+                            transition={{ duration: 0.7, delay: 0.1 }}
                             className="text-5xl md:text-7xl lg:text-8xl font-black text-ink-900 leading-[0.95] tracking-tighter"
                         >
                             {headline}{' '}
@@ -105,10 +105,10 @@ const ServicePageLayout = ({
                                 return (
                                     <motion.div
                                         key={i}
-                                        initial={{ opacity: 0, y: 60 }}
+                                        initial={{ opacity: 0, y: 80 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
-                                        transition={{ delay: i * 0.08 }}
+                                        transition={{ delay: i * 0.15, duration: 0.5 }}
                                         whileHover={{ y: -6 }}
                                         className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg border border-ink-100 transition-all"
                                     >
@@ -147,10 +147,10 @@ const ServicePageLayout = ({
                                 return (
                                     <motion.div
                                         key={i}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
+                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
                                         viewport={{ once: true }}
-                                        transition={{ delay: i * 0.08 }}
+                                        transition={{ delay: i * 0.1, duration: 0.5 }}
                                         className="text-center"
                                     >
                                         <div className={`text-5xl md:text-7xl font-black ${tones[i % tones.length]} leading-none mb-2`}>
@@ -257,9 +257,9 @@ const FAQItem = ({ question, answer, index }) => {
         >
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-ink-50 transition-colors"
+                className="group w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-ink-50 transition-colors"
             >
-                <span className="font-black text-ink-900 text-base md:text-lg">{question}</span>
+                <span className="font-black text-ink-900 text-base md:text-lg group-hover:translate-x-1 transition-transform">{question}</span>
                 <motion.div
                     animate={{ rotate: isOpen ? 45 : 0 }}
                     transition={{ duration: 0.2 }}

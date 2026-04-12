@@ -54,15 +54,15 @@ const Services = () => {
                         return (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, y: 60 }}
+                                initial={{ opacity: 0, y: 80 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.4, delay: i * 0.1 }}
+                                transition={{ duration: 0.5, delay: i * 0.15 }}
                                 onClick={() => service.path && navigate(service.path)}
-                                className="group cursor-pointer border-b border-ink-100 py-10 px-2 md:px-6 hover:bg-ink-50 transition-colors"
+                                className="group cursor-pointer border-b border-ink-100 border-l-2 border-l-transparent hover:border-l-brand-600 py-12 px-2 md:px-6 hover:bg-ink-50 transition-all"
                             >
                                 <div className="flex items-start gap-5">
-                                    <IconComponent size={28} className="text-ink-400 shrink-0 mt-1" strokeWidth={1.5} />
+                                    <IconComponent size={28} className="text-ink-400 group-hover:text-brand-600 shrink-0 mt-1 transition-colors" strokeWidth={1.5} />
                                     <div className="flex-1">
                                         <h3 className="text-2xl font-bold text-ink-900 mb-2 tracking-tight">
                                             {service.title}
@@ -71,9 +71,9 @@ const Services = () => {
                                             {service.description}
                                         </p>
                                         {service.path && (
-                                            <span className="inline-flex items-center gap-2 text-sm font-medium text-brand-600 group-hover:gap-3 transition-all">
+                                            <span className="inline-flex items-center gap-2 text-sm font-medium text-brand-600 transition-all">
                                                 {t('services_see_details')}
-                                                <ArrowUpRight size={14} strokeWidth={2} />
+                                                <ArrowUpRight size={14} strokeWidth={2} className="group-hover:translate-x-2 transition-transform" />
                                             </span>
                                         )}
                                     </div>
