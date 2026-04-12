@@ -12,7 +12,7 @@ const Services = () => {
     const services = t('services_list');
 
     return (
-        <section id="services" className="relative py-32 md:py-48 bg-white">
+        <section id="services" className="relative py-40 md:py-48 bg-white">
             <div className="container mx-auto px-4 md:px-8">
                 {/* Section header */}
                 <div className="max-w-3xl mb-20 md:mb-24">
@@ -54,10 +54,10 @@ const Services = () => {
                         return (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 60 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.4, delay: i * 0.06 }}
+                                transition={{ duration: 0.4, delay: i * 0.1 }}
                                 onClick={() => service.path && navigate(service.path)}
                                 className="group cursor-pointer border-b border-ink-100 py-10 px-2 md:px-6 hover:bg-ink-50 transition-colors"
                             >

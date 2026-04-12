@@ -24,6 +24,17 @@ const Home = () => {
             <Hero />
             <ServiceBanner />
             <Services />
+
+            {/* Full-bleed image break */}
+            <section className="relative h-[60vh] md:h-[80vh] overflow-hidden">
+                <img
+                    src="/marketing-hero-v3.jpg"
+                    alt="BC Creative Agency"
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-ink-900/30" />
+            </section>
+
             <Approach />
             <FAQ />
         </main>

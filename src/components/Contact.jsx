@@ -119,7 +119,7 @@ const Contact = () => {
                                     <p className="font-bold text-lg md:text-xl truncate">{ch.value}</p>
                                 </div>
                                 {ch.primary && (
-                                    <div className="hidden sm:flex items-center gap-2 bg-ink-900 text-white rounded-full px-5 py-2 text-sm font-medium">
+                                    <div className="hidden sm:flex items-center gap-2 bg-brand-600 text-white rounded-full px-5 py-2 text-sm font-medium">
                                         {lang === 'tr' ? 'Yaz' : 'Message'} &rarr;
                                     </div>
                                 )}
@@ -176,7 +176,7 @@ const Contact = () => {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.2 }}
-                                className="bg-ink-900 rounded-xl p-6"
+                                className="bg-brand-600 rounded-xl p-6"
                             >
                                 <h3 className="font-bold text-white text-lg mb-2">{t('contact_response_title')}</h3>
                                 <p className="text-ink-400 leading-relaxed mb-4">{t('contact_response_desc')}</p>
