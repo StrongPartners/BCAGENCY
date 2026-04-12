@@ -79,7 +79,7 @@ const Contact = () => {
                         initial={{ opacity: 0, scale: 0.8, rotate: -3 }}
                         animate={{ opacity: 1, scale: 1, rotate: -1 }}
                         transition={{ duration: 0.5 }}
-                        className="inline-block bg-mint-200 border-2 border-ink-900 rounded-full px-4 py-1.5 mb-6 shadow-sticker"
+                        className="inline-block bg-mint-200 rounded-full px-4 py-1.5 mb-6 shadow-md"
                     >
                         <span className="font-black text-ink-900 text-xs uppercase tracking-wider">{t('contact_eyebrow')}</span>
                     </motion.div>
@@ -124,9 +124,9 @@ const Contact = () => {
                                 transition={{ duration: 0.4, delay: i * 0.08 }}
                                 whileHover={{ scale: 1.03, y: -4 }}
                                 whileTap={{ scale: 0.98 }}
-                                className={`flex items-center gap-5 p-6 rounded-3xl text-ink-900 border-2 border-ink-900 shadow-sticker-lg ${ch.color} ${ch.primary ? 'sm:col-span-2' : ''}`}
+                                className={`flex items-center gap-5 p-6 rounded-2xl text-ink-900 shadow-md hover:shadow-lg transition-all ${ch.color} ${ch.primary ? 'sm:col-span-2' : ''}`}
                             >
-                                <div className="w-14 h-14 bg-white border-2 border-ink-900 rounded-2xl flex items-center justify-center shrink-0">
+                                <div className="w-14 h-14 bg-white/80 rounded-2xl flex items-center justify-center shrink-0 shadow-sm">
                                     {ch.icon}
                                 </div>
                                 <div className="flex-1 min-w-0">
@@ -134,7 +134,7 @@ const Contact = () => {
                                     <p className="font-black text-lg md:text-xl truncate">{ch.value}</p>
                                 </div>
                                 {ch.primary && (
-                                    <div className="hidden sm:flex items-center gap-2 bg-white border-2 border-ink-900 rounded-xl px-4 py-2 text-sm font-black">
+                                    <div className="hidden sm:flex items-center gap-2 bg-white/80 rounded-xl px-4 py-2 text-sm font-black shadow-sm">
                                         {lang === 'tr' ? 'Yaz →' : 'Message →'}
                                     </div>
                                 )}
@@ -153,10 +153,10 @@ const Contact = () => {
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
-                                className="bg-white rounded-3xl p-6 border-2 border-ink-900 shadow-sticker-brand rotate-neg-1"
+                                className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
                             >
                                 <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-brand-100 border-2 border-ink-900 rounded-xl flex items-center justify-center shrink-0">
+                                    <div className="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center shrink-0">
                                         <MapPin size={20} strokeWidth={2.5} className="text-brand-600" />
                                     </div>
                                     <div>
@@ -177,10 +177,10 @@ const Contact = () => {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.1 }}
-                                className="bg-white rounded-3xl p-6 border-2 border-ink-900 shadow-sticker-mint rotate-pos-1"
+                                className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
                             >
                                 <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-mint-100 border-2 border-ink-900 rounded-xl flex items-center justify-center shrink-0">
+                                    <div className="w-12 h-12 bg-mint-100 rounded-xl flex items-center justify-center shrink-0">
                                         <Clock size={20} strokeWidth={2.5} className="text-mint-600" />
                                     </div>
                                     <div>
@@ -195,7 +195,7 @@ const Contact = () => {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.2 }}
-                                className="bg-ink-900 rounded-3xl p-6 border-2 border-ink-900 shadow-sticker-sun"
+                                className="bg-ink-900 rounded-2xl p-6 shadow-xl"
                             >
                                 <h3 className="font-black text-white text-lg mb-2">{t('contact_response_title')}</h3>
                                 <p className="text-ink-300 font-medium leading-relaxed mb-4">{t('contact_response_desc')}</p>
@@ -203,7 +203,7 @@ const Contact = () => {
                                     href="https://wa.me/905488755461"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-block bg-mint-400 text-ink-900 font-black px-5 py-2 rounded-xl border-2 border-mint-400 hover:bg-mint-300 transition-colors"
+                                    className="inline-block bg-mint-400 text-ink-900 font-black px-5 py-2 rounded-xl hover:bg-mint-300 transition-all shadow-lg hover:shadow-xl"
                                 >
                                     {t('contact_response_btn')}
                                 </a>
@@ -215,7 +215,7 @@ const Contact = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.15 }}
-                            className="rounded-3xl overflow-hidden border-2 border-ink-900 shadow-sticker-coral h-80 lg:h-full min-h-[400px]"
+                            className="rounded-2xl overflow-hidden shadow-xl border border-gray-200 h-80 lg:h-full min-h-[400px]"
                         >
                             <iframe
                                 title={t('contact_map_title')}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Camera, PartyPopper, User, UtensilsCrossed } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 import ServicePageLayout from './shared/ServicePageLayout';
 import { useLanguage } from '../context/LanguageContext';
@@ -21,10 +22,10 @@ const FotografVideo = () => {
         subheadline: 'Profesyonel çekim, sosyal medyaya hazır içerik.',
         description: "Ürün katalogu mu, etkinlik mi, kurumsal headshot mu — ne ihtiyacınız varsa. Stüdyo ve dış mekan, tüm ekipman ve post prodüksiyon dahil.",
         features: [
-            { icon: '', title: 'Ürün fotoğrafçılığı', desc: 'E-ticaret için beyaz fon, lifestyle çekim, katalog. Amazon/Shopify için hazır.', tone: 'brand' },
-            { icon: '', title: 'Etkinlik kaydı', desc: 'Düğün, konferans, lansman, sergi — fotoğraf + video birlikte.', tone: 'coral' },
-            { icon: '', title: 'Kurumsal headshot', desc: 'LinkedIn, hakkımızda sayfası, basın bülteni için profesyonel portreler.', tone: 'mint' },
-            { icon: '', title: 'Yemek & mekan', desc: "Restoran menüsü, menü fotoğrafları, mekan atmosfer çekimi — iştah açan görseller.", tone: 'sun' },
+            { icon: Camera, title: 'Ürün foto��rafçılığı', desc: 'E-ticaret için beyaz fon, lifestyle çekim, katalog. Amazon/Shopify için hazır.', tone: 'brand' },
+            { icon: PartyPopper, title: 'Etkinlik kaydı', desc: 'Düğün, konferans, lansman, sergi — fotoğraf + video birlikte.', tone: 'coral' },
+            { icon: User, title: 'Kurumsal headshot', desc: 'LinkedIn, hakkımızda sayfası, basın b��lteni için profesyonel portreler.', tone: 'mint' },
+            { icon: UtensilsCrossed, title: 'Yemek & mekan', desc: "Restoran menüsü, menü fotoğrafları, mekan atmosfer çekimi — iştah açan görseller.", tone: 'sun' },
         ],
         stats: [
             { value: '50MP', label: 'Fotoğraf kalitesi' },
@@ -54,10 +55,10 @@ const FotografVideo = () => {
         subheadline: 'Professional shoots, social-ready output.',
         description: "Product catalog, event, corporate headshots — whatever you need. Studio or on-location, all equipment and post-production included.",
         features: [
-            { icon: '', title: 'Product photography', desc: 'White background for e-commerce, lifestyle shots, catalog. Amazon / Shopify ready.', tone: 'brand' },
-            { icon: '', title: 'Event capture', desc: 'Weddings, conferences, launches, exhibitions — photo + video together.', tone: 'coral' },
-            { icon: '', title: 'Corporate headshots', desc: 'Professional portraits for LinkedIn, about pages, press kits.', tone: 'mint' },
-            { icon: '', title: 'Food & venue', desc: "Restaurant menus, dish photography, venue atmosphere — mouth-watering shots.", tone: 'sun' },
+            { icon: Camera, title: 'Product photography', desc: 'White background for e-commerce, lifestyle shots, catalog. Amazon / Shopify ready.', tone: 'brand' },
+            { icon: PartyPopper, title: 'Event capture', desc: 'Weddings, conferences, launches, exhibitions — photo + video together.', tone: 'coral' },
+            { icon: User, title: 'Corporate headshots', desc: 'Professional portraits for LinkedIn, about pages, press kits.', tone: 'mint' },
+            { icon: UtensilsCrossed, title: 'Food & venue', desc: "Restaurant menus, dish photography, venue atmosphere — mouth-watering shots.", tone: 'sun' },
         ],
         stats: [
             { value: '50MP', label: 'Photo quality' },

@@ -270,11 +270,11 @@ const BlogPost = () => {
           <div className="container mx-auto max-w-4xl">
             <button
               onClick={() => navigate('/blog')}
-              className="inline-flex items-center gap-2 bg-white text-ink-900 font-black text-sm px-4 py-2 rounded-full border-2 border-ink-900 mb-4 hover:bg-sun-200 transition-colors"
+              className="inline-flex items-center gap-2 bg-white text-ink-900 font-black text-sm px-4 py-2 rounded-full border border-gray-200 mb-4 hover:bg-sun-200 transition-colors shadow-md"
             >
               <ArrowLeft size={14} strokeWidth={3} /> {t('blog_back')}
             </button>
-            <span className={`inline-block text-xs font-black px-3 py-1 rounded-full mb-3 border-2 border-ink-900 ${categoryColors[post.category] || 'bg-white text-ink-700'}`}>
+            <span className={`inline-block text-xs font-black px-3 py-1 rounded-full mb-3 ${categoryColors[post.category] || 'bg-white text-ink-700'}`}>
               {categoryLabels[post.category]?.[lang] || post.category}
             </span>
             <h1 className="text-3xl md:text-6xl font-black text-white leading-[0.95] max-w-4xl tracking-tight">
@@ -288,7 +288,7 @@ const BlogPost = () => {
       <div className="container mx-auto px-4 md:px-8 py-12">
         <div className="max-w-4xl mx-auto">
           {/* Meta */}
-          <div className="flex items-center gap-4 text-sm text-ink-400 font-bold mb-10 pb-8 border-b-2 border-ink-100">
+          <div className="flex items-center gap-4 text-sm text-ink-400 font-bold mb-10 pb-8 border-b border-ink-100">
             <span className="flex items-center gap-1"><Clock size={14} strokeWidth={2.5} /> {postReadTime} {t('blog_read_time')}</span>
             <span>·</span>
             <span>{postDate}</span>
@@ -307,7 +307,7 @@ const BlogPost = () => {
           </motion.div>
 
           {/* CTA */}
-          <div className="mt-20 p-10 md:p-14 bg-ink-900 rounded-[3rem] border-2 border-ink-900 shadow-sticker-sun text-center relative overflow-hidden">
+          <div className="mt-20 p-10 md:p-14 bg-ink-900 rounded-[3rem] shadow-2xl text-center relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-600/30 blur-3xl pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-coral-500/20 blur-3xl pointer-events-none" />
             <h3 className="text-3xl md:text-5xl font-black text-white mb-5 relative z-10 leading-tight tracking-tight">
@@ -318,7 +318,7 @@ const BlogPost = () => {
             </p>
             <button
               onClick={() => window.open('https://wa.me/905488755461', '_blank')}
-              className="bg-mint-400 text-ink-900 font-black text-lg px-10 py-4 rounded-full border-2 border-mint-400 hover:bg-mint-300 transition-colors relative z-10"
+              className="bg-mint-400 text-ink-900 font-black text-lg px-10 py-4 rounded-full hover:bg-mint-300 transition-all shadow-lg hover:shadow-xl relative z-10"
             >
               {t('btn_offer')} →
             </button>
@@ -333,15 +333,13 @@ const BlogPost = () => {
             <h2 className="text-3xl md:text-4xl font-black text-ink-900 mb-10 tracking-tight">{t('blog_other_posts')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {otherPosts.map((other, idx) => {
-                const tones = ['shadow-sticker-brand', 'shadow-sticker-coral', 'shadow-sticker-mint'];
-                const tilts = ['rotate-neg-1', 'rotate-pos-1', 'rotate-neg-2'];
                 return (
                   <div
                     key={other.id}
                     onClick={() => navigate(`/blog/${other.slug}`)}
-                    className={`bg-white rounded-3xl overflow-hidden border-2 border-ink-900 ${tones[idx % 3]} ${tilts[idx % 3]} cursor-pointer group hover:-translate-y-2 hover:rotate-0 transition-all`}
+                    className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 cursor-pointer group hover:-translate-y-2 transition-all"
                   >
-                    <div className="h-44 overflow-hidden border-b-2 border-ink-900">
+                    <div className="h-44 overflow-hidden">
                       <img
                         src={other.image}
                         alt={other.imageAlt?.[lang] || other.imageAlt?.tr || other.title[lang] || other.title.tr}
@@ -349,7 +347,7 @@ const BlogPost = () => {
                       />
                     </div>
                     <div className="p-6">
-                      <span className={`text-xs font-black px-3 py-1 rounded-full border-2 border-ink-900 ${categoryColors[other.category] || 'bg-ink-100 text-ink-700'}`}>
+                      <span className={`text-xs font-black px-3 py-1 rounded-full ${categoryColors[other.category] || 'bg-ink-100 text-ink-700'}`}>
                         {other.category}
                       </span>
                       <h3 className="font-black text-ink-900 mt-3 text-lg leading-tight group-hover:text-brand-600 transition-colors line-clamp-2">

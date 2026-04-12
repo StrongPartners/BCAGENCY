@@ -1,4 +1,5 @@
 import React from 'react';
+import { Zap, Smartphone, Search, Paintbrush } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 import ServicePageLayout from './shared/ServicePageLayout';
 import { useLanguage } from '../context/LanguageContext';
@@ -21,10 +22,10 @@ const WebDesign = () => {
         subheadline: 'Hızlı, modern, mobil uyumlu, SEO ile doğan web siteleri.',
         description: "Sadece güzel görünsün diye site yapmıyoruz. Dönüşüm odaklı, Google dostu, 2 saniyenin altında açılan siteler kuruyoruz. React + Vite + Tailwind ile.",
         features: [
-            { icon: '', title: 'Işık hızı', desc: 'Core Web Vitals 90+ skor. Google sevdiği kadar müşteri de sever. 2 saniyenin altında açılma hedefi.', tone: 'brand' },
-            { icon: '', title: 'Mobil önce', desc: 'Önce mobil tasarlıyoruz. Çünkü kullanıcılarınızın %75\'i telefondan girer.', tone: 'coral' },
-            { icon: '', title: 'SEO ile doğar', desc: 'Meta tag, schema, sitemap, canonical — hepsi ilk günden hazır. Sonradan eklenmez.', tone: 'mint' },
-            { icon: '', title: 'Markanıza özel', desc: 'Hazır temalar yok. Her site sıfırdan, markanıza özel tasarlanır.', tone: 'sun' },
+            { icon: Zap, title: 'Işık hızı', desc: 'Core Web Vitals 90+ skor. Google sevdiği kadar müşteri de sever. 2 saniyenin altında açılma hedefi.', tone: 'brand' },
+            { icon: Smartphone, title: 'Mobil önce', desc: 'Önce mobil tasarlıyoruz. Çünkü kullanıcılarınızın %75\'i telefondan girer.', tone: 'coral' },
+            { icon: Search, title: 'SEO ile doğar', desc: 'Meta tag, schema, sitemap, canonical — hepsi ilk günden hazır. Sonradan eklenmez.', tone: 'mint' },
+            { icon: Paintbrush, title: 'Markanıza özel', desc: 'Hazır temalar yok. Her site sıfırdan, markanıza özel tasarlanır.', tone: 'sun' },
         ],
         stats: [
             { value: '2–4 hafta', label: 'Teslim süresi' },
@@ -54,10 +55,10 @@ const WebDesign = () => {
         subheadline: 'Fast, modern, mobile-friendly websites born with SEO baked in.',
         description: "We don't build sites just to look pretty. Conversion-focused, Google-friendly sites that load in under 2 seconds. React + Vite + Tailwind.",
         features: [
-            { icon: '', title: 'Lightning fast', desc: 'Core Web Vitals 90+ score. What Google loves, customers love. Sub-2s load target.', tone: 'brand' },
-            { icon: '', title: 'Mobile first', desc: 'We design for mobile first. Because 75% of your users come from phones.', tone: 'coral' },
-            { icon: '', title: 'Born with SEO', desc: 'Meta tags, schema, sitemap, canonical — all ready from day one. Not bolted on later.', tone: 'mint' },
-            { icon: '', title: 'Custom to your brand', desc: 'No stock themes. Every site is built from scratch, custom to your brand.', tone: 'sun' },
+            { icon: Zap, title: 'Lightning fast', desc: 'Core Web Vitals 90+ score. What Google loves, customers love. Sub-2s load target.', tone: 'brand' },
+            { icon: Smartphone, title: 'Mobile first', desc: 'We design for mobile first. Because 75% of your users come from phones.', tone: 'coral' },
+            { icon: Search, title: 'Born with SEO', desc: 'Meta tags, schema, sitemap, canonical — all ready from day one. Not bolted on later.', tone: 'mint' },
+            { icon: Paintbrush, title: 'Custom to your brand', desc: 'No stock themes. Every site is built from scratch, custom to your brand.', tone: 'sun' },
         ],
         stats: [
             { value: '2–4 weeks', label: 'Delivery time' },
