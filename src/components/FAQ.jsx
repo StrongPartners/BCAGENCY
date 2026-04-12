@@ -90,11 +90,11 @@ const FAQItem = ({ question, answer, index, tone }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.04 }}
-      className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100"
+      className="bg-surface-card rounded-2xl overflow-hidden shadow-sm border border-gray-100"
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-ink-50 transition-colors"
+        className="w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-surface-alt transition-colors"
       >
         <span className="font-black text-ink-900 text-base md:text-lg">{question}</span>
         <motion.div
@@ -130,7 +130,7 @@ const FAQ = () => {
   const tones = ['brand', 'coral', 'mint', 'sun'];
 
   return (
-    <section className="py-24 md:py-32 bg-white relative overflow-hidden" id="faq">
+    <section className="py-24 md:py-32 bg-surface-card relative overflow-hidden" id="faq">
       {/* Bg accents */}
       <div className="absolute top-20 -left-20 w-96 h-96 bg-sun-200 rounded-full blur-3xl opacity-40" />
       <div className="absolute bottom-20 -right-20 w-96 h-96 bg-mint-200 rounded-full blur-3xl opacity-40" />

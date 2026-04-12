@@ -15,39 +15,42 @@ import Produksiyon from './components/Produksiyon';
 import DroneCekim from './components/DroneCekim';
 import FotografVideo from './components/FotografVideo';
 import { LanguageProvider } from './context/LanguageContext';
+import { ThemeProvider } from './context/ThemeContext';
 import ScrollToTop from './components/ScrollToTop';
 import WhatsAppButton from './components/WhatsAppButton';
 
 function App() {
   return (
-    <LanguageProvider>
-      <Router>
-        <ScrollToTop />
-        <div className="flex flex-col min-h-screen">
-          <Header />
-          <div className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/hizmetler/seo" element={<SEO />} />
-              <Route path="/hizmetler/google-ads" element={<GoogleAds />} />
-              <Route path="/hizmetler/sosyal-medya" element={<SocialMedia />} />
-              <Route path="/hizmetler/web-tasarim" element={<WebDesign />} />
-              <Route path="/hizmetler/produksiyon" element={<Produksiyon />} />
-              <Route path="/hizmetler/drone-cekim" element={<DroneCekim />} />
-              <Route path="/hizmetler/fotograf-video" element={<FotografVideo />} />
-              {/* Fallback */}
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
+    <ThemeProvider>
+      <LanguageProvider>
+        <Router>
+          <ScrollToTop />
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <div className="flex-grow">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/hizmetler/seo" element={<SEO />} />
+                <Route path="/hizmetler/google-ads" element={<GoogleAds />} />
+                <Route path="/hizmetler/sosyal-medya" element={<SocialMedia />} />
+                <Route path="/hizmetler/web-tasarim" element={<WebDesign />} />
+                <Route path="/hizmetler/produksiyon" element={<Produksiyon />} />
+                <Route path="/hizmetler/drone-cekim" element={<DroneCekim />} />
+                <Route path="/hizmetler/fotograf-video" element={<FotografVideo />} />
+                {/* Fallback */}
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </div>
+            <Footer />
+            <WhatsAppButton />
           </div>
-          <Footer />
-          <WhatsAppButton />
-        </div>
-      </Router>
-    </LanguageProvider>
+        </Router>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }
 

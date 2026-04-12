@@ -64,7 +64,7 @@ const renderContent = (content) => {
               <thead className="bg-gray-50">
                 <tr>{rows[0].map((c, idx) => <th key={idx} className="px-6 py-4 text-left text-xs font-black text-gray-500 uppercase tracking-wider">{c}</th>)}</tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-surface-card divide-y divide-gray-200">
                 {rows.slice(1).map((row, ri) => (
                   <tr key={ri} className="hover:bg-gray-50/50 transition-colors">
                     {row.map((c, ci) => <td key={ci} className="px-6 py-4 text-sm font-medium text-gray-600">{c}</td>)}
@@ -257,7 +257,7 @@ const BlogPost = () => {
   const otherPosts = blogPosts.filter(p => p.slug !== slug).slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-surface-card">
       {/* Hero Image */}
       <div className="relative h-80 md:h-[480px] overflow-hidden pt-24">
         <img
@@ -270,11 +270,11 @@ const BlogPost = () => {
           <div className="container mx-auto max-w-4xl">
             <button
               onClick={() => navigate('/blog')}
-              className="inline-flex items-center gap-2 bg-white text-ink-900 font-black text-sm px-4 py-2 rounded-full border border-gray-200 mb-4 hover:bg-sun-200 transition-colors shadow-md"
+              className="inline-flex items-center gap-2 bg-surface-card text-ink-900 font-black text-sm px-4 py-2 rounded-full border border-gray-200 mb-4 hover:bg-sun-200 transition-colors shadow-md"
             >
               <ArrowLeft size={14} strokeWidth={3} /> {t('blog_back')}
             </button>
-            <span className={`inline-block text-xs font-black px-3 py-1 rounded-full mb-3 ${categoryColors[post.category] || 'bg-white text-ink-700'}`}>
+            <span className={`inline-block text-xs font-black px-3 py-1 rounded-full mb-3 ${categoryColors[post.category] || 'bg-surface-card text-ink-700'}`}>
               {categoryLabels[post.category]?.[lang] || post.category}
             </span>
             <h1 className="text-3xl md:text-6xl font-black text-white leading-[0.95] max-w-4xl tracking-tight">
@@ -328,7 +328,7 @@ const BlogPost = () => {
 
       {/* Other Posts */}
       {otherPosts.length > 0 && (
-        <section className="py-20 md:py-24 px-4 md:px-8 bg-ink-50">
+        <section className="py-20 md:py-24 px-4 md:px-8 bg-surface-alt">
           <div className="container mx-auto">
             <h2 className="text-3xl md:text-4xl font-black text-ink-900 mb-10 tracking-tight">{t('blog_other_posts')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
@@ -337,7 +337,7 @@ const BlogPost = () => {
                   <div
                     key={other.id}
                     onClick={() => navigate(`/blog/${other.slug}`)}
-                    className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 cursor-pointer group hover:-translate-y-2 transition-all"
+                    className="bg-surface-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 cursor-pointer group hover:-translate-y-2 transition-all"
                   >
                     <div className="h-44 overflow-hidden">
                       <img

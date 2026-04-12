@@ -15,7 +15,7 @@ const Approach = () => {
     const steps = t('approach_steps');
 
     return (
-        <section className="relative py-24 md:py-32 bg-ink-50 overflow-hidden">
+        <section className="relative py-24 md:py-32 bg-surface-alt overflow-hidden">
             {/* Decorative accents */}
             <div className="absolute top-20 left-10 w-40 h-40 bg-coral-200 rounded-full blur-3xl opacity-40" />
             <div className="absolute bottom-20 right-10 w-48 h-48 bg-brand-200 rounded-full blur-3xl opacity-40" />
@@ -66,7 +66,7 @@ const Approach = () => {
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
                                 whileHover={{ y: -6 }}
-                                className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
+                                className="group bg-surface-card rounded-2xl p-8 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
                             >
                                 <div className={`w-14 h-14 ${TONE_BG[tone]} rounded-xl flex items-center justify-center font-black text-lg ${TONE_NUMBER[tone]} mb-6`}>
                                     {step.number}
@@ -98,7 +98,7 @@ const Approach = () => {
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.08 }}
-                                    className="text-center bg-white rounded-2xl p-6 shadow-sm border border-gray-100"
+                                    className="text-center bg-surface-card rounded-2xl p-6 shadow-sm border border-gray-100"
                                 >
                                     <div className={`text-5xl md:text-6xl font-black ${TONE_NUMBER[tone]} mb-2 leading-none`}>
                                         {stat.value}

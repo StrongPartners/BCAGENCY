@@ -66,7 +66,7 @@ const Contact = () => {
     ];
 
     return (
-        <div className="bg-white">
+        <div className="bg-surface-card">
 
             {/* Hero */}
             <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden">
@@ -153,7 +153,7 @@ const Contact = () => {
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
-                                className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
+                                className="bg-surface-card rounded-2xl p-6 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
                             >
                                 <div className="flex items-start gap-4">
                                     <div className="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center shrink-0">
@@ -177,7 +177,7 @@ const Contact = () => {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.1 }}
-                                className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
+                                className="bg-surface-card rounded-2xl p-6 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
                             >
                                 <div className="flex items-start gap-4">
                                     <div className="w-12 h-12 bg-mint-100 rounded-xl flex items-center justify-center shrink-0">

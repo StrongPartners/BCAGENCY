@@ -32,10 +32,10 @@ const About = () => {
     });
 
     return (
-        <div className="bg-white">
+        <div className="bg-surface-card">
 
             {/* Hero */}
-            <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-white">
+            <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-surface-card">
                 <div className="absolute inset-0 z-0">
                     <ColorfulBlobs variant="hero" />
                 </div>
@@ -79,7 +79,7 @@ const About = () => {
             </section>
 
             {/* Story */}
-            <section className="py-20 md:py-28 bg-ink-50 relative overflow-hidden">
+            <section className="py-20 md:py-28 bg-surface-alt relative overflow-hidden">
                 <div className="absolute top-10 right-10 w-72 h-72 bg-brand-200 rounded-full blur-3xl opacity-50" />
                 <div className="container mx-auto px-4 md:px-8 relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
@@ -123,7 +123,7 @@ const About = () => {
             </section>
 
             {/* Values */}
-            <section className="py-20 md:py-28 bg-white">
+            <section className="py-20 md:py-28 bg-surface-card">
                 <div className="container mx-auto px-4 md:px-8">
                     <div className="max-w-3xl mb-14">
                         <div className="inline-block bg-sun-200 rounded-full px-4 py-1.5 mb-6">
@@ -149,7 +149,7 @@ const About = () => {
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.1 }}
                                     whileHover={{ y: -6 }}
-                                    className="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
+                                    className="bg-surface-card rounded-2xl p-7 shadow-sm hover:shadow-lg border border-gray-100 transition-all"
                                 >
                                     <div className={`w-14 h-14 ${TONE_BG[tone]} rounded-xl flex items-center justify-center mb-5`}>
                                         <IconComponent size={24} className={TONE_ICON[tone]} strokeWidth={2} />
@@ -164,7 +164,7 @@ const About = () => {
             </section>
 
             {/* Services grid */}
-            <section className="py-20 md:py-28 bg-ink-50 relative overflow-hidden">
+            <section className="py-20 md:py-28 bg-surface-alt relative overflow-hidden">
                 <div className="absolute top-10 left-10 w-72 h-72 bg-coral-200 rounded-full blur-3xl opacity-50" />
                 <div className="absolute bottom-10 right-10 w-72 h-72 bg-brand-200 rounded-full blur-3xl opacity-50" />
 
@@ -193,7 +193,7 @@ const About = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.05 }}
-                                    className="bg-white rounded-2xl p-5 shadow-sm hover:shadow-lg border border-gray-100 hover:-translate-y-1 transition-all"
+                                    className="bg-surface-card rounded-2xl p-5 shadow-sm hover:shadow-lg border border-gray-100 hover:-translate-y-1 transition-all"
                                 >
                                     <div className={`w-12 h-12 ${TONE_BG[tone]} rounded-xl flex items-center justify-center mb-3`}>
                                         <IconComponent size={20} className={TONE_ICON[tone]} strokeWidth={2} />
