@@ -26,25 +26,3 @@ dist-ssr
 # Security
 bccreative-49a1ba3a3690.json
 google-service-account.json
-gsc-service-account.json
-*.json.key
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-*.egg-info/
-dist/
-build/
-.eggs/
-*.egg
-.venv/
-venv/
-env/
-
-# AI SEO
-ai-seo/.env
-ai-seo/ai-seo.log
-ai-seo/*.json
-!ai-seo/docker-compose.yml
