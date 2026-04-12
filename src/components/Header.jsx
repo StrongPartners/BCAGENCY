@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
-import { useTheme, THEMES } from '../context/ThemeContext';
+import { useTheme } from '../context/ThemeContext';
 
 /**
  * Header — Creative Playground top navigation.
@@ -199,6 +199,20 @@ const Header = () => {
                         className="absolute top-full left-0 right-0 bg-surface-card border-t border-gray-200 shadow-xl lg:hidden"
                     >
                         <div className="flex flex-col p-6 space-y-4 max-h-[85vh] overflow-y-auto">
+                            {/* Theme picker */}
+                            <div className="flex items-center gap-2 self-start">
+                                {themes.map((t) => (
+                                    <button
+                                        key={t.id}
+                                        onClick={() => setTheme(t.id)}
+                                        className={`w-8 h-8 rounded-full ${t.preview} border-2 transition-all ${
+                                            theme === t.id ? 'border-brand-600 scale-110' : 'border-transparent hover:scale-105'
+                                        }`}
+                                        title={t.name[lang]}
+                                    />
+                                ))}
+                            </div>
+
                             {/* Language toggle */}
                             <div className="flex items-center gap-2 bg-ink-100 rounded-full p-1 self-start">
                                 <button onClick={toggleLang} className={`px-4 py-1.5 rounded-full text-xs font-black ${lang === 'tr' ? 'bg-surface-card text-ink-900 shadow-sm' : 'text-ink-400'}`}>TR</button>
