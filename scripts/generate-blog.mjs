@@ -138,7 +138,14 @@ class GenerateBlogBatchUseCase {
                     if (err.message.toLowerCase().includes("403") || err.message.toLowerCase().includes("forbidden")) {
                         throw new Error(`API KAPALI! Google Cloud'da Generative Language API'yi aktifleştir.`);
                     }
-                    console.warn(`[BlogUseCase] ${modelName} (${apiVer}) hata: ${err.message.substring(0, 60)}...`);
+                    if (err.message.toLowerCase().includes("401") || err.message.toLowerCase().includes("unauthorized") || err.message.toLowerCase().includes("api_key") || err.message.toLowerCase().includes("api key")) {
+                        throw new Error(`GEMINI_API_KEY GEÇERSİZ! aistudio.google.com'dan yeni bir key oluştur.`);
+                    }
+                    if (err.message.toLowerCase().includes("429") || err.message.toLowerCase().includes("rate limit") || err.message.toLowerCase().includes("quota")) {
+                        throw new Error(`RATE LIMIT! Gemini kotası doldu, birkaç dakika bekle veya paid tier'a geç.`);
+                    }
+                    // Tam hata mesajını göster (önceden 60 karakter kesiyordu, teşhisi zorlaştırıyordu)
+                    console.warn(`[BlogUseCase] ${modelName} (${apiVer}) FULL ERROR: ${err.message}`);
                 }
             }
         }
