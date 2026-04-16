@@ -15,11 +15,9 @@ const POSTS_PATH = join(__dirname, '../src/data/blogPosts.js');
 
 let content = readFileSync(POSTS_PATH, 'utf-8');
 const originalContent = content;
-let changes = { headingArtifacts: 0, undefinedEn: 0 };
+let changes = { headingArtifacts: 0, undefinedEn: 0, doubleCommas: 0 };
 
 // FIX 1: "### H2: Title" → "## Title" (markdown seviyesi düzelt)
-// "### H3: Title" → "### Title"
-// Hem inline JSON-stringified string içinde (\\n ile) hem de backtick içinde çalışır
 const beforeH2 = content.length;
 content = content.replace(/###\s+H2:\s*/g, '## ');
 content = content.replace(/###\s+H3:\s*/g, '### ');
@@ -35,12 +33,22 @@ if (undefMatches) {
     content = content.replace(undefEnRegex, 'en: "" }');
 }
 
+// FIX 3: KRİTİK - "},," (çift virgül) bug'ı sparse array oluşturuyor,
+// Blog.jsx .map() içinde post.id'ye erişince crash ediyor → BEYAZ EKRAN!
+// "},(whitespace),"  →  "},(whitespace)"
+const doubleCommaMatches = content.match(/\},(\s*),/g);
+if (doubleCommaMatches) {
+    changes.doubleCommas = doubleCommaMatches.length;
+    content = content.replace(/\},(\s*),/g, '},$1');
+}
+
 // Kaydet
 if (content !== originalContent) {
     writeFileSync(POSTS_PATH, content, 'utf-8');
     console.log('✅ Temizlik tamamlandı:');
     console.log(`   - Heading artifact'ları (H2:/H3:/H4: prefix): ${changes.headingArtifacts > 0 ? 'düzeltildi' : 'yok'}`);
-    console.log(`   - Undefined EN içerik: ${changes.undefinedEn} adet → "" olarak ayarlandı (TR fallback devreye girer)`);
+    console.log(`   - Undefined EN içerik: ${changes.undefinedEn} adet → "" olarak ayarlandı (TR fallback)`);
+    console.log(`   - Çift virgül (sparse array) bug'ı: ${changes.doubleCommas} adet düzeltildi`);
 } else {
     console.log('ℹ️  Temizlenecek bir şey bulunamadı.');
 }
