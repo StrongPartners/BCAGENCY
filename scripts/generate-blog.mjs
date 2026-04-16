@@ -81,7 +81,19 @@ class FileBlogRepository {
         const entries = uniquePosts.map(post => BlogPost.toRawObject(post));
         const insertAt = content.lastIndexOf('];');
         if (insertAt === -1) throw new Error("Dosya yapısı geçersiz: '];' bulunamadı.");
-        const updated = content.substring(0, insertAt) + entries.join(',\n') + ',\n' + content.substring(insertAt);
+
+        // ÖNCEKİ ENTRY'NİN TRAILING COMMA'sı OLMAZSA EKLE,
+        // VARSA TEKRARLAMA (çift virgül = sparse array = beyaz ekran bug'ı)
+        let beforeInsert = content.substring(0, insertAt);
+        const trimmedBefore = beforeInsert.replace(/\s+$/, '');
+        const lastChar = trimmedBefore[trimmedBefore.length - 1];
+        // Önceki son karakter '}' ise (yani önceki entry'de trailing comma yoksa) virgül ekle
+        const separator = lastChar === '}' ? ',\n    ' : '    ';
+        let updated = beforeInsert + separator + entries.join(',\n    ') + ',\n' + content.substring(insertAt);
+
+        // Son güvenlik kontrolü: olası çift virgül pattern'lerini temizle
+        updated = updated.replace(/\},(\s*),/g, '},$1');
+
         writeFileSync(this.filePath, updated, 'utf-8');
         return uniquePosts.length;
     }
