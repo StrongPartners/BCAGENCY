@@ -268,6 +268,12 @@ ${existingSlugs.join(', ')}
 - --- ile bölüm ayırıcılar (3-4 kez)
 - Minimum 1000 kelime Türkçe içerik
 
+### KRİTİK: Başlıklarda ASLA Şu Prefix'leri KULLANMA:
+- ❌ YANLIŞ: "### H2: Başlık metni" veya "## H1: Başlık metni"
+- ✅ DOĞRU: "## Başlık metni" (markdown seviyesi başlığı yeterince belirtir)
+- "H1:", "H2:", "H3:", "H4:" prefix'lerini ASLA başlık metninin içine YAZMA
+- SADECE markdown syntax'ı kullan: #, ##, ###, ####
+
 ### Kaçınılacaklar:
 - Genel tavsiyeler vermekten kaçın, her şeyi KKTC özelinde somutlaştır
 - "Her ülkede geçerli" tarzı cümleler yazma
