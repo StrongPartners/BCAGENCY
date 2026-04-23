@@ -178,13 +178,7 @@ export const buildArticleSchema = ({
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     datePublished,
     dateModified: dateModified || datePublished,
-    author: {
-      '@type': 'Person',
-      name: 'Sergen Bakan',
-      jobTitle: 'Kurucu & Dijital Pazarlama Uzmanı',
-      url: `${BRAND.url}/about`,
-      worksFor: { '@id': ORG_ID },
-    },
+    author: { '@type': 'Organization', name: BRAND.name, url: BRAND.url },
     publisher: { '@id': ORG_ID },
     inLanguage: 'tr-TR',
   };
