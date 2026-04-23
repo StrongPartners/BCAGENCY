@@ -14,6 +14,8 @@ import WebDesign from './components/WebDesign';
 import Produksiyon from './components/Produksiyon';
 import DroneCekim from './components/DroneCekim';
 import FotografVideo from './components/FotografVideo';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsOfService from './components/TermsOfService';
 import { LanguageProvider } from './context/LanguageContext';
 import ScrollToTop from './components/ScrollToTop';
 import WhatsAppButton from './components/WhatsAppButton';
@@ -39,6 +41,8 @@ function App() {
               <Route path="/hizmetler/produksiyon" element={<Produksiyon />} />
               <Route path="/hizmetler/drone-cekim" element={<DroneCekim />} />
               <Route path="/hizmetler/fotograf-video" element={<FotografVideo />} />
+              <Route path="/gizlilik-politikasi" element={<PrivacyPolicy />} />
+              <Route path="/kullanim-sartlari" element={<TermsOfService />} />
               {/* Fallback */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
