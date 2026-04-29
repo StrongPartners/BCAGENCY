@@ -36,8 +36,8 @@ export const CONTACT = Object.freeze({
 });
 
 export const ADDRESS = Object.freeze({
-  streetAddress: 'Fatih Sk, Aşağı Girne Mah. Ardem 11 Apt. Kat:3 No:14',
-  addressLocality: 'Girne',
+  streetAddress: 'Alsancak, Emtan West Park No:4',
+  addressLocality: 'Alsancak/Girne',
   addressRegion: 'Girne',
   postalCode: '99320',
   addressCountry: 'CY',
