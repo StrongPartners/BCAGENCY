@@ -67,7 +67,7 @@ const PrivacyPolicy = () => {
                     <section>
                         <h2 className="text-2xl font-bold text-ink-900 mb-3">8. İletişim</h2>
                         <p>BC Creative Agency<br />
-                        Fatih Sk, Aşağı Girne Mah. Ardem 11 Apt. Kat:3 No:14, Girne, KKTC<br />
+                        Alsancak, Emtan West Park No:4, Girne, KKTC<br />
                         E-posta: info@bccreative.agency<br />
                         Telefon: +90 548 875 54 61</p>
                     </section>
