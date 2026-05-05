@@ -10,7 +10,7 @@ const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
-    const { lang, toggleLang, t } = useLanguage();
+    const { lang, setLang, t, LANGUAGES } = useLanguage();
     const isHome = location.pathname === '/';
 
     useEffect(() => {
@@ -119,20 +119,17 @@ const Header = () => {
 
                 {/* Desktop right side */}
                 <div className="hidden lg:flex items-center gap-3">
-                    {/* Language toggle */}
+                    {/* Language selector */}
                     <div className={`flex items-center rounded-full p-0.5 ${!isScrolled && isHome ? 'bg-white/15' : 'bg-ink-50'}`}>
-                        <button
-                            onClick={() => lang !== 'tr' && toggleLang()}
-                            className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${lang === 'tr' ? 'bg-white text-ink-900 shadow-sm' : (!isScrolled && isHome ? 'text-white/60' : 'text-ink-400')}`}
-                        >
-                            TR
-                        </button>
-                        <button
-                            onClick={() => lang !== 'en' && toggleLang()}
-                            className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${lang === 'en' ? 'bg-white text-ink-900 shadow-sm' : (!isScrolled && isHome ? 'text-white/60' : 'text-ink-400')}`}
-                        >
-                            EN
-                        </button>
+                        {LANGUAGES.map((l) => (
+                            <button
+                                key={l}
+                                onClick={() => setLang(l)}
+                                className={`px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all ${lang === l ? 'bg-white text-ink-900 shadow-sm' : (!isScrolled && isHome ? 'text-white/60 hover:text-white' : 'text-ink-400 hover:text-ink-700')}`}
+                            >
+                                {l.toUpperCase()}
+                            </button>
+                        ))}
                     </div>
 
                     {/* CTA pill */}
@@ -165,10 +162,17 @@ const Header = () => {
                         className="absolute top-full left-0 right-0 bg-white border-t border-ink-100 shadow-lg lg:hidden"
                     >
                         <div className="flex flex-col p-6 space-y-4 max-h-[85vh] overflow-y-auto">
-                            {/* Language toggle */}
-                            <div className="flex items-center gap-2 bg-ink-50 rounded-full p-0.5 self-start">
-                                <button onClick={() => { if (lang !== 'tr') toggleLang(); }} className={`px-4 py-1.5 rounded-full text-xs font-semibold ${lang === 'tr' ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-400'}`}>TR</button>
-                                <button onClick={() => { if (lang !== 'en') toggleLang(); }} className={`px-4 py-1.5 rounded-full text-xs font-semibold ${lang === 'en' ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-400'}`}>EN</button>
+                            {/* Language selector */}
+                            <div className="flex items-center gap-1 bg-ink-50 rounded-full p-0.5 self-start">
+                                {LANGUAGES.map((l) => (
+                                    <button
+                                        key={l}
+                                        onClick={() => setLang(l)}
+                                        className={`px-3 py-1.5 rounded-full text-xs font-semibold ${lang === l ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-400'}`}
+                                    >
+                                        {l.toUpperCase()}
+                                    </button>
+                                ))}
                             </div>
 
                             {navLinks.map((item) => (

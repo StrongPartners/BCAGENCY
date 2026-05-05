@@ -15,6 +15,8 @@ const Home = () => {
         alternates: [
             { hreflang: 'tr', href: 'https://bccreative.agency/' },
             { hreflang: 'en', href: 'https://bccreative.agency/' },
+            { hreflang: 'ru', href: 'https://bccreative.agency/' },
+            { hreflang: 'fa', href: 'https://bccreative.agency/' },
         ],
         schemas: [buildOrganizationSchema(), buildWebSiteSchema()],
     });
