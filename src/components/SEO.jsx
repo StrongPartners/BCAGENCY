@@ -112,10 +112,17 @@ const SEO = () => {
         ],
     });
 
+    const breadcrumbs = [
+        { name: isTr ? 'Ana Sayfa' : 'Home', url: '/' },
+        { name: isTr ? 'Hizmetler' : 'Services', url: '/hizmetler/seo' },
+        { name: 'SEO', url: '/hizmetler/seo' },
+    ];
+
     return (
         <ServicePageLayout
             {...content}
             tone="brand"
+            breadcrumbs={breadcrumbs}
         />
     );
 };

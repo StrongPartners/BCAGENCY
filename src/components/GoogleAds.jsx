@@ -111,7 +111,13 @@ const GoogleAds = () => {
         ],
     });
 
-    return <ServicePageLayout {...content} tone="coral" />;
+    const breadcrumbs = [
+        { name: isTr ? 'Ana Sayfa' : 'Home', url: '/' },
+        { name: isTr ? 'Hizmetler' : 'Services', url: '/hizmetler/google-ads' },
+        { name: 'Google Ads', url: '/hizmetler/google-ads' },
+    ];
+
+    return <ServicePageLayout {...content} tone="coral" breadcrumbs={breadcrumbs} />;
 };
 
 export default GoogleAds;

@@ -104,7 +104,13 @@ const DroneCekim = () => {
         ],
     });
 
-    return <ServicePageLayout {...content} tone="brand" />;
+    const breadcrumbs = [
+        { name: isTr ? 'Ana Sayfa' : 'Home', url: '/' },
+        { name: isTr ? 'Hizmetler' : 'Services', url: '/hizmetler/drone-cekim' },
+        { name: isTr ? 'Drone Çekim' : 'Drone Filming', url: '/hizmetler/drone-cekim' },
+    ];
+
+    return <ServicePageLayout {...content} tone="brand" breadcrumbs={breadcrumbs} />;
 };
 
 export default DroneCekim;

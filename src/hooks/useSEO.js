@@ -92,6 +92,11 @@ const useSEO = ({
     alternates.forEach(alt => {
       setLink(`link[hreflang="${alt.hreflang}"]`, 'alternate', alt.href, { hreflang: alt.hreflang });
     });
+    // Self-referencing hreflang + x-default (SEO best practice)
+    if (alternates.length > 0) {
+      const currentUrl = canonical || window.location.href;
+      setLink('link[hreflang="x-default"]', 'alternate', currentUrl, { hreflang: 'x-default' });
+    }
 
     // 6. GEO meta tags (page-level, inherited from central geoConfig)
     if (geoMeta) {

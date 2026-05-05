@@ -55,7 +55,7 @@ const Header = () => {
                     onClick={() => go('/')}
                     className="flex items-center gap-2 group"
                 >
-                    <img src="/logo-icon.png" alt="BC Creative Agency" className="h-12 md:h-14 w-auto object-contain" />
+                    <img src="/logo-icon.png" alt="BC Creative Agency Logo" className="h-12 md:h-14 w-auto object-contain" width="56" height="56" />
                     <span className={`hidden sm:block font-bold text-base md:text-lg tracking-tight leading-none transition-colors ${!isScrolled && isHome ? 'text-white' : 'text-ink-900'}`}>
                         BC Creative
                     </span>

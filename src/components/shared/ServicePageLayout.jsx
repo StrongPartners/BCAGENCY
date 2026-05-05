@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Plus } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
+import Breadcrumb from './Breadcrumb';
 
 /**
  * ServicePageLayout
@@ -28,13 +29,15 @@ const ServicePageLayout = ({
     faqs = [],          // [{ question, answer }]
     ctaTitle,
     ctaSub,
+    breadcrumbs = [],   // [{ name, url }]
 }) => {
     const { t } = useLanguage();
 
     return (
         <div>
+            {breadcrumbs.length > 0 && <Breadcrumb items={breadcrumbs} />}
             {/* Hero */}
-            <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-white">
+            <section className={breadcrumbs.length > 0 ? "relative pt-8 pb-20 md:pt-12 md:pb-28 overflow-hidden bg-white" : "relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-white"}>
                 <div className="container mx-auto px-4 md:px-8 relative z-10">
                     <div className="max-w-4xl">
                         <motion.div
@@ -129,8 +132,11 @@ const ServicePageLayout = ({
             <section className="relative h-[60vh] md:h-[80vh] overflow-hidden">
                 <img
                     src="/marketing-hero-v2.jpg"
-                    alt="BC Creative Agency"
+                    alt="BC Creative Agency profesyonel dijital pazarlama hizmetleri"
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    width="1920"
+                    height="1080"
                 />
                 <div className="absolute inset-0 bg-ink-900/30" />
             </section>

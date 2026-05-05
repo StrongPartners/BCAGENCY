@@ -90,7 +90,7 @@ const About = () => {
                             className="lg:col-span-1"
                         >
                             <div className="rounded-2xl shadow-lg overflow-hidden">
-                                <img src="/about-rocket.jpg" alt="BC Creative Agency" className="w-full h-auto object-cover" />
+                                <img src="/about-rocket.jpg" alt="BC Creative Agency ofis çalışma ortamı, Girne KKTC" className="w-full h-auto object-cover" loading="lazy" width="640" height="480" />
                             </div>
                         </motion.div>
                     </div>
