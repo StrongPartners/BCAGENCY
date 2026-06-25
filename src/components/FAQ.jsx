@@ -142,17 +142,17 @@ const FAQItem = ({ question, answer, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.03 }}
-      className="border-b border-ink-100"
+      className="border-b border-white/10"
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="group w-full flex items-center justify-between gap-4 py-6 text-left"
       >
-        <span className="font-semibold text-ink-900 text-base md:text-lg">{question}</span>
+        <span className="font-semibold text-white text-base md:text-lg">{question}</span>
         <motion.div
           animate={{ rotate: isOpen ? 45 : 0 }}
           transition={{ duration: 0.2 }}
-          className="flex-shrink-0 text-ink-400"
+          className="flex-shrink-0 text-white/40"
         >
           <Plus size={20} strokeWidth={2} />
         </motion.div>
@@ -166,7 +166,7 @@ const FAQItem = ({ question, answer, index }) => {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
-            <div className="pb-6 text-ink-500 text-base leading-relaxed">
+            <div className="pb-6 text-white/50 text-base leading-relaxed">
               {answer}
             </div>
           </motion.div>
@@ -181,7 +181,7 @@ const FAQ = () => {
   const faqs = faqData[lang] || faqData.tr;
 
   return (
-    <section className="py-24 md:py-32 bg-white" id="faq">
+    <section className="py-0" id="faq">
       <div className="container mx-auto px-4 md:px-8 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -189,13 +189,13 @@ const FAQ = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-xs font-semibold uppercase tracking-widest text-ink-400 mb-6">
+          <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-6">
             {t('faq_label')}
           </p>
-          <h2 className="text-5xl md:text-7xl font-bold text-ink-900 leading-none tracking-tight">
+          <h2 className="text-5xl md:text-7xl font-bold text-white leading-none tracking-tight">
             {t('faq_title')}
           </h2>
-          <p className="mt-4 text-ink-500 text-lg md:text-xl">
+          <p className="mt-4 text-white/50 text-lg md:text-xl">
             {t('faq_subtitle')}
           </p>
         </motion.div>
@@ -217,12 +217,12 @@ const FAQ = () => {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <p className="text-ink-500 mb-4">
+          <p className="text-white/50 mb-4">
             {t('faq_no_answer')}
           </p>
           <button
             onClick={() => window.open('https://wa.me/905488755461', '_blank')}
-            className="inline-flex items-center gap-2 bg-ink-900 text-white px-8 py-3 rounded-full font-medium text-base hover:bg-ink-800 transition-colors"
+            className="inline-flex items-center gap-2 bg-white text-ink-900 px-8 py-3 rounded-full font-medium text-base hover:bg-ink-100 transition-colors"
           >
             {t('faq_whatsapp')}
           </button>
