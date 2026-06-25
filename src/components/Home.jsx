@@ -57,15 +57,51 @@ const Home = () => {
     return (
         <main>
             <Hero />
+
+            {/* Parallax — Ink explosion (yaratıcılık) */}
+            <ParallaxImage
+                src="/parallax-ink.webp"
+                alt="Mürekkep patlaması — yaratıcı sürecin görsel ifadesi"
+                speed={0.25}
+                height="h-[40vh] md:h-[55vh]"
+                overlay="bg-ink-900/20"
+            />
+
             <Services />
 
-            {/* Parallax — Girne aerial */}
+            {/* Parallax — Light trails (enerji) */}
             <ParallaxImage
-                src="/hf-girne-aerial.webp"
-                alt="Girne limanı havadan drone görünümü, Kuzey Kıbrıs"
+                src="/parallax-light.webp"
+                alt="Işık izleri — dijital pazarlamanın dinamik enerjisi"
                 speed={0.2}
                 height="h-[50vh] md:h-[70vh]"
-                overlay="bg-ink-900/30"
+                overlay="bg-ink-900/20"
+            >
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                    className="text-center px-6"
+                >
+                    <p className="text-white/60 text-sm font-semibold uppercase tracking-widest mb-4">
+                        {t('approach_eyebrow')}
+                    </p>
+                    <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-none tracking-tight">
+                        {t('approach_heading_1')}<br />{t('approach_heading_2')}
+                    </h2>
+                </motion.div>
+            </ParallaxImage>
+
+            <Approach />
+
+            {/* Parallax — Powder explosion (dinamizm) */}
+            <ParallaxImage
+                src="/parallax-powder.webp"
+                alt="Renk patlaması — markaların görünür olma anı"
+                speed={0.3}
+                height="h-[45vh] md:h-[60vh]"
+                overlay="bg-ink-900/10"
             >
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
@@ -81,13 +117,12 @@ const Home = () => {
                 </motion.div>
             </ParallaxImage>
 
-            <Approach />
             <FAQ />
 
-            {/* Parallax — Navy abstract CTA */}
+            {/* Parallax — Smoke CTA (atmosfer) */}
             <ParallaxImage
-                src="/hf-navy-abstract.webp"
-                alt="BC Creative Agency dijital pazarlama"
+                src="/parallax-smoke.webp"
+                alt="Renkli duman — yaratıcı fikirlerin buluşma noktası"
                 speed={0.15}
                 height="h-[50vh] md:h-[60vh]"
                 overlay="bg-ink-900/40"

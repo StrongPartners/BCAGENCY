@@ -131,8 +131,8 @@ const ServicePageLayout = ({
             {/* Full-bleed image break */}
             <section className="relative h-[60vh] md:h-[80vh] overflow-hidden">
                 <img
-                    src="/hf-girne-aerial.webp"
-                    alt="Girne Kuzey Kıbrıs havadan görünüm"
+                    src="/parallax-ink.webp"
+                    alt="BC Creative Agency yaratıcı süreç"
                     className="w-full h-full object-cover"
                     loading="lazy"
                     width="1920"
