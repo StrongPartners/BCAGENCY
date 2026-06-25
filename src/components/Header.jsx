@@ -11,7 +11,6 @@ const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { lang, setLang, t, LANGUAGES } = useLanguage();
-    const isHome = location.pathname === '/';
 
     useEffect(() => {
         const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -46,7 +45,7 @@ const Header = () => {
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white border-b border-ink-100 py-3' : 'bg-transparent py-5'}`}
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-ink-900/95 backdrop-blur-md border-b border-white/10 py-3' : 'bg-transparent py-5'}`}
         >
             <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
 
@@ -56,7 +55,7 @@ const Header = () => {
                     className="flex items-center gap-2 group"
                 >
                     <img src="/logo-icon.png" alt="BC Creative Agency Logo" className="h-12 md:h-14 w-auto object-contain" width="56" height="56" />
-                    <span className={`hidden sm:block font-bold text-base md:text-lg tracking-tight leading-none transition-colors ${!isScrolled && isHome ? 'text-white' : 'text-ink-900'}`}>
+                    <span className="hidden sm:block font-bold text-base md:text-lg tracking-tight leading-none text-white">
                         BC Creative
                     </span>
                 </button>
@@ -65,12 +64,11 @@ const Header = () => {
                 <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
                     {navLinks.map((item) => {
                         const active = location.pathname === item.path;
-                        const lightMode = !isScrolled && isHome;
                         return (
                             <button
                                 key={item.label}
                                 onClick={() => go(item.path)}
-                                className={`font-medium text-[15px] tracking-tight transition-colors ${lightMode ? (active ? 'text-white' : 'text-white/80 hover:text-white') : (active ? 'text-ink-900' : 'text-ink-600 hover:text-ink-900')}`}
+                                className={`font-medium text-[15px] tracking-tight transition-colors ${active ? 'text-white' : 'text-white/80 hover:text-white'}`}
                             >
                                 {item.label}
                             </button>
@@ -84,7 +82,7 @@ const Header = () => {
                         onMouseLeave={() => setIsHovering(false)}
                     >
                         <button
-                            className={`flex items-center gap-1.5 font-medium text-[15px] transition-colors py-2 ${!isScrolled && isHome ? 'text-white/80 hover:text-white' : 'text-ink-600 hover:text-ink-900'}`}
+                            className="flex items-center gap-1.5 font-medium text-[15px] transition-colors py-2 text-white/80 hover:text-white"
                         >
                             {t('nav_services')}
                             <ChevronDown size={16} className={`transition-transform ${isHovering ? 'rotate-180' : ''}`} />
@@ -99,15 +97,15 @@ const Header = () => {
                                     transition={{ duration: 0.18 }}
                                     className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-64"
                                 >
-                                    <div className="bg-white rounded-xl shadow-lg border border-ink-100 overflow-hidden py-2">
+                                    <div className="bg-ink-800/95 backdrop-blur-md rounded-xl shadow-lg border border-white/10 overflow-hidden py-2">
                                         {services.map((s) => (
                                             <button
                                                 key={s.name}
                                                 onClick={() => go(s.path)}
-                                                className="w-full flex items-center justify-between px-5 py-3 text-ink-600 hover:bg-ink-50 transition-colors text-[14px] font-medium group"
+                                                className="w-full flex items-center justify-between px-5 py-3 text-white/70 hover:bg-white/10 transition-colors text-[14px] font-medium group"
                                             >
-                                                <span className="group-hover:text-ink-900 transition-colors">{s.name}</span>
-                                                <span className="opacity-0 group-hover:opacity-100 text-ink-400 transition-opacity">&rarr;</span>
+                                                <span className="group-hover:text-white transition-colors">{s.name}</span>
+                                                <span className="opacity-0 group-hover:opacity-100 text-secondary-300 transition-opacity">&rarr;</span>
                                             </button>
                                         ))}
                                     </div>
@@ -120,12 +118,12 @@ const Header = () => {
                 {/* Desktop right side */}
                 <div className="hidden lg:flex items-center gap-3">
                     {/* Language selector */}
-                    <div className={`flex items-center rounded-full p-0.5 ${!isScrolled && isHome ? 'bg-white/15' : 'bg-ink-50'}`}>
+                    <div className="flex items-center rounded-full p-0.5 bg-white/15">
                         {LANGUAGES.map((l) => (
                             <button
                                 key={l}
                                 onClick={() => setLang(l)}
-                                className={`px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all ${lang === l ? 'bg-white text-ink-900 shadow-sm' : (!isScrolled && isHome ? 'text-white/60 hover:text-white' : 'text-ink-400 hover:text-ink-700')}`}
+                                className={`px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all ${lang === l ? 'bg-white text-ink-900 shadow-sm' : 'text-white/60 hover:text-white'}`}
                             >
                                 {l.toUpperCase()}
                             </button>
@@ -143,7 +141,7 @@ const Header = () => {
 
                 {/* Mobile menu button */}
                 <button
-                    className={`lg:hidden p-2 transition-colors ${!isScrolled && isHome ? 'text-white' : 'text-ink-900'}`}
+                    className="lg:hidden p-2 transition-colors text-white"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     aria-label="Menu"
                 >
@@ -159,16 +157,16 @@ const Header = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 right-0 bg-white border-t border-ink-100 shadow-lg lg:hidden"
+                        className="absolute top-full left-0 right-0 bg-ink-900/95 backdrop-blur-md border-t border-white/10 shadow-lg lg:hidden"
                     >
                         <div className="flex flex-col p-6 space-y-4 max-h-[85vh] overflow-y-auto">
                             {/* Language selector */}
-                            <div className="flex items-center gap-1 bg-ink-50 rounded-full p-0.5 self-start">
+                            <div className="flex items-center gap-1 bg-white/10 rounded-full p-0.5 self-start">
                                 {LANGUAGES.map((l) => (
                                     <button
                                         key={l}
                                         onClick={() => setLang(l)}
-                                        className={`px-3 py-1.5 rounded-full text-xs font-semibold ${lang === l ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-400'}`}
+                                        className={`px-3 py-1.5 rounded-full text-xs font-semibold ${lang === l ? 'bg-white text-ink-900 shadow-sm' : 'text-white/50'}`}
                                     >
                                         {l.toUpperCase()}
                                     </button>
@@ -176,19 +174,19 @@ const Header = () => {
                             </div>
 
                             {navLinks.map((item) => (
-                                <button key={item.label} onClick={() => go(item.path)} className="text-left text-lg font-medium text-ink-900 hover:text-brand-600 transition-colors">
+                                <button key={item.label} onClick={() => go(item.path)} className="text-left text-lg font-medium text-white hover:text-secondary-300 transition-colors">
                                     {item.label}
                                 </button>
                             ))}
 
-                            <div className="pt-4 border-t border-ink-100">
-                                <div className="text-xs font-semibold text-ink-400 uppercase tracking-wider mb-3">{t('nav_services')}</div>
+                            <div className="pt-4 border-t border-white/10">
+                                <div className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-3">{t('nav_services')}</div>
                                 <div className="space-y-3">
                                     {services.map((s) => (
                                         <button
                                             key={s.name}
                                             onClick={() => go(s.path)}
-                                            className="w-full text-left text-base font-medium text-ink-600 hover:text-ink-900 transition-colors"
+                                            className="w-full text-left text-base font-medium text-white/70 hover:text-white transition-colors"
                                         >
                                             {s.name}
                                         </button>

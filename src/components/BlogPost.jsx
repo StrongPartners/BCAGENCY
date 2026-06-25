@@ -24,7 +24,7 @@ const parseInline = (text) => {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
   return parts.map((part, j) =>
     part.startsWith('**') && part.endsWith('**')
-      ? <strong key={j} className="text-ink-900 font-bold">{part.slice(2, -2)}</strong>
+      ? <strong key={j} className="text-white font-bold">{part.slice(2, -2)}</strong>
       : part
   );
 };
@@ -50,14 +50,14 @@ const renderContent = (content) => {
         );
         result.push(
           <div key={`tbl-${i}`} className="overflow-x-auto my-8">
-            <table className="min-w-full divide-y divide-ink-100 border border-ink-100 rounded-xl overflow-hidden">
-              <thead className="bg-ink-50">
-                <tr>{rows[0].map((c, idx) => <th key={idx} className="px-6 py-4 text-left text-xs font-semibold text-ink-500 uppercase tracking-wider">{c}</th>)}</tr>
+            <table className="min-w-full divide-y divide-white/10 border border-white/10 rounded-xl overflow-hidden">
+              <thead className="bg-white/5">
+                <tr>{rows[0].map((c, idx) => <th key={idx} className="px-6 py-4 text-left text-xs font-semibold text-white/40 uppercase tracking-wider">{c}</th>)}</tr>
               </thead>
-              <tbody className="bg-white divide-y divide-ink-100">
+              <tbody className="bg-ink-900 divide-y divide-white/10">
                 {rows.slice(1).map((row, ri) => (
-                  <tr key={ri} className="hover:bg-ink-50 transition-colors">
-                    {row.map((c, ci) => <td key={ci} className="px-6 py-4 text-sm text-ink-600">{c}</td>)}
+                  <tr key={ri} className="hover:bg-white/5 transition-colors">
+                    {row.map((c, ci) => <td key={ci} className="px-6 py-4 text-sm text-white/60">{c}</td>)}
                   </tr>
                 ))}
               </tbody>
@@ -69,21 +69,21 @@ const renderContent = (content) => {
     }
 
     if (line.startsWith('#### ')) {
-      result.push(<h4 key={i} className="text-lg font-bold text-ink-900 mt-5 mb-2">{line.slice(5)}</h4>);
+      result.push(<h4 key={i} className="text-lg font-bold text-white mt-5 mb-2">{line.slice(5)}</h4>);
     } else if (line.startsWith('### ')) {
-      result.push(<h3 key={i} className="text-xl font-bold text-ink-800 mt-8 mb-3 border-l-4 border-ink-200 pl-4">{line.slice(4)}</h3>);
+      result.push(<h3 key={i} className="text-xl font-bold text-white mt-8 mb-3 border-l-4 border-secondary-300/30 pl-4">{line.slice(4)}</h3>);
     } else if (line.startsWith('## ')) {
-      result.push(<h2 key={i} className="text-2xl md:text-3xl font-bold text-ink-900 mt-12 mb-5">{line.slice(3)}</h2>);
+      result.push(<h2 key={i} className="text-2xl md:text-3xl font-bold text-white mt-12 mb-5">{line.slice(3)}</h2>);
 
     } else if (line.startsWith('> ')) {
       result.push(
-        <blockquote key={i} className="border-l-4 border-ink-200 bg-ink-50 rounded-r-xl px-6 py-4 my-6 text-ink-600 italic">
+        <blockquote key={i} className="border-l-4 border-secondary-300/30 bg-white/5 rounded-r-xl px-6 py-4 my-6 text-white/60 italic">
           {parseInline(line.slice(2))}
         </blockquote>
       );
 
     } else if (line === '---') {
-      result.push(<hr key={i} className="my-10 border-ink-100" />);
+      result.push(<hr key={i} className="my-10 border-white/10" />);
 
     } else if (line.startsWith('![')) {
       const m = line.match(/!\[([^\]]*)\]\(([^)]+)\)/);
@@ -110,8 +110,8 @@ const renderContent = (content) => {
       result.push(
         <ul key={`ul-${i}`} className="my-4 space-y-2 pl-2">
           {items.map((item, idx) => (
-            <li key={idx} className="flex items-start gap-3 text-ink-600">
-              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-ink-400 flex-shrink-0" />
+            <li key={idx} className="flex items-start gap-3 text-white/60">
+              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary-300/50 flex-shrink-0" />
               <span>{parseInline(item)}</span>
             </li>
           ))}
@@ -128,8 +128,8 @@ const renderContent = (content) => {
       result.push(
         <ol key={`ol-${i}`} className="my-4 space-y-3 pl-2">
           {items.map((item, idx) => (
-            <li key={idx} className="flex items-start gap-3 text-ink-600">
-              <span className="flex-shrink-0 w-7 h-7 rounded-full bg-ink-900 text-white text-xs font-bold flex items-center justify-center mt-0.5">
+            <li key={idx} className="flex items-start gap-3 text-white/60">
+              <span className="flex-shrink-0 w-7 h-7 rounded-full bg-white/10 text-white text-xs font-bold flex items-center justify-center mt-0.5">
                 {idx + 1}
               </span>
               <span className="pt-0.5">{parseInline(item)}</span>
@@ -140,17 +140,17 @@ const renderContent = (content) => {
       continue;
 
     } else if (line.startsWith('`') && line.endsWith('`')) {
-      result.push(<code key={i} className="block bg-ink-50 text-ink-700 px-4 py-2 rounded-lg text-sm font-mono my-3">{line.slice(1, -1)}</code>);
+      result.push(<code key={i} className="block bg-white/5 text-white/70 px-4 py-2 rounded-lg text-sm font-mono my-3">{line.slice(1, -1)}</code>);
 
     } else if (line === '') {
       // skip empty
 
     } else if (line.startsWith('**') && line.endsWith('**') && line.indexOf('**', 2) === line.length - 2) {
-      result.push(<p key={i} className="font-bold text-ink-800 my-3 text-lg">{line.slice(2, -2)}</p>);
+      result.push(<p key={i} className="font-bold text-white my-3 text-lg">{line.slice(2, -2)}</p>);
 
     } else {
       result.push(
-        <p key={i} className="text-ink-600 leading-relaxed mb-4">
+        <p key={i} className="text-white/60 leading-relaxed mb-4">
           {line.includes('**') ? parseInline(line) : line}
         </p>
       );
@@ -222,8 +222,8 @@ const BlogPost = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-ink-900 mb-4">{t('blog_not_found')}</h1>
-          <button onClick={() => navigate('/blog')} className="text-brand-600 font-medium">
+          <h1 className="text-4xl font-bold text-white mb-4">{t('blog_not_found')}</h1>
+          <button onClick={() => navigate('/blog')} className="text-secondary-300 font-medium">
             &larr; {t('blog_back')}
           </button>
         </div>
@@ -234,7 +234,7 @@ const BlogPost = () => {
   const otherPosts = blogPosts.filter(p => p.slug !== slug).slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-ink-900">
       {/* Hero Image */}
       <div className="relative h-80 md:h-[480px] overflow-hidden pt-24">
         <img
@@ -251,7 +251,7 @@ const BlogPost = () => {
             >
               <ArrowLeft size={14} /> {t('blog_back')}
             </button>
-            <span className="inline-block text-xs font-medium px-3 py-1 rounded-full mb-3 bg-white/90 text-ink-700">
+            <span className="inline-block text-xs font-medium px-3 py-1 rounded-full mb-3 bg-white/10 text-white/80 backdrop-blur-sm">
               {categoryLabels[post.category]?.[lang] || post.category}
             </span>
             <h1 className="text-3xl md:text-6xl font-bold text-white leading-[0.95] max-w-4xl tracking-tight">
@@ -265,7 +265,7 @@ const BlogPost = () => {
       <div className="container mx-auto px-4 md:px-8 py-12">
         <div className="max-w-4xl mx-auto">
           {/* Meta */}
-          <div className="flex items-center gap-4 text-sm text-ink-400 mb-10 pb-8 border-b border-ink-100">
+          <div className="flex items-center gap-4 text-sm text-white/40 mb-10 pb-8 border-b border-white/10">
             <span className="flex items-center gap-1"><Clock size={14} /> {postReadTime} {t('blog_read_time')}</span>
             <span>&middot;</span>
             <span>{postDate}</span>
@@ -288,7 +288,7 @@ const BlogPost = () => {
             <h3 className="text-3xl md:text-5xl font-bold text-white mb-5 leading-tight tracking-tight">
               {t('blog_cta_title')}
             </h3>
-            <p className="text-ink-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+            <p className="text-white/40 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
               {t('blog_cta_sub')}
             </p>
             <button
@@ -303,15 +303,15 @@ const BlogPost = () => {
 
       {/* Other Posts */}
       {otherPosts.length > 0 && (
-        <section className="py-20 md:py-24 px-4 md:px-8 bg-ink-50">
+        <section className="py-20 md:py-24 px-4 md:px-8 bg-ink-800/50">
           <div className="container mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-ink-900 mb-10 tracking-tight">{t('blog_other_posts')}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-10 tracking-tight">{t('blog_other_posts')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {otherPosts.map((other) => (
                 <div
                   key={other.id}
                   onClick={() => navigate(`/blog/${other.slug}`)}
-                  className="bg-white rounded-xl overflow-hidden border border-ink-100 cursor-pointer group hover:shadow-sm transition-all"
+                  className="bg-white/5 rounded-xl overflow-hidden border border-white/10 cursor-pointer group hover:bg-white/10 transition-all"
                 >
                   <div className="h-44 overflow-hidden">
                     <img
@@ -321,13 +321,13 @@ const BlogPost = () => {
                     />
                   </div>
                   <div className="p-6">
-                    <span className="text-xs font-medium px-3 py-1 rounded-full bg-ink-50 text-ink-600">
+                    <span className="text-xs font-medium px-3 py-1 rounded-full bg-white/10 text-white/70">
                       {other.category}
                     </span>
-                    <h3 className="font-bold text-ink-900 mt-3 text-lg leading-tight group-hover:text-brand-600 transition-colors line-clamp-2">
+                    <h3 className="font-bold text-white mt-3 text-lg leading-tight group-hover:text-secondary-300 transition-colors line-clamp-2">
                       {other.title[lang] || other.title.tr}
                     </h3>
-                    <div className="flex items-center gap-1 text-brand-600 text-sm font-medium mt-4">
+                    <div className="flex items-center gap-1 text-secondary-300 text-sm font-medium mt-4">
                       {t('blog_read_more')} <ChevronRight size={14} />
                     </div>
                   </div>

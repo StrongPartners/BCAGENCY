@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
+import Testimonials from './components/Testimonials';
+import BlogPreview from './components/BlogPreview';
 import { LanguageProvider } from './context/LanguageContext';
 import ScrollToTop from './components/ScrollToTop';
 import WhatsAppButton from './components/WhatsAppButton';
@@ -32,7 +34,7 @@ function App() {
           <div className="flex-grow">
             <Suspense fallback={<div className="min-h-screen" />}>
               <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<><Home /><Testimonials /><BlogPreview /></>} />
                 <Route path="/about" element={<About />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />

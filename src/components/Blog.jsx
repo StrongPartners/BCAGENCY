@@ -34,7 +34,7 @@ const Blog = () => {
   });
 
   return (
-    <div className="bg-white">
+    <div className="bg-ink-900">
 
       {/* Hero */}
       <section className="pt-32 pb-16 md:pt-40 md:pb-20">
@@ -43,7 +43,7 @@ const Blog = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="text-xs font-semibold uppercase tracking-widest text-ink-400 mb-6"
+            className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-6"
           >
             {t('blog_badge')}
           </motion.p>
@@ -52,7 +52,7 @@ const Blog = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl md:text-8xl font-bold text-ink-900 leading-[0.95] tracking-tighter"
+            className="text-5xl md:text-8xl font-bold text-white leading-[0.95] tracking-tighter"
           >
             {t('blog_heading_1')}{' '}
             {t('blog_heading_accent')}
@@ -62,7 +62,7 @@ const Blog = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-8 text-lg md:text-xl text-ink-500 max-w-2xl mx-auto"
+            className="mt-8 text-lg md:text-xl text-white/50 max-w-2xl mx-auto"
           >
             {t('blog_sub')}
           </motion.p>
@@ -81,7 +81,7 @@ const Blog = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: (index % 6) * 0.06 }}
                 onClick={() => navigate(`/blog/${post.slug}`)}
-                className="bg-white rounded-xl overflow-hidden border border-ink-100 cursor-pointer group hover:shadow-sm transition-all"
+                className="bg-white/5 rounded-xl overflow-hidden border border-white/10 cursor-pointer group hover:bg-white/10 hover:border-secondary-300/30 transition-all"
               >
                 <div className="relative h-48 overflow-hidden">
                   <img
@@ -93,13 +93,13 @@ const Blog = () => {
                     height="192"
                   />
                   <div className="absolute inset-0 bg-ink-900/0 group-hover:bg-ink-900/40 transition-all duration-500" />
-                  <span className="absolute top-4 left-4 text-xs font-medium px-3 py-1 rounded-full bg-white/90 text-ink-700 backdrop-blur-sm">
+                  <span className="absolute top-4 left-4 text-xs font-medium px-3 py-1 rounded-full bg-white/10 text-white/80 backdrop-blur-sm">
                     {categoryLabels[post.category]?.[lang] || post.category}
                   </span>
                 </div>
 
                 <div className="p-6">
-                  <div className="flex items-center gap-3 text-xs text-ink-400 mb-3">
+                  <div className="flex items-center gap-3 text-xs text-white/30 mb-3">
                     <span className="flex items-center gap-1">
                       <Clock size={12} />
                       {post.readTime[lang] || post.readTime.tr} {t('blog_read_time')}
@@ -107,13 +107,13 @@ const Blog = () => {
                     <span>&middot;</span>
                     <span>{post.date[lang] || post.date.tr}</span>
                   </div>
-                  <h2 className="text-xl font-bold text-ink-900 mb-3 leading-snug line-clamp-2 group-hover:text-brand-600 group-hover:-translate-y-0.5 transition-all duration-300">
+                  <h2 className="text-xl font-bold text-white mb-3 leading-snug line-clamp-2 group-hover:text-secondary-300 group-hover:-translate-y-0.5 transition-all duration-300">
                     {post.title[lang] || post.title.tr}
                   </h2>
-                  <p className="text-ink-500 text-sm leading-relaxed mb-4 line-clamp-3">
+                  <p className="text-white/40 text-sm leading-relaxed mb-4 line-clamp-3">
                     {post.excerpt[lang] || post.excerpt.tr}
                   </p>
-                  <div className="flex items-center gap-2 text-brand-600 font-medium text-sm group-hover:gap-3 transition-all">
+                  <div className="flex items-center gap-2 text-secondary-300 font-medium text-sm group-hover:gap-3 transition-all">
                     {t('blog_read_more')}
                     <ArrowUpRight size={14} strokeWidth={2} />
                   </div>

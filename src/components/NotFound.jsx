@@ -14,13 +14,13 @@ const NotFound = () => {
     });
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-white px-6">
+        <div className="min-h-screen flex items-center justify-center bg-ink-900 px-6">
             <div className="text-center max-w-lg">
-                <p className="text-9xl font-bold text-brand-600 leading-none">404</p>
-                <h1 className="mt-6 text-3xl md:text-4xl font-bold text-ink-900">
+                <p className="text-9xl font-bold text-secondary-300 leading-none">404</p>
+                <h1 className="mt-6 text-3xl md:text-4xl font-bold text-white">
                     {isTr ? 'Sayfa Bulunamadı' : 'Page Not Found'}
                 </h1>
-                <p className="mt-4 text-ink-500 text-lg">
+                <p className="mt-4 text-white/50 text-lg">
                     {isTr
                         ? 'Aradığınız sayfa taşınmış veya kaldırılmış olabilir.'
                         : 'The page you are looking for may have been moved or removed.'}
@@ -34,7 +34,7 @@ const NotFound = () => {
                     </Link>
                     <Link
                         to="/contact"
-                        className="inline-flex items-center gap-2 border border-ink-200 text-ink-700 font-medium px-8 py-3 rounded-full hover:border-ink-400 transition-colors"
+                        className="inline-flex items-center gap-2 border border-white/20 text-white/70 font-medium px-8 py-3 rounded-full hover:border-white/40 transition-colors"
                     >
                         {isTr ? 'İletişim' : 'Contact Us'}
                     </Link>

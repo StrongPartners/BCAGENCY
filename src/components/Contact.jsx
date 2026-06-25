@@ -97,17 +97,17 @@ const Contact = () => {
     ];
 
     return (
-        <div className="bg-white">
+        <div className="bg-ink-900">
             {/* Hero */}
             <section className="pt-32 pb-16 md:pt-40 md:pb-20">
                 <div className="container mx-auto px-4 md:px-8 text-center">
-                    <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} className="text-xs font-semibold uppercase tracking-widest text-ink-400 mb-6">
+                    <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-6">
                         {t('contact_eyebrow')}
                     </motion.p>
-                    <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="text-5xl md:text-8xl font-bold text-ink-900 leading-[0.95] tracking-tighter">
+                    <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="text-5xl md:text-8xl font-bold text-white leading-[0.95] tracking-tighter">
                         {t('contact_heading_1')} {t('contact_heading_accent')}
                     </motion.h1>
-                    <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="mt-8 text-lg md:text-xl text-ink-500 max-w-2xl mx-auto leading-relaxed">
+                    <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="mt-8 text-lg md:text-xl text-white/50 max-w-2xl mx-auto leading-relaxed">
                         {t('contact_sub')}
                     </motion.p>
                 </div>
@@ -119,22 +119,22 @@ const Contact = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         {/* Form */}
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-                            <h2 className="text-2xl font-bold text-ink-900 mb-6">
+                            <h2 className="text-2xl font-bold text-white mb-6">
                                 {isTr ? 'Bize yazin' : 'Send us a message'}
                             </h2>
 
                             {status === 'success' ? (
-                                <div className="bg-green-50 border border-green-200 rounded-xl p-8 text-center">
+                                <div className="bg-green-900/20 border border-green-500/30 rounded-xl p-8 text-center">
                                     <CheckCircle size={48} className="text-green-500 mx-auto mb-4" />
-                                    <h3 className="text-xl font-bold text-ink-900 mb-2">
+                                    <h3 className="text-xl font-bold text-white mb-2">
                                         {isTr ? 'Mesajiniz alindi!' : 'Message received!'}
                                     </h3>
-                                    <p className="text-ink-500">
+                                    <p className="text-white/50">
                                         {isTr ? 'En kisa surede size donecegiz.' : "We'll get back to you shortly."}
                                     </p>
                                     <button
                                         onClick={() => setStatus('idle')}
-                                        className="mt-6 text-brand-600 font-medium text-sm hover:text-brand-700"
+                                        className="mt-6 text-secondary-300 font-medium text-sm hover:text-secondary-200"
                                     >
                                         {isTr ? 'Yeni mesaj gonder' : 'Send another message'}
                                     </button>
@@ -142,7 +142,7 @@ const Contact = () => {
                             ) : (
                                 <form onSubmit={handleSubmit} className="space-y-5">
                                     <div>
-                                        <label className="block text-sm font-medium text-ink-700 mb-1.5">
+                                        <label className="block text-sm font-medium text-white/70 mb-1.5">
                                             {isTr ? 'Ad Soyad' : 'Full Name'} *
                                         </label>
                                         <input
@@ -150,13 +150,13 @@ const Contact = () => {
                                             required
                                             value={form.name}
                                             onChange={(e) => setForm({ ...form, name: e.target.value })}
-                                            className="w-full px-4 py-3 rounded-xl border border-ink-200 bg-white text-ink-900 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
+                                            className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-secondary-300 focus:border-transparent transition-all"
                                             placeholder={isTr ? 'Adiniz Soyadiniz' : 'Your full name'}
                                         />
                                     </div>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                         <div>
-                                            <label className="block text-sm font-medium text-ink-700 mb-1.5">
+                                            <label className="block text-sm font-medium text-white/70 mb-1.5">
                                                 {isTr ? 'E-posta' : 'Email'} *
                                             </label>
                                             <input
@@ -164,25 +164,25 @@ const Contact = () => {
                                                 required
                                                 value={form.email}
                                                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                                                className="w-full px-4 py-3 rounded-xl border border-ink-200 bg-white text-ink-900 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
+                                                className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-secondary-300 focus:border-transparent transition-all"
                                                 placeholder="ornek@email.com"
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-medium text-ink-700 mb-1.5">
+                                            <label className="block text-sm font-medium text-white/70 mb-1.5">
                                                 {isTr ? 'Telefon' : 'Phone'}
                                             </label>
                                             <input
                                                 type="tel"
                                                 value={form.phone}
                                                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                                                className="w-full px-4 py-3 rounded-xl border border-ink-200 bg-white text-ink-900 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
+                                                className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-secondary-300 focus:border-transparent transition-all"
                                                 placeholder="+90 5XX XXX XX XX"
                                             />
                                         </div>
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-medium text-ink-700 mb-1.5">
+                                        <label className="block text-sm font-medium text-white/70 mb-1.5">
                                             {isTr ? 'Mesajiniz' : 'Your message'} *
                                         </label>
                                         <textarea
@@ -190,7 +190,7 @@ const Contact = () => {
                                             rows={4}
                                             value={form.message}
                                             onChange={(e) => setForm({ ...form, message: e.target.value })}
-                                            className="w-full px-4 py-3 rounded-xl border border-ink-200 bg-white text-ink-900 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all resize-none"
+                                            className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-secondary-300 focus:border-transparent transition-all resize-none"
                                             placeholder={isTr ? 'Projeniz hakkinda bize bilgi verin...' : 'Tell us about your project...'}
                                         />
                                     </div>
@@ -202,7 +202,7 @@ const Contact = () => {
                                     <button
                                         type="submit"
                                         disabled={status === 'sending'}
-                                        className="w-full inline-flex items-center justify-center gap-2 bg-ink-900 text-white font-medium py-4 rounded-full hover:bg-ink-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                                        className="w-full inline-flex items-center justify-center gap-2 bg-white text-ink-900 font-medium py-4 rounded-full hover:bg-secondary-300 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                                     >
                                         {status === 'sending' ? (
                                             <>
@@ -232,13 +232,13 @@ const Contact = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.4, delay: i * 0.08 }}
-                                    className="flex items-center gap-5 p-5 rounded-xl bg-white border border-ink-100 text-ink-900 hover:shadow-sm transition-all"
+                                    className="flex items-center gap-5 p-5 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-secondary-300/30 transition-all"
                                 >
-                                    <div className="w-11 h-11 bg-ink-50 rounded-xl flex items-center justify-center shrink-0">
+                                    <div className="w-11 h-11 bg-white/10 rounded-xl flex items-center justify-center shrink-0">
                                         {ch.icon}
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <p className="text-ink-500 text-xs mb-0.5">{ch.label}</p>
+                                        <p className="text-white/40 text-xs mb-0.5">{ch.label}</p>
                                         <p className="font-bold text-base truncate">{ch.value}</p>
                                     </div>
                                 </motion.a>
@@ -253,24 +253,24 @@ const Contact = () => {
                 <div className="container mx-auto max-w-5xl">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <div className="space-y-5">
-                            <div className="bg-white rounded-xl p-6 border border-ink-100">
+                            <div className="bg-white/5 rounded-xl p-6 border border-white/10">
                                 <div className="flex items-start gap-4">
-                                    <MapPin size={20} strokeWidth={1.5} className="text-ink-400 shrink-0 mt-1" />
+                                    <MapPin size={20} strokeWidth={1.5} className="text-white/40 shrink-0 mt-1" />
                                     <div>
-                                        <h3 className="font-bold text-ink-900 text-lg mb-2">{t('contact_address_label')}</h3>
-                                        <p className="text-ink-500 leading-relaxed">{t('contact_address_val')}</p>
-                                        <button onClick={() => window.open(t('contact_map_url'), '_blank')} className="mt-3 text-brand-600 font-medium text-sm hover:text-brand-700">
+                                        <h3 className="font-bold text-white text-lg mb-2">{t('contact_address_label')}</h3>
+                                        <p className="text-white/50 leading-relaxed">{t('contact_address_val')}</p>
+                                        <button onClick={() => window.open(t('contact_map_url'), '_blank')} className="mt-3 text-secondary-300 font-medium text-sm hover:text-secondary-200">
                                             {t('contact_maps_btn')}
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            <div className="bg-white rounded-xl p-6 border border-ink-100">
+                            <div className="bg-white/5 rounded-xl p-6 border border-white/10">
                                 <div className="flex items-start gap-4">
-                                    <Clock size={20} strokeWidth={1.5} className="text-ink-400 shrink-0 mt-1" />
+                                    <Clock size={20} strokeWidth={1.5} className="text-white/40 shrink-0 mt-1" />
                                     <div>
-                                        <h3 className="font-bold text-ink-900 text-lg mb-2">{t('contact_hours_label')}</h3>
-                                        <p className="text-ink-500">{t('contact_hours_val')}</p>
+                                        <h3 className="font-bold text-white text-lg mb-2">{t('contact_hours_label')}</h3>
+                                        <p className="text-white/50">{t('contact_hours_val')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -282,7 +282,7 @@ const Contact = () => {
                                 </a>
                             </div>
                         </div>
-                        <div className="rounded-xl overflow-hidden border border-ink-100 h-80 lg:h-full min-h-[400px]">
+                        <div className="rounded-xl overflow-hidden border border-white/10 h-80 lg:h-full min-h-[400px]">
                             <iframe
                                 title={t('contact_map_title')}
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.8!2d33.3184!3d35.3421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14de1763498dfb09%3A0x0!2sAlsancak+Emtan+West+Park+Girne!5e0!3m2!1str!2str!4v1700000000001"

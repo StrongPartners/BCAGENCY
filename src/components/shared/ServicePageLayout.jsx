@@ -37,28 +37,28 @@ const ServicePageLayout = ({
         <div>
             {breadcrumbs.length > 0 && <Breadcrumb items={breadcrumbs} />}
             {/* Hero */}
-            <section className={breadcrumbs.length > 0 ? "relative pt-8 pb-20 md:pt-12 md:pb-28 overflow-hidden bg-white" : "relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-white"}>
+            <section className={breadcrumbs.length > 0 ? "relative pt-8 pb-20 md:pt-12 md:pb-28 overflow-hidden bg-ink-900" : "relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-ink-900"}>
                 <div className="container mx-auto px-4 md:px-8 relative z-10">
                     <div className="max-w-4xl">
                         <motion.div
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5 }}
-                            className="inline-block bg-ink-50 rounded-full px-4 py-1.5 mb-6 shadow-md"
+                            className="inline-block bg-white/10 rounded-full px-4 py-1.5 mb-6 shadow-md"
                         >
-                            <span className="font-black text-ink-900 text-xs uppercase tracking-wider">{eyebrow}</span>
+                            <span className="font-black text-white text-xs uppercase tracking-wider">{eyebrow}</span>
                         </motion.div>
 
                         <motion.h1
                             initial={{ opacity: 0, y: 80 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.7, delay: 0.1 }}
-                            className="text-5xl md:text-7xl lg:text-8xl font-black text-ink-900 leading-[0.95] tracking-tighter"
+                            className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.95] tracking-tighter"
                         >
                             {headline}{' '}
                             <span className="relative inline-block">
-                                <span className="relative z-10 text-brand-600">{headlineAccent}</span>
-                                <span className="absolute left-0 right-0 bottom-1 h-4 bg-secondary-200 -z-0 rounded-sm" />
+                                <span className="relative z-10 text-secondary-300">{headlineAccent}</span>
+                                <span className="absolute left-0 right-0 bottom-1 h-4 bg-secondary-300/20 -z-0 rounded-sm" />
                             </span>
                             {headlineRest && <> {headlineRest}</>}
                         </motion.h1>
@@ -68,7 +68,7 @@ const ServicePageLayout = ({
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5, delay: 0.3 }}
-                                className="mt-6 text-xl md:text-2xl font-bold text-ink-700"
+                                className="mt-6 text-xl md:text-2xl font-bold text-white/70"
                             >
                                 {subheadline}
                             </motion.p>
@@ -78,7 +78,7 @@ const ServicePageLayout = ({
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.6, delay: 0.5 }}
-                            className="mt-6 text-lg text-ink-700 font-medium max-w-2xl leading-relaxed"
+                            className="mt-6 text-lg text-white/50 font-medium max-w-2xl leading-relaxed"
                         >
                             {description}
                         </motion.p>
@@ -100,7 +100,7 @@ const ServicePageLayout = ({
 
             {/* Features */}
             {features.length > 0 && (
-                <section className="py-28 md:py-40 bg-white">
+                <section className="py-28 md:py-40 bg-ink-900">
                     <div className="container mx-auto px-4 md:px-8">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
                             {features.map((feature, i) => {
@@ -113,13 +113,13 @@ const ServicePageLayout = ({
                                         viewport={{ once: true }}
                                         transition={{ delay: i * 0.15, duration: 0.5 }}
                                         whileHover={{ y: -6 }}
-                                        className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg border border-ink-100 transition-all"
+                                        className="bg-white/5 rounded-2xl p-8 border border-white/10 hover:bg-white/10 hover:border-secondary-300/30 transition-all"
                                     >
-                                        <div className="w-14 h-14 bg-ink-50 rounded-xl flex items-center justify-center mb-5">
-                                            {IconComponent && <IconComponent size={24} className="text-ink-400" strokeWidth={2} />}
+                                        <div className="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center mb-5">
+                                            {IconComponent && <IconComponent size={24} className="text-secondary-300/60" strokeWidth={2} />}
                                         </div>
-                                        <h3 className="text-2xl font-black text-ink-900 mb-3 leading-tight">{feature.title}</h3>
-                                        <p className="text-ink-700 font-medium leading-relaxed">{feature.desc}</p>
+                                        <h3 className="text-2xl font-black text-white mb-3 leading-tight">{feature.title}</h3>
+                                        <p className="text-white/50 font-medium leading-relaxed">{feature.desc}</p>
                                     </motion.div>
                                 );
                             })}
@@ -175,10 +175,10 @@ const ServicePageLayout = ({
 
             {/* Process steps */}
             {steps.length > 0 && (
-                <section className="py-28 md:py-40 bg-ink-50 relative overflow-hidden">
+                <section className="py-28 md:py-40 bg-ink-800/50 relative overflow-hidden">
                     <div className="container mx-auto px-4 md:px-8 relative z-10">
                         <div className="text-center mb-16">
-                            <h2 className="text-4xl md:text-6xl font-black text-ink-900 leading-none tracking-tight">
+                            <h2 className="text-4xl md:text-6xl font-black text-white leading-none tracking-tight">
                                 {t('approach_eyebrow')}
                             </h2>
                         </div>
@@ -191,13 +191,13 @@ const ServicePageLayout = ({
                                         viewport={{ once: true }}
                                         transition={{ delay: i * 0.1 }}
                                         whileHover={{ y: -6 }}
-                                        className="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg border border-ink-100 transition-all"
+                                        className="bg-white/5 rounded-2xl p-7 border border-white/10 hover:bg-white/10 hover:border-secondary-300/30 transition-all"
                                     >
-                                        <div className="w-12 h-12 bg-ink-50 rounded-xl flex items-center justify-center font-black text-sm text-ink-400 mb-4">
+                                        <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center font-black text-sm text-white/40 mb-4">
                                             {step.step}
                                         </div>
-                                        <h4 className="text-xl font-black text-ink-900 mb-3 leading-tight">{step.title}</h4>
-                                        <p className="text-ink-700 font-medium text-sm leading-relaxed">{step.desc}</p>
+                                        <h4 className="text-xl font-black text-white mb-3 leading-tight">{step.title}</h4>
+                                        <p className="text-white/50 font-medium text-sm leading-relaxed">{step.desc}</p>
                                     </motion.div>
                             ))}
                         </div>
@@ -207,13 +207,13 @@ const ServicePageLayout = ({
 
             {/* FAQ */}
             {faqs.length > 0 && (
-                <section className="py-28 md:py-40 bg-white">
+                <section className="py-28 md:py-40 bg-ink-900">
                     <div className="container mx-auto px-4 md:px-8 max-w-4xl">
                         <div className="text-center mb-14">
-                            <span className="inline-block bg-ink-100 text-ink-900 font-black text-xs px-4 py-1.5 rounded-full mb-6 uppercase tracking-wider">
+                            <span className="inline-block bg-white/10 text-white font-black text-xs px-4 py-1.5 rounded-full mb-6 uppercase tracking-wider">
                                 FAQ
                             </span>
-                            <h2 className="text-4xl md:text-6xl font-black text-ink-900 leading-none tracking-tight">
+                            <h2 className="text-4xl md:text-6xl font-black text-white leading-none tracking-tight">
                                 {t('faq_title')}
                             </h2>
                         </div>
@@ -259,23 +259,23 @@ const FAQItem = ({ question, answer, index }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.04 }}
-            className="bg-white rounded-2xl overflow-hidden shadow-sm border border-ink-100"
+            className="bg-white/5 rounded-2xl overflow-hidden border border-white/10"
         >
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="group w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-ink-50 transition-colors"
+                className="group w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-white/10 transition-colors"
             >
-                <span className="font-black text-ink-900 text-base md:text-lg group-hover:translate-x-1 transition-transform">{question}</span>
+                <span className="font-black text-white text-base md:text-lg group-hover:translate-x-1 transition-transform">{question}</span>
                 <motion.div
                     animate={{ rotate: isOpen ? 45 : 0 }}
                     transition={{ duration: 0.2 }}
-                    className="flex-shrink-0 w-10 h-10 rounded-full bg-ink-900 text-white flex items-center justify-center"
+                    className="flex-shrink-0 w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center"
                 >
                     <Plus size={20} strokeWidth={3} />
                 </motion.div>
             </button>
             {isOpen && (
-                <div className="px-6 pb-6 text-ink-700 text-base leading-relaxed font-medium border-t border-ink-100 pt-4">
+                <div className="px-6 pb-6 text-white/50 text-base leading-relaxed font-medium border-t border-white/10 pt-4">
                     {answer}
                 </div>
             )}
