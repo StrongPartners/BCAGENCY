@@ -2,172 +2,104 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Plus } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
+import { ZoomSection, ScrollText } from './ParallaxKit';
 import Breadcrumb from './Breadcrumb';
 
-/**
- * ServicePageLayout
- *
- * Shared modern layout for every /hizmetler/* page.
- * Each service just passes its content — the layout handles
- * the hero, feature grid, process strip, stats, FAQ and CTA.
- *
- * Keeps all service pages visually consistent and removes
- * duplicated layout code.
- */
-
 const ServicePageLayout = ({
-    eyebrow,
-    headline,
-    headlineAccent,
-    headlineRest,
-    subheadline,
-    description,
-    tone = 'brand',
-    features = [],      // [{ icon (LucideIcon component), title, desc }]
-    steps = [],         // [{ step, title, desc }]
-    stats = [],         // [{ value, label }]
-    faqs = [],          // [{ question, answer }]
-    ctaTitle,
-    ctaSub,
-    breadcrumbs = [],   // [{ name, url }]
+    eyebrow, headline, headlineAccent, headlineRest, subheadline, description,
+    tone = 'brand', features = [], steps = [], stats = [], faqs = [],
+    ctaTitle, ctaSub, breadcrumbs = [],
 }) => {
     const { t } = useLanguage();
 
+    const bgMap = {
+        brand: { video: '/bg-ink.mp4', bg: '/parallax-ink.webp' },
+        coral: { video: '/bg-light.mp4', bg: '/parallax-light.webp' },
+        mint: { video: '/bg-smoke.mp4', bg: '/parallax-smoke.webp' },
+        sun: { video: '/bg-powder.mp4', bg: '/parallax-powder.webp' },
+    };
+    const heroBg = bgMap[tone] || bgMap.brand;
+    const featureBg = bgMap[tone === 'brand' ? 'coral' : 'brand'];
+
     return (
-        <div>
+        <main className="bg-ink-900">
             {breadcrumbs.length > 0 && <Breadcrumb items={breadcrumbs} />}
+
             {/* Hero */}
-            <section className={breadcrumbs.length > 0 ? "relative pt-8 pb-20 md:pt-12 md:pb-28 overflow-hidden bg-ink-900" : "relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-ink-900"}>
-                <div className="container mx-auto px-4 md:px-8 relative z-10">
+            <ZoomSection video={heroBg.video} bg={heroBg.bg} overlay="bg-ink-900/70">
+                <div className="container mx-auto px-6 md:px-12">
                     <div className="max-w-4xl">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.5 }}
-                            className="inline-block bg-white/10 rounded-full px-4 py-1.5 mb-6 shadow-md"
-                        >
-                            <span className="font-black text-white text-xs uppercase tracking-wider">{eyebrow}</span>
-                        </motion.div>
-
-                        <motion.h1
-                            initial={{ opacity: 0, y: 80 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.7, delay: 0.1 }}
-                            className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.95] tracking-tighter"
-                        >
-                            {headline}{' '}
-                            <span className="relative inline-block">
-                                <span className="relative z-10 text-secondary-300">{headlineAccent}</span>
-                                <span className="absolute left-0 right-0 bottom-1 h-4 bg-secondary-300/20 -z-0 rounded-sm" />
+                        <ScrollText>
+                            <span className="inline-block bg-white/10 rounded-full px-4 py-1.5 mb-6 text-white text-xs font-bold uppercase tracking-wider">
+                                {eyebrow}
                             </span>
-                            {headlineRest && <> {headlineRest}</>}
-                        </motion.h1>
-
+                        </ScrollText>
+                        <ScrollText delay={0.1}>
+                            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] tracking-tighter">
+                                {headline}{' '}
+                                <span className="text-secondary-300">{headlineAccent}</span>
+                                {headlineRest && <> {headlineRest}</>}
+                            </h1>
+                        </ScrollText>
                         {subheadline && (
-                            <motion.p
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: 0.3 }}
-                                className="mt-6 text-xl md:text-2xl font-bold text-white/70"
-                            >
-                                {subheadline}
-                            </motion.p>
+                            <ScrollText delay={0.15}>
+                                <p className="mt-6 text-xl md:text-2xl font-bold text-white/60">{subheadline}</p>
+                            </ScrollText>
                         )}
-
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.6, delay: 0.5 }}
-                            className="mt-6 text-lg text-white/50 font-medium max-w-2xl leading-relaxed"
-                        >
-                            {description}
-                        </motion.p>
-
-                        <motion.button
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.7 }}
-                            whileHover={{ scale: 1.05, y: -3 }}
-                            whileTap={{ scale: 0.96 }}
-                            onClick={() => window.open('https://wa.me/905488321919', '_blank')}
-                            className="mt-10 bg-brand-600 text-white font-black text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-shadow"
-                        >
-                            {t('btn_offer')}
-                        </motion.button>
+                        <ScrollText delay={0.2}>
+                            <p className="mt-6 text-lg text-white/50 max-w-2xl leading-relaxed">{description}</p>
+                        </ScrollText>
+                        <ScrollText delay={0.25}>
+                            <motion.button
+                                whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
+                                onClick={() => window.open('https://wa.me/905488321919', '_blank')}
+                                className="mt-10 inline-flex items-center gap-2 bg-white text-ink-900 font-bold text-lg px-8 py-4 rounded-full hover:bg-secondary-300 transition-colors"
+                            >
+                                {t('btn_offer')}
+                                <ArrowUpRight size={20} strokeWidth={2.5} />
+                            </motion.button>
+                        </ScrollText>
                     </div>
                 </div>
-            </section>
+            </ZoomSection>
 
             {/* Features */}
             {features.length > 0 && (
-                <section className="py-28 md:py-40 bg-ink-900">
-                    <div className="container mx-auto px-4 md:px-8">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
+                <ZoomSection video={featureBg.video} bg={featureBg.bg} overlay="bg-ink-900/80">
+                    <div className="container mx-auto px-6 md:px-12">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
                             {features.map((feature, i) => {
-                                const IconComponent = feature.icon;
+                                const Icon = feature.icon;
                                 return (
-                                    <motion.div
-                                        key={i}
-                                        initial={{ opacity: 0, y: 80 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: i * 0.15, duration: 0.5 }}
-                                        whileHover={{ y: -6 }}
-                                        className="bg-white/5 rounded-2xl p-8 border border-white/10 hover:bg-white/10 hover:border-secondary-300/30 transition-all"
-                                    >
-                                        <div className="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center mb-5">
-                                            {IconComponent && <IconComponent size={24} className="text-secondary-300/60" strokeWidth={2} />}
-                                        </div>
-                                        <h3 className="text-2xl font-black text-white mb-3 leading-tight">{feature.title}</h3>
-                                        <p className="text-white/50 font-medium leading-relaxed">{feature.desc}</p>
-                                    </motion.div>
+                                    <ScrollText key={i} delay={i * 0.1}>
+                                        <motion.div whileHover={{ y: -6 }}
+                                            className="p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-secondary-300/30 transition-all">
+                                            <div className="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center mb-5">
+                                                {Icon && <Icon size={24} className="text-secondary-300/60" strokeWidth={2} />}
+                                            </div>
+                                            <h3 className="text-2xl font-bold text-white mb-3">{feature.title}</h3>
+                                            <p className="text-white/50 leading-relaxed">{feature.desc}</p>
+                                        </motion.div>
+                                    </ScrollText>
                                 );
                             })}
                         </div>
                     </div>
-                </section>
+                </ZoomSection>
             )}
-
-            {/* Full-bleed image break */}
-            <section className="relative h-[60vh] md:h-[80vh] overflow-hidden">
-                <img
-                    src="/parallax-ink.webp"
-                    alt="BC Creative Agency yaratıcı süreç"
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                    width="1920"
-                    height="1080"
-                />
-                <div className="absolute inset-0 bg-ink-900/30" />
-            </section>
 
             {/* Stats */}
             {stats.length > 0 && (
-                <section className="py-16 md:py-20 bg-ink-900 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-brand-600/30 rounded-full blur-3xl" />
-                    <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-500/20 rounded-full blur-3xl" />
-                    <div className="container mx-auto px-4 md:px-8 relative z-10">
+                <section className="relative bg-ink-900 py-16 md:py-20 overflow-hidden">
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-brand-600/20 rounded-full blur-3xl" />
+                    <div className="container mx-auto px-6 md:px-12 relative z-10">
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                            {stats.map((stat, i) => {
-                                const tones = ['text-secondary-300', 'text-accent-400', 'text-secondary-200', 'text-brand-300'];
-                                return (
-                                    <motion.div
-                                        key={i}
-                                        initial={{ opacity: 0, scale: 0.8 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: i * 0.1, duration: 0.5 }}
-                                        className="text-center"
-                                    >
-                                        <div className={`text-5xl md:text-7xl font-black ${tones[i % tones.length]} leading-none mb-2`}>
-                                            {stat.value}
-                                        </div>
-                                        <div className="text-white font-bold uppercase tracking-wider text-xs md:text-sm">
-                                            {stat.label}
-                                        </div>
-                                    </motion.div>
-                                );
-                            })}
+                            {stats.map((stat, i) => (
+                                <ScrollText key={i} delay={i * 0.08} className="text-center">
+                                    <div className="text-5xl md:text-6xl font-bold text-white mb-2">{stat.value}</div>
+                                    <div className="text-white/40 text-sm uppercase tracking-wider">{stat.label}</div>
+                                </ScrollText>
+                            ))}
                         </div>
                     </div>
                 </section>
@@ -175,30 +107,25 @@ const ServicePageLayout = ({
 
             {/* Process steps */}
             {steps.length > 0 && (
-                <section className="py-28 md:py-40 bg-ink-800/50 relative overflow-hidden">
-                    <div className="container mx-auto px-4 md:px-8 relative z-10">
-                        <div className="text-center mb-16">
-                            <h2 className="text-4xl md:text-6xl font-black text-white leading-none tracking-tight">
-                                {t('approach_eyebrow')}
-                            </h2>
-                        </div>
+                <section className="relative bg-ink-900 py-20 md:py-28 overflow-hidden">
+                    <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-10">
+                        <source src="/bg-ink.mp4" type="video/mp4" />
+                    </video>
+                    <div className="absolute inset-0 bg-ink-900/80" />
+                    <div className="container mx-auto px-6 md:px-12 relative z-10">
+                        <ScrollText className="text-center mb-14">
+                            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight">{t('approach_eyebrow')}</h2>
+                        </ScrollText>
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                             {steps.map((step, i) => (
-                                    <motion.div
-                                        key={i}
-                                        initial={{ opacity: 0, y: 60 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: i * 0.1 }}
-                                        whileHover={{ y: -6 }}
-                                        className="bg-white/5 rounded-2xl p-7 border border-white/10 hover:bg-white/10 hover:border-secondary-300/30 transition-all"
-                                    >
-                                        <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center font-black text-sm text-white/40 mb-4">
-                                            {step.step}
-                                        </div>
-                                        <h4 className="text-xl font-black text-white mb-3 leading-tight">{step.title}</h4>
-                                        <p className="text-white/50 font-medium text-sm leading-relaxed">{step.desc}</p>
+                                <ScrollText key={i} delay={i * 0.1}>
+                                    <motion.div whileHover={{ y: -5 }}
+                                        className="p-7 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-secondary-300/30 transition-all">
+                                        <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center font-bold text-sm text-white/40 mb-4">{step.step}</div>
+                                        <h4 className="text-xl font-bold text-white mb-2">{step.title}</h4>
+                                        <p className="text-white/50 text-sm leading-relaxed">{step.desc}</p>
                                     </motion.div>
+                                </ScrollText>
                             ))}
                         </div>
                     </div>
@@ -207,77 +134,54 @@ const ServicePageLayout = ({
 
             {/* FAQ */}
             {faqs.length > 0 && (
-                <section className="py-28 md:py-40 bg-ink-900">
-                    <div className="container mx-auto px-4 md:px-8 max-w-4xl">
-                        <div className="text-center mb-14">
-                            <span className="inline-block bg-white/10 text-white font-black text-xs px-4 py-1.5 rounded-full mb-6 uppercase tracking-wider">
-                                FAQ
-                            </span>
-                            <h2 className="text-4xl md:text-6xl font-black text-white leading-none tracking-tight">
-                                {t('faq_title')}
-                            </h2>
-                        </div>
+                <section className="relative bg-ink-900 py-20 md:py-28">
+                    <div className="container mx-auto px-6 md:px-12 max-w-4xl">
+                        <ScrollText className="text-center mb-14">
+                            <span className="inline-block bg-white/10 text-white font-bold text-xs px-4 py-1.5 rounded-full mb-6 uppercase tracking-wider">FAQ</span>
+                            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight">{t('faq_title')}</h2>
+                        </ScrollText>
                         <div className="space-y-4">
-                            {faqs.map((faq, i) => (
-                                <FAQItem key={i} question={faq.question} answer={faq.answer} index={i} />
-                            ))}
+                            {faqs.map((faq, i) => <FAQItem key={i} question={faq.question} answer={faq.answer} index={i} />)}
                         </div>
                     </div>
                 </section>
             )}
 
             {/* CTA */}
-            <section className="py-24 md:py-32 bg-brand-600 relative overflow-hidden">
-                <div className="container mx-auto px-4 md:px-8 relative z-10 text-center max-w-4xl">
-                    <h2 className="text-4xl md:text-7xl font-black text-white leading-none tracking-tight mb-6">
-                        {ctaTitle}
-                    </h2>
-                    <p className="text-xl md:text-2xl text-white/70 font-medium max-w-2xl mx-auto mb-10">
-                        {ctaSub}
-                    </p>
-                    <motion.button
-                        onClick={() => window.open('https://wa.me/905488321919', '_blank')}
-                        whileHover={{ scale: 1.05, y: -3 }}
-                        whileTap={{ scale: 0.96 }}
-                        className="inline-flex items-center gap-2 bg-white text-ink-900 font-black text-lg px-10 py-5 rounded-full shadow-lg hover:shadow-xl transition-all"
-                    >
-                        {t('btn_offer')}
-                        <ArrowUpRight size={20} strokeWidth={3} />
-                    </motion.button>
+            <ZoomSection video="/bg-smoke.mp4" bg="/parallax-smoke.webp" overlay="bg-ink-900/50">
+                <div className="container mx-auto px-6 md:px-12 text-center max-w-4xl">
+                    <ScrollText>
+                        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-[0.95] tracking-tight mb-6">{ctaTitle}</h2>
+                        <p className="text-xl text-white/50 max-w-2xl mx-auto mb-10">{ctaSub}</p>
+                        <motion.button
+                            whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
+                            onClick={() => window.open('https://wa.me/905488321919', '_blank')}
+                            className="inline-flex items-center gap-2 bg-white text-ink-900 font-bold text-lg px-10 py-5 rounded-full hover:bg-secondary-300 transition-colors"
+                        >
+                            {t('btn_offer')}
+                            <ArrowUpRight size={20} strokeWidth={2.5} />
+                        </motion.button>
+                    </ScrollText>
                 </div>
-            </section>
-        </div>
+            </ZoomSection>
+        </main>
     );
 };
 
-// Small local FAQ item
 const FAQItem = ({ question, answer, index }) => {
     const [isOpen, setIsOpen] = React.useState(false);
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.04 }}
-            className="bg-white/5 rounded-2xl overflow-hidden border border-white/10"
-        >
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="group w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-white/10 transition-colors"
-            >
-                <span className="font-black text-white text-base md:text-lg group-hover:translate-x-1 transition-transform">{question}</span>
-                <motion.div
-                    animate={{ rotate: isOpen ? 45 : 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="flex-shrink-0 w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center"
-                >
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.04 }}
+            className="bg-white/5 rounded-2xl overflow-hidden border border-white/10">
+            <button onClick={() => setIsOpen(!isOpen)} className="group w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-white/10 transition-colors">
+                <span className="font-bold text-white text-base md:text-lg">{question}</span>
+                <motion.div animate={{ rotate: isOpen ? 45 : 0 }} transition={{ duration: 0.2 }}
+                    className="flex-shrink-0 w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center">
                     <Plus size={20} strokeWidth={3} />
                 </motion.div>
             </button>
             {isOpen && (
-                <div className="px-6 pb-6 text-white/50 text-base leading-relaxed font-medium border-t border-white/10 pt-4">
-                    {answer}
-                </div>
+                <div className="px-6 pb-6 text-white/50 text-base leading-relaxed border-t border-white/10 pt-4">{answer}</div>
             )}
         </motion.div>
     );

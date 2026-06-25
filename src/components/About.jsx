@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Eye, Heart, Zap, Target, Search, Megaphone, Smartphone, Monitor, Video, Plane, Camera, Paintbrush, FileText } from 'lucide-react';
+import { Eye, Heart, Zap, Target } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 import { useLanguage } from '../context/LanguageContext';
 import { buildOrganizationSchema, buildBreadcrumbSchema } from '../lib/geoSchemas';
+import { ZoomSection, ScrollText } from './shared/ParallaxKit';
 
 const VALUE_ICONS = [Eye, Heart, Zap, Target];
-const SERVICE_ICONS = [Search, Megaphone, Smartphone, Monitor, Video, Plane, Camera, Paintbrush, FileText];
 
 const About = () => {
     const { lang, t } = useLanguage();
@@ -15,8 +15,7 @@ const About = () => {
 
     useSEO({
         title: lang === 'tr' ? 'Hakkımızda | BC Creative Agency - KKTC Girne' : 'About | BC Creative Agency - Kyrenia TRNC',
-        description: lang === 'tr' ? "BC Creative Agency — 2017'den beri KKTC'de dijital pazarlama. Küçük bir stüdyodan bugünkü 50+ markaya uzanan samimi hikayemiz." : "BC Creative Agency — digital marketing in Northern Cyprus since 2017. Our story from a small studio to working with 50+ brands today.",
-        keywords: 'BC Creative Agency hakkında, KKTC dijital ajans ekibi, Girne reklam ajansı kimdir',
+        description: lang === 'tr' ? "BC Creative Agency — 2017'den beri KKTC'de dijital pazarlama." : "BC Creative Agency — digital marketing in Northern Cyprus since 2017.",
         canonical: 'https://bccreative.agency/about',
         schemas: [
             buildOrganizationSchema(),
@@ -28,142 +27,114 @@ const About = () => {
     });
 
     return (
-        <div className="bg-ink-900">
-
-            {/* Hero */}
-            <section className="pt-32 pb-20 md:pt-40 md:pb-28">
-                <div className="container mx-auto px-4 md:px-8">
+        <main className="bg-ink-900">
+            {/* Hero — zoom into smoke */}
+            <ZoomSection video="/bg-smoke.mp4" bg="/parallax-smoke.webp" overlay="bg-ink-900/60">
+                <div className="container mx-auto px-6 md:px-12">
                     <div className="max-w-4xl">
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.5 }}
-                            className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-6"
-                        >
-                            {t('about_eyebrow')}
-                        </motion.p>
-
-                        <motion.h1
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.1 }}
-                            className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] tracking-tighter"
-                        >
-                            {t('about_hero_title_1')}{' '}
-                            <span className="text-secondary-300">{t('about_hero_title_accent')}</span>{' '}
-                            {t('about_hero_title_2')}
-                        </motion.h1>
-
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.3 }}
-                            className="mt-8 text-lg md:text-xl text-white/50 max-w-2xl leading-relaxed"
-                        >
-                            {t('about_hero_desc')}
-                        </motion.p>
+                        <ScrollText>
+                            <p className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-6">
+                                {t('about_eyebrow')}
+                            </p>
+                        </ScrollText>
+                        <ScrollText delay={0.1}>
+                            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] tracking-tighter">
+                                {t('about_hero_title_1')}{' '}
+                                <span className="text-secondary-300">{t('about_hero_title_accent')}</span>{' '}
+                                {t('about_hero_title_2')}
+                            </h1>
+                        </ScrollText>
+                        <ScrollText delay={0.2}>
+                            <p className="mt-8 text-lg md:text-xl text-white/50 max-w-2xl leading-relaxed">
+                                {t('about_hero_desc')}
+                            </p>
+                        </ScrollText>
                     </div>
                 </div>
-            </section>
+            </ZoomSection>
 
-            {/* Story */}
-            <section className="py-32 md:py-48 bg-ink-800/50">
-                <div className="container mx-auto px-4 md:px-8">
+            {/* Story — zoom into ink */}
+            <ZoomSection video="/bg-ink.mp4" bg="/parallax-ink.webp" overlay="bg-ink-900/80">
+                <div className="container mx-auto px-6 md:px-12">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div>
-                            <p className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-6">Story</p>
-                            <h2 className="text-4xl md:text-6xl font-bold text-white leading-[0.95] tracking-tight mb-6">
-                                {t('about_story_title')}
-                            </h2>
-                            <p className="text-lg text-white/50 leading-relaxed mb-4">
-                                {t('about_story_p1')}
-                            </p>
-                            <p className="text-lg text-white/50 leading-relaxed">
-                                {t('about_story_p2')}
-                            </p>
+                            <ScrollText>
+                                <p className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-6">Story</p>
+                                <h2 className="text-4xl md:text-6xl font-bold text-white leading-[0.95] tracking-tight mb-6">
+                                    {t('about_story_title')}
+                                </h2>
+                            </ScrollText>
+                            <ScrollText delay={0.1}>
+                                <p className="text-lg text-white/50 leading-relaxed mb-4">{t('about_story_p1')}</p>
+                            </ScrollText>
+                            <ScrollText delay={0.2}>
+                                <p className="text-lg text-white/50 leading-relaxed">{t('about_story_p2')}</p>
+                            </ScrollText>
                         </div>
-                        <motion.div
-                            initial={{ opacity: 0, y: 80 }}
-                            whileInView={{ opacity: 1, y: 0, scale: 1.05 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.2, ease: 'easeOut' }}
-                            className="lg:col-span-1"
-                        >
-                            <div className="rounded-2xl shadow-2xl overflow-hidden">
-                                <img src="/about-rocket.jpg" alt="BC Creative Agency ofis çalışma ortamı, Girne KKTC" className="w-full h-auto object-cover" loading="lazy" width="640" height="480" />
+                        <ScrollText delay={0.15}>
+                            <div className="rounded-2xl overflow-hidden border border-white/10">
+                                <img src="/about-rocket.jpg" alt="BC Creative Agency ofis, Girne KKTC" className="w-full h-auto object-cover" loading="lazy" width="640" height="480" />
                             </div>
-                        </motion.div>
+                        </ScrollText>
                     </div>
                 </div>
-            </section>
+            </ZoomSection>
 
-            {/* Values */}
-            <section className="py-32 md:py-48 bg-ink-900">
-                <div className="container mx-auto px-4 md:px-8">
-                    <div className="max-w-3xl mb-16">
+            {/* Values — zoom into light */}
+            <ZoomSection video="/bg-light.mp4" bg="/parallax-light.webp" overlay="bg-ink-900/80">
+                <div className="container mx-auto px-6 md:px-12">
+                    <ScrollText className="max-w-3xl mb-16">
                         <p className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-6">Values</p>
                         <h2 className="text-4xl md:text-6xl font-bold text-white leading-[0.95] tracking-tight">
                             {t('about_values_title')}
                         </h2>
-                        <p className="mt-4 text-lg md:text-xl text-white/40">
-                            {t('about_values_sub')}
-                        </p>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                        <p className="mt-4 text-lg text-white/40">{t('about_values_sub')}</p>
+                    </ScrollText>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {values.map((value, i) => {
-                            const IconComponent = VALUE_ICONS[i] || Eye;
+                            const Icon = VALUE_ICONS[i] || Eye;
                             return (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 60 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: i * 0.2, duration: 0.6 }}
-                                >
-                                    <IconComponent size={28} className="text-secondary-300/60 mb-5" strokeWidth={1.5} />
-                                    <h3 className="text-2xl font-bold text-white mb-3 leading-tight">{value.title}</h3>
-                                    <p className="text-white/40 leading-relaxed text-sm">{value.desc}</p>
-                                </motion.div>
+                                <ScrollText key={i} delay={i * 0.1}>
+                                    <motion.div whileHover={{ y: -5 }} className="group">
+                                        <div className="w-12 h-12 rounded-xl bg-white/10 group-hover:bg-secondary-300/20 flex items-center justify-center mb-4 transition-colors">
+                                            <Icon size={22} className="text-secondary-300/60" strokeWidth={1.5} />
+                                        </div>
+                                        <h3 className="text-xl font-bold text-white mb-2">{value.title}</h3>
+                                        <p className="text-white/40 text-sm leading-relaxed">{value.desc}</p>
+                                    </motion.div>
+                                </ScrollText>
                             );
                         })}
                     </div>
                 </div>
-            </section>
+            </ZoomSection>
 
-            {/* Services grid */}
-            <section className="py-32 md:py-48 bg-ink-800/50">
-                <div className="container mx-auto px-4 md:px-8">
-                    <div className="text-center mb-16">
+            {/* Services — zoom into powder */}
+            <ZoomSection video="/bg-powder.mp4" bg="/parallax-powder.webp" overlay="bg-ink-900/80">
+                <div className="container mx-auto px-6 md:px-12">
+                    <ScrollText className="text-center mb-14">
                         <h2 className="text-4xl md:text-6xl font-bold text-white leading-[0.95] tracking-tight">
                             {t('about_services_title')}
-                            {t('about_services_title_accent')}
+                            <span className="text-secondary-300">{t('about_services_title_accent')}</span>
                         </h2>
-                        <p className="mt-4 text-lg md:text-xl text-white/40 max-w-2xl mx-auto">
-                            {t('about_services_sub')}
-                        </p>
-                    </div>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                        {services.map((service, i) => {
-                            const IconComponent = SERVICE_ICONS[i] || Search;
-                            return (
+                        <p className="mt-4 text-lg text-white/40 max-w-2xl mx-auto">{t('about_services_sub')}</p>
+                    </ScrollText>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        {services.map((service, i) => (
+                            <ScrollText key={i} delay={i * 0.05}>
                                 <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 15 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: i * 0.05 }}
-                                    className="bg-white/5 rounded-xl p-6 border border-white/10 hover:bg-white/10 hover:border-secondary-300/30 transition-all"
+                                    whileHover={{ y: -5, scale: 1.02 }}
+                                    className="p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-secondary-300/30 transition-all"
                                 >
-                                    <IconComponent size={24} className="text-secondary-300/60 mb-3" strokeWidth={1.5} />
-                                    <h3 className="text-lg font-bold text-white mb-1 leading-tight">{service.title}</h3>
-                                    <p className="text-white/40 text-sm leading-snug">{service.description}</p>
+                                    <h3 className="text-lg font-bold text-white mb-1">{service.title}</h3>
+                                    <p className="text-white/40 text-sm leading-relaxed">{service.description}</p>
                                 </motion.div>
-                            );
-                        })}
+                            </ScrollText>
+                        ))}
                     </div>
                 </div>
-            </section>
-        </div>
+            </ZoomSection>
+        </main>
     );
 };
 
