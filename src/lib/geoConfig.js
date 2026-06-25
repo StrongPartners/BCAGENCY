@@ -32,7 +32,7 @@ export const CONTACT = Object.freeze({
   whatsapp: '905488755461',
   email: 'info@bccreative.agency',
   contactType: 'customer service',
-  availableLanguage: ['Turkish', 'English'],
+  availableLanguage: ['Turkish', 'English', 'Russian', 'Persian'],
 });
 
 export const ADDRESS = Object.freeze({
@@ -156,6 +156,6 @@ export const GEO_SIGNALS = Object.freeze({
     'Drone & aerial video production',
   ],
   primaryMarket: 'Kuzey Kıbrıs Türk Cumhuriyeti (Northern Cyprus / TRNC)',
-  languages: ['tr-TR', 'en-GB'],
+  languages: ['tr-TR', 'en-GB', 'ru-RU', 'fa-IR'],
   yearsOfExperience: new Date().getFullYear() - 2017,
 });

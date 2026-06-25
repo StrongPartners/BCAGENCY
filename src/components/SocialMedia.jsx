@@ -104,7 +104,13 @@ const SocialMedia = () => {
         ],
     });
 
-    return <ServicePageLayout {...content} tone="mint" />;
+    const breadcrumbs = [
+        { name: isTr ? 'Ana Sayfa' : 'Home', url: '/' },
+        { name: isTr ? 'Hizmetler' : 'Services', url: '/hizmetler/sosyal-medya' },
+        { name: isTr ? 'Sosyal Medya' : 'Social Media', url: '/hizmetler/sosyal-medya' },
+    ];
+
+    return <ServicePageLayout {...content} tone="mint" breadcrumbs={breadcrumbs} />;
 };
 
 export default SocialMedia;

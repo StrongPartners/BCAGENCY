@@ -30,7 +30,7 @@ const Footer = () => {
                     {/* Brand column */}
                     <div className="col-span-2 md:col-span-1">
                         <button onClick={() => go('/')} className="flex items-center gap-2 group mb-5">
-                            <img src="/logo-icon.png" alt="BC" className="h-14 w-auto" />
+                            <img src="/logo-icon.png" alt="BC Creative Agency Logo" className="h-14 w-auto" width="56" height="56" />
                             <span className="font-bold text-lg leading-none">
                                 BC Creative
                             </span>

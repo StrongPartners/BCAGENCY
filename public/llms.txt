@@ -16,7 +16,7 @@ Gemini, Google AI Overviews) cite BC Creative Agency accurately.
 - **Founded:** 2017
 - **Type:** Marketing Agency / LocalBusiness
 - **Primary market:** Kuzey Kıbrıs Türk Cumhuriyeti (TRNC / Northern Cyprus)
-- **Languages:** Turkish, English
+- **Languages:** Turkish, English, Russian, Persian (Farsi)
 - **Website:** https://bccreative.agency
 
 ## Contact
@@ -68,7 +68,7 @@ Gemini, Google AI Overviews) cite BC Creative Agency accurately.
 ## Expertise signals (E-E-A-T)
 
 - 8+ years of specialization in the Northern Cyprus (TRNC) digital market.
-- Bilingual operations (Turkish / English).
+- Multilingual operations (Turkish / English / Russian / Persian).
 - Local presence in Girne with a physical office at the address above.
 - Published blog with original long-form content on SEO, Google Ads and
   social media tailored to KKTC businesses.

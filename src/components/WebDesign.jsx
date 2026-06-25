@@ -104,7 +104,13 @@ const WebDesign = () => {
         ],
     });
 
-    return <ServicePageLayout {...content} tone="sun" />;
+    const breadcrumbs = [
+        { name: isTr ? 'Ana Sayfa' : 'Home', url: '/' },
+        { name: isTr ? 'Hizmetler' : 'Services', url: '/hizmetler/web-tasarim' },
+        { name: isTr ? 'Web Tasarım' : 'Web Design', url: '/hizmetler/web-tasarim' },
+    ];
+
+    return <ServicePageLayout {...content} tone="sun" breadcrumbs={breadcrumbs} />;
 };
 
 export default WebDesign;

@@ -104,7 +104,13 @@ const FotografVideo = () => {
         ],
     });
 
-    return <ServicePageLayout {...content} tone="mint" />;
+    const breadcrumbs = [
+        { name: isTr ? 'Ana Sayfa' : 'Home', url: '/' },
+        { name: isTr ? 'Hizmetler' : 'Services', url: '/hizmetler/fotograf-video' },
+        { name: isTr ? 'Fotoğraf & Video' : 'Photography & Video', url: '/hizmetler/fotograf-video' },
+    ];
+
+    return <ServicePageLayout {...content} tone="mint" breadcrumbs={breadcrumbs} />;
 };
 
 export default FotografVideo;
