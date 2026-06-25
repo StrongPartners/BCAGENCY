@@ -20,27 +20,19 @@ const useLenis = () => {
 /* ─── Preloader ─── */
 const Preloader = ({ onComplete }) => (
     <motion.div
-        className="fixed inset-0 z-[9999] bg-ink-900 flex items-center justify-center"
-        exit={{ opacity: 0, scale: 1.1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed inset-0 z-[9999] bg-ink-900 flex items-center justify-center overflow-hidden"
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
     >
         <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
             onAnimationComplete={() => setTimeout(onComplete, 800)}
             className="text-center"
         >
-            <motion.img
-                src="/logo-icon.png"
-                alt=""
-                className="w-16 h-16 mx-auto mb-4"
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-            />
-            <motion.div
-                className="w-32 h-0.5 bg-white/10 rounded-full overflow-hidden mx-auto"
-            >
+            <img src="/logo-icon.png" alt="" className="w-14 h-14 mx-auto mb-4" />
+            <motion.div className="w-28 h-0.5 bg-white/10 rounded-full overflow-hidden mx-auto">
                 <motion.div
                     className="h-full bg-secondary-300"
                     initial={{ width: '0%' }}
