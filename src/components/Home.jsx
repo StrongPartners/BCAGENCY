@@ -237,7 +237,7 @@ const Home = () => {
                                     <motion.button
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.97 }}
-                                        onClick={() => window.open('https://wa.me/905488755461', '_blank')}
+                                        onClick={() => window.open('https://wa.me/905488321919', '_blank')}
                                         className="group inline-flex items-center gap-3 bg-white text-ink-900 font-medium text-base md:text-lg px-8 md:px-10 py-4 md:py-5 rounded-full hover:bg-secondary-300 transition-colors duration-300"
                                     >
                                         {t('hero_cta')}
@@ -368,7 +368,7 @@ const Home = () => {
                                 <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.97 }}
-                                    onClick={() => window.open('https://wa.me/905488755461', '_blank')}
+                                    onClick={() => window.open('https://wa.me/905488321919', '_blank')}
                                     className="group inline-flex items-center gap-3 bg-white text-ink-900 font-medium text-lg px-10 py-5 rounded-full hover:bg-secondary-300 transition-colors duration-300"
                                 >
                                     {t('btn_whatsapp')}

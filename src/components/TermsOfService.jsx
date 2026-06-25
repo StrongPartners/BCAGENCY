@@ -56,7 +56,7 @@ const TermsOfService = () => {
                         <p>Bu şartlarla ilgili sorularınız için:<br />
                         BC Creative Agency<br />
                         E-posta: info@bccreative.agency<br />
-                        Telefon: +90 548 875 54 61</p>
+                        Telefon: +90 548 832 19 19</p>
                     </section>
                 </div>
             </div>

@@ -41,7 +41,7 @@ const WebDesign = () => {
         ],
         faqs: [
             { question: 'Web sitesi ne kadar sürer?', answer: "Kurumsal siteler genellikle 2–4 hafta içinde teslim edilir. Kapsam arttıkça süre uzar. Projenin başında net takvim veriyoruz." },
-            { question: 'Fiyatlar nasıl belirleniyor?', answer: "Sayfa sayısı, e-ticaret özelliği, özel entegrasyonlar ve içerik miktarı fiyatı belirler. Tek seferlik paket olarak sunuluyor. WhatsApp: +90 548 875 54 61." },
+            { question: 'Fiyatlar nasıl belirleniyor?', answer: "Sayfa sayısı, e-ticaret özelliği, özel entegrasyonlar ve içerik miktarı fiyatı belirler. Tek seferlik paket olarak sunuluyor. WhatsApp: +90 548 832 19 19." },
             { question: 'E-ticaret de yapıyor musunuz?', answer: "Evet. Ürün yönetimi, ödeme entegrasyonu (iyzico, stripe), kargo takibi — hepsi dahil. Shopify ya da custom React çözümler sunuyoruz." },
             { question: 'Site sonrası destek var mı?', answer: "Aylık bakım paketleri sunuyoruz: güncelleme, yedekleme, performans takibi, yeni içerik ekleme. Opsiyonel." },
         ],

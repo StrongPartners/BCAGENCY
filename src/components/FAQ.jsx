@@ -27,7 +27,7 @@ const faqData = {
     },
     {
       question: "Çalışmaya başlamak için ne yapmalıyım?",
-      answer: "Ücretsiz strateji görüşmesi için WhatsApp (+90 548 875 54 61) veya e-posta (info@bccreative.agency) üzerinden bize ulaşın. İlk görüşmede işletmenizi dinleyip size özel bir yol haritası sunuyoruz. Hiçbir bağlayıcılığı yok."
+      answer: "Ücretsiz strateji görüşmesi için WhatsApp (+90 548 832 19 19) veya e-posta (info@bccreative.agency) üzerinden bize ulaşın. İlk görüşmede işletmenizi dinleyip size özel bir yol haritası sunuyoruz. Hiçbir bağlayıcılığı yok."
     },
     {
       question: "Hangi sektörlerde deneyiminiz var?",
@@ -65,7 +65,7 @@ const faqData = {
     },
     {
       question: "How do I get started?",
-      answer: "Message us on WhatsApp (+90 548 875 54 61) or email (info@bccreative.agency) for a free strategy call. We'll listen to your business, goals and budget, then give you a tailored roadmap. No strings attached."
+      answer: "Message us on WhatsApp (+90 548 832 19 19) or email (info@bccreative.agency) for a free strategy call. We'll listen to your business, goals and budget, then give you a tailored roadmap. No strings attached."
     },
     {
       question: "What industries do you work with?",
@@ -103,7 +103,7 @@ const faqData = {
     },
     {
       question: "Как начать работу?",
-      answer: "Напишите в WhatsApp (+90 548 875 54 61) или на email (info@bccreative.agency) для бесплатной стратегической консультации. На первой встрече выслушаем вас и предложим индивидуальный план. Без обязательств."
+      answer: "Напишите в WhatsApp (+90 548 832 19 19) или на email (info@bccreative.agency) для бесплатной стратегической консультации. На первой встрече выслушаем вас и предложим индивидуальный план. Без обязательств."
     },
   ],
   fa: [
@@ -129,7 +129,7 @@ const faqData = {
     },
     {
       question: "چگونه شروع کنم؟",
-      answer: "در واتساپ (+90 548 875 54 61) یا ایمیل (info@bccreative.agency) برای مشاوره رایگان پیام دهید. در اولین جلسه به شما گوش می‌دهیم و نقشه راه اختصاصی ارائه می‌کنیم. بدون تعهد."
+      answer: "در واتساپ (+90 548 832 19 19) یا ایمیل (info@bccreative.agency) برای مشاوره رایگان پیام دهید. در اولین جلسه به شما گوش می‌دهیم و نقشه راه اختصاصی ارائه می‌کنیم. بدون تعهد."
     },
   ]
 };
@@ -221,7 +221,7 @@ const FAQ = () => {
             {t('faq_no_answer')}
           </p>
           <button
-            onClick={() => window.open('https://wa.me/905488755461', '_blank')}
+            onClick={() => window.open('https://wa.me/905488321919', '_blank')}
             className="inline-flex items-center gap-2 bg-white text-ink-900 px-8 py-3 rounded-full font-medium text-base hover:bg-ink-100 transition-colors"
           >
             {t('faq_whatsapp')}

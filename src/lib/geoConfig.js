@@ -28,8 +28,8 @@ export const BRAND = Object.freeze({
 });
 
 export const CONTACT = Object.freeze({
-  telephone: '+905488755461',
-  whatsapp: '905488755461',
+  telephone: '+905488321919',
+  whatsapp: '905488321919',
   email: 'info@bccreative.agency',
   contactType: 'customer service',
   availableLanguage: ['Turkish', 'English', 'Russian', 'Persian'],

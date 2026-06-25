@@ -69,7 +69,7 @@ const PrivacyPolicy = () => {
                         <p>BC Creative Agency<br />
                         Alsancak, Emtan West Park No:4, Girne, KKTC<br />
                         E-posta: info@bccreative.agency<br />
-                        Telefon: +90 548 875 54 61</p>
+                        Telefon: +90 548 832 19 19</p>
                     </section>
                 </div>
             </div>

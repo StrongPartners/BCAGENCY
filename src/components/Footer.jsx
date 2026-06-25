@@ -48,7 +48,7 @@ const Footer = () => {
                                 <Instagram size={16} className="text-ink-400 hover:text-white" />
                             </a>
                             <a
-                                href="https://wa.me/905488755461"
+                                href="https://wa.me/905488321919"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-10 h-10 rounded-full border border-ink-700 flex items-center justify-center hover:border-white transition-colors"
@@ -119,7 +119,7 @@ const Footer = () => {
                             </li>
                             <li className="flex items-center gap-2.5 text-ink-400 text-sm">
                                 <Phone size={16} className="text-ink-500 shrink-0" />
-                                <a href="tel:+905488755461" className="hover:text-white transition-colors">+90 548 875 54 61</a>
+                                <a href="tel:+905488321919" className="hover:text-white transition-colors">+90 548 832 19 19</a>
                             </li>
                             <li className="flex items-center gap-2.5 text-ink-400 text-sm">
                                 <Mail size={16} className="text-ink-500 shrink-0" />

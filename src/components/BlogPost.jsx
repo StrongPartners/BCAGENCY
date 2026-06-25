@@ -292,7 +292,7 @@ const BlogPost = () => {
               {t('blog_cta_sub')}
             </p>
             <button
-              onClick={() => window.open('https://wa.me/905488755461', '_blank')}
+              onClick={() => window.open('https://wa.me/905488321919', '_blank')}
               className="bg-white text-ink-900 font-medium text-lg px-10 py-4 rounded-full hover:bg-ink-50 transition-colors"
             >
               {t('btn_offer')} &rarr;

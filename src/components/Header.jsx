@@ -134,7 +134,7 @@ const Header = () => {
 
                     {/* CTA pill */}
                     <button
-                        onClick={() => window.open('https://wa.me/905488755461', '_blank')}
+                        onClick={() => window.open('https://wa.me/905488321919', '_blank')}
                         className="bg-brand-600 text-white font-medium text-sm px-6 py-2.5 rounded-full hover:bg-brand-700 transition-colors"
                     >
                         {t('btn_offer')}
@@ -197,7 +197,7 @@ const Header = () => {
                             </div>
 
                             <button
-                                onClick={() => window.open('https://wa.me/905488755461', '_blank')}
+                                onClick={() => window.open('https://wa.me/905488321919', '_blank')}
                                 className="mt-4 w-full bg-brand-600 text-white font-medium py-3.5 rounded-full hover:bg-brand-700 transition-colors"
                             >
                                 {t('btn_offer')}

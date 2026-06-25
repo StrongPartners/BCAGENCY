@@ -89,7 +89,7 @@ const ServicePageLayout = ({
                             transition={{ duration: 0.5, delay: 0.7 }}
                             whileHover={{ scale: 1.05, y: -3 }}
                             whileTap={{ scale: 0.96 }}
-                            onClick={() => window.open('https://wa.me/905488755461', '_blank')}
+                            onClick={() => window.open('https://wa.me/905488321919', '_blank')}
                             className="mt-10 bg-brand-600 text-white font-black text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-shadow"
                         >
                             {t('btn_offer')}
@@ -236,7 +236,7 @@ const ServicePageLayout = ({
                         {ctaSub}
                     </p>
                     <motion.button
-                        onClick={() => window.open('https://wa.me/905488755461', '_blank')}
+                        onClick={() => window.open('https://wa.me/905488321919', '_blank')}
                         whileHover={{ scale: 1.05, y: -3 }}
                         whileTap={{ scale: 0.96 }}
                         className="inline-flex items-center gap-2 bg-white text-ink-900 font-black text-lg px-10 py-5 rounded-full shadow-lg hover:shadow-xl transition-all"

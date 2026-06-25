@@ -62,7 +62,7 @@ const Hero = () => {
                         className="mt-12 flex flex-wrap items-center gap-6"
                     >
                         <button
-                            onClick={() => window.open('https://wa.me/905488755461', '_blank')}
+                            onClick={() => window.open('https://wa.me/905488321919', '_blank')}
                             className="group inline-flex items-center gap-3 bg-white text-ink-900 font-medium text-base md:text-lg px-8 md:px-10 py-4 md:py-5 rounded-full hover:bg-ink-100 transition-all hover:gap-4"
                         >
                             {t('hero_cta')}

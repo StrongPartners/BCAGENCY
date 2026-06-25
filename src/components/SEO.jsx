@@ -42,7 +42,7 @@ const SEO = () => {
         faqs: [
             { question: "KKTC'de SEO ne kadar sürede sonuç verir?", answer: "İlk organik trafik artışı genellikle 2–4 ay içinde görülür. Kalıcı üst sıralar için 4–6 ay sürekli çalışma gerekir. KKTC global pazara göre daha az rekabetli olduğu için doğru strateji süreci kısaltabilir." },
             { question: 'BC Creative Agency hangi SEO hizmetlerini sunuyor?', answer: 'Sektörel anahtar kelime stratejisi, teknik SEO (Core Web Vitals, sayfa hızı), yerel SEO + Google Business Profile optimizasyonu, içerik pazarlaması, backlink kazanımı ve aylık performans raporlaması.' },
-            { question: 'SEO fiyatları nasıl belirleniyor?', answer: "Fiyatlar rakip yoğunluğu, hedef anahtar kelime sayısı ve sitenin mevcut durumuna göre değişir. Ücretsiz SEO analizi sonrası size özel bir teklif sunuyoruz. WhatsApp: +90 548 875 54 61." },
+            { question: 'SEO fiyatları nasıl belirleniyor?', answer: "Fiyatlar rakip yoğunluğu, hedef anahtar kelime sayısı ve sitenin mevcut durumuna göre değişir. Ücretsiz SEO analizi sonrası size özel bir teklif sunuyoruz. WhatsApp: +90 548 832 19 19." },
             { question: 'Yerel SEO ile klasik SEO\'nun farkı nedir?', answer: "Yerel SEO, belirli bir şehir/bölge için arama yapan kullanıcılara odaklanır. KKTC için kritik çünkü müşteriler 'Girne emlak', 'Lefkoşa avukat' gibi yerel sorgular kullanır. Klasik SEO daha genel arama trafiği hedefler." },
         ],
         ctaTitle: 'Google zirvesine hazır mısınız?',
@@ -75,7 +75,7 @@ const SEO = () => {
         faqs: [
             { question: 'How long does SEO take in TRNC?', answer: "First organic traffic lifts appear in 2–4 months. For sustained top rankings, 4–6 months of consistent work is needed. Since TRNC has lower competition than global markets, the right strategy can shorten this." },
             { question: 'Which SEO services does BC Creative Agency offer?', answer: 'Industry keyword strategy, technical SEO (Core Web Vitals, page speed), local SEO + Google Business Profile, content marketing, link building and monthly performance reporting.' },
-            { question: 'How are SEO prices determined?', answer: "Pricing depends on competitive density, the number of target keywords and the current state of your website. We give you a custom quote after a free SEO audit. WhatsApp: +90 548 875 54 61." },
+            { question: 'How are SEO prices determined?', answer: "Pricing depends on competitive density, the number of target keywords and the current state of your website. We give you a custom quote after a free SEO audit. WhatsApp: +90 548 832 19 19." },
             { question: "What's the difference between local SEO and classic SEO?", answer: "Local SEO targets users searching for a specific city or region. It's critical for TRNC because customers use queries like 'Kyrenia real estate' or 'Nicosia lawyer'. Classic SEO targets broader search traffic." },
         ],
         ctaTitle: 'Ready to dominate Google?',
