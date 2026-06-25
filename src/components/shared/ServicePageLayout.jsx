@@ -131,8 +131,8 @@ const ServicePageLayout = ({
             {/* Full-bleed image break */}
             <section className="relative h-[60vh] md:h-[80vh] overflow-hidden">
                 <img
-                    src="/marketing-hero-v2.jpg"
-                    alt="BC Creative Agency profesyonel dijital pazarlama hizmetleri"
+                    src="/hf-team-brainstorm.webp"
+                    alt="BC Creative Agency profesyonel dijital pazarlama ekibi"
                     className="w-full h-full object-cover"
                     loading="lazy"
                     width="1920"
