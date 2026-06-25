@@ -208,52 +208,170 @@ const Home = () => {
             <main className="bg-ink-900">
 
                 {/* ═══ 1. HERO ═══ */}
-                <ZoomSection video="/hero-bg.mp4" overlay="bg-gradient-to-b from-ink-900/50 via-ink-900/20 to-ink-900">
-                    <div className="container mx-auto px-6 md:px-12">
-                        <div className="max-w-5xl">
-                            <ScrollText>
-                                <p className="text-xs md:text-sm font-semibold uppercase tracking-[0.3em] text-white/40 mb-8">
-                                    BC Creative Agency · Girne, KKTC
-                                </p>
-                            </ScrollText>
+                <section className="relative min-h-screen flex items-center overflow-hidden bg-ink-900">
+                    {/* Animated gradient background */}
+                    <div className="absolute inset-0 animate-gradient" style={{
+                        background: 'linear-gradient(135deg, #0c1224 0%, #1B2A5C 25%, #111a35 50%, #162247 75%, #0c1224 100%)',
+                        backgroundSize: '400% 400%',
+                    }} />
 
-                            <ScrollText delay={0.1}>
-                                <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] font-bold text-white leading-[0.9] tracking-tighter">
-                                    {t('hero_headline_1')}{' '}
-                                    <span className="italic font-light text-secondary-300">{t('hero_headline_accent')}</span>
-                                    <br />
-                                    {t('hero_headline_2')}
-                                </h1>
-                            </ScrollText>
+                    {/* Video overlay (may not load on all hosts) */}
+                    <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay">
+                        <source src="/hero-bg.mp4" type="video/mp4" />
+                    </video>
 
-                            <ScrollText delay={0.2}>
-                                <p className="mt-10 text-lg md:text-xl text-white/50 max-w-2xl leading-relaxed">
-                                    {t('hero_desc')}
-                                </p>
-                            </ScrollText>
+                    {/* Animated grid lines */}
+                    <div className="absolute inset-0 opacity-[0.03]" style={{
+                        backgroundImage: `linear-gradient(rgba(168,208,224,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(168,208,224,0.3) 1px, transparent 1px)`,
+                        backgroundSize: '80px 80px',
+                    }} />
 
-                            <ScrollText delay={0.3}>
-                                <div className="mt-12 flex flex-wrap items-center gap-6">
-                                    <motion.button
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.97 }}
-                                        onClick={() => window.open('https://wa.me/905488321919', '_blank')}
-                                        className="group inline-flex items-center gap-3 bg-white text-ink-900 font-medium text-base md:text-lg px-8 md:px-10 py-4 md:py-5 rounded-full hover:bg-secondary-300 transition-colors duration-300"
-                                    >
-                                        {t('hero_cta')}
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-                                    </motion.button>
-                                </div>
-                            </ScrollText>
-                        </div>
-
-                        <div className="absolute bottom-8 right-8 hidden md:flex items-center gap-6 text-white/30 text-xs font-medium uppercase tracking-widest">
-                            <span>EST. 2017</span>
-                            <span className="w-12 h-px bg-white/15" />
-                            <span>Girne, KKTC</span>
-                        </div>
+                    {/* Floating orbs */}
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                        <motion.div
+                            animate={{ x: [0, 100, -50, 0], y: [0, -80, 40, 0], scale: [1, 1.3, 0.9, 1] }}
+                            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                            className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-brand-600/20 rounded-full blur-[100px]"
+                        />
+                        <motion.div
+                            animate={{ x: [0, -80, 60, 0], y: [0, 60, -40, 0], scale: [1, 0.8, 1.2, 1] }}
+                            transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
+                            className="absolute bottom-1/4 left-1/6 w-[400px] h-[400px] bg-accent-500/15 rounded-full blur-[80px]"
+                        />
+                        <motion.div
+                            animate={{ x: [0, 50, -30, 0], y: [0, -50, 80, 0] }}
+                            transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+                            className="absolute top-1/2 left-1/2 w-[300px] h-[300px] bg-secondary-300/10 rounded-full blur-[60px]"
+                        />
                     </div>
-                </ZoomSection>
+
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink-900" />
+
+                    {/* Content */}
+                    <div className="container mx-auto px-6 md:px-12 relative z-10">
+                        <div className="max-w-5xl">
+                            <motion.p
+                                initial={{ opacity: 0, x: -30 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.8, delay: 0.5 }}
+                                className="text-xs md:text-sm font-semibold uppercase tracking-[0.3em] text-white/40 mb-8"
+                            >
+                                BC Creative Agency · Girne, KKTC
+                            </motion.p>
+
+                            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] font-bold text-white leading-[0.9] tracking-tighter">
+                                {/* Word by word stagger */}
+                                {t('hero_headline_1').split(' ').map((word, i) => (
+                                    <motion.span
+                                        key={i}
+                                        initial={{ opacity: 0, y: 80, rotateX: -90 }}
+                                        animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                                        transition={{ duration: 0.8, delay: 0.7 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                                        className="inline-block mr-[0.25em]"
+                                        style={{ perspective: '500px' }}
+                                    >
+                                        {word}
+                                    </motion.span>
+                                ))}
+                                {' '}
+                                <motion.span
+                                    initial={{ opacity: 0, scale: 0.5, filter: 'blur(20px)' }}
+                                    animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                                    transition={{ duration: 1, delay: 1, ease: [0.22, 1, 0.36, 1] }}
+                                    className="italic font-light text-secondary-300 inline-block"
+                                >
+                                    {t('hero_headline_accent')}
+                                </motion.span>
+                                <br />
+                                {t('hero_headline_2').split(' ').map((word, i) => (
+                                    <motion.span
+                                        key={`r2-${i}`}
+                                        initial={{ opacity: 0, y: 80, rotateX: -90 }}
+                                        animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                                        transition={{ duration: 0.8, delay: 1.2 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                                        className="inline-block mr-[0.25em]"
+                                    >
+                                        {word}
+                                    </motion.span>
+                                ))}
+                            </h1>
+
+                            <motion.p
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 1.6 }}
+                                className="mt-10 text-lg md:text-xl text-white/50 max-w-2xl leading-relaxed"
+                            >
+                                {t('hero_desc')}
+                            </motion.p>
+
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 1.9 }}
+                                className="mt-12 flex flex-wrap items-center gap-6"
+                            >
+                                <motion.button
+                                    whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(168,208,224,0.3)' }}
+                                    whileTap={{ scale: 0.97 }}
+                                    onClick={() => window.open('https://wa.me/905488321919', '_blank')}
+                                    className="group inline-flex items-center gap-3 bg-white text-ink-900 font-medium text-base md:text-lg px-8 md:px-10 py-4 md:py-5 rounded-full hover:bg-secondary-300 transition-colors duration-300"
+                                >
+                                    {t('hero_cta')}
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                                </motion.button>
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+                                    className="inline-flex items-center gap-2 text-white/40 hover:text-white font-medium text-sm transition-colors border border-white/15 hover:border-white/30 px-6 py-3 rounded-full"
+                                >
+                                    {t('hero_cta_secondary')}
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M12 5v14M5 12l7 7 7-7" />
+                                    </svg>
+                                </motion.button>
+                            </motion.div>
+                        </div>
+
+                        {/* Bottom meta */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 2.2, duration: 1 }}
+                            className="absolute bottom-8 right-8 hidden md:flex items-center gap-6 text-white/20 text-xs font-medium uppercase tracking-widest"
+                        >
+                            <span>EST. 2017</span>
+                            <motion.span
+                                initial={{ width: 0 }}
+                                animate={{ width: 48 }}
+                                transition={{ delay: 2.5, duration: 0.8 }}
+                                className="h-px bg-white/15 block"
+                            />
+                            <span>Girne, KKTC</span>
+                        </motion.div>
+                    </div>
+
+                    {/* Scroll indicator */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 2.5 }}
+                        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
+                    >
+                        <motion.div
+                            animate={{ y: [0, 8, 0] }}
+                            transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
+                        >
+                            <div className="w-6 h-10 border border-white/20 rounded-full flex items-start justify-center p-1.5">
+                                <motion.div
+                                    className="w-1 h-1 bg-secondary-300/60 rounded-full"
+                                    animate={{ y: [0, 16, 0], opacity: [1, 0.3, 1] }}
+                                    transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
+                                />
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                </section>
 
                 {/* ═══ MARQUEE ═══ */}
                 <Marquee items={bannerItems} />
