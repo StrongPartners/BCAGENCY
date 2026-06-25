@@ -45,8 +45,8 @@
   html.lenis, html.lenis body { height: auto; }
   .lenis.lenis-smooth { scroll-behavior: auto; }
   .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-  html { scroll-behavior: smooth; }
-  body { @apply font-sans antialiased text-ink-900 bg-white; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body { @apply font-sans antialiased text-ink-900 bg-white; overflow-x: hidden; }
   ::selection { background-color: #1B2A5C; color: white; }
 }
 
