@@ -257,6 +257,7 @@
 <body>
   <div id="root">
     <!-- Static fallback content for crawlers that don't execute JS -->
+    <div id="static-fallback" style="display:none">
     <header>
       <a href="/">BC Creative Agency</a>
       <nav>
@@ -315,6 +316,8 @@
       <a href="/kullanim-sartlari">Kullanım Şartları</a> |
       <a href="https://www.instagram.com/bccreative.agency/" rel="noopener" target="_blank">Instagram</a>
     </footer>
+    </div>
+    <noscript><style>#static-fallback{display:block!important}</style></noscript>
   </div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
