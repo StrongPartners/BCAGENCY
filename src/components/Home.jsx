@@ -260,12 +260,16 @@ const Home = () => {
             {/* ═══ MARQUEE 2 ═══ */}
             <Marquee items={['SEO', 'Google Ads', 'Social Media', 'Web Design', 'Production', 'Drone', 'Photo & Video']} />
 
-            {/* ═══ 4. FAQ — Zoom into powder ═══ */}
-            <ZoomSection video="/bg-powder.mp4" bg="/parallax-powder.webp" overlay="bg-ink-900/80">
-                <div className="py-16 w-full">
+            {/* ═══ 4. FAQ — Static dark section (too long for zoom) ═══ */}
+            <section className="relative bg-ink-900 overflow-hidden">
+                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-20">
+                    <source src="/bg-powder.mp4" type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-ink-900/75" />
+                <div className="relative z-10 py-24 md:py-32">
                     <FAQ />
                 </div>
-            </ZoomSection>
+            </section>
 
             {/* ═══ 5. CTA — Zoom into smoke ═══ */}
             <ZoomSection video="/bg-smoke.mp4" bg="/parallax-smoke.webp" overlay="bg-ink-900/50">
