@@ -57,7 +57,7 @@ export const translations = {
     approach_eyebrow: 'Nasıl çalışıyoruz',
     approach_heading_1: 'Karmaşık değil,',
     approach_heading_2: 'sadece iyi iş.',
-    approach_sub: 'Süreci basit tutuyoruz — öğreniyoruz, tasarlıyoruz, üretiyoruz, ölçüyoruz. Tekrarlıyoruz.',
+    approach_sub: 'Süreci basit tutuyoruz: öğreniyoruz, tasarlıyoruz, üretiyoruz, ölçüyoruz. Tekrarlıyoruz.',
     approach_steps: [
       { number: '01', title: 'Dinle', desc: "Önce markanızı, hedeflerinizi ve müşterinizi anlıyoruz. Bol kahve eşliğinde.", tone: 'brand' },
       { number: '02', title: 'Tasarla', desc: 'Veriye ve yaratıcılığa dayalı bir strateji çıkarıyoruz. Kısa, net, ölçülebilir.', tone: 'coral' },
@@ -222,7 +222,7 @@ export const translations = {
     approach_eyebrow: 'How we work',
     approach_heading_1: 'Not complicated,',
     approach_heading_2: 'just good work.',
-    approach_sub: 'We keep the process simple — listen, design, make, measure. Rinse and repeat.',
+    approach_sub: 'We keep the process simple: listen, design, make, measure. Rinse and repeat.',
     approach_steps: [
       { number: '01', title: 'Listen', desc: "First we understand your brand, your goals, your customer. Over plenty of coffee.", tone: 'brand' },
       { number: '02', title: 'Design', desc: 'We build a strategy on data and creativity. Short, clear, measurable.', tone: 'coral' },
@@ -387,7 +387,7 @@ export const translations = {
     approach_eyebrow: 'Как мы работаем',
     approach_heading_1: 'Не сложно,',
     approach_heading_2: 'просто хорошая работа.',
-    approach_sub: 'Мы держим процесс простым — слушаем, про��ктируем, создаём, измеряем. И повторяем.',
+    approach_sub: 'Мы держим процесс простым: слушаем, проектируем, создаём, измеряем. И повторяем.',
     approach_steps: [
       { number: '01', title: 'Слушаем', desc: 'Сначала понимаем ваш бренд, цели и клиента. За чашкой кофе.', tone: 'brand' },
       { number: '02', title: 'Проектируем', desc: '��троим стратегию на данных и креативе. Коротко, ясно, измеримо.', tone: 'coral' },
@@ -552,7 +552,7 @@ export const translations = {
     approach_eyebrow: 'نحوه کار ما',
     approach_heading_1: 'پیچیده نیست،',
     approach_heading_2: 'فقط کار خوب.',
-    approach_sub: 'فرآیند را ساده نگه می‌داریم — گوش می‌دهیم، طراحی می‌کنیم، می‌سازیم، اندازه‌گیری می‌کنیم. و تکرار.',
+    approach_sub: 'فرآیند را ساده نگه می‌داریم: گوش می‌دهیم، طراحی می‌کنیم، می‌سازیم، اندازه‌گیری می‌کنیم. و تکرار.',
     approach_steps: [
       { number: '01', title: 'گوش دادن', desc: 'ابتدا برند، اهداف و مشتری شما را می‌شناسیم. با کلی قهوه.', tone: 'brand' },
       { number: '02', title: 'طراحی', desc: 'استراتژی بر پایه داده و خلاقی�� می‌سا��یم. کوتاه، واضح، قابل اندازه‌گیری.', tone: 'coral' },

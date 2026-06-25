@@ -88,7 +88,7 @@ const ScrollProgress = () => {
     );
 };
 
-/* ─── Zoom-through section (fixed: no border, no gaps) ─── */
+/* ─── Zoom-through section ─── */
 const ZoomSection = ({ children, bg, video, overlay = 'bg-black/40', className = '' }) => {
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({
@@ -96,22 +96,22 @@ const ZoomSection = ({ children, bg, video, overlay = 'bg-black/40', className =
         offset: ['start end', 'end start'],
     });
 
-    const scale = useTransform(scrollYProgress, [0, 0.35, 0.5, 0.65, 1], [0.85, 0.95, 1, 1.08, 1.2]);
+    const scale = useTransform(scrollYProgress, [0, 0.3, 0.5, 0.7, 1], [0.92, 0.98, 1, 1.05, 1.15]);
     const opacity = useTransform(scrollYProgress, [0, 0.2, 0.35, 0.7, 0.9], [0, 1, 1, 1, 0]);
 
     return (
-        <div ref={ref} className="h-[180vh] relative">
-            <div className="sticky top-0 h-screen overflow-hidden">
+        <div ref={ref} className="h-[180vh] relative bg-ink-900">
+            <div className="sticky top-0 h-screen overflow-hidden bg-ink-900">
                 <motion.div
                     style={{ scale, opacity }}
                     className={`w-full h-full relative overflow-hidden ${className}`}
                 >
                     {video ? (
-                        <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover scale-110">
+                        <video autoPlay loop muted playsInline className="absolute inset-[-5%] w-[110%] h-[110%] object-cover">
                             <source src={video} type="video/mp4" />
                         </video>
                     ) : bg ? (
-                        <img src={bg} alt="" className="absolute inset-0 w-full h-full object-cover scale-110" />
+                        <img src={bg} alt="" className="absolute inset-[-5%] w-[110%] h-[110%] object-cover" />
                     ) : null}
                     <div className={`absolute inset-0 ${overlay}`} />
                     <div className="relative z-10 flex items-center justify-center h-full">
