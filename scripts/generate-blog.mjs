@@ -120,9 +120,10 @@ class GenerateBlogBatchUseCase {
             throw new Error(`GEMINI_API_KEY içine JSON yapıştırılmış! aistudio.google.com'dan AIza... ile başlayan key al.`);
         }
 
-        // Öncelik sırası: 1.5-flash yüksek free tier limit'i (1500 req/gün) sunuyor
-        // 2.0-flash daha kaliteli ama düşük limit (200 req/gün) — fallback olarak kullan
-        const models = ["gemini-1.5-flash", "gemini-1.5-flash-8b", "gemini-2.0-flash", "gemini-2.5-flash", "gemini-1.5-pro"];
+        // Öncelik: gemini-2.5-flash (güncel, ayrı quota bucket)
+        // gemini-1.5-* modelleri Google tarafından retire edildi (404).
+        // 2.5-flash-lite → daha hafif alternatif; 2.0-flash fallback
+        const models = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.5-pro", "gemini-2.0-flash"];
         const versions = ["v1beta", "v1"];
         const prompt = this._getPrompt(batchSize, existingSlugs);
 
