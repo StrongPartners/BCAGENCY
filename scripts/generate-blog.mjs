@@ -120,7 +120,9 @@ class GenerateBlogBatchUseCase {
             throw new Error(`GEMINI_API_KEY içine JSON yapıştırılmış! aistudio.google.com'dan AIza... ile başlayan key al.`);
         }
 
-        const models = ["gemini-2.0-flash", "gemini-2.5-pro", "gemini-1.5-flash", "gemini-1.5-pro"];
+        // Öncelik sırası: 1.5-flash yüksek free tier limit'i (1500 req/gün) sunuyor
+        // 2.0-flash daha kaliteli ama düşük limit (200 req/gün) — fallback olarak kullan
+        const models = ["gemini-1.5-flash", "gemini-1.5-flash-8b", "gemini-2.0-flash", "gemini-2.5-flash", "gemini-1.5-pro"];
         const versions = ["v1beta", "v1"];
         const prompt = this._getPrompt(batchSize, existingSlugs);
 
@@ -377,6 +379,7 @@ Requirements: Wide landscape format (16:9), no text overlay, no watermarks,
 vibrant colors, suitable for a B2B digital marketing agency website.`;
 
         const imageModels = [
+            'gemini-2.5-flash-image-preview',
             'gemini-2.0-flash-preview-image-generation',
             'gemini-2.0-flash-exp',
         ];
