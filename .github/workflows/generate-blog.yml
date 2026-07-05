@@ -1,7 +1,7 @@
 name: 📝 Günlük Otomatik SEO Blog Motoru (Gemini Edition)
 
 on:
-  # Her gün saat 07:00 UTC (10:00 KKTC) — otomatik 2 yazı (Gemini free tier dostu)
+  # Her gün saat 07:00 UTC (10:00 KKTC) — otomatik 1 yazı (Gemini free tier dostu)
   schedule:
     - cron: '0 7 * * *'
 
@@ -9,11 +9,12 @@ on:
   workflow_dispatch:
     inputs:
       blog_count:
-        description: '📝 Kaç blog yazısı üretilsin? (1-30)'
+        description: '📝 Kaç blog yazısı üretilsin? (1-15)'
         required: false
-        default: '2'
+        default: '1'
         type: choice
         options:
+          - '1'
           - '2'
           - '3'
           - '5'
@@ -46,7 +47,7 @@ jobs:
         run: node scripts/generate-blog.mjs
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          BLOG_COUNT: ${{ github.event.inputs.blog_count || '2' }}
+          BLOG_COUNT: ${{ github.event.inputs.blog_count || '1' }}
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
           CLOUDINARY_UPLOAD_PRESET: ${{ secrets.CLOUDINARY_UPLOAD_PRESET }}
 
@@ -60,7 +61,7 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
             echo "Yeni yazı bulunamadı."
           else
-            COUNT=${{ github.event.inputs.blog_count || '2' }}
+            COUNT=${{ github.event.inputs.blog_count || '1' }}
             git commit -m "seo: ${COUNT} adet blog yazısı eklendi $(date +'%Y-%m-%d')"
             git push
             echo "has_changes=true" >> $GITHUB_OUTPUT
