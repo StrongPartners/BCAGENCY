@@ -463,6 +463,7 @@ class BlogManager {
             let rawDataBatch = [];
             let usedSlugs = [...existingSlugs];
             const MAX_RETRIES = 2;
+            const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
             for (let i = 0; i < totalCount; i++) {
                 let success = false;
@@ -489,11 +490,19 @@ class BlogManager {
                         }
                     } catch (err) {
                         console.warn(`[Manager] ⚠️ Üretim hatası: ${err.message.substring(0, 80)}`);
+                        // Rate limit hatası ise expo backoff
+                        if (err.message.includes('RATE LIMIT') && attempt < MAX_RETRIES) {
+                            const waitMs = 30000 * Math.pow(2, attempt); // 30s, 60s
+                            console.log(`[Manager] ⏳ Rate limit, ${waitMs / 1000}s bekleniyor...`);
+                            await sleep(waitMs);
+                        }
                     }
                 }
                 if (!success) {
                     console.warn(`[Manager] ⚠️ Yazı ${i + 1} üretilemedi, atlanıyor.`);
                 }
+                // Yazılar arası her zaman 15s bekle — kota dostu
+                if (i < totalCount - 1) await sleep(15000);
             }
 
             if (rawDataBatch.length === 0) {
