@@ -1,9 +1,9 @@
-name: 📝 Günlük Otomatik SEO Blog Motoru (Gemini Edition)
+name: 📝 Otomatik SEO Blog Motoru (Gemini — sadece manuel)
 
 on:
-  # Her gün saat 07:00 UTC (10:00 KKTC) — otomatik 1 yazı (Gemini free tier dostu)
-  schedule:
-    - cron: '0 7 * * *'
+  # NOT: Günlük otomatik üretim artık Claude Code Routine ile yapılıyor
+  # (Gemini rate limit sorunları nedeniyle cron devre dışı bırakıldı).
+  # Bu workflow yalnızca manuel yedek olarak duruyor.
 
   # Manuel tetikleme — kaç yazı üretileceğini kendin seç
   workflow_dispatch:
