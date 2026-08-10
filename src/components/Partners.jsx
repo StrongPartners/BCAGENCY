@@ -9,20 +9,26 @@ import { motion } from 'framer-motion';
 const FEED = 'https://europe-west1-bcrm-8bedd.cloudfunctions.net/partnersFeed';
 
 const PartnerItem = ({ partner }) => {
+  // Her logo aynı ölçüdeki görünmez kutuya sığdırılır (object-contain):
+  // kare logo da, uzun yazı logosu da optik olarak eşit ağırlıkta durur.
   const inner = partner.logo ? (
-    <img
-      src={partner.logo}
-      alt={partner.name}
-      loading="lazy"
-      className="h-12 md:h-14 w-auto max-w-[170px] object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-105"
-    />
+    <div className="flex items-center justify-center w-[130px] h-[56px] md:w-[170px] md:h-[72px]">
+      <img
+        src={partner.logo}
+        alt={partner.name}
+        loading="lazy"
+        className="max-w-full max-h-full w-auto h-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-105"
+      />
+    </div>
   ) : (
-    <span className="text-white/50 text-lg font-semibold whitespace-nowrap transition-colors duration-300 group-hover:text-white">
-      {partner.name}
-    </span>
+    <div className="flex items-center justify-center w-[130px] h-[56px] md:w-[170px] md:h-[72px]">
+      <span className="text-white/50 text-base md:text-lg font-semibold whitespace-nowrap text-center leading-tight transition-colors duration-300 group-hover:text-white">
+        {partner.name}
+      </span>
+    </div>
   );
 
-  const className = 'group flex-shrink-0 flex items-center justify-center px-8 md:px-10';
+  const className = 'group flex-shrink-0 flex items-center justify-center px-6 md:px-8';
 
   return partner.website ? (
     <a href={partner.website} target="_blank" rel="noopener noreferrer" title={partner.name} className={className}>
