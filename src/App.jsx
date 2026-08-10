@@ -35,7 +35,7 @@ function App() {
           <div className="flex-grow">
             <Suspense fallback={<div className="min-h-screen" />}>
               <Routes>
-                <Route path="/" element={<><Home /><Testimonials /><BlogPreview /></>} />
+                <Route path="/" element={<><Home /><Partners /><Testimonials /><BlogPreview /></>} />
                 <Route path="/about" element={<About />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
