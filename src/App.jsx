@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import Testimonials from './components/Testimonials';
+import Partners from './components/Partners';
 import BlogPreview from './components/BlogPreview';
 import { LanguageProvider } from './context/LanguageContext';
 import ScrollToTop from './components/ScrollToTop';
