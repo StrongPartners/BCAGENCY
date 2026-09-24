@@ -1,0 +1,39 @@
+/* ─── "Blueprint" ana sayfa stili (Alche × Lisovskiy esintili) ─── */
+.bp { --bp-bg:#050506; --bp-ink:#f1f1f0; --bp-dim:#8c8c95; --bp-line:rgba(255,255,255,.08); --bp-accent:#E03C31; --bp-cyan:#A8D0E0; }
+.bp-mono { font-family: "JetBrains Mono", "SFMono-Regular", Menlo, monospace; font-feature-settings: "ss01"; }
+.bp-display { font-family: "Inter Tight", "DM Sans", sans-serif; letter-spacing: -0.04em; }
+
+/* çizim ızgarası */
+.bp-grid { background-image:
+  linear-gradient(var(--bp-line) 1px, transparent 1px),
+  linear-gradient(90deg, var(--bp-line) 1px, transparent 1px);
+  background-size: 96px 96px; background-position: center top; }
+
+/* blueprint çizgi animasyonu */
+.bp-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: bp-draw 1.6s cubic-bezier(.65,0,.2,1) forwards; }
+@keyframes bp-draw { to { stroke-dashoffset: 0; } }
+
+/* kayan sütun */
+@keyframes bp-roll { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+.bp-roll { animation: bp-roll 18s linear infinite; }
+
+/* scroll oku */
+@keyframes bp-scan { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+.bp-scan { animation: bp-scan 2.2s ease-in-out infinite; }
+
+/* klaket 3D */
+.bp-3d { perspective: 1400px; }
+.bp-3d-inner { transform-style: preserve-3d; transition: transform .25s ease-out; will-change: transform; }
+.bp-stripes { background: repeating-linear-gradient(135deg, #f1f1f0 0 22px, #101014 22px 44px); }
+
+/* iş satırı */
+.bp-row { border-top: 1px solid var(--bp-line); }
+.bp-row:last-child { border-bottom: 1px solid var(--bp-line); }
+.bp-row:hover .bp-row-title { transform: translateX(14px); color: #fff; }
+.bp-row-title { transition: transform .5s cubic-bezier(.2,.8,.2,1), color .3s; }
+
+/* hover görsel takip */
+.bp-float-img { position: fixed; width: 320px; aspect-ratio: 4/3; pointer-events: none; z-index: 40; object-fit: cover; border-radius: 6px; opacity: 0; transform: translate(-50%, -50%) scale(.9); transition: opacity .25s, transform .25s; }
+.bp-float-img.on { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+.bp-marker { width: 9px; height: 9px; border: 1px solid var(--bp-ink); transform: rotate(45deg); display: inline-block; }
