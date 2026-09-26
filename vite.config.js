@@ -427,6 +427,7 @@ export default defineConfig({
         '/blog/kktc-video-icerik-cogaltma-stratejisi-tek-cekim-girne',
         '/blog/kktc-marka-kilavuzu-brand-guidelines-hazirlama-girne',
         '/blog/kktc-google-tag-manager-donusum-takibi-ga4-girne',
+        '/blog/kktc-whatsapp-rezervasyon-onay-hatirlatma-sistemi-girne',
       ],
     }),
   ],
