@@ -287,13 +287,13 @@ const BlogPost = () => {
       <div className="container mx-auto px-4 md:px-8 py-12">
         <div className="max-w-4xl mx-auto">
           {/* Meta */}
-          <div className="flex items-center gap-4 text-sm text-white/40 mb-10 pb-8 border-b border-white/10">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-white/40 mb-10 pb-8 border-b border-white/10">
             <span className="flex items-center gap-1"><Clock size={14} /> {postReadTime} {t('blog_read_time')}</span>
             <span>&middot;</span>
             <span>{postDate}</span>
             <span>&middot;</span>
             <span className="flex items-center gap-1"><Tag size={14} /> {categoryLabels[post.category]?.[lang] || post.category}</span>
-            <Suspense fallback={null}><VoxelMini shape={getShape(categoryShape(post.category))} className="ml-auto h-20 w-28 md:h-28 md:w-40 -my-6" label={categoryLabels[post.category]?.[lang] || post.category} /></Suspense>
+            <Suspense fallback={null}><VoxelMini shape={getShape(categoryShape(post.category))} className="hidden sm:block ml-auto h-20 w-28 md:h-28 md:w-40 -my-6" label={categoryLabels[post.category]?.[lang] || post.category} /></Suspense>
           </div>
 
           {/* Blog Content */}

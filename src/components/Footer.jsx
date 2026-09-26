@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { getShape } from './hero/voxelShapes';
+import { SERVICES } from './shared/services';
 const VoxelMini = lazy(() => import('./hero/VoxelMini'));
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -7,9 +8,9 @@ import { Phone, Mail, MapPin, Instagram } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const Footer = () => {
-    const { t } = useLanguage();
     const navigate = useNavigate();
-    const services = t('services_list');
+    const { t, lang } = useLanguage();
+    const services = SERVICES.map(s => ({ title: lang === 'tr' ? s.tr : s.en, path: s.path }));
 
     const go = (path) => {
         navigate(path);
@@ -37,7 +38,7 @@ const Footer = () => {
                                 BC Creative
                             </span>
                         </button>
-                        <p className="text-ink-400 text-sm leading-relaxed mb-6">
+                        <p className="text-white/65 text-sm leading-relaxed mb-6">
                             {t('footer_desc')}
                         </p>
                         <div className="flex items-center gap-3">
@@ -45,30 +46,30 @@ const Footer = () => {
                                 href="https://www.instagram.com/bccreative.agency/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-10 h-10 rounded-full border border-ink-700 flex items-center justify-center hover:border-white transition-colors"
+                                className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-white transition-colors"
                             >
-                                <Instagram size={16} className="text-ink-400 hover:text-white" />
+                                <Instagram size={16} className="text-white/65 hover:text-white" />
                             </a>
                             <a
                                 href="https://wa.me/905488321919"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-10 h-10 rounded-full border border-ink-700 flex items-center justify-center hover:border-white transition-colors"
+                                className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-white transition-colors"
                             >
-                                <Phone size={14} className="text-ink-400" />
+                                <Phone size={14} className="text-white/65" />
                             </a>
                             <a
                                 href="mailto:info@bccreative.agency"
-                                className="w-10 h-10 rounded-full border border-ink-700 flex items-center justify-center hover:border-white transition-colors"
+                                className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-white transition-colors"
                             >
-                                <Mail size={14} className="text-ink-400" />
+                                <Mail size={14} className="text-white/65" />
                             </a>
                         </div>
                     </div>
 
                     {/* Services */}
                     <div>
-                        <h3 className="text-sm font-semibold uppercase tracking-wider text-ink-400 mb-5">
+                        <h3 className="text-sm font-semibold uppercase tracking-wider text-white/65 mb-5">
                             {t('footer_services_title')}
                         </h3>
                         <ul className="space-y-2.5">
@@ -77,12 +78,12 @@ const Footer = () => {
                                     {s.path ? (
                                         <button
                                             onClick={() => go(s.path)}
-                                            className="text-ink-400 hover:text-white text-sm transition-colors"
+                                            className="text-white/65 hover:text-white text-sm transition-colors"
                                         >
                                             {s.title}
                                         </button>
                                     ) : (
-                                        <span className="text-ink-400 text-sm">{s.title}</span>
+                                        <span className="text-white/65 text-sm">{s.title}</span>
                                     )}
                                 </li>
                             ))}
@@ -91,25 +92,25 @@ const Footer = () => {
 
                     {/* Nav */}
                     <div>
-                        <h3 className="text-sm font-semibold uppercase tracking-wider text-ink-400 mb-5">
+                        <h3 className="text-sm font-semibold uppercase tracking-wider text-white/65 mb-5">
                             {t('footer_nav_title')}
                         </h3>
                         <ul className="space-y-2.5">
-                            <li><button onClick={() => go('/')} className="text-ink-400 hover:text-white text-sm transition-colors">{t('nav_home')}</button></li>
-                            <li><button onClick={() => go('/about')} className="text-ink-400 hover:text-white text-sm transition-colors">{t('nav_about')}</button></li>
-                            <li><button onClick={() => go('/blog')} className="text-ink-400 hover:text-white text-sm transition-colors">{t('nav_blog')}</button></li>
-                            <li><button onClick={() => go('/contact')} className="text-ink-400 hover:text-white text-sm transition-colors">{t('nav_contact')}</button></li>
+                            <li><button onClick={() => go('/')} className="text-white/65 hover:text-white text-sm transition-colors">{t('nav_home')}</button></li>
+                            <li><button onClick={() => go('/about')} className="text-white/65 hover:text-white text-sm transition-colors">{t('nav_about')}</button></li>
+                            <li><button onClick={() => go('/blog')} className="text-white/65 hover:text-white text-sm transition-colors">{t('nav_blog')}</button></li>
+                            <li><button onClick={() => go('/contact')} className="text-white/65 hover:text-white text-sm transition-colors">{t('nav_contact')}</button></li>
                         </ul>
                     </div>
 
                     {/* Contact */}
                     <div>
-                        <h3 className="text-sm font-semibold uppercase tracking-wider text-ink-400 mb-5">
+                        <h3 className="text-sm font-semibold uppercase tracking-wider text-white/65 mb-5">
                             {t('footer_contact_title')}
                         </h3>
                         <ul className="space-y-4">
-                            <li className="flex items-start gap-2.5 text-ink-400 text-sm leading-relaxed">
-                                <MapPin size={16} className="text-ink-500 shrink-0 mt-0.5" />
+                            <li className="flex items-start gap-2.5 text-white/65 text-sm leading-relaxed">
+                                <MapPin size={16} className="text-white/45 shrink-0 mt-0.5" />
                                 <a
                                     href={t('contact_map_url')}
                                     target="_blank"
@@ -119,12 +120,12 @@ const Footer = () => {
                                     {t('footer_address')}
                                 </a>
                             </li>
-                            <li className="flex items-center gap-2.5 text-ink-400 text-sm">
-                                <Phone size={16} className="text-ink-500 shrink-0" />
+                            <li className="flex items-center gap-2.5 text-white/65 text-sm">
+                                <Phone size={16} className="text-white/45 shrink-0" />
                                 <a href="tel:+905488321919" className="hover:text-white transition-colors">+90 548 832 19 19</a>
                             </li>
-                            <li className="flex items-center gap-2.5 text-ink-400 text-sm">
-                                <Mail size={16} className="text-ink-500 shrink-0" />
+                            <li className="flex items-center gap-2.5 text-white/65 text-sm">
+                                <Mail size={16} className="text-white/45 shrink-0" />
                                 <a href="mailto:info@bccreative.agency" className="hover:text-white transition-colors">info@bccreative.agency</a>
                             </li>
                         </ul>
@@ -137,7 +138,7 @@ const Footer = () => {
                 </Suspense>
 
                 {/* Bottom strip */}
-                <div className="mt-16 pt-8 border-t border-ink-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-ink-500">
+                <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/45">
                     <div>&copy; 2017 &ndash; 2026 BC Creative Agency. {t('footer_rights')}</div>
                     <div>{t('footer_made_with')}</div>
                 </div>

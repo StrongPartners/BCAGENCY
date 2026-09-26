@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Clock, ArrowUpRight } from 'lucide-react';
@@ -8,8 +8,23 @@ import { useLanguage } from '../context/LanguageContext';
 import VoxelIcon from './hero/VoxelIcon';
 import { categoryShape, getShape } from './hero/voxelShapes';
 
-const VoxelMini = lazy(() => import('./hero/VoxelMini'));
 import { buildOrganizationSchema, buildBreadcrumbSchema } from '../lib/geoSchemas';
+
+const VoxelMini = lazy(() => import('./hero/VoxelMini'));
+
+// Kategori filtresi: her grup kendi küp şekliyle (video ve fotoğraf tek grupta)
+const groupOf = (cat) => { const g = categoryShape(cat); return g === 'camera' ? 'clapper' : g; };
+const FILTERS = [
+  { key: 'all', icon: 'bc', tr: 'Tümü', en: 'All' },
+  { key: 'heart', icon: 'heart', tr: 'Sosyal Medya', en: 'Social Media' },
+  { key: 'magnifier', icon: 'magnifier', tr: 'SEO', en: 'SEO' },
+  { key: 'target', icon: 'target', tr: 'Google Ads', en: 'Google Ads' },
+  { key: 'browser', icon: 'browser', tr: 'Web', en: 'Web' },
+  { key: 'clapper', icon: 'clapper', tr: 'Video & Foto', en: 'Video & Photo' },
+  { key: 'pencil', icon: 'pencil', tr: 'Grafik', en: 'Graphic' },
+  { key: 'chart', icon: 'chart', tr: 'Dijital Pazarlama', en: 'Digital Marketing' },
+];
+const PAGE = 12;
 
 const categoryLabels = {
   'SEO': { tr: 'SEO', en: 'SEO' },
@@ -22,6 +37,12 @@ const categoryLabels = {
 const Blog = () => {
   const navigate = useNavigate();
   const { lang, t } = useLanguage();
+  const [filter, setFilter] = useState('all');
+  const [limit, setLimit] = useState(PAGE);
+  const counts = useMemo(() => blogPosts.reduce((m, p) => { const g = groupOf(p.category); m[g] = (m[g] || 0) + 1; return m; }, { all: blogPosts.length }), []);
+  const list = useMemo(() => (filter === 'all' ? blogPosts : blogPosts.filter(p => groupOf(p.category) === filter)), [filter]);
+  const shown = list.slice(0, limit);
+  const pick = (k) => { setFilter(k); setLimit(PAGE); };
 
   useSEO({
     title: t('blog_heading_1') + ' ' + t('blog_heading_accent') + ' | BC Creative Agency',
@@ -77,8 +98,18 @@ const Blog = () => {
       {/* Blog grid */}
       <section className="py-16 md:py-24 px-4 md:px-8">
         <div className="container mx-auto">
+          <div className="flex gap-2 overflow-x-auto pb-3 mb-8 -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap" role="tablist" aria-label={lang === 'tr' ? 'Kategoriler' : 'Categories'}>
+            {FILTERS.filter(f => counts[f.key]).map(f => (
+              <button key={f.key} role="tab" aria-selected={filter === f.key} onClick={() => pick(f.key)}
+                className={`group shrink-0 inline-flex items-center gap-2 rounded-full border pl-2 pr-4 py-1.5 text-sm font-medium transition-colors ${filter === f.key ? 'border-secondary-300 bg-secondary-300/10 text-white' : 'border-white/10 text-white/60 hover:border-white/30 hover:text-white'}`}>
+                <VoxelIcon name={f.icon} className="w-7 h-7 transition-transform duration-300 group-hover:-rotate-6" />
+                {lang === 'tr' ? f.tr : f.en}
+                <span className="text-xs text-white/35">{counts[f.key]}</span>
+              </button>
+            ))}
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {blogPosts.map((post, index) => (
+            {shown.map((post, index) => (
               <motion.article
                 key={post.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -127,6 +158,14 @@ const Blog = () => {
               </motion.article>
             ))}
           </div>
+          {limit < list.length && (
+            <div className="mt-12 flex justify-center">
+              <button onClick={() => setLimit(l => l + PAGE)} className="group inline-flex items-center gap-3 rounded-full border border-white/15 pl-3 pr-6 py-2.5 font-medium hover:border-white/40 transition-colors">
+                <VoxelIcon name="arrow-up" className="w-8 h-8 rotate-180 transition-transform duration-300 group-hover:translate-y-0.5" />
+                {lang === 'tr' ? `Daha fazla göster (${list.length - limit} yazı daha)` : `Show more (${list.length - limit} more)`}
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

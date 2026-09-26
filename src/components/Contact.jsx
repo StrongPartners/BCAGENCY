@@ -6,7 +6,7 @@ import { shapeCheck } from './hero/voxelShapes';
 import VoxelIcon from './hero/VoxelIcon';
 import { useLanguage } from '../context/LanguageContext';
 import { buildOrganizationSchema, buildBreadcrumbSchema } from '../lib/geoSchemas';
-import { ZoomSection, ScrollText } from './shared/ParallaxKit';
+import { ScrollText } from './shared/ParallaxKit';
 
 const LEAD_API = 'https://leadintake-fafl6lnd7a-ew.a.run.app';
 const API_KEY = '36ee59119b9aa5590032763a6079e1a899485ad9d8850e447676441b71e26ad';
@@ -66,22 +66,17 @@ const Contact = () => {
     return (
         <main className="bg-ink-900">
             {/* Hero */}
-            <ZoomSection video="/bg-light.mp4" bg="/parallax-light.webp" overlay="bg-ink-900/70">
-                <div className="container mx-auto px-6 md:px-12 text-center">
-                    <div data-voxel-anchor="always" aria-hidden="true" className="mx-auto w-full max-w-xl h-[26svh] md:h-[34vh] lg:h-[38vh] mb-2" />
-                    <ScrollText>
-                        <p className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-6">{t('contact_eyebrow')}</p>
-                    </ScrollText>
-                    <ScrollText delay={0.1}>
-                        <h1 className="text-5xl md:text-8xl font-bold text-white leading-[0.95] tracking-tighter">
-                            {t('contact_heading_1')} <span className="text-secondary-300">{t('contact_heading_accent')}</span>
-                        </h1>
-                    </ScrollText>
-                    <ScrollText delay={0.2}>
-                        <p className="mt-8 text-lg md:text-xl text-white/50 max-w-2xl mx-auto leading-relaxed">{t('contact_sub')}</p>
-                    </ScrollText>
+            <section className="relative overflow-hidden pt-28 md:pt-32 pb-12 md:pb-16">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(168,208,224,0.45),transparent_60%)]" />
+                <div className="container mx-auto px-6 md:px-12 text-center relative">
+                    <div data-voxel-anchor="always" aria-hidden="true" className="mx-auto w-full max-w-xl h-[24svh] md:h-[30vh] mb-2" />
+                    <p className="text-xs font-semibold uppercase tracking-widest text-white/50 mb-5">{t('contact_eyebrow')}</p>
+                    <h1 className="text-5xl md:text-7xl font-bold text-white leading-[0.95] tracking-tighter">
+                        {t('contact_heading_1')} <span className="text-secondary-300">{t('contact_heading_accent')}</span>
+                    </h1>
+                    <p className="mt-6 text-lg md:text-xl text-white/55 max-w-2xl mx-auto leading-relaxed">{t('contact_sub')}</p>
                 </div>
-            </ZoomSection>
+            </section>
 
             {/* Form + Channels */}
             <section className="relative bg-ink-900 py-16 md:py-24">

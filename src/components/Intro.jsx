@@ -8,8 +8,10 @@ import { useLanguage } from '../context/LanguageContext';
  * Kapanırken o anki kare küplere bölünür ve küpler dağılarak siteyi açar.
  */
 const KEY = 'bc_intro_seen';
-// Telefonda 720p, masaüstünde 1080p yüksek bitrate
-const pickSrc = () => (window.matchMedia('(max-width: 820px)').matches ? '/showreel-720.mp4' : '/showreel.mp4');
+// Dik tutulan ekranda dikey (9:16) kurgu, yatayda telefonda 720p, masaüstünde 1080p
+const isPortrait = () => window.matchMedia('(orientation: portrait) and (max-width: 900px)').matches;
+const pickSrc = () => (isPortrait() ? '/showreel-vertical.mp4' : window.matchMedia('(max-width: 820px)').matches ? '/showreel-720.mp4' : '/showreel.mp4');
+const pickPoster = () => (isPortrait() ? '/showreel-poster-vertical.jpg' : '/showreel-poster.jpg');
 
 const Intro = () => {
   const [open, setOpen] = useState(false);
@@ -85,7 +87,7 @@ const Intro = () => {
             </div>
           ) : (
           <>
-          <video ref={ref} src={pickSrc()} poster="/showreel-poster.jpg" autoPlay muted playsInline preload="auto"
+          <video ref={ref} src={pickSrc()} poster={pickPoster()} autoPlay muted playsInline preload="auto"
             onEnded={close} className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
           <div className="absolute inset-x-0 bottom-8 md:bottom-12 flex flex-col items-center gap-4 px-6">

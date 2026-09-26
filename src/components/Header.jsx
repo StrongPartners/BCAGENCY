@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -9,6 +9,8 @@ import { shapeForPath } from './hero/voxelBus';
 const Header = () => {
     const [isHovering, setIsHovering] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [menuTop, setMenuTop] = useState(72);
+    const headerRef = useRef(null);
     const [isScrolled, setIsScrolled] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
@@ -20,6 +22,15 @@ const Header = () => {
         window.addEventListener('scroll', onScroll, { passive: true });
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
+
+    // Mobil menü açıkken arkadaki sayfa kaymasın
+    useEffect(() => {
+        if (!isMobileMenuOpen) return undefined;
+        setMenuTop(headerRef.current?.getBoundingClientRect().bottom ?? 72);
+        const prev = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        return () => { document.body.style.overflow = prev; };
+    }, [isMobileMenuOpen]);
 
     const go = (path) => {
         navigate(path);
@@ -51,6 +62,7 @@ const Header = () => {
 
     return (
         <header
+            ref={headerRef}
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-ink-900/95 backdrop-blur-md border-b border-white/10 py-3' : 'bg-transparent py-5'}`}
         >
             <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
@@ -167,9 +179,10 @@ const Header = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 right-0 bg-ink-900/95 backdrop-blur-md border-t border-white/10 shadow-lg lg:hidden"
+                        className="absolute top-full left-0 right-0 bg-ink-900 border-t border-white/10 shadow-lg lg:hidden overflow-y-auto overscroll-contain"
+                        style={{ maxHeight: `calc(100svh - ${menuTop}px)` }}
                     >
-                        <div className="flex flex-col p-6 space-y-4 max-h-[85vh] overflow-y-auto">
+                        <div className="flex flex-col p-6 pb-24 space-y-4">
                             {/* Language selector */}
                             <div className="flex items-center gap-1 bg-white/10 rounded-full p-0.5 self-start">
                                 {LANGUAGES.map((l) => (

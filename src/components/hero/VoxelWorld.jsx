@@ -130,7 +130,7 @@ export default function VoxelWorld({ className = '' }) {
       // mobilde sahne şeridi üstte durduğu için son bölüm biterken daha erken kaybolur
       const fade = isDesktop()
         ? Math.min(1, Math.max(0, (vh * 0.45 - last.bottom) / (vh * 0.45)))
-        : Math.min(1, Math.max(0, (vh * 0.7 - last.bottom) / (vh * 0.25)));
+        : Math.min(1, Math.max(0, (vh * 0.85 - last.bottom) / (vh * 0.15)));
       return { p: Math.min(steps.length - 1, p), fade };
     };
     const update = (dt) => {
@@ -149,7 +149,7 @@ export default function VoxelWorld({ className = '' }) {
           dispF = Math.min(1, dispF + dt * 0.8);
           if (dispF >= 1) { dispA = dispB; }
         }
-        const heroFade = Math.min(1, window.scrollY / (window.innerHeight * 0.6));
+        const heroFade = Math.min(1, window.scrollY / (window.innerHeight * 0.4));
         targetOpacity = placed ? (1 - heroFade) : 0;
       }
       opacity += (targetOpacity - opacity) * 0.12;
