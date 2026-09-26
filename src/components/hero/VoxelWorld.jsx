@@ -11,7 +11,7 @@ import { voxel } from './voxelBus';
  * İmleç yakınındaki küpler her aşamada dağılıp yaylanarak geri döner.
  */
 
-const NAVY = 0x1e3a8a, NAVY2 = 0x3d5a9e, LIGHT = 0xa8d0e0, LIGHT2 = 0x8fc1d6, RED = 0xe03c31, WHITE = 0xe9eef7;
+const NAVY = 0x1e3a8a, NAVY2 = 0x3d5a9e, LIGHT = 0x7fc0dc, LIGHT2 = 0x5aa9cc, RED = 0xe03c31, WHITE = 0xe9eef7;
 
 // ── Şekil üreticileri: [{x,y,z,c}] ──
 const fromRows = (rows, ox, oy, pick) => {
@@ -122,9 +122,9 @@ export default function VoxelWorld({ className = '' }) {
     el.appendChild(renderer.domElement);
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 200);
-    scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+    scene.add(new THREE.AmbientLight(0xffffff, 0.95));
     const key = new THREE.DirectionalLight(0xffffff, 1.7); key.position.set(6, 9, 12); scene.add(key);
-    const rim = new THREE.DirectionalLight(0xa8d0e0, 1.3); rim.position.set(-9, -5, -8); scene.add(rim);
+    const rim = new THREE.DirectionalLight(0xffffff, 0.9); rim.position.set(-9, -5, -8); scene.add(rim);
 
     const geo = new THREE.BoxGeometry(0.9, 0.9, 0.9);
     const mat = new THREE.MeshStandardMaterial({ roughness: 0.35, metalness: 0.15 });

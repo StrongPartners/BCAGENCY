@@ -46,7 +46,7 @@ const WhatsAppButton = () => {
             whileTap={{ scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 200 }}
             onClick={() => window.open('https://wa.me/905488321919?text=Merhaba%2C%20dijital%20pazarlama%20hizmetleri%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum.', '_blank')}
-            className="w-14 h-14 bg-[#25D366] rounded-full shadow-lg flex items-center justify-center cursor-pointer"
+            className="on-dark w-14 h-14 bg-[#25D366] rounded-full shadow-lg flex items-center justify-center cursor-pointer"
             onMouseEnter={() => setShowTooltip(true)}
             onMouseLeave={() => setShowTooltip(false)}
             aria-label="WhatsApp"

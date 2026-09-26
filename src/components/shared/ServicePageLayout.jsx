@@ -28,7 +28,7 @@ const ServicePageLayout = ({
       {breadcrumbs.length > 0 && <Breadcrumb items={breadcrumbs} />}
       {/* Hero */}
       <section className={`relative overflow-hidden pb-16 md:pb-24 ${breadcrumbs.length ? 'pt-8 md:pt-12' : 'pt-32 md:pt-40'}`}>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(30,58,138,0.4),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(168,208,224,0.45),transparent_60%)]" />
         <div className="container mx-auto px-6 md:px-12 relative">
           <div className={`grid gap-12 items-center ${heroImage ? 'lg:grid-cols-2' : ''}`}>
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
@@ -39,7 +39,7 @@ const ServicePageLayout = ({
               {subheadline && <p className="mt-6 text-xl md:text-2xl font-semibold text-white/70">{subheadline}</p>}
               <p className="mt-5 text-lg text-white/55 max-w-2xl leading-relaxed">{description}</p>
               <div className="mt-9 flex flex-wrap gap-4">
-                <a href={WA} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-3 bg-white text-ink-900 font-semibold px-7 py-4 rounded-full hover:bg-secondary-100 transition-colors">
+                <a href={WA} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-3 bg-white text-ink-900 font-semibold px-7 py-4 rounded-full hover:bg-brand-600 transition-colors">
                   {t('btn_offer')} <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                 </a>
               </div>
@@ -104,10 +104,10 @@ const ServicePageLayout = ({
       {/* Çağrı */}
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-6 md:px-12">
-          <motion.div {...fade} className="rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 p-10 md:p-16 text-center">
+          <motion.div {...fade} className="on-dark rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 p-10 md:p-16 text-center">
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">{ctaTitle}</h2>
             {ctaSub && <p className="mt-5 text-white/70 text-lg max-w-xl mx-auto">{ctaSub}</p>}
-            <a href={WA} target="_blank" rel="noopener noreferrer" className="mt-9 inline-flex items-center gap-2 bg-white text-ink-900 font-semibold px-8 py-4 rounded-full hover:bg-secondary-100 transition-colors">
+            <a href={WA} target="_blank" rel="noopener noreferrer" className="mt-9 inline-flex items-center gap-2 bg-white text-ink-900 font-semibold px-8 py-4 rounded-full hover:bg-brand-600 transition-colors">
               {t('btn_offer')} <ArrowUpRight size={18} />
             </a>
           </motion.div>

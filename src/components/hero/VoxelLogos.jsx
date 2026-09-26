@@ -31,7 +31,7 @@ function sampleLogo(src) {
           if (bg[3] > 200 && diff < 60) continue; // opak düz arka planı at
           let r = d[i], gg = d[i + 1], b = d[i + 2];
           const lum = 0.2126 * r + 0.7152 * gg + 0.0722 * b;
-          if (lum < 60) { r = 220; gg = 226; b = 238; } // koyu logolar koyu zeminde görünsün
+          if (lum > 215) { r = 27; gg = 42; b = 92; } // beyaz logolar açık zeminde görünsün (lacivert)
           pts.push({ x: x - COLS / 2, y: ROWS / 2 - y, c: new THREE.Color(`rgb(${r},${gg},${b})`) });
         }
         resolve(pts.length > 8 ? pts : null);

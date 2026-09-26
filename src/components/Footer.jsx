@@ -15,7 +15,7 @@ const Footer = () => {
     };
 
     return (
-        <footer className="bg-brand-600 text-white">
+        <footer className="on-dark bg-brand-600 text-white">
             <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}

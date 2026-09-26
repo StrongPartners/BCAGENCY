@@ -93,7 +93,7 @@ const Blog = () => {
                     height="192"
                   />
                   <div className="absolute inset-0 bg-ink-900/0 group-hover:bg-ink-900/40 transition-all duration-500" />
-                  <span className="absolute top-4 left-4 text-xs font-medium px-3 py-1 rounded-full bg-white/10 text-white/80 backdrop-blur-sm">
+                  <span className="on-dark absolute top-4 left-4 text-xs font-medium px-3 py-1 rounded-full bg-white/10 text-white/80 backdrop-blur-sm">
                     {categoryLabels[post.category]?.[lang] || post.category}
                   </span>
                 </div>
@@ -125,7 +125,7 @@ const Blog = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-24 md:py-32 bg-brand-600">
+      <section className="on-dark py-24 md:py-32 bg-brand-600">
         <div className="container mx-auto px-4 md:px-8 text-center max-w-3xl">
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-5 leading-none tracking-tight">
             {t('blog_cta_title')}

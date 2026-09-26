@@ -28,7 +28,7 @@ const NotFound = () => {
                 <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                     <Link
                         to="/"
-                        className="inline-flex items-center gap-2 bg-brand-600 text-white font-medium px-8 py-3 rounded-full hover:bg-brand-700 transition-colors"
+                        className="on-dark inline-flex items-center gap-2 bg-brand-600 text-white font-medium px-8 py-3 rounded-full hover:bg-brand-700 transition-colors"
                     >
                         {isTr ? 'Ana Sayfaya Dön' : 'Back to Home'}
                     </Link>

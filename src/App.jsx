@@ -25,6 +25,7 @@ const ReelsVideo = lazy(() => import('./components/ReelsVideo'));
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./components/TermsOfService'));
 const NotFound = lazy(() => import('./components/NotFound'));
+import Intro from './components/Intro';
 const VoxelWorld = lazy(() => import('./components/hero/VoxelWorld'));
 
 // Sayfa değişince küp dünyasına hangi şekli göstereceğini söyler
@@ -40,6 +41,7 @@ function App() {
       <Router>
         <ScrollToTop />
         <VoxelRouteSync />
+        <Intro />
         <Suspense fallback={null}><VoxelWorld className="z-[5] pointer-events-none" /></Suspense>
         <div className="flex flex-col min-h-screen">
           <Header />

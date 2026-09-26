@@ -63,7 +63,7 @@ const BlogPreview = () => {
                   height="192"
                 />
                 <div className="absolute inset-0 bg-ink-900/0 group-hover:bg-ink-900/30 transition-all duration-500" />
-                <span className="absolute top-4 left-4 text-xs font-medium px-3 py-1 rounded-full bg-white/10 text-white/80 backdrop-blur-sm">
+                <span className="on-dark absolute top-4 left-4 text-xs font-medium px-3 py-1 rounded-full bg-white/10 text-white/80 backdrop-blur-sm">
                   {categoryLabels[post.category]?.[lang] || post.category}
                 </span>
               </div>

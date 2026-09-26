@@ -41,12 +41,50 @@
   --font-sans: "DM Sans", "Inter", sans-serif;
 }
 
+/*
+ * Açık tema. Bileşenler koyu tema diliyle yazıldı (bg-ink-900 + text-white);
+ * burada ink skalası ve "white" ters çevrilir, böylece site kırık beyaz zemin +
+ * koyu yazıya döner. Koyu kalması gereken yerler (video, renkli CTA) .on-dark ile
+ * orijinal değerlere geri alınır.
+ */
+:root {
+  --color-white: #15161b;
+  --color-ink-50:  #1a1b20;
+  --color-ink-100: #24252b;
+  --color-ink-200: #3a3b42;
+  --color-ink-300: #55565e;
+  --color-ink-400: #6b6c74;
+  --color-ink-500: #7c7d85;
+  --color-ink-600: #a9aab0;
+  --color-ink-700: #d9d8d2;
+  --color-ink-800: #ecebe6;
+  --color-ink-900: #f7f6f2;
+  --color-secondary-300: #2d7896;
+  --color-secondary-100: #dcebf1;
+}
+.on-dark {
+  --color-white: #ffffff;
+  --color-ink-50:  #f7f7f8;
+  --color-ink-100: #eeeef0;
+  --color-ink-200: #d9d9dd;
+  --color-ink-300: #b8b8bf;
+  --color-ink-400: #8c8c95;
+  --color-ink-500: #6b6b74;
+  --color-ink-600: #4b4b53;
+  --color-ink-700: #35353b;
+  --color-ink-800: #222226;
+  --color-ink-900: #101014;
+  --color-secondary-300: #A8D0E0;
+  --color-secondary-100: #d6eaf2;
+  color: #fff;
+}
+
 @layer base {
   html.lenis, html.lenis body { height: auto; }
   .lenis.lenis-smooth { scroll-behavior: auto; }
   .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
   html { scroll-behavior: smooth; overflow-x: hidden; }
-  body { @apply font-sans antialiased text-ink-900 bg-white; overflow-x: hidden; }
+  body { @apply font-sans antialiased; color: #15161b; background: #f7f6f2; overflow-x: hidden; }
   ::selection { background-color: #1B2A5C; color: white; }
 }
 

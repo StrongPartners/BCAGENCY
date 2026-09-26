@@ -253,7 +253,7 @@ const BlogPost = () => {
   return (
     <div className="min-h-screen bg-ink-900">
       {/* Hero Image */}
-      <div className="relative h-80 md:h-[480px] overflow-hidden pt-24">
+      <div className="on-dark relative h-80 md:h-[480px] overflow-hidden pt-24">
         <img
           src={post.image}
           alt={post.imageAlt?.[lang] || post.imageAlt?.tr || postTitle}

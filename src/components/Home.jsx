@@ -9,7 +9,6 @@ import Partners from './Partners';
 import Testimonials from './Testimonials';
 import BlogPreview from './BlogPreview';
 import FAQ from './FAQ';
-import Showreel from './Showreel';
 
 
 /*
@@ -94,7 +93,7 @@ const Home = () => {
   return (
     <div className="bg-ink-900 text-white">
       {/* 3D sahne App seviyesinde yaşar (hero/VoxelWorld); burada sadece arka ışık */}
-      <div className="fixed inset-0 z-0 pointer-events-none bg-[radial-gradient(ellipse_at_70%_40%,rgba(30,58,138,0.35),transparent_60%)]" />
+      <div className="fixed inset-0 z-0 pointer-events-none bg-[radial-gradient(ellipse_at_70%_40%,rgba(168,208,224,0.35),transparent_60%)]" />
 
       <div className="relative z-10">
         {/* 0 — BC */}
@@ -106,7 +105,7 @@ const Home = () => {
             </h1>
             <p className="mt-7 text-lg text-white/65 max-w-xl leading-relaxed">{c.heroDesc}</p>
             <div className="mt-9 flex flex-wrap items-center gap-4">
-              <a href={WA} target="_blank" rel="noopener noreferrer" className="pointer-events-auto group inline-flex items-center gap-3 bg-white text-ink-900 font-semibold px-7 py-4 rounded-full hover:bg-secondary-100 transition-colors">
+              <a href={WA} target="_blank" rel="noopener noreferrer" className="pointer-events-auto group inline-flex items-center gap-3 bg-white text-ink-900 font-semibold px-7 py-4 rounded-full hover:bg-brand-600 transition-colors">
                 {c.cta} <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
               </a>
             </div>
@@ -149,7 +148,7 @@ const Home = () => {
           <motion.div {...reveal} className="">
             <h2 className="text-5xl md:text-7xl font-bold tracking-tight leading-[0.95]">{c.oneTitle}</h2>
             <p className="mt-6 text-lg text-white/60 max-w-xl leading-relaxed">{c.oneDesc}</p>
-            <a href={WA} target="_blank" rel="noopener noreferrer" className="mt-9 inline-flex items-center gap-3 bg-accent-500 hover:bg-accent-600 font-semibold px-7 py-4 rounded-full transition-colors">
+            <a href={WA} target="_blank" rel="noopener noreferrer" className="on-dark mt-9 inline-flex items-center gap-3 bg-accent-500 hover:bg-accent-600 font-semibold px-7 py-4 rounded-full transition-colors">
               {c.oneCta} <ArrowRight size={18} />
             </a>
           </motion.div>
@@ -157,18 +156,17 @@ const Home = () => {
 
         {/* Klasik bölümler (3D sahne burada kaybolur) */}
         <div className="bg-ink-900">
-          <Showreel />
           <Partners />
           <Testimonials />
           <BlogPreview />
           <section className="py-24 md:py-32 border-t border-white/5"><FAQ /></section>
           <section className="py-24 md:py-32">
             <div className="container mx-auto px-6 md:px-12">
-              <div className="rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 p-10 md:p-16 text-center">
+              <div className="on-dark rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 p-10 md:p-16 text-center">
                 <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">{c.ctaTitle}</h2>
                 <p className="mt-5 text-white/70 text-lg max-w-xl mx-auto">{c.ctaDesc}</p>
                 <div className="mt-9 flex flex-wrap justify-center gap-4">
-                  <a href={WA} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 bg-white text-ink-900 font-semibold px-7 py-4 rounded-full hover:bg-secondary-100 transition-colors">
+                  <a href={WA} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 bg-white text-ink-900 font-semibold px-7 py-4 rounded-full hover:bg-brand-600 transition-colors">
                     {t('btn_whatsapp')} <ArrowRight size={18} />
                   </a>
                   <a href="mailto:info@bccreative.agency" className="inline-flex items-center px-7 py-4 rounded-full border border-white/25 hover:border-white/60 transition-colors">info@bccreative.agency</a>
