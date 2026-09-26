@@ -1,5 +1,6 @@
-import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { lazy, Suspense, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { syncVoxelToRoute } from './components/hero/voxelBus';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
@@ -24,12 +25,22 @@ const ReelsVideo = lazy(() => import('./components/ReelsVideo'));
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./components/TermsOfService'));
 const NotFound = lazy(() => import('./components/NotFound'));
+const VoxelWorld = lazy(() => import('./components/hero/VoxelWorld'));
+
+// Sayfa değişince küp dünyasına hangi şekli göstereceğini söyler
+const VoxelRouteSync = () => {
+  const { pathname } = useLocation();
+  useEffect(() => { syncVoxelToRoute(pathname); }, [pathname]);
+  return null;
+};
 
 function App() {
   return (
     <LanguageProvider>
       <Router>
         <ScrollToTop />
+        <VoxelRouteSync />
+        <Suspense fallback={null}><VoxelWorld className="z-[5] pointer-events-none" /></Suspense>
         <div className="flex flex-col min-h-screen">
           <Header />
           <div className="flex-grow">

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Check } from 'lucide-react';
@@ -9,8 +9,8 @@ import Partners from './Partners';
 import Testimonials from './Testimonials';
 import BlogPreview from './BlogPreview';
 import FAQ from './FAQ';
+import Showreel from './Showreel';
 
-const VoxelWorld = lazy(() => import('./hero/VoxelWorld'));
 
 /*
  * Ana sayfa — "Küp dünyası".
@@ -93,13 +93,8 @@ const Home = () => {
 
   return (
     <div className="bg-ink-900 text-white">
-      {/* Arkadaki 3D sahne: masaüstünde sağ yarı, mobilde tüm ekran ve soluk */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,rgba(30,58,138,0.35),transparent_60%)]" />
-        <Suspense fallback={null}>
-          <VoxelWorld className="absolute inset-x-0 bottom-0 h-[46svh] lg:h-auto lg:inset-0 lg:left-[42%] transition-opacity duration-300" />
-        </Suspense>
-      </div>
+      {/* 3D sahne App seviyesinde yaşar (hero/VoxelWorld); burada sadece arka ışık */}
+      <div className="fixed inset-0 z-0 pointer-events-none bg-[radial-gradient(ellipse_at_70%_40%,rgba(30,58,138,0.35),transparent_60%)]" />
 
       <div className="relative z-10">
         {/* 0 — BC */}
@@ -162,6 +157,7 @@ const Home = () => {
 
         {/* Klasik bölümler (3D sahne burada kaybolur) */}
         <div className="bg-ink-900">
+          <Showreel />
           <Partners />
           <Testimonials />
           <BlogPreview />

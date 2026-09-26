@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { voxel } from './voxelBus';
 
 /*
  * Küp dünyası — sayfanın arkasında yaşayan tek 3D sahne.
@@ -168,11 +169,22 @@ export default function VoxelWorld({ className = '' }) {
     };
     resize(); const ro = new ResizeObserver(resize); ro.observe(el);
 
-    // Kaydırma → şekil ilerlemesi (0..SHAPES-1, ondalıklı)
-    let progress = 0, fadeOut = 0;
+    // Görüntülenen geçiş: A şeklinden B şekline, f oranında
+    let dispA = 0, dispB = 0, dispF = 0, opacity = 0;
+    const isDesktop = () => window.innerWidth >= 1024;
+    let lastLayout = '';
+    const applyLayout = (layout) => {
+      if (layout === lastLayout) return; lastLayout = layout;
+      const st = el.style; st.position = 'fixed'; st.top = ''; st.bottom = ''; st.left = ''; st.right = ''; st.height = ''; st.width = '';
+      if (layout === 'home-desktop') Object.assign(st, { top: '0', bottom: '0', left: '42%', right: '0' });
+      else if (layout === 'home-mobile') Object.assign(st, { left: '0', right: '0', bottom: '0', height: '46svh' });
+      else if (layout === 'service-desktop') Object.assign(st, { top: '0', left: '52%', right: '0', height: '100vh' });
+      else Object.assign(st, { left: '0', right: '0', bottom: '0', height: '40svh' });
+      resize();
+    };
     const readScroll = () => {
       const steps = [...document.querySelectorAll('[data-voxel-step]')];
-      if (!steps.length) return;
+      if (!steps.length) return null;
       const y = window.scrollY + window.innerHeight * 0.3;
       let p = 0;
       steps.forEach((s, i) => {
@@ -182,22 +194,39 @@ export default function VoxelWorld({ className = '' }) {
           p = i + Math.min(1, Math.max(0, (local - 0.45) / 0.55));
         }
       });
-      progress = Math.min(steps.length - 1, p);
-      const last = steps[steps.length - 1];
-      const lastBottom = last.getBoundingClientRect().bottom;
-      fadeOut = Math.min(1, Math.max(0, (window.innerHeight * 0.45 - lastBottom) / (window.innerHeight * 0.45)));
+      const last = steps[steps.length - 1].getBoundingClientRect();
+      const fade = Math.min(1, Math.max(0, (window.innerHeight * 0.45 - last.bottom) / (window.innerHeight * 0.45)));
+      return { p: Math.min(steps.length - 1, p), fade };
+    };
+    const update = (dt) => {
+      let targetOpacity = 0;
+      if (voxel.mode === 'scroll') {
+        applyLayout(isDesktop() ? 'home-desktop' : 'home-mobile');
+        const r = readScroll();
+        if (r) { dispA = Math.floor(r.p); dispB = Math.min(SHAPES.length - 1, dispA + 1); dispF = r.p - dispA; targetOpacity = 1 - r.fade; }
+      } else if (voxel.mode === 'fixed') {
+        applyLayout(isDesktop() ? 'service-desktop' : 'service-mobile');
+        if (dispB !== voxel.target || (dispF < 1 && dispA !== dispB)) {
+          if (dispB !== voxel.target) { dispA = dispF > 0.5 ? dispB : dispA; dispB = voxel.target; dispF = dispA === dispB ? 1 : 0; }
+          dispF = Math.min(1, dispF + dt * 0.8);
+          if (dispF >= 1) { dispA = dispB; }
+        }
+        const heroFade = Math.min(1, window.scrollY / (window.innerHeight * 0.6));
+        targetOpacity = (isDesktop() ? 1 : 0.35) * (1 - heroFade);
+      }
+      opacity += (targetOpacity - opacity) * 0.12;
+      el.style.opacity = opacity.toFixed(3);
     };
 
-    let raf; const t0 = performance.now();
+    let raf; const t0 = performance.now(); let prev = t0;
     const tick = (now) => {
       raf = requestAnimationFrame(tick);
-      const t = (now - t0) / 1000;
-      readScroll();
-      el.style.opacity = String(1 - fadeOut);
-      if (fadeOut >= 1) return;
+      const t = (now - t0) / 1000, dt = Math.min(0.05, (now - prev) / 1000); prev = now;
+      update(dt);
+      if (opacity < 0.01) return;
 
-      const i0 = Math.floor(progress), i1 = Math.min(SHAPES.length - 1, i0 + 1);
-      let f = progress - i0;
+      const i0 = dispA, i1 = dispB;
+      let f = dispF;
       f = f < 0.5 ? 4 * f * f * f : 1 - Math.pow(-2 * f + 2, 3) / 2; // easeInOutCubic
       const A = targets[i0], Bt = targets[i1];
       const swirl = Math.sin(f * Math.PI); // geçişin ortasında dağılma
@@ -243,5 +272,5 @@ export default function VoxelWorld({ className = '' }) {
     };
   }, []);
 
-  return <div ref={mount} className={`[&>canvas]:w-full [&>canvas]:h-full ${className}`} aria-hidden="true" />;
+  return <div ref={mount} style={{ position: "fixed", opacity: 0 }} className={`[&>canvas]:w-full [&>canvas]:h-full ${className}`} aria-hidden="true" />;
 }

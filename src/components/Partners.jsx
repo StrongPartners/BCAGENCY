@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 
 /**
@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
  * CRM'de firmaya "Web sitesinde göster" işaretlenip logo yüklendiğinde
  * burada otomatik belirir; işaret kaldırılınca kaybolur.
  */
+const VoxelLogos = lazy(() => import('./hero/VoxelLogos'));
 const FEED = 'https://europe-west1-bcrm-8bedd.cloudfunctions.net/partnersFeed';
 
 const PartnerItem = ({ partner }) => {
@@ -71,6 +72,10 @@ const Partners = () => {
           </h2>
         </motion.div>
       </div>
+
+      <Suspense fallback={null}>
+        <VoxelLogos partners={partners} className="container mx-auto px-6 md:px-12 mb-10" />
+      </Suspense>
 
       <div className="relative overflow-hidden">
         <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-ink-900 to-transparent z-10 pointer-events-none" />

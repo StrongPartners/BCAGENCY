@@ -52,20 +52,6 @@ const ServicePageLayout = ({
         </div>
       </section>
 
-      {/* Rakamlar */}
-      {stats.length > 0 && (
-        <section className="border-y border-white/10">
-          <div className="container mx-auto px-6 md:px-12 grid grid-cols-2 md:grid-cols-4">
-            {stats.map((s, i) => (
-              <div key={i} className="py-8 md:py-10 text-center">
-                <div className="text-3xl md:text-5xl font-bold">{s.value}</div>
-                <div className="mt-2 text-xs md:text-sm uppercase tracking-wider text-white/45">{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
       {/* Özellikler */}
       {features.length > 0 && (
         <section className="py-20 md:py-28">
