@@ -26,3 +26,9 @@ dist-ssr
 # Security
 bccreative-49a1ba3a3690.json
 google-service-account.json
+
+# Derlemede üretilir (scripts/build-blog-data.mjs)
+public/blog-data/
+src/data/blogIndex.json
+src/data/blogLatest.json
+.wrangler/

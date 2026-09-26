@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Clock, ArrowLeft, Tag, ChevronRight } from 'lucide-react';
-import { blogPosts } from '../data/blogPosts';
+import latestPosts from '../data/blogLatest.json';
 import useSEO from '../hooks/useSEO';
 import { useLanguage } from '../context/LanguageContext';
 import {
@@ -168,7 +168,17 @@ const BlogPost = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const { lang, t } = useLanguage();
-  const post = blogPosts.find(p => p.slug === slug);
+  // undefined = yükleniyor, null = bulunamadı
+  const [post, setPost] = useState(undefined);
+  useEffect(() => {
+    let alive = true;
+    setPost(undefined);
+    fetch(`/blog-data/${encodeURIComponent(slug)}.json`)
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => { if (alive) setPost(d); })
+      .catch(() => { if (alive) setPost(null); });
+    return () => { alive = false; };
+  }, [slug]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -221,6 +231,10 @@ const BlogPost = () => {
     schemas: articleSchemas,
   });
 
+  if (post === undefined) {
+    return <div className="min-h-screen bg-ink-900" aria-busy="true" />;
+  }
+
   if (!post) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -234,7 +248,7 @@ const BlogPost = () => {
     );
   }
 
-  const otherPosts = blogPosts.filter(p => p.slug !== slug).slice(0, 3);
+  const otherPosts = latestPosts.filter(p => p.slug !== slug).slice(0, 3);
 
   return (
     <div className="min-h-screen bg-ink-900">

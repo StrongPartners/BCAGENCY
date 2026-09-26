@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Clock, ArrowUpRight } from 'lucide-react';
-import { blogPosts } from '../data/blogPosts';
+import blogPosts from '../data/blogIndex.json';
 import useSEO from '../hooks/useSEO';
 import { useLanguage } from '../context/LanguageContext';
 import { buildOrganizationSchema, buildBreadcrumbSchema } from '../lib/geoSchemas';

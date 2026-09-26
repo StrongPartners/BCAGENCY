@@ -6,6 +6,7 @@ export const LANGUAGES = ['tr', 'en', 'ru', 'fa'];
 
 export const translations = {
   tr: {
+    blog_view_all: 'Tüm yazıları gör',
     // Header nav
     nav_home: 'Ana Sayfa',
     nav_about: 'Hakkımızda',
@@ -171,6 +172,7 @@ export const translations = {
   },
 
   en: {
+    blog_view_all: 'View all posts',
     // Header nav
     nav_home: 'Home',
     nav_about: 'About',

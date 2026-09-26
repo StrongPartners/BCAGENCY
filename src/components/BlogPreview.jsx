@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Clock, ArrowUpRight } from 'lucide-react';
-import { blogPosts } from '../data/blogPosts';
+import latestPosts from '../data/blogLatest.json';
 import { useLanguage } from '../context/LanguageContext';
 
 const categoryLabels = {
@@ -16,7 +16,6 @@ const categoryLabels = {
 const BlogPreview = () => {
   const navigate = useNavigate();
   const { lang, t } = useLanguage();
-  const latestPosts = blogPosts.slice(0, 3);
 
   return (
     <section className="py-24 md:py-32 bg-ink-900">
