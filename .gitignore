@@ -31,4 +31,5 @@ google-service-account.json
 public/blog-data/
 src/data/blogIndex.json
 src/data/blogLatest.json
+# Cloudflare wrangler yerel önbelleği
 .wrangler/
