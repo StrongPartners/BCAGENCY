@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Clock, ArrowUpRight } from 'lucide-react';
@@ -6,7 +6,9 @@ import blogPosts from '../data/blogIndex.json';
 import useSEO from '../hooks/useSEO';
 import { useLanguage } from '../context/LanguageContext';
 import VoxelIcon from './hero/VoxelIcon';
-import { categoryShape } from './hero/voxelShapes';
+import { categoryShape, getShape } from './hero/voxelShapes';
+
+const VoxelMini = lazy(() => import('./hero/VoxelMini'));
 import { buildOrganizationSchema, buildBreadcrumbSchema } from '../lib/geoSchemas';
 
 const categoryLabels = {
@@ -131,6 +133,9 @@ const Blog = () => {
       {/* CTA */}
       <section className="on-dark py-24 md:py-32 bg-brand-600">
         <div className="container mx-auto px-4 md:px-8 text-center max-w-3xl">
+          <Suspense fallback={<div className="h-36 md:h-44" />}>
+            <VoxelMini shape={getShape('chat')} palette="dark" className="h-36 md:h-44 w-full -mt-6 mb-6" />
+          </Suspense>
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-5 leading-none tracking-tight">
             {t('blog_cta_title')}
           </h2>

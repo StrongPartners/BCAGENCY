@@ -1,5 +1,7 @@
 import * as THREE from 'three';
-import { getShape } from './voxelShapes';
+import { getShape, NAVY, NAVY2 } from './voxelShapes';
+
+const DARK_MAP = { [NAVY]: 0xdbe6f7, [NAVY2]: 0xa9bde6 };
 
 /*
  * Küp ikonları: tek bir gizli WebGL sahnesinde şekli bir kez çizip PNG'ye çevirir.
@@ -20,8 +22,9 @@ function setup() {
   return { renderer, scene, camera, group, geo: new THREE.BoxGeometry(0.9, 0.9, 0.9), mat: new THREE.MeshStandardMaterial({ roughness: 0.35, metalness: 0.15 }) };
 }
 
-export function renderVoxelIcon(name, points) {
-  if (cache.has(name)) return cache.get(name);
+export function renderVoxelIcon(name, points, palette = 'light') {
+  const key = `${name}|${palette}`;
+  if (cache.has(key)) return cache.get(key);
   try {
     if (!ctx) ctx = setup();
     const { renderer, scene, camera, group, geo, mat } = ctx;
@@ -32,7 +35,7 @@ export function renderVoxelIcon(name, points) {
     pts.forEach((p, i) => {
       const s = p.k ?? 1;
       m.compose(new THREE.Vector3(p.x, p.y, p.z || 0), q, new THREE.Vector3(s, s, s));
-      mesh.setMatrixAt(i, m); mesh.setColorAt(i, c.setHex(p.c));
+      mesh.setMatrixAt(i, m); mesh.setColorAt(i, c.setHex(palette === 'dark' ? (DARK_MAP[p.c] ?? p.c) : p.c));
       ext = Math.max(ext, Math.abs(p.x), Math.abs(p.y));
     });
     group.clear(); group.add(mesh);
@@ -42,7 +45,7 @@ export function renderVoxelIcon(name, points) {
     renderer.render(scene, camera);
     const url = renderer.domElement.toDataURL('image/png');
     mesh.dispose();
-    cache.set(name, url);
+    cache.set(key, url);
     return url;
   } catch {
     return null;

@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
+import { useLocation } from 'react-router-dom';
 import VoxelIcon from '../hero/VoxelIcon';
-import { textShape } from '../hero/voxelShapes';
+import { getShape, textShape } from '../hero/voxelShapes';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Plus, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import Breadcrumb from './Breadcrumb';
+import { shapeForPath } from '../hero/voxelBus';
+
+const VoxelMini = lazy(() => import('../hero/VoxelMini'));
 
 /*
  * Hizmet sayfası şablonu — sade, tek tema.
@@ -24,6 +28,7 @@ const ServicePageLayout = ({
   ctaTitle, ctaSub, breadcrumbs = [], heroImage, children,
 }) => {
   const { t } = useLanguage();
+  const { pathname } = useLocation();
 
   return (
     <main className="bg-ink-900 text-white">
@@ -43,7 +48,7 @@ const ServicePageLayout = ({
               <p className="mt-5 text-lg text-white/55 max-w-2xl leading-relaxed">{description}</p>
               <div className="mt-9 flex flex-wrap gap-4">
                 <a href={WA} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-3 bg-white text-ink-900 font-semibold px-7 py-4 rounded-full hover:bg-brand-600 transition-colors">
-                  {t('btn_offer')} <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                  <VoxelIcon name="coffee" palette="dark" className="w-8 h-8 -ml-2 -my-2 transition-transform duration-300 group-hover:-rotate-12" />{t('btn_offer')} <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                 </a>
               </div>
             </motion.div>
@@ -98,7 +103,7 @@ const ServicePageLayout = ({
       {faqs.length > 0 && (
         <section className="py-20 md:py-28 border-t border-white/5">
           <div className="container mx-auto px-6 md:px-12 max-w-4xl">
-            <motion.h2 {...fade} className="text-4xl md:text-5xl font-bold tracking-tight mb-10">{t('faq_title')}</motion.h2>
+            <motion.h2 {...fade} className="flex items-center gap-3 text-4xl md:text-5xl font-bold tracking-tight mb-10"><VoxelIcon name="question" className="w-14 h-14 -ml-2 cube-bob" />{t('faq_title')}</motion.h2>
             <div className="space-y-3">{faqs.map((f, i) => <FAQItem key={i} {...f} />)}</div>
           </div>
         </section>
@@ -108,6 +113,9 @@ const ServicePageLayout = ({
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-6 md:px-12">
           <motion.div {...fade} className="on-dark rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 p-10 md:p-16 text-center">
+            <Suspense fallback={<div className="h-32 md:h-40" />}>
+              <VoxelMini shape={getShape(shapeForPath(pathname))} palette="dark" className="h-32 md:h-40 w-full -mt-4 mb-4" />
+            </Suspense>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">{ctaTitle}</h2>
             {ctaSub && <p className="mt-5 text-white/70 text-lg max-w-xl mx-auto">{ctaSub}</p>}
             <a href={WA} target="_blank" rel="noopener noreferrer" className="mt-9 inline-flex items-center gap-2 bg-white text-ink-900 font-semibold px-8 py-4 rounded-full hover:bg-brand-600 transition-colors">

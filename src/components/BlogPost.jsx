@@ -309,6 +309,9 @@ const BlogPost = () => {
 
           {/* CTA */}
           <div className="mt-20 p-10 md:p-14 bg-ink-900 rounded-2xl text-center">
+            <Suspense fallback={<div className="h-32" />}>
+              <VoxelMini shape={getShape('chat')} className="h-32 md:h-36 w-full -mt-4 mb-4" />
+            </Suspense>
             <h3 className="text-3xl md:text-5xl font-bold text-white mb-5 leading-tight tracking-tight">
               {t('blog_cta_title')}
             </h3>

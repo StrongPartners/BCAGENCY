@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import VoxelIcon from './hero/VoxelIcon';
 
 const faqData = {
   tr: [
@@ -192,6 +193,7 @@ const FAQ = () => {
           <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-6">
             {t('faq_label')}
           </p>
+          <VoxelIcon name="question" className="w-20 h-20 mx-auto mb-2 cube-bob" />
           <h2 className="text-5xl md:text-7xl font-bold text-white leading-none tracking-tight">
             {t('faq_title')}
           </h2>

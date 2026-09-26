@@ -28,6 +28,7 @@ const NotFound = lazy(() => import('./components/NotFound'));
 import Intro from './components/Intro';
 import CubeLoader from './components/cubes/CubeLoader';
 import CubeBurst from './components/cubes/CubeBurst';
+import ScrollTopCube from './components/cubes/ScrollTopCube';
 const VoxelWorld = lazy(() => import('./components/hero/VoxelWorld'));
 
 // Sayfa değişince küp dünyasına hangi şekli göstereceğini söyler
@@ -45,6 +46,7 @@ function App() {
         <VoxelRouteSync />
         <Intro />
         <CubeBurst />
+        <ScrollTopCube />
         <Suspense fallback={null}><VoxelWorld className="z-[5] pointer-events-none" /></Suspense>
         <div className="flex flex-col min-h-screen">
           <Header />

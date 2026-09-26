@@ -249,11 +249,86 @@ function shapeChat() { // İletişim — sohbet balonları
   return center(thick(out, p => p.z === 0));
 }
 
+// ── İkon şekilleri (değerler, iletişim kanalları, yardımcı düğmeler) ──
+function shapeEye() {
+  const out = [];
+  for (let x = -7; x <= 7; x++) {
+    const h = Math.round(Math.sqrt(Math.max(0, 1 - (x / 7.5) ** 2)) * 4);
+    out.push({ x, y: h, z: 0, c: NAVY }, { x, y: -h, z: 0, c: NAVY });
+  }
+  out.push(...disc(0, 0, 1.6, 2.6, LIGHT2, 0.5), ...disc(0, 0, 0, 1.4, NAVY2, 1), { x: -1, y: 1, z: 2, c: WHITE });
+  return center(thick(out, p => p.c === NAVY));
+}
+function shapeBolt() {
+  const rows = [
+    '.....RRRR',
+    '....RRRR.',
+    '...RRRR..',
+    '..RRRR...',
+    '.RRRRRRRR',
+    'RRRRRRRR.',
+    '....RRR..',
+    '...RRR...',
+    '..RRR....',
+    '.RR......',
+    'R........',
+  ];
+  return center(thick(fromRows(rows, 0, 5, (ch, r, c) => ((r + c) % 3 ? RED : RED2))));
+}
+function shapeQuote() {
+  const one = ['.QQ', 'QQ.', 'QQQ', 'QQQ', 'QQQ'];
+  return center(thick([...fromRows(one, 0, 2, () => NAVY2), ...fromRows(one, 4, 2, () => LIGHT)]), 10);
+}
+function shapePin() {
+  const out = disc(0, 2, 0, 4.6, (x, y, d) => (d < 1.8 ? WHITE : RED));
+  for (let y = -1; y >= -6; y--) { const w = Math.max(0, Math.round((y + 6) * 0.6)); for (let x = -w; x <= w; x++) out.push({ x, y, z: 0, c: RED2 }); }
+  out.push(...disc(0, -7, 2.2, 3.2, LIGHT2, -1));
+  return center(thick(out, p => p.c !== LIGHT2));
+}
+function shapeClock() {
+  const out = [...disc(0, 0, 5, 6.2, NAVY), ...disc(0, 0, 0, 5, LIGHT, -0.5)];
+  for (let y = 1; y <= 4; y++) out.push({ x: 0, y, z: 0.6, c: NAVY2 });
+  for (let x = 1; x <= 3; x++) out.push({ x, y: 0, z: 0.6, c: RED });
+  [[0, 5], [5, 0], [0, -5], [-5, 0]].forEach(([x, y]) => out.push({ x: x * 0.8, y: y * 0.8, z: 0.6, c: NAVY2 }));
+  return center(thick(out, p => p.c === NAVY));
+}
+function shapeMail() {
+  const out = [];
+  const W = 15, H = 10;
+  for (let x = 0; x < W; x++) for (let y = 0; y < H; y++) {
+    const edge = x === 0 || y === 0 || x === W - 1 || y === H - 1;
+    const flap = Math.abs(y - Math.round(Math.abs(x - 7) * 0.72)) === 0 && y < 6;
+    if (edge || flap) out.push({ x, y: -y, z: 0, c: flap ? RED : NAVY });
+    else out.push({ x, y: -y, z: -0.6, c: LIGHT });
+  }
+  return center(thick(out, p => p.c === NAVY));
+}
+function shapeInsta() {
+  const out = [];
+  for (let x = 0; x < 13; x++) for (let y = 0; y < 13; y++) {
+    const corner = (x < 2 || x > 10) && (y < 2 || y > 10) && !((x === 1 || x === 11) && (y === 1 || y === 11));
+    const edge = x === 0 || y === 0 || x === 12 || y === 12 || ((x === 1 || x === 11) && (y === 1 || y === 11));
+    if (edge && !corner) out.push({ x, y: -y, z: 0, c: (x + y) % 2 ? RED : RED2 });
+  }
+  out.push(...disc(6, -6, 2.4, 3.5, NAVY2), { x: 9, y: -3, z: 0, c: NAVY });
+  return center(thick(out));
+}
+function shapeArrowUp() {
+  const rows = ['...A...', '..AAA..', '.AAAAA.', 'AAAAAAA', '..AAA..', '..AAA..', '..AAA..', '..AAA..'];
+  return center(thick(fromRows(rows, 0, 4, (ch, r) => (r < 4 ? RED : r % 2 ? NAVY : NAVY2))));
+}
+function shapeQuestion() {
+  const rows = ['.QQQQ.', 'QQ..QQ', '....QQ', '...QQ.', '..QQ..', '..QQ..', '......', '..RR..'];
+  return center(thick(fromRows(rows, 0, 4, (ch, r) => (ch === 'R' ? RED : r % 2 ? NAVY : NAVY2))));
+}
+
 // Sıra önemli: 0–5 ana sayfanın kaydırma hikâyesi, sonrakiler menü sayfaları
 export const SHAPE_DEFS = [
   ['bc', shapeBC], ['phone', shapePhone], ['browser', shapeBrowser], ['layers', shapeLayers], ['chart', shapeChart], ['bc-end', shapeBC],
   ['heart', shapeHeart], ['reels', shapeReels], ['magnifier', shapeMagnifier], ['target', shapeTarget], ['clapper', shapeClapper],
   ['drone', shapeDrone], ['camera', shapeCamera], ['coffee', shapeCoffee], ['pencil', shapePencil], ['chat', shapeChat],
+  ['eye', shapeEye], ['bolt', shapeBolt], ['quote', shapeQuote], ['pin', shapePin], ['clock', shapeClock], ['mail', shapeMail],
+  ['insta', shapeInsta], ['arrow-up', shapeArrowUp], ['question', shapeQuestion],
 ];
 export const SHAPES = SHAPE_DEFS.map(([, f]) => f());
 export const SHAPE_INDEX = Object.fromEntries(SHAPE_DEFS.map(([n], i) => [n, i]));

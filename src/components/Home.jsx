@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Check } from 'lucide-react';
@@ -12,6 +12,9 @@ import FAQ from './FAQ';
 import BrandTyper from './BrandTyper';
 import VoxelIcon from './hero/VoxelIcon';
 import { shapeForPath } from './hero/voxelBus';
+import { getShape } from './hero/voxelShapes';
+
+const VoxelMini = lazy(() => import('./hero/VoxelMini'));
 
 
 /*
@@ -108,8 +111,8 @@ const Home = () => {
             </h1>
             <p className="mt-7 text-lg text-white/65 max-w-xl leading-relaxed">{c.heroDesc}</p>
             <div className="mt-9 flex flex-wrap items-center gap-4">
-              <a href={WA} target="_blank" rel="noopener noreferrer" className="pointer-events-auto group inline-flex items-center gap-3 bg-white text-ink-900 font-semibold px-7 py-4 rounded-full hover:bg-brand-600 transition-colors">
-                {c.cta} <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+              <a href={WA} target="_blank" rel="noopener noreferrer" className="pointer-events-auto group inline-flex items-center gap-3 bg-white text-ink-900 font-semibold pl-5 pr-7 py-3 rounded-full hover:bg-brand-600 transition-colors">
+                <VoxelIcon name="coffee" palette="dark" className="w-9 h-9 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110" />{c.cta} <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
               </a>
             </div>
             <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/45">
@@ -167,6 +170,9 @@ const Home = () => {
           <section className="py-24 md:py-32">
             <div className="container mx-auto px-6 md:px-12">
               <div className="on-dark rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 p-10 md:p-16 text-center">
+                <Suspense fallback={<div className="h-36 md:h-44" />}>
+                  <VoxelMini shape={getShape('coffee')} palette="dark" className="h-36 md:h-44 w-full -mt-4 mb-4" label={c.cta} />
+                </Suspense>
                 <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">{c.ctaTitle}</h2>
                 <p className="mt-5 text-white/70 text-lg max-w-xl mx-auto">{c.ctaDesc}</p>
                 <div className="mt-9 flex flex-wrap justify-center gap-4">

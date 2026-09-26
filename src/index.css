@@ -127,3 +127,8 @@
 }
 .cube-loader-cell { animation: cube-loader 1.2s cubic-bezier(.4,0,.2,1) infinite; }
 @media (prefers-reduced-motion: reduce) { .cube-loader-cell { animation: none; } }
+
+/* Küp ikonlarının hafif süzülmesi */
+@keyframes cube-bob { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-6px) rotate(-4deg); } }
+.cube-bob { animation: cube-bob 3.2s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .cube-bob { animation: none; } }

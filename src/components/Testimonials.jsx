@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+import VoxelIcon from './hero/VoxelIcon';
 const testimonials = [
   "Google'da 'Girne kiralık daire' yazdığında artık ilk sayfadayız. 3 ayda geldi bu sonuç, beklediğimden hızlıydı.",
   "Sosyal medyayı devrettik, takipçi 800'den 4.500'e çıktı. Müşteriler artık 'Instagram'dan gördüm' diye geliyor.",
@@ -24,15 +25,9 @@ const testimonials = [
   "Açıkçası dijital pazarlamaya pek inanmıyordum. İlk ay sonunda raporları görünce fikrimi değiştirdim.",
 ];
 
-const QuoteIcon = () => (
-  <svg className="w-8 h-8 text-secondary-300/20 mb-3 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11h4v10H0z" />
-  </svg>
-);
-
 const TestimonialCard = ({ text }) => (
   <div className="flex-shrink-0 w-[320px] md:w-[380px] p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
-    <QuoteIcon />
+    <VoxelIcon name="quote" className="w-10 h-10 mb-3 -ml-1" />
     <p className="text-white/70 text-sm leading-relaxed">{text}</p>
   </div>
 );

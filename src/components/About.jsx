@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Eye, Heart, Zap, Target } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 import { useLanguage } from '../context/LanguageContext';
 import { buildOrganizationSchema, buildBreadcrumbSchema } from '../lib/geoSchemas';
 import { ZoomSection, ScrollText } from './shared/ParallaxKit';
+import VoxelIcon from './hero/VoxelIcon';
 
-const VALUE_ICONS = [Eye, Heart, Zap, Target];
+const VALUE_SHAPES = ['eye', 'heart', 'bolt', 'target'];
 
 const About = () => {
     const { lang, t } = useLanguage();
@@ -93,13 +93,11 @@ const About = () => {
                     </ScrollText>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {values.map((value, i) => {
-                            const Icon = VALUE_ICONS[i] || Eye;
+                            const shape = VALUE_SHAPES[i] || 'eye';
                             return (
                                 <ScrollText key={i} delay={i * 0.1}>
                                     <motion.div whileHover={{ y: -5 }} className="group">
-                                        <div className="w-12 h-12 rounded-xl bg-white/10 group-hover:bg-secondary-300/20 flex items-center justify-center mb-4 transition-colors">
-                                            <Icon size={22} className="text-secondary-300/60" strokeWidth={1.5} />
-                                        </div>
+                                        <VoxelIcon name={shape} className="w-16 h-16 -ml-2 mb-3 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6" />
                                         <h3 className="text-xl font-bold text-white mb-2">{value.title}</h3>
                                         <p className="text-white/40 text-sm leading-relaxed">{value.desc}</p>
                                     </motion.div>

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 /*
- * Tıklanan yerden küçük küpler saçılır. DOM + Web Animations API; her tıkta ~11 küp,
+ * Tıklanan yerden küçük küpler saçılır. Gizli sürpriz: klavyeden "bc" yazınca küp yağmuru. DOM + Web Animations API; her tıkta ~11 küp,
  * 0.8 sn sonra silinir. Hareket azaltma tercihinde kapalı.
  */
 const COLORS = ['#1e3a8a', '#3d5a9e', '#7fc0dc', '#5aa9cc', '#e03c31'];
@@ -41,8 +41,40 @@ export default function CubeBurst() {
         ).onfinish = () => el.remove();
       }
     };
+    // "bc" → ekranın üstünden küp yağmuru
+    const rain = () => {
+      const W = window.innerWidth, H = window.innerHeight;
+      for (let i = 0; i < 90; i++) {
+        const s = 10 + Math.random() * 14;
+        const el = document.createElement('span');
+        Object.assign(el.style, {
+          position: 'absolute', left: `${Math.random() * W}px`, top: `${-40 - Math.random() * 60}px`, width: `${s}px`, height: `${s}px`,
+          background: COLORS[i % 13 === 0 ? 4 : Math.floor(Math.random() * 4)], borderRadius: '2px',
+          boxShadow: 'inset -3px -3px 0 rgba(0,0,0,.22), inset 2px 2px 0 rgba(255,255,255,.35)',
+        });
+        layer.appendChild(el);
+        const r = (Math.random() - 0.5) * 540;
+        el.animate(
+          [
+            { transform: 'translateY(0) rotate(0deg)', opacity: 1, easing: 'cubic-bezier(.5,0,.9,.6)' },
+            { transform: `translateY(${H + 120}px) rotate(${r}deg)`, opacity: 1 },
+          ],
+          { duration: 1400 + Math.random() * 1400, delay: Math.random() * 900 },
+        ).onfinish = () => el.remove();
+      }
+    };
+    let last = '', lastT = 0;
+    const onKey = (e) => {
+      const t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      const k = (e.key || '').toLowerCase();
+      const now = performance.now();
+      if (k === 'c' && last === 'b' && now - lastT < 1200) rain();
+      last = k; lastT = now;
+    };
     window.addEventListener('pointerdown', onDown, { passive: true });
-    return () => { window.removeEventListener('pointerdown', onDown); layer.remove(); };
+    window.addEventListener('keydown', onKey);
+    return () => { window.removeEventListener('pointerdown', onDown); window.removeEventListener('keydown', onKey); layer.remove(); };
   }, []);
   return null;
 }
