@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import {
-  Search, MousePointerClick, Share2, Monitor, Clapperboard, Plane, Camera,
-  ArrowRight, ArrowUpRight, Check,
+  Clapperboard, Code2, TrendingUp, ArrowRight, ArrowUpRight, Check,
+  Users, Layers, MessageCircle, LineChart,
 } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 import { useLanguage } from '../context/LanguageContext';
@@ -13,36 +13,69 @@ import Testimonials from './Testimonials';
 import BlogPreview from './BlogPreview';
 import FAQ from './FAQ';
 
+const BCObject = lazy(() => import('./hero/BCObject'));
+
 /*
- * Ana sayfa — sade, tek tema, hızlı.
- * Sıra: Hero → İş birlikleri → Hizmetler → Öne çıkan iş (3D LED) → Süreç →
- *       Yorumlar → Blog → SSS → İletişim çağrısı
+ * Ana sayfa
+ * Hero (interaktif BC) → İş birlikleri → Üç kapı (İçerik · Yazılım · Büyüme) →
+ * Tek ekip → Süreç + rakamlar → Yorumlar → Blog → SSS → İletişim çağrısı
  */
-
 const WA = 'https://wa.me/905488321919';
-const ICONS = [Search, MousePointerClick, Share2, Monitor, Clapperboard, Plane, Camera];
 
-// Bu sayfaya özel metinler (tr/en; diğer diller en'e düşer)
 const COPY = {
   tr: {
+    kicker: 'BC Creative Agency · Girne, KKTC',
+    title_1: 'KKTC’de markanı', title_accent: 'dijitalde', title_2: 'büyüten ekip.',
+    desc: 'Sosyal medya, Reels ve video, web sitesi, mobil uygulama, CRM ve SEO. İçeriği üreten ekiple yazılımı yazan ekip aynı çatı altında.',
+    cta: 'Bir kahve içelim', cta2: 'Ne yapıyoruz?',
     trust: ['2017’den beri', 'Girne stüdyosu', '4 dilde hizmet'],
-    featured_eyebrow: 'Öne çıkan iş',
-    featured_title: 'Ekrandan fırlayan reklamlar: çıplak göz 3D LED',
-    featured_desc: 'Köşe, kavisli ve dikey LED ekranlar için ürününüzün ekrandan dışarı çıkıyormuş gibi göründüğü reklam videoları üretiyoruz. Yer keşfinden müziğe kadar her şey bizde.',
-    featured_points: ['Ekranınızın ölçüsüne ve izleme noktasına göre tasarım', 'Gerçekçi prodüksiyon, sesli ve müzikli kurgu', 'Aynı videonun sosyal medya sürümleri'],
-    featured_cta: 'Rehberi oku',
-    services_title: 'Markanız için gereken her şey, tek ekipte.',
+    pillars_eyebrow: 'Ne yapıyoruz',
+    pillars_title: 'Üç iş, tek ekip.',
+    pillars: [
+      { icon: Clapperboard, name: 'İçerik', desc: 'Markanızın her gün konuşulması için: strateji, çekim, kurgu ve paylaşım.',
+        items: [['Sosyal Medya Yönetimi', '/hizmetler/sosyal-medya'], ['Reels ve Video Edit', '/hizmetler/reels-video-edit'], ['Video Çekim ve Prodüksiyon', '/hizmetler/produksiyon'], ['Fotoğraf ve Drone', '/hizmetler/fotograf-video']] },
+      { icon: Code2, name: 'Yazılım', desc: 'İşinizi taşıyan dijital altyapı: hızlı siteler, uygulamalar ve iş yazılımları.',
+        items: [['Web Sitesi', '/hizmetler/web-tasarim'], ['Mobil Uygulama', '/hizmetler/uygulama-gelistirme'], ['CRM ve İş Yazılımları', '/hizmetler/crm-yazilim']] },
+      { icon: TrendingUp, name: 'Büyüme', desc: 'Doğru kişiye ulaşmak ve bunu ölçmek: arama, reklam ve raporlama.',
+        items: [['SEO Yönetimi', '/hizmetler/seo'], ['Google Ads', '/hizmetler/google-ads'], ['Meta Reklamları', '/hizmetler/sosyal-medya']] },
+    ],
+    why_eyebrow: 'Neden BC',
+    why_title: 'Tek ekip, tek muhatap.',
+    why_desc: 'Videoyu çeken ekiple siteyi yazan ekip aynı masada oturuyor. Kampanya, içerik ve yazılım birbirinden kopmuyor; siz de beş ayrı firmayla uğraşmıyorsunuz.',
+    why: [
+      { icon: Users, t: 'Tek muhatap', d: 'Tüm işleriniz için tek proje yöneticisi ve tek WhatsApp grubu.' },
+      { icon: Layers, t: 'Kendi yazılımımız', d: 'Kendi CRM’imizi yazdık ve her gün kullanıyoruz. Aynı deneyimi size taşıyoruz.' },
+      { icon: LineChart, t: 'Şeffaf raporlama', d: 'Müşteri portalında raporlarınızı, form mesajlarınızı ve işlerinizi görürsünüz.' },
+      { icon: MessageCircle, t: 'Hızlı iletişim', d: 'Girne’deki stüdyomuzda yüz yüze, gerisi WhatsApp’ta aynı gün.' },
+    ],
     cta_title: 'Bir sonraki iş seninki olsun.',
     cta_desc: 'WhatsApp’tan yaz, aynı gün dönelim. İlk görüşme ve fikir bizden.',
   },
   en: {
+    kicker: 'BC Creative Agency · Kyrenia, Northern Cyprus',
+    title_1: 'The team that grows', title_accent: 'your brand', title_2: 'online.',
+    desc: 'Social media, Reels and video, websites, mobile apps, CRM and SEO. The team that creates your content and the team that writes your software work under one roof.',
+    cta: 'Let’s grab a coffee', cta2: 'What we do',
     trust: ['Since 2017', 'Kyrenia studio', 'Service in 4 languages'],
-    featured_eyebrow: 'Featured work',
-    featured_title: 'Ads that leap out of the screen: naked-eye 3D LED',
-    featured_desc: 'We produce ad videos for corner, curved and vertical LED screens in which your product seems to burst out of the screen. From site survey to music, we do it all.',
-    featured_points: ['Designed for your screen size and viewing point', 'Realistic production with sound and music', 'Social media versions of the same video'],
-    featured_cta: 'Read the guide',
-    services_title: 'Everything your brand needs, in one team.',
+    pillars_eyebrow: 'What we do',
+    pillars_title: 'Three crafts, one team.',
+    pillars: [
+      { icon: Clapperboard, name: 'Content', desc: 'Keeping your brand in the conversation every day: strategy, shoots, editing and posting.',
+        items: [['Social Media Management', '/hizmetler/sosyal-medya'], ['Reels & Video Editing', '/hizmetler/reels-video-edit'], ['Video Production', '/hizmetler/produksiyon'], ['Photo & Drone', '/hizmetler/fotograf-video']] },
+      { icon: Code2, name: 'Software', desc: 'The digital backbone of your business: fast websites, apps and business software.',
+        items: [['Websites', '/hizmetler/web-tasarim'], ['Mobile Apps', '/hizmetler/uygulama-gelistirme'], ['CRM & Business Software', '/hizmetler/crm-yazilim']] },
+      { icon: TrendingUp, name: 'Growth', desc: 'Reaching the right people and measuring it: search, ads and reporting.',
+        items: [['SEO Management', '/hizmetler/seo'], ['Google Ads', '/hizmetler/google-ads'], ['Meta Ads', '/hizmetler/sosyal-medya']] },
+    ],
+    why_eyebrow: 'Why BC',
+    why_title: 'One team, one contact.',
+    why_desc: 'The people who shoot your videos and the people who build your site sit at the same table. Campaigns, content and software stay connected, and you don’t juggle five vendors.',
+    why: [
+      { icon: Users, t: 'One contact', d: 'One project manager and one WhatsApp group for everything.' },
+      { icon: Layers, t: 'Our own software', d: 'We built our own CRM and use it daily. We bring that experience to you.' },
+      { icon: LineChart, t: 'Transparent reporting', d: 'See your reports, form messages and jobs in the client portal.' },
+      { icon: MessageCircle, t: 'Fast communication', d: 'Face to face at our Kyrenia studio, same-day replies on WhatsApp.' },
+    ],
     cta_title: 'Let the next one be yours.',
     cta_desc: 'Message us on WhatsApp and we’ll reply the same day. The first meeting and ideas are on us.',
   },
@@ -65,14 +98,13 @@ const Home = () => {
   const c = COPY[lang] || COPY.en;
 
   useSEO({
-    title: 'BC Creative Agency | KKTC Dijital Pazarlama, SEO, Google Ads – Girne',
-    description: 'BC Creative Agency — KKTC Girne merkezli yaratıcı dijital pazarlama ajansı. SEO, Google Ads, sosyal medya, web tasarım, prodüksiyon ve 3D LED reklam.',
-    keywords: 'KKTC dijital ajans, Kuzey Kıbrıs reklam ajansı, KKTC SEO, Girne dijital pazarlama, KKTC Google Ads, sosyal medya yönetimi KKTC, 3D LED reklam KKTC',
+    title: 'BC Creative Agency | KKTC Sosyal Medya, Web Sitesi, Uygulama, CRM ve SEO – Girne',
+    description: 'BC Creative Agency — KKTC Girne merkezli ajans. Sosyal medya yönetimi, Reels ve video, web sitesi, mobil uygulama, CRM yazılımı ve SEO tek ekipte.',
+    keywords: 'KKTC sosyal medya ajansı, Girne web tasarım, KKTC mobil uygulama, KKTC CRM yazılımı, KKTC SEO, Reels üretimi KKTC, Kuzey Kıbrıs dijital ajans',
     canonical: 'https://bccreative.agency/',
     schemas: [buildOrganizationSchema(), buildWebSiteSchema()],
   });
 
-  const services = Array.isArray(t('services_list')) ? t('services_list') : [];
   const steps = Array.isArray(t('approach_steps')) ? t('approach_steps') : [];
   const stats = Array.isArray(t('stats')) ? t('stats') : [];
   const go = (p) => { navigate(p); window.scrollTo({ top: 0 }); };
@@ -80,39 +112,31 @@ const Home = () => {
   return (
     <div className="bg-ink-900 text-white">
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
+      <section className="relative overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(30,58,138,0.45),transparent_60%)]" />
-        <div className="container mx-auto px-6 md:px-12 relative grid lg:grid-cols-12 gap-12 items-center">
-          <motion.div className="lg:col-span-6" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/50 mb-6">BC Creative Agency · Girne, KKTC</p>
+        <div className="container mx-auto px-6 md:px-12 relative grid lg:grid-cols-12 gap-8 items-center">
+          <motion.div className="lg:col-span-6 relative z-10" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/50 mb-6">{c.kicker}</p>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight">
-              {t('hero_headline_1')} <span className="italic font-light text-secondary-300">{t('hero_headline_accent')}</span><br />
-              {t('hero_headline_2')}
+              {c.title_1} <span className="italic font-light text-secondary-300">{c.title_accent}</span> {c.title_2}
             </h1>
-            <p className="mt-7 text-lg text-white/65 max-w-xl leading-relaxed">{t('hero_desc')}</p>
+            <p className="mt-7 text-lg text-white/65 max-w-xl leading-relaxed">{c.desc}</p>
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <a href={WA} target="_blank" rel="noopener noreferrer"
                 className="group inline-flex items-center gap-3 bg-white text-ink-900 font-semibold px-7 py-4 rounded-full hover:bg-secondary-100 transition-colors">
-                {t('hero_cta')} <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                {c.cta} <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
               </a>
-              <button onClick={() => document.getElementById('hizmetler')?.scrollIntoView({ behavior: 'smooth' })}
+              <button onClick={() => document.getElementById('ne-yapiyoruz')?.scrollIntoView({ behavior: 'smooth' })}
                 className="inline-flex items-center gap-2 px-6 py-4 rounded-full border border-white/15 text-white/80 hover:text-white hover:border-white/40 transition-colors">
-                {t('hero_cta_secondary')}
+                {c.cta2}
               </button>
             </div>
             <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/45">
               {c.trust.map((x) => <li key={x} className="flex items-center gap-2"><Check size={14} className="text-secondary-300" />{x}</li>)}
             </ul>
           </motion.div>
-
-          {/* Görsel kolaj — 3D LED çalışmalarından */}
-          <motion.div className="lg:col-span-6 relative h-[380px] sm:h-[460px]" initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.15 }}>
-            <img src="/blog/led-3d/01-girne-liman-3d-led.webp" alt="Liman kenarında 3D LED reklam" fetchpriority="high"
-              className="absolute right-0 top-0 w-[82%] h-[70%] object-cover rounded-2xl shadow-2xl" />
-            <img src="/blog/led-3d/09-stil-karesi-kutu-oda.webp" alt="3D LED stil karesi" loading="lazy"
-              className="absolute left-0 bottom-0 w-[52%] h-[48%] object-cover rounded-2xl shadow-2xl ring-4 ring-ink-900" />
-            <img src="/blog/led-3d/12-telefonla-cekim-viral.webp" alt="3D LED reklamı telefonla çeken insanlar" loading="lazy"
-              className="absolute right-[6%] bottom-[2%] w-[40%] h-[34%] object-cover rounded-2xl shadow-2xl ring-4 ring-ink-900 hidden sm:block" />
+          <motion.div className="lg:col-span-6 h-[320px] sm:h-[440px] lg:h-[560px]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.2 }}>
+            <Suspense fallback={null}><BCObject className="w-full h-full cursor-crosshair" /></Suspense>
           </motion.div>
         </div>
       </section>
@@ -120,62 +144,62 @@ const Home = () => {
       {/* ── İŞ BİRLİKLERİ ── */}
       <Partners />
 
-      {/* ── HİZMETLER ── */}
-      <section id="hizmetler" className="py-24 md:py-32 border-t border-white/5">
+      {/* ── ÜÇ KAPI ── */}
+      <section id="ne-yapiyoruz" className="py-24 md:py-32 border-t border-white/5">
         <div className="container mx-auto px-6 md:px-12">
           <motion.div {...fade} className="max-w-2xl mb-14">
-            <Eyebrow>{t('services_eyebrow')}</Eyebrow>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight">{c.services_title}</h2>
-            <p className="mt-5 text-white/55 text-lg">{t('services_sub')}</p>
+            <Eyebrow>{c.pillars_eyebrow}</Eyebrow>
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">{c.pillars_title}</h2>
           </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {services.map((s, i) => {
-              const Icon = ICONS[i] || Search;
+          <div className="grid lg:grid-cols-3 gap-5">
+            {c.pillars.map((p, i) => {
+              const Icon = p.icon;
               return (
-                <motion.button {...fade} transition={{ ...fade.transition, delay: i * 0.05 }} key={s.path} onClick={() => go(s.path)}
-                  className="group text-left p-7 rounded-2xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.06] hover:border-secondary-300/40 transition-colors">
-                  <span className="inline-flex w-11 h-11 items-center justify-center rounded-xl bg-brand-500/30 text-secondary-300 mb-5"><Icon size={20} /></span>
-                  <h3 className="text-lg font-semibold mb-2 flex items-center justify-between">{s.title}<ArrowUpRight size={16} className="text-white/30 group-hover:text-secondary-300 transition-colors" /></h3>
-                  <p className="text-sm text-white/50 leading-relaxed">{s.description}</p>
-                </motion.button>
+                <motion.div {...fade} transition={{ ...fade.transition, delay: i * 0.08 }} key={p.name}
+                  className="group flex flex-col p-8 md:p-10 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-secondary-300/40 hover:bg-white/[0.05] transition-colors">
+                  <div className="flex items-center justify-between mb-8">
+                    <span className="inline-flex w-14 h-14 items-center justify-center rounded-2xl bg-brand-500/30 text-secondary-300"><Icon size={26} /></span>
+                    <span className="font-mono text-sm text-white/30">0{i + 1}</span>
+                  </div>
+                  <h3 className="text-3xl font-bold mb-3">{p.name}</h3>
+                  <p className="text-white/55 leading-relaxed mb-8">{p.desc}</p>
+                  <ul className="mt-auto border-t border-white/10">
+                    {p.items.map(([label, path]) => (
+                      <li key={label}>
+                        <button onClick={() => go(path)} className="w-full flex items-center justify-between py-3.5 border-b border-white/10 text-left text-white/80 hover:text-white group/item">
+                          {label}
+                          <ArrowUpRight size={16} className="text-white/30 group-hover/item:text-secondary-300 transition-colors" />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
               );
             })}
-            <motion.a {...fade} href={WA} target="_blank" rel="noopener noreferrer"
-              className="p-7 rounded-2xl bg-accent-500 hover:bg-accent-600 transition-colors flex flex-col justify-between min-h-[190px]">
-              <span className="text-lg font-semibold">{t('btn_talk')}</span>
-              <span className="flex items-center gap-2 text-white/90">{t('btn_whatsapp')} <ArrowRight size={16} /></span>
-            </motion.a>
           </div>
         </div>
       </section>
 
-      {/* ── ÖNE ÇIKAN İŞ: 3D LED ── */}
+      {/* ── TEK EKİP ── */}
       <section className="py-24 md:py-32 border-t border-white/5">
-        <div className="container mx-auto px-6 md:px-12 grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div {...fade} className="grid grid-cols-2 gap-3">
-            <img src="/blog/led-3d/03-kose-led-ekran-3d.webp" alt="Köşe LED ekranda 3D reklam" loading="lazy" className="col-span-2 w-full aspect-[16/9] object-cover rounded-2xl" />
-            <img src="/blog/led-3d/10-buz-patlama-karesi.webp" alt="Buz patlaması 3D kare" loading="lazy" className="w-full aspect-[4/3] object-cover rounded-2xl" />
-            <img src="/blog/led-3d/05-otel-lobi-dikey-led.webp" alt="Otel lobisinde dikey LED" loading="lazy" className="w-full aspect-[4/3] object-cover rounded-2xl" />
+        <div className="container mx-auto px-6 md:px-12 grid lg:grid-cols-12 gap-12">
+          <motion.div {...fade} className="lg:col-span-5">
+            <Eyebrow>{c.why_eyebrow}</Eyebrow>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight">{c.why_title}</h2>
+            <p className="mt-6 text-white/60 text-lg leading-relaxed">{c.why_desc}</p>
           </motion.div>
-          <motion.div {...fade}>
-            <Eyebrow>{c.featured_eyebrow}</Eyebrow>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight">{c.featured_title}</h2>
-            <p className="mt-5 text-white/60 text-lg leading-relaxed">{c.featured_desc}</p>
-            <ul className="mt-7 space-y-3">
-              {c.featured_points.map((p) => (
-                <li key={p} className="flex gap-3 text-white/75"><Check size={18} className="text-secondary-300 shrink-0 mt-0.5" />{p}</li>
-              ))}
-            </ul>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <button onClick={() => go('/blog/kktc-ciplak-goz-3d-led-reklam-rehberi-girne-lefkosa')}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/20 hover:border-white/50 transition-colors">
-                {c.featured_cta} <ArrowUpRight size={16} />
-              </button>
-              <button onClick={() => go('/hizmetler/produksiyon')} className="inline-flex items-center gap-2 px-6 py-3.5 text-white/60 hover:text-white transition-colors">
-                {t('nav_production')} <ArrowRight size={16} />
-              </button>
-            </div>
-          </motion.div>
+          <div className="lg:col-span-7 grid sm:grid-cols-2 gap-4">
+            {c.why.map((w, i) => {
+              const Icon = w.icon;
+              return (
+                <motion.div {...fade} transition={{ ...fade.transition, delay: i * 0.06 }} key={w.t} className="p-7 rounded-2xl border border-white/10 bg-white/[0.02]">
+                  <Icon size={22} className="text-secondary-300 mb-5" />
+                  <h3 className="text-lg font-semibold mb-2">{w.t}</h3>
+                  <p className="text-sm text-white/55 leading-relaxed">{w.d}</p>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </section>
 

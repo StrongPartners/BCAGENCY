@@ -18,6 +18,9 @@ const WebDesign = lazy(() => import('./components/WebDesign'));
 const Produksiyon = lazy(() => import('./components/Produksiyon'));
 const DroneCekim = lazy(() => import('./components/DroneCekim'));
 const FotografVideo = lazy(() => import('./components/FotografVideo'));
+const AppDevelopment = lazy(() => import('./components/AppDevelopment'));
+const CrmSoftware = lazy(() => import('./components/CrmSoftware'));
+const ReelsVideo = lazy(() => import('./components/ReelsVideo'));
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./components/TermsOfService'));
 const NotFound = lazy(() => import('./components/NotFound'));
@@ -44,6 +47,9 @@ function App() {
                 <Route path="/hizmetler/produksiyon" element={<Produksiyon />} />
                 <Route path="/hizmetler/drone-cekim" element={<DroneCekim />} />
                 <Route path="/hizmetler/fotograf-video" element={<FotografVideo />} />
+                <Route path="/hizmetler/uygulama-gelistirme" element={<AppDevelopment />} />
+                <Route path="/hizmetler/crm-yazilim" element={<CrmSoftware />} />
+                <Route path="/hizmetler/reels-video-edit" element={<ReelsVideo />} />
                 <Route path="/gizlilik-politikasi" element={<PrivacyPolicy />} />
                 <Route path="/kullanim-sartlari" element={<TermsOfService />} />
                 <Route path="*" element={<NotFound />} />

@@ -33,14 +33,18 @@ const Header = () => {
         { label: t('nav_contact'), path: '/contact' },
     ];
 
+    const L = (tr, en) => (lang === 'tr' ? tr : en);
     const services = [
-        { name: t('nav_seo'),        path: '/hizmetler/seo' },
-        { name: t('nav_ads'),        path: '/hizmetler/google-ads' },
-        { name: t('nav_social'),     path: '/hizmetler/sosyal-medya' },
-        { name: t('nav_web'),        path: '/hizmetler/web-tasarim' },
-        { name: t('nav_production'), path: '/hizmetler/produksiyon' },
-        { name: t('nav_drone'),      path: '/hizmetler/drone-cekim' },
-        { name: t('nav_photo'),      path: '/hizmetler/fotograf-video' },
+        { name: t('nav_social'),                         path: '/hizmetler/sosyal-medya' },
+        { name: L('Reels & Video Edit', 'Reels & Video Editing'), path: '/hizmetler/reels-video-edit' },
+        { name: t('nav_web'),                            path: '/hizmetler/web-tasarim' },
+        { name: L('Uygulama Geliştirme', 'App Development'), path: '/hizmetler/uygulama-gelistirme' },
+        { name: L('CRM & İş Yazılımları', 'CRM & Business Software'), path: '/hizmetler/crm-yazilim' },
+        { name: t('nav_seo'),                            path: '/hizmetler/seo' },
+        { name: t('nav_ads'),                            path: '/hizmetler/google-ads' },
+        { name: t('nav_production'),                     path: '/hizmetler/produksiyon' },
+        { name: t('nav_drone'),                          path: '/hizmetler/drone-cekim' },
+        { name: t('nav_photo'),                          path: '/hizmetler/fotograf-video' },
     ];
 
     return (
