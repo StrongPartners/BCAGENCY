@@ -62,7 +62,7 @@ const COPY = {
 };
 
 const Step = ({ index, children, className = '' }) => (
-  <section data-voxel-step={index} className={`relative min-h-[100svh] flex items-start lg:items-center pt-24 lg:pt-0 pb-[48svh] lg:pb-0 ${className}`}>
+  <section data-voxel-step={index} className={`relative min-h-[100svh] flex items-start lg:items-center pt-[calc(34svh+4.5rem)] lg:pt-0 pb-20 lg:pb-0 ${className}`}>
     <div className="container mx-auto px-6 md:px-12 w-full">
       <div className="lg:w-1/2 relative z-10">{children}</div>
     </div>
@@ -97,7 +97,7 @@ const Home = () => {
 
       <div className="relative z-10">
         {/* 0 — BC */}
-        <Step index={0} className="pt-24">
+        <Step index={0}>
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/50 mb-6">{c.kicker}</p>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight">

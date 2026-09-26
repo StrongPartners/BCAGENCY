@@ -174,13 +174,35 @@ export default function VoxelWorld({ className = '' }) {
     const isDesktop = () => window.innerWidth >= 1024;
     let lastLayout = '';
     const applyLayout = (layout) => {
-      if (layout === lastLayout) return; lastLayout = layout;
+      if (layout === lastLayout) return; lastLayout = layout; lastBox = '';
       const st = el.style; st.position = 'fixed'; st.top = ''; st.bottom = ''; st.left = ''; st.right = ''; st.height = ''; st.width = '';
+      st.background = ''; st.zIndex = '';
       if (layout === 'home-desktop') Object.assign(st, { top: '0', bottom: '0', left: '42%', right: '0' });
-      else if (layout === 'home-mobile') Object.assign(st, { left: '0', right: '0', bottom: '0', height: '46svh' });
       else if (layout === 'service-desktop') Object.assign(st, { top: '0', left: '52%', right: '0', height: '100vh' });
-      else Object.assign(st, { left: '0', right: '0', bottom: '0', height: '40svh' });
       resize();
+    };
+    // Mobil: küpler yazının üstüne binmesin.
+    // Ana sayfa → header'ın altında sabit bir "sahne" şeridi (zemin rengiyle), yazı altından akar.
+    // Servis sayfası → hero'daki [data-voxel-anchor] boşluğunu takip eder.
+    let lastBox = '';
+    const placeMobile = (kind) => {
+      applyLayout('mobile-' + kind);
+      let top, height, bg = '', z = '';
+      if (kind === 'home') {
+        const hb = document.querySelector('header')?.getBoundingClientRect().bottom ?? 64;
+        top = Math.max(0, hb); height = window.innerHeight * 0.34;
+        bg = 'linear-gradient(to bottom, #f7f6f2 90%, rgba(247,246,242,0))'; z = '30';
+      } else {
+        const a = document.querySelector('[data-voxel-anchor]');
+        if (!a) return false;
+        const r = a.getBoundingClientRect(); top = r.top; height = r.height;
+      }
+      const key = `${Math.round(top)}|${Math.round(height)}`;
+      if (key !== lastBox) {
+        lastBox = key;
+        Object.assign(el.style, { left: '0', right: '0', top: `${top}px`, height: `${height}px`, background: bg, zIndex: z });
+      }
+      return true;
     };
     const readScroll = () => {
       const steps = [...document.querySelectorAll('[data-voxel-step]')];
@@ -195,24 +217,28 @@ export default function VoxelWorld({ className = '' }) {
         }
       });
       const last = steps[steps.length - 1].getBoundingClientRect();
-      const fade = Math.min(1, Math.max(0, (window.innerHeight * 0.45 - last.bottom) / (window.innerHeight * 0.45)));
+      const vh = window.innerHeight;
+      // mobilde sahne şeridi üstte durduğu için son bölüm biterken daha erken kaybolur
+      const fade = isDesktop()
+        ? Math.min(1, Math.max(0, (vh * 0.45 - last.bottom) / (vh * 0.45)))
+        : Math.min(1, Math.max(0, (vh * 0.7 - last.bottom) / (vh * 0.25)));
       return { p: Math.min(steps.length - 1, p), fade };
     };
     const update = (dt) => {
       let targetOpacity = 0;
       if (voxel.mode === 'scroll') {
-        applyLayout(isDesktop() ? 'home-desktop' : 'home-mobile');
+        if (isDesktop()) applyLayout('home-desktop'); else placeMobile('home');
         const r = readScroll();
         if (r) { dispA = Math.floor(r.p); dispB = Math.min(SHAPES.length - 1, dispA + 1); dispF = r.p - dispA; targetOpacity = 1 - r.fade; }
       } else if (voxel.mode === 'fixed') {
-        applyLayout(isDesktop() ? 'service-desktop' : 'service-mobile');
+        const placed = isDesktop() ? (applyLayout('service-desktop'), true) : placeMobile('service');
         if (dispB !== voxel.target || (dispF < 1 && dispA !== dispB)) {
           if (dispB !== voxel.target) { dispA = dispF > 0.5 ? dispB : dispA; dispB = voxel.target; dispF = dispA === dispB ? 1 : 0; }
           dispF = Math.min(1, dispF + dt * 0.8);
           if (dispF >= 1) { dispA = dispB; }
         }
         const heroFade = Math.min(1, window.scrollY / (window.innerHeight * 0.6));
-        targetOpacity = (isDesktop() ? 1 : 0.35) * (1 - heroFade);
+        targetOpacity = placed ? (1 - heroFade) : 0;
       }
       opacity += (targetOpacity - opacity) * 0.12;
       el.style.opacity = opacity.toFixed(3);

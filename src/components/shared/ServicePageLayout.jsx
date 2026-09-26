@@ -32,6 +32,7 @@ const ServicePageLayout = ({
         <div className="container mx-auto px-6 md:px-12 relative">
           <div className={`grid gap-12 items-center ${heroImage ? 'lg:grid-cols-2' : ''}`}>
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
+              <div data-voxel-anchor aria-hidden="true" className="lg:hidden h-[30svh] -mt-2 mb-4" />
               <span className="inline-block rounded-full border border-white/15 px-4 py-1.5 mb-7 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">{eyebrow}</span>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.98] tracking-tight">
                 {headline} <span className="text-secondary-300">{headlineAccent}</span>{headlineRest && <> {headlineRest}</>}

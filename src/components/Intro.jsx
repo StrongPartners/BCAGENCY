@@ -5,6 +5,8 @@ import { useLanguage } from '../context/LanguageContext';
 
 /* Açılış: showreel oturum başına bir kez oynar; "Siteye devam et" ile ya da video bitince kapanır. */
 const KEY = 'bc_intro_seen';
+// Telefonda 720p, masaüstünde 1080p yüksek bitrate
+const pickSrc = () => (window.matchMedia('(max-width: 820px)').matches ? '/showreel-720.mp4' : '/showreel.mp4');
 
 const Intro = () => {
   const [open, setOpen] = useState(false);
@@ -40,7 +42,7 @@ const Intro = () => {
       {open && (
         <motion.div key="intro" className="on-dark fixed inset-0 z-[100] bg-black"
           initial={{ opacity: 1 }} exit={{ opacity: 0, scale: 1.04 }} transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}>
-          <video ref={ref} src="/showreel.mp4" poster="/showreel-poster.jpg" autoPlay muted playsInline preload="auto"
+          <video ref={ref} src={pickSrc()} poster="/showreel-poster.jpg" autoPlay muted playsInline preload="auto"
             onEnded={close} className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
           <div className="absolute inset-x-0 bottom-8 md:bottom-12 flex flex-col items-center gap-4 px-6">
