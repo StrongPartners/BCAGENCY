@@ -428,6 +428,7 @@ export default defineConfig({
         '/blog/kktc-marka-kilavuzu-brand-guidelines-hazirlama-girne',
         '/blog/kktc-google-tag-manager-donusum-takibi-ga4-girne',
         '/blog/kktc-whatsapp-rezervasyon-onay-hatirlatma-sistemi-girne',
+        '/blog/kktc-ciplak-goz-3d-led-reklam-rehberi-girne-lefkosa',
       ],
     }),
   ],

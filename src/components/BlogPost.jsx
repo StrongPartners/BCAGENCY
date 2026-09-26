@@ -93,7 +93,10 @@ const renderContent = (content) => {
             <img
               src={m[2]}
               alt={m[1]}
-              className="w-full rounded-xl object-cover max-h-80"
+              className="w-full h-auto rounded-xl object-cover"
+              width="1600"
+              height="900"
+              decoding="async"
               loading="lazy"
             />
             {m[1] && <figcaption className="text-center text-sm text-ink-400 mt-3 italic">{m[1]}</figcaption>}

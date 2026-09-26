@@ -24,7 +24,7 @@ entry = f'''    {{
         category: {J(p['category'])},
         date: {{ tr: {J(date['tr'])}, en: {J(date['en'])} }},
         readTime: {{ tr: {J(p['readTime']['tr'])}, en: {J(p['readTime']['en'])} }},
-        image: {J('https://picsum.photos/seed/' + p['slug'] + '/1200/630')},
+        image: {J(p.get('image') or ('https://picsum.photos/seed/' + p['slug'] + '/1200/630'))},
         imageAlt: {{ tr: {J(p['imageAlt']['tr'])}, en: {J(p['imageAlt']['en'])} }},
         content: {{ tr: {J(p['content']['tr'])}, en: {J(p['content']['en'])} }},
     }},
