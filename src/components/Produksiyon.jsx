@@ -24,7 +24,7 @@ const Produksiyon = () => {
         features: [
             { icon: Film, title: 'Reklam filmi', desc: 'Marka hikayenizi anlatan kısa, etkili reklam filmleri. 30–60 saniye TV & dijital.', tone: 'brand' },
             { icon: Building2, title: 'Kurumsal video', desc: 'Şirket tanıtımı, röportaj, süreç anlatımı, iç iletişim videoları.', tone: 'coral' },
-            { icon: Video, title: 'Sosyal medya videoları', desc: 'Reels, TikTok, YouTube Shorts — her platform i��in özelleştirilmiş içerik.', tone: 'mint' },
+            { icon: Video, title: 'Sosyal medya videoları', desc: 'Reels, TikTok, YouTube Shorts — her platform için özelleştirilmiş içerik.', tone: 'mint' },
             { icon: Scissors, title: 'Post prodüksiyon', desc: 'Kurgu, renk düzenleme, ses tasarımı, motion graphics — hepsi bir arada.', tone: 'sun' },
         ],
         stats: [

@@ -119,3 +119,11 @@
     animation: gradient-shift 8s ease infinite;
   }
 }
+
+/* Küp yükleyici (CubeLoader) */
+@keyframes cube-loader {
+  0%, 100% { transform: scale(0.35) rotate(0deg); opacity: 0.25; }
+  40% { transform: scale(1) rotate(90deg); opacity: 1; }
+}
+.cube-loader-cell { animation: cube-loader 1.2s cubic-bezier(.4,0,.2,1) infinite; }
+@media (prefers-reduced-motion: reduce) { .cube-loader-cell { animation: none; } }

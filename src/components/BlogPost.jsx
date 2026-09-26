@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Clock, ArrowLeft, Tag, ChevronRight } from 'lucide-react';
@@ -6,6 +6,7 @@ import latestPosts from '../data/blogLatest.json';
 import useSEO from '../hooks/useSEO';
 import { useLanguage } from '../context/LanguageContext';
 import { getShape, categoryShape } from './hero/voxelShapes';
+import ReadProgress from './cubes/ReadProgress';
 import {
   buildArticleSchema,
   buildBreadcrumbSchema,
@@ -172,6 +173,7 @@ const BlogPost = () => {
   const { lang, t } = useLanguage();
   // undefined = yükleniyor, null = bulunamadı
   const [post, setPost] = useState(undefined);
+  const articleRef = useRef(null);
   useEffect(() => {
     let alive = true;
     setPost(undefined);
@@ -254,6 +256,7 @@ const BlogPost = () => {
 
   return (
     <div className="min-h-screen bg-ink-900">
+      <ReadProgress target={articleRef} />
       {/* Hero Image */}
       <div className="on-dark relative h-80 md:h-[480px] overflow-hidden pt-24">
         <img
@@ -298,6 +301,7 @@ const BlogPost = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            ref={articleRef}
             className="prose prose-lg max-w-none text-lg leading-relaxed"
           >
             {renderContent(postContent)}

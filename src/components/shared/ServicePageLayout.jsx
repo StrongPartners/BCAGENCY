@@ -1,4 +1,6 @@
 import React from 'react';
+import VoxelIcon from '../hero/VoxelIcon';
+import { textShape } from '../hero/voxelShapes';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Plus, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
@@ -82,7 +84,7 @@ const ServicePageLayout = ({
             <div className="grid md:grid-cols-4 gap-4">
               {steps.map((s, i) => (
                 <motion.div {...fade} transition={{ ...fade.transition, delay: i * 0.08 }} key={i} className="p-7 rounded-2xl border border-white/10 bg-white/[0.02]">
-                  <div className="text-sm font-mono text-secondary-300 mb-6">{s.step}</div>
+                  <VoxelIcon name={`num-${s.step}`} points={() => textShape(String(s.step), { rows: 10, dot: false })} title={String(s.step)} className="h-16 w-16 -ml-3 -mt-2 mb-3" />
                   <h3 className="text-xl font-semibold mb-2">{s.title}</h3>
                   <p className="text-sm text-white/55 leading-relaxed">{s.desc}</p>
                 </motion.div>

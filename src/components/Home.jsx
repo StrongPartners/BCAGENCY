@@ -10,6 +10,8 @@ import Testimonials from './Testimonials';
 import BlogPreview from './BlogPreview';
 import FAQ from './FAQ';
 import BrandTyper from './BrandTyper';
+import VoxelIcon from './hero/VoxelIcon';
+import { shapeForPath } from './hero/voxelBus';
 
 
 /*
@@ -134,7 +136,7 @@ const Home = () => {
                 {s.links.map(([label, path]) => (
                   <li key={label}>
                     <button onClick={() => go(path)} className="w-full flex items-center justify-between py-4 border-b border-white/10 text-left text-white/85 hover:text-white group">
-                      <span className="text-lg">{label}</span>
+                      <span className="flex items-center gap-3 text-lg"><VoxelIcon name={shapeForPath(path)} className="w-9 h-9 shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6" />{label}</span>
                       <ArrowUpRight size={18} className="text-white/30 group-hover:text-secondary-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
                     </button>
                   </li>

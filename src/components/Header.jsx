@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import VoxelIcon from './hero/VoxelIcon';
+import { shapeForPath } from './hero/voxelBus';
 
 const Header = () => {
     const [isHovering, setIsHovering] = useState(false);
@@ -99,16 +101,19 @@ const Header = () => {
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                     exit={{ opacity: 0, y: 10, scale: 0.96 }}
                                     transition={{ duration: 0.18 }}
-                                    className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-64"
+                                    className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-72"
                                 >
                                     <div className="bg-ink-800/95 backdrop-blur-md rounded-xl shadow-lg border border-white/10 overflow-hidden py-2">
                                         {services.map((s) => (
                                             <button
                                                 key={s.name}
                                                 onClick={() => go(s.path)}
-                                                className="w-full flex items-center justify-between px-5 py-3 text-white/70 hover:bg-white/10 transition-colors text-[14px] font-medium group"
+                                                className="w-full flex items-center justify-between px-4 py-2.5 text-white/70 hover:bg-white/10 transition-colors text-[14px] font-medium group"
                                             >
-                                                <span className="group-hover:text-white transition-colors">{s.name}</span>
+                                                <span className="flex items-center gap-3">
+                                                    <VoxelIcon name={shapeForPath(s.path)} className="w-8 h-8 shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6" />
+                                                    <span className="group-hover:text-white transition-colors">{s.name}</span>
+                                                </span>
                                                 <span className="opacity-0 group-hover:opacity-100 text-secondary-300 transition-opacity">&rarr;</span>
                                             </button>
                                         ))}
@@ -190,8 +195,9 @@ const Header = () => {
                                         <button
                                             key={s.name}
                                             onClick={() => go(s.path)}
-                                            className="w-full text-left text-base font-medium text-white/70 hover:text-white transition-colors"
+                                            className="w-full flex items-center gap-3 text-left text-base font-medium text-white/70 hover:text-white transition-colors"
                                         >
+                                            <VoxelIcon name={shapeForPath(s.path)} className="w-8 h-8 shrink-0" />
                                             {s.name}
                                         </button>
                                     ))}

@@ -22,9 +22,9 @@ const FotografVideo = () => {
         subheadline: 'Profesyonel çekim, sosyal medyaya hazır içerik.',
         description: "Ürün katalogu mu, etkinlik mi, kurumsal headshot mu — ne ihtiyacınız varsa. Stüdyo ve dış mekan, tüm ekipman ve post prodüksiyon dahil.",
         features: [
-            { icon: Camera, title: 'Ürün foto��rafçılığı', desc: 'E-ticaret için beyaz fon, lifestyle çekim, katalog. Amazon/Shopify için hazır.', tone: 'brand' },
+            { icon: Camera, title: 'Ürün fotoğrafçılığı', desc: 'E-ticaret için beyaz fon, lifestyle çekim, katalog. Amazon/Shopify için hazır.', tone: 'brand' },
             { icon: PartyPopper, title: 'Etkinlik kaydı', desc: 'Düğün, konferans, lansman, sergi — fotoğraf + video birlikte.', tone: 'coral' },
-            { icon: User, title: 'Kurumsal headshot', desc: 'LinkedIn, hakkımızda sayfası, basın b��lteni için profesyonel portreler.', tone: 'mint' },
+            { icon: User, title: 'Kurumsal headshot', desc: 'LinkedIn, hakkımızda sayfası, basın bülteni için profesyonel portreler.', tone: 'mint' },
             { icon: UtensilsCrossed, title: 'Yemek & mekan', desc: "Restoran menüsü, menü fotoğrafları, mekan atmosfer çekimi — iştah açan görseller.", tone: 'sun' },
         ],
         stats: [

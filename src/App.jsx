@@ -26,6 +26,8 @@ const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./components/TermsOfService'));
 const NotFound = lazy(() => import('./components/NotFound'));
 import Intro from './components/Intro';
+import CubeLoader from './components/cubes/CubeLoader';
+import CubeBurst from './components/cubes/CubeBurst';
 const VoxelWorld = lazy(() => import('./components/hero/VoxelWorld'));
 
 // Sayfa değişince küp dünyasına hangi şekli göstereceğini söyler
@@ -42,11 +44,12 @@ function App() {
         <ScrollToTop />
         <VoxelRouteSync />
         <Intro />
+        <CubeBurst />
         <Suspense fallback={null}><VoxelWorld className="z-[5] pointer-events-none" /></Suspense>
         <div className="flex flex-col min-h-screen">
           <Header />
           <div className="flex-grow">
-            <Suspense fallback={<div className="min-h-screen" />}>
+            <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><CubeLoader /></div>}>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />

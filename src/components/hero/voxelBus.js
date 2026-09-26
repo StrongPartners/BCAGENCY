@@ -21,6 +21,9 @@ const ROUTE_SHAPES = [
   [/^\/contact\/?$/, 'chat'],
 ];
 
+// Bir yolun küp şekli (menü ikonları için); eşleşme yoksa BC
+export const shapeForPath = (path) => ROUTE_SHAPES.find(([re]) => re.test(path))?.[1] ?? 'bc';
+
 export function syncVoxelToRoute(pathname) {
   if (pathname === '/') { voxel.mode = 'scroll'; return; }
   const hit = ROUTE_SHAPES.find(([re]) => re.test(pathname));

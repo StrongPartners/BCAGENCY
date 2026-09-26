@@ -20,12 +20,12 @@ function setup() {
   return { renderer, scene, camera, group, geo: new THREE.BoxGeometry(0.9, 0.9, 0.9), mat: new THREE.MeshStandardMaterial({ roughness: 0.35, metalness: 0.15 }) };
 }
 
-export function renderVoxelIcon(name) {
+export function renderVoxelIcon(name, points) {
   if (cache.has(name)) return cache.get(name);
   try {
     if (!ctx) ctx = setup();
     const { renderer, scene, camera, group, geo, mat } = ctx;
-    const pts = getShape(name);
+    const pts = points || getShape(name);
     const mesh = new THREE.InstancedMesh(geo, mat, pts.length);
     const m = new THREE.Matrix4(), q = new THREE.Quaternion(), c = new THREE.Color();
     let ext = 0;
@@ -36,7 +36,7 @@ export function renderVoxelIcon(name) {
       ext = Math.max(ext, Math.abs(p.x), Math.abs(p.y));
     });
     group.clear(); group.add(mesh);
-    group.rotation.set(-0.12, 0.35, 0);
+    group.rotation.set(-0.12, points ? 0.22 : 0.35, 0);
     camera.position.set(0, 0, (ext + 1.5) / Math.tan(THREE.MathUtils.degToRad(15)));
     camera.updateProjectionMatrix();
     renderer.render(scene, camera);
