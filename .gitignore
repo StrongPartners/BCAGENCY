@@ -26,3 +26,6 @@ dist-ssr
 # Security
 bccreative-49a1ba3a3690.json
 google-service-account.json
+
+# Cloudflare wrangler yerel önbelleği
+.wrangler/
