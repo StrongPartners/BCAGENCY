@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { lazy, Suspense, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import useSEO from '../hooks/useSEO';
 import { useLanguage } from '../context/LanguageContext';
+import { textShape } from './hero/voxelShapes';
+
+const VoxelMini = lazy(() => import('./hero/VoxelMini'));
 
 const NotFound = () => {
     const { lang } = useLanguage();
     const isTr = lang === 'tr';
+    const shape = useMemo(() => textShape('404', { rows: 14 }), []);
 
     useSEO({
         title: isTr ? '404 — Sayfa Bulunamadı | BC Creative Agency' : '404 — Page Not Found | BC Creative Agency',
@@ -16,7 +20,9 @@ const NotFound = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-ink-900 px-6">
             <div className="text-center max-w-lg">
-                <p className="text-9xl font-bold text-secondary-300 leading-none">404</p>
+                <Suspense fallback={<div className="h-48 md:h-64" />}>
+                    <VoxelMini shape={shape} mode="crumble" className="h-48 md:h-64 w-full" label="404" />
+                </Suspense>
                 <h1 className="mt-6 text-3xl md:text-4xl font-bold text-white">
                     {isTr ? 'Sayfa Bulunamadı' : 'Page Not Found'}
                 </h1>

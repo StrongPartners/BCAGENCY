@@ -9,6 +9,7 @@ import Partners from './Partners';
 import Testimonials from './Testimonials';
 import BlogPreview from './BlogPreview';
 import FAQ from './FAQ';
+import BrandTyper from './BrandTyper';
 
 
 /*
@@ -156,6 +157,7 @@ const Home = () => {
 
         {/* Klasik bölümler (3D sahne burada kaybolur) */}
         <div className="bg-ink-900">
+          <BrandTyper />
           <Partners />
           <Testimonials />
           <BlogPreview />

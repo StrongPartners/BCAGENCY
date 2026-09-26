@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
+import { getShape } from './hero/voxelShapes';
+const VoxelMini = lazy(() => import('./hero/VoxelMini'));
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Instagram } from 'lucide-react';
@@ -128,6 +130,11 @@ const Footer = () => {
                         </ul>
                     </div>
                 </div>
+
+                {/* Küp imza: dokununca dağılır, geri toplanır */}
+                <Suspense fallback={<div className="mt-16 h-36 md:h-52" />}>
+                    <VoxelMini shape={getShape('bc')} palette="dark" className="mt-16 h-36 md:h-52 w-full" label="BC Creative" />
+                </Suspense>
 
                 {/* Bottom strip */}
                 <div className="mt-16 pt-8 border-t border-ink-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-ink-500">

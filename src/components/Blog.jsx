@@ -5,6 +5,8 @@ import { Clock, ArrowUpRight } from 'lucide-react';
 import blogPosts from '../data/blogIndex.json';
 import useSEO from '../hooks/useSEO';
 import { useLanguage } from '../context/LanguageContext';
+import VoxelIcon from './hero/VoxelIcon';
+import { categoryShape } from './hero/voxelShapes';
 import { buildOrganizationSchema, buildBreadcrumbSchema } from '../lib/geoSchemas';
 
 const categoryLabels = {
@@ -107,6 +109,7 @@ const Blog = () => {
                     </span>
                     <span>&middot;</span>
                     <span>{post.date[lang] || post.date.tr}</span>
+                    <VoxelIcon name={categoryShape(post.category)} className="ml-auto w-9 h-9 -my-2" />
                   </div>
                   <h2 className="text-xl font-bold text-white mb-3 leading-snug line-clamp-2 group-hover:text-secondary-300 group-hover:-translate-y-0.5 transition-all duration-300">
                     {post.title[lang] || post.title.tr}

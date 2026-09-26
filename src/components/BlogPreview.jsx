@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { Clock, ArrowUpRight } from 'lucide-react';
 import latestPosts from '../data/blogLatest.json';
 import { useLanguage } from '../context/LanguageContext';
+import VoxelIcon from './hero/VoxelIcon';
+import { categoryShape } from './hero/voxelShapes';
 
 const categoryLabels = {
   'SEO': { tr: 'SEO', en: 'SEO' },
@@ -77,6 +79,7 @@ const BlogPreview = () => {
                   </span>
                   <span>&middot;</span>
                   <span>{post.date[lang] || post.date.tr}</span>
+                  <VoxelIcon name={categoryShape(post.category)} className="ml-auto w-9 h-9 -my-2" />
                 </div>
                 <h3 className="text-lg font-bold text-white mb-2 leading-snug line-clamp-2 group-hover:text-secondary-300 transition-colors duration-300">
                   {post.title[lang] || post.title.tr}

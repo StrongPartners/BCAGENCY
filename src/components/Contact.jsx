@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Clock, Instagram, Send, Loader2, CheckCircle } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
+import { shapeCheck } from './hero/voxelShapes';
 import { useLanguage } from '../context/LanguageContext';
 import { buildOrganizationSchema, buildBreadcrumbSchema } from '../lib/geoSchemas';
 import { ZoomSection, ScrollText } from './shared/ParallaxKit';
 
 const LEAD_API = 'https://leadintake-fafl6lnd7a-ew.a.run.app';
 const API_KEY = '36ee59119b9aa5590032763a6079e1a899485ad9d8850e447676441b71e26ad';
+
+const VoxelMini = lazy(() => import('./hero/VoxelMini'));
+const CHECK = shapeCheck();
 
 const Contact = () => {
     const { lang, t } = useLanguage();
@@ -88,7 +92,7 @@ const Contact = () => {
                             <h2 className="text-2xl font-bold text-white mb-6">{isTr ? 'Bize yazin' : 'Send us a message'}</h2>
                             {status === 'success' ? (
                                 <div className="bg-green-900/20 border border-green-500/30 rounded-xl p-8 text-center">
-                                    <CheckCircle size={48} className="text-green-500 mx-auto mb-4" />
+                                    <Suspense fallback={<CheckCircle size={48} className="text-green-500 mx-auto mb-4" />}><VoxelMini shape={CHECK} className="h-40 w-full mb-2" label="Gönderildi" /></Suspense>
                                     <h3 className="text-xl font-bold text-white mb-2">{isTr ? 'Mesajiniz alindi!' : 'Message received!'}</h3>
                                     <p className="text-white/50">{isTr ? 'En kisa surede size donecegiz.' : "We'll get back to you shortly."}</p>
                                     <button onClick={() => setStatus('idle')} className="mt-6 text-secondary-300 font-medium text-sm">{isTr ? 'Yeni mesaj gonder' : 'Send another'}</button>

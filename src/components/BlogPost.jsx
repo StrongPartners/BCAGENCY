@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Clock, ArrowLeft, Tag, ChevronRight } from 'lucide-react';
 import latestPosts from '../data/blogLatest.json';
 import useSEO from '../hooks/useSEO';
 import { useLanguage } from '../context/LanguageContext';
+import { getShape, categoryShape } from './hero/voxelShapes';
 import {
   buildArticleSchema,
   buildBreadcrumbSchema,
   buildOrganizationSchema,
 } from '../lib/geoSchemas';
 
+const VoxelMini = lazy(() => import('./hero/VoxelMini'));
 const categoryLabels = {
   'SEO': { tr: 'SEO', en: 'SEO' },
   'Google Ads': { tr: 'Google Ads', en: 'Google Ads' },
@@ -288,6 +290,7 @@ const BlogPost = () => {
             <span>{postDate}</span>
             <span>&middot;</span>
             <span className="flex items-center gap-1"><Tag size={14} /> {categoryLabels[post.category]?.[lang] || post.category}</span>
+            <Suspense fallback={null}><VoxelMini shape={getShape(categoryShape(post.category))} className="ml-auto h-20 w-28 md:h-28 md:w-40 -my-6" label={categoryLabels[post.category]?.[lang] || post.category} /></Suspense>
           </div>
 
           {/* Blog Content */}
