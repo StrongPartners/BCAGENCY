@@ -32,6 +32,7 @@ const About = () => {
             <ZoomSection video="/bg-smoke.mp4" bg="/parallax-smoke.webp" overlay="bg-ink-900/60">
                 <div className="container mx-auto px-6 md:px-12">
                     <div className="max-w-4xl">
+                        <div data-voxel-anchor="always" aria-hidden="true" className="w-full max-w-xl h-[26svh] md:h-[34vh] lg:h-[38vh] mb-2" />
                         <ScrollText>
                             <p className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-6">
                                 {t('about_eyebrow')}

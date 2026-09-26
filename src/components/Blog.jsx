@@ -39,6 +39,7 @@ const Blog = () => {
       {/* Hero */}
       <section className="pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="container mx-auto px-4 md:px-8 text-center">
+          <div data-voxel-anchor="always" aria-hidden="true" className="mx-auto w-full max-w-xl h-[26svh] md:h-[34vh] lg:h-[38vh] mb-2" />
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

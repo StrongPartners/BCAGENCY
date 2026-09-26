@@ -5,8 +5,8 @@ import { voxel } from './voxelBus';
 /*
  * Küp dünyası — sayfanın arkasında yaşayan tek 3D sahne.
  * Aynı küpler kaydırdıkça bir şekilden diğerine uçarak dönüşür:
- * BC logosu → telefon (içerik) → tarayıcı (web) → katmanlı panolar (uygulama/CRM)
- * → yükselen grafik (büyüme) → BC.
+ * Ana sayfa: BC logosu → telefon (içerik) → tarayıcı (web) → katmanlı panolar (uygulama/CRM)
+ * → yükselen grafik (büyüme) → BC. Menü sayfalarının her birinin kendi şekli var (voxelBus).
  * Sayfadaki [data-voxel-step="i"] bölümleri hangi şeklin görüneceğini belirler.
  * İmleç yakınındaki küpler her aşamada dağılıp yaylanarak geri döner.
  */
@@ -106,7 +106,166 @@ function shapeChart() {
   return center(out);
 }
 
-const SHAPES = [shapeBC, shapePhone, shapeBrowser, shapeLayers, shapeChart, shapeBC].map(f => f());
+// ── Menü sayfalarının şekilleri ──
+const RED2 = 0xf04e42, WOOD = 0xf0d9b5;
+const disc = (cx, cy, r0, r1, c, z = 0) => {
+  const out = [];
+  for (let x = Math.floor(cx - r1); x <= Math.ceil(cx + r1); x++) for (let y = Math.floor(cy - r1); y <= Math.ceil(cy + r1); y++) {
+    const d = Math.hypot(x - cx, y - cy);
+    if (d >= r0 && d <= r1) out.push({ x, y, z, c: typeof c === 'function' ? c(x, y, d) : c });
+  }
+  return out;
+};
+// Döndür ve tekrar ızgaraya oturt (küpler üst üste binmesin)
+const rotSnap = (pts, ang, cx = 0, cy = 0) => {
+  const cs = Math.cos(ang), sn = Math.sin(ang), seen = new Set(), out = [];
+  pts.forEach(p => {
+    const x = Math.round(cx + (p.x - cx) * cs - (p.y - cy) * sn), y = Math.round(cy + (p.x - cx) * sn + (p.y - cy) * cs);
+    const k = `${x},${y},${p.z}`; if (!seen.has(k)) { seen.add(k); out.push({ ...p, x, y }); }
+  });
+  return out;
+};
+const thick = (pts, pred = () => true) => pts.flatMap(p => (pred(p) ? [p, { ...p, z: p.z - 1 }] : [p]));
+
+function shapeHeart() { // Sosyal medya — beğeni
+  const rows = [
+    '..HHH...HHH..',
+    '.HWHHH.HHHHH.',
+    'HWHHHHHHHHHHH',
+    'HHHHHHHHHHHHH',
+    'HHHHHHHHHHHHH',
+    '.HHHHHHHHHHH.',
+    '..HHHHHHHHH..',
+    '...HHHHHHH...',
+    '....HHHHH....',
+    '.....HHH.....',
+    '......H......',
+  ];
+  return center(thick(fromRows(rows, 0, 5, (ch, r, c) => (ch === 'W' ? WHITE : (r + c) % 2 ? RED : RED2))), 14);
+}
+
+function shapeReels() { // Reels ve video edit — kıvrılan film şeridi
+  const strip = ['NNNNNNNNNNNNNNNNN', 'N.N.N.N.N.N.N.N.N', 'NNNNNNNNNNNNNNNNN'];
+  const body = [
+    'NHHHHNLLLLLNHHHHN',
+    'NHHHHNLPLLLNHHHHN',
+    'NHHHHNLPPLLNHHHHN',
+    'NHHHHNLPPPLNHHHHN',
+    'NHHHHNLPPLLNHHHHN',
+    'NHHHHNLPLLLNHHHHN',
+    'NHHHHNLLLLLNHHHHN',
+  ];
+  const rows = [...strip, ...body, ...strip];
+  return center(fromRows(rows, 0, 6, (ch) => ({ N: NAVY, H: LIGHT2, L: LIGHT, P: RED }[ch])).map(p => ({ ...p, z: -Math.pow(p.x - 8, 2) * 0.09 })));
+}
+
+function shapeMagnifier() { // SEO — büyüteç ve yükselen sıralama
+  const out = [
+    ...disc(0, 0, 3.6, 5.1, (x, y) => ((x + y) % 2 ? NAVY : NAVY2)),
+    { x: -2, y: -2, z: 0, c: LIGHT }, { x: 0, y: -2, z: 0, c: LIGHT }, { x: 0, y: -1, z: 0, c: LIGHT },
+    { x: 2, y: -2, z: 0, c: RED }, { x: 2, y: -1, z: 0, c: RED }, { x: 2, y: 0, z: 0, c: RED }, { x: 2, y: 1, z: 0, c: RED },
+  ];
+  for (let i = 0; i < 6; i++) for (let w = 0; w < 2; w++) out.push({ x: 4 + i + w, y: -4 - i, z: 0, c: i < 1 ? LIGHT2 : RED });
+  return center(thick(out, p => p.c === NAVY || p.c === NAVY2 || p.c === RED));
+}
+
+function shapeTarget() { // Google Ads — hedef ve ok
+  const out = disc(0, 0, 0, 6.2, (x, y, d) => (d < 1.6 ? RED : d < 3.1 ? LIGHT : d < 4.6 ? RED : NAVY));
+  for (let i = 1; i <= 7; i++) out.push({ x: i, y: i, z: i * 0.9, c: NAVY2 });
+  [[7, 8], [8, 7], [8, 8], [8, 9], [9, 8]].forEach(([x, y]) => out.push({ x, y, z: 7, c: RED2 }));
+  return center(out);
+}
+
+function shapeClapper() { // Prodüksiyon — klaket
+  const out = [];
+  for (let x = 0; x < 15; x++) for (let y = 0; y < 8; y++) {
+    const line = (y === 2 || y === 4 || y === 6) && x > 1 && x < 13 && !(y === 6 && x > 7);
+    out.push({ x, y: -y, z: 0, c: line ? LIGHT : NAVY });
+  }
+  for (let x = 0; x < 15; x++) out.push({ x, y: 1, z: 0, c: Math.floor(x / 2) % 2 ? NAVY2 : WHITE });
+  const arm = [];
+  for (let x = 0; x < 15; x++) for (let y = 2; y < 4; y++) arm.push({ x, y, z: 0, c: Math.floor((x + y) / 2) % 2 ? NAVY2 : WHITE });
+  out.push(...rotSnap(arm, 0.32, 0, 2), { x: 13, y: -6, z: 1, c: RED });
+  return center(thick(out, p => p.c === NAVY));
+}
+
+function shapeDrone() { // Drone — üstten görünüş, eğik
+  const out = [];
+  for (let x = -1; x <= 1; x++) for (let y = -2; y <= 2; y++) out.push({ x, y, z: 0, c: NAVY });
+  [[1, 1], [1, -1], [-1, 1], [-1, -1]].forEach(([sx, sy]) => {
+    for (let i = 2; i <= 5; i++) out.push({ x: sx * i, y: sy * i, z: 0, c: NAVY2 });
+    out.push(...disc(sx * 6, sy * 6, 2.2, 3.3, LIGHT, 0.5), { x: sx * 6, y: sy * 6, z: 1, c: sy > 0 ? RED : NAVY });
+  });
+  out.push({ x: 0, y: -3, z: -1, c: RED }, { x: 0, y: 3, z: 0, c: WHITE });
+  const a = 0.95; // eğim
+  return center(out.map(p => ({ ...p, y: p.y * Math.cos(a), z: p.z + p.y * Math.sin(a) })), 16);
+}
+
+function shapeCamera() { // Fotoğraf ve video — fotoğraf makinesi
+  const out = [];
+  for (let x = 0; x < 15; x++) for (let y = 0; y < 9; y++) out.push({ x: x - 7, y: y - 4, z: 0, c: y === 8 || y === 0 ? NAVY2 : NAVY });
+  for (let x = -5; x <= -2; x++) for (let y = 5; y <= 6; y++) out.push({ x, y, z: 0, c: NAVY2 });
+  out.push({ x: 5, y: 5, z: 0, c: RED }, { x: 6, y: 5, z: 0, c: RED });
+  out.push(...disc(0, 0, 2.6, 3.6, LIGHT, 1), ...disc(0, 0, 1.4, 2.6, LIGHT2, 2), ...disc(0, 0, 0, 1.4, NAVY2, 2), { x: -1, y: 1, z: 3, c: WHITE });
+  return center(thick(out, p => p.z === 0));
+}
+
+function shapeCoffee() { // Hakkımızda — "bir kahve içelim"
+  const rows = [
+    '..L...L...L....',
+    '...L...L...L...',
+    '..L...L...L....',
+    '...............',
+    'NNNNNNNNNNN....',
+    'NNNNNNNNNNNHHH.',
+    'NNNNNNNNNNN..H.',
+    'NNNNRNRNNNN..H.',
+    'NNNNNRNNNNNHHH.',
+    '.NNNNNNNNN.....',
+    '..NNNNNNN......',
+    'SSSSSSSSSSSSS..',
+  ];
+  const pts = fromRows(rows, 0, 6, (ch, r, c) => ({ L: LIGHT, N: (r + c) % 2 ? NAVY : NAVY2, H: NAVY2, R: RED, S: LIGHT2 }[ch]))
+    .map(p => (p.c === LIGHT ? { ...p, z: Math.sin(p.y + p.x) * 1.2 } : p))
+    .map(p => (p.c === LIGHT2 ? { ...p, x: p.x - 1 } : p));
+  return center(thick(pts, p => p.c !== LIGHT));
+}
+
+function shapePencil() { // Blog — kalem ve yazdığı satır
+  const bar = [];
+  for (let x = 0; x < 17; x++) for (let y = -1; y <= 1; y++) {
+    const c = x < 2 ? RED : x < 3 ? LIGHT : x < 13 ? (y === 0 ? NAVY : NAVY2) : x < 16 ? (Math.abs(y) <= 16 - x - 1 ? WOOD : null) : (y === 0 ? NAVY : null);
+    if (c !== null) bar.push({ x, y, z: 0, c });
+  }
+  const pencil = rotSnap(bar, -0.7, 16, 0);
+  const line = [];
+  for (let x = -2; x <= 16; x++) line.push({ x, y: Math.round(Math.sin(x * 0.7) * 0.8) - 1, z: 0, c: x % 5 === 4 ? RED : LIGHT2 });
+  return center([...thick(pencil), ...line]);
+}
+
+function shapeChat() { // İletişim — sohbet balonları
+  const out = [];
+  const bubble = (w, h, ox, oy, z, fill, edge, tail) => {
+    for (let x = 0; x < w; x++) for (let y = 0; y < h; y++) {
+      const corner = (x === 0 || x === w - 1) && (y === 0 || y === h - 1);
+      if (!corner) out.push({ x: ox + x, y: oy - y, z, c: x === 0 || y === 0 || x === w - 1 || y === h - 1 ? edge : fill });
+    }
+    tail.forEach(([x, y]) => out.push({ x: ox + x, y: oy - y, z, c: edge }));
+  };
+  bubble(11, 7, 6, 9, -3, LIGHT2, LIGHT, [[9, 7], [10, 8]]);
+  bubble(13, 8, 0, 5, 0, NAVY, NAVY2, [[1, 8], [0, 9]]);
+  [3, 6, 9].forEach(x => out.push({ x, y: 1, z: 1, c: x === 9 ? RED : WHITE }));
+  return center(thick(out, p => p.z === 0));
+}
+
+// Sıra önemli: 0–5 ana sayfanın kaydırma hikâyesi, sonrakiler menü sayfaları
+const SHAPE_DEFS = [
+  ['bc', shapeBC], ['phone', shapePhone], ['browser', shapeBrowser], ['layers', shapeLayers], ['chart', shapeChart], ['bc-end', shapeBC],
+  ['heart', shapeHeart], ['reels', shapeReels], ['magnifier', shapeMagnifier], ['target', shapeTarget], ['clapper', shapeClapper],
+  ['drone', shapeDrone], ['camera', shapeCamera], ['coffee', shapeCoffee], ['pencil', shapePencil], ['chat', shapeChat],
+];
+const SHAPES = SHAPE_DEFS.map(([, f]) => f());
+const SHAPE_INDEX = Object.fromEntries(SHAPE_DEFS.map(([n], i) => [n, i]));
 
 export default function VoxelWorld({ className = '' }) {
   const mount = useRef(null);
@@ -187,20 +346,24 @@ export default function VoxelWorld({ className = '' }) {
     let lastBox = '';
     const placeMobile = (kind) => {
       applyLayout('mobile-' + kind);
-      let top, height, bg = '', z = '';
+      let top, height, left = 0, width = 0, bg = '', z = '';
       if (kind === 'home') {
         const hb = document.querySelector('header')?.getBoundingClientRect().bottom ?? 64;
         top = Math.max(0, hb); height = window.innerHeight * 0.34;
         bg = 'linear-gradient(to bottom, #f7f6f2 90%, rgba(247,246,242,0))'; z = '30';
       } else {
-        const a = document.querySelector('[data-voxel-anchor]');
+        const a = [...document.querySelectorAll('[data-voxel-anchor]')].find(n => n.offsetParent !== null);
         if (!a) return false;
         const r = a.getBoundingClientRect(); top = r.top; height = r.height;
+        // mobilde tam genişlik (küpler büyük görünsün), masaüstünde ayrılan kutu kadar
+        if (isDesktop()) { left = r.left; width = r.width; }
       }
-      const key = `${Math.round(top)}|${Math.round(height)}`;
+      const key = `${Math.round(top)}|${Math.round(height)}|${Math.round(left)}|${Math.round(width)}`;
       if (key !== lastBox) {
         lastBox = key;
-        Object.assign(el.style, { left: '0', right: '0', top: `${top}px`, height: `${height}px`, background: bg, zIndex: z });
+        Object.assign(el.style, width
+          ? { left: `${left}px`, right: '', width: `${width}px`, top: `${top}px`, height: `${height}px`, background: bg, zIndex: z }
+          : { left: '0', right: '0', width: '', top: `${top}px`, height: `${height}px`, background: bg, zIndex: z });
       }
       return true;
     };
@@ -231,9 +394,12 @@ export default function VoxelWorld({ className = '' }) {
         const r = readScroll();
         if (r) { dispA = Math.floor(r.p); dispB = Math.min(SHAPES.length - 1, dispA + 1); dispF = r.p - dispA; targetOpacity = 1 - r.fade; }
       } else if (voxel.mode === 'fixed') {
-        const placed = isDesktop() ? (applyLayout('service-desktop'), true) : placeMobile('service');
-        if (dispB !== voxel.target || (dispF < 1 && dispA !== dispB)) {
-          if (dispB !== voxel.target) { dispA = dispF > 0.5 ? dispB : dispA; dispB = voxel.target; dispF = dispA === dispB ? 1 : 0; }
+        // Sayfa her ekranda geçerli bir yer ayırdıysa (data-voxel-anchor="always") oraya, yoksa masaüstünde sağ yarıya
+        const always = document.querySelector('[data-voxel-anchor="always"]');
+        const placed = isDesktop() && !always ? (applyLayout('service-desktop'), true) : placeMobile('anchor');
+        const tgt = SHAPE_INDEX[voxel.target] ?? 0;
+        if (dispB !== tgt || (dispF < 1 && dispA !== dispB)) {
+          if (dispB !== tgt) { dispA = dispF > 0.5 ? dispB : dispA; dispB = tgt; dispF = dispA === dispB ? 1 : 0; }
           dispF = Math.min(1, dispF + dt * 0.8);
           if (dispF >= 1) { dispA = dispB; }
         }

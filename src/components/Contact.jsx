@@ -61,6 +61,7 @@ const Contact = () => {
             {/* Hero */}
             <ZoomSection video="/bg-light.mp4" bg="/parallax-light.webp" overlay="bg-ink-900/70">
                 <div className="container mx-auto px-6 md:px-12 text-center">
+                    <div data-voxel-anchor="always" aria-hidden="true" className="mx-auto w-full max-w-xl h-[26svh] md:h-[34vh] lg:h-[38vh] mb-2" />
                     <ScrollText>
                         <p className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-6">{t('contact_eyebrow')}</p>
                     </ScrollText>
