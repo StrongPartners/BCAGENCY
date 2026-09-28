@@ -433,6 +433,7 @@ export default defineConfig({
         '/blog/kktc-whatsapp-rezervasyon-onay-hatirlatma-sistemi-girne',
         '/blog/kktc-ciplak-goz-3d-led-reklam-rehberi-girne-lefkosa',
         '/blog/kktc-estetik-guzellik-klinigi-google-ads-instagram-reklam-girne-lefkosa',
+        '/blog/kktc-ozel-okul-kurs-merkezi-google-ads-ogrenci-kayit-girne',
       ],
     }),
   ],
