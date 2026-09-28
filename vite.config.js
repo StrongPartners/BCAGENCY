@@ -15,6 +15,7 @@ export default defineConfig({
         '/about',
         '/contact',
         '/blog',
+        '/kup',
         '/hizmetler/uygulama-gelistirme',
         '/hizmetler/crm-yazilim',
         '/hizmetler/reels-video-edit',

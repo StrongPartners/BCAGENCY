@@ -23,7 +23,9 @@ const Intro = () => {
   useEffect(() => {
     let seen = false;
     try { seen = sessionStorage.getItem(KEY) === '1'; } catch { /* storage kapalı */ }
-    if (!seen && !navigator.webdriver) setOpen(true);
+    // #KüpleYaz kampanya linkinden gelen doğrudan sayfaya girsin
+    const campaign = window.location.pathname.startsWith('/kup');
+    if (!seen && !campaign && !navigator.webdriver) setOpen(true);
   }, []);
 
   useEffect(() => {

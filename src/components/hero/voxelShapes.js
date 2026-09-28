@@ -346,8 +346,27 @@ export function shapeCheck() {
 
 // Yazıyı küplere çevir: her harf kendi renginde, sonunda BC'nin kırmızı karesi
 const TEXT_COLORS = [NAVY, LIGHT2, NAVY2, LIGHT];
-export function textShape(str, { rows = 15, dot = true } = {}) {
+export function textShape(str, { rows = 15, dot = true, multiline = false } = {}) {
   const text = (str || '').trim() || 'BC';
+  // Dikey kareler (Story) için çok kelimeli adlar alt alta: her satır ayrı yazılıp üst üste dizilir
+  const words = text.split(/\s+/);
+  if (multiline && words.length > 1 && text.length > 8) {
+    const lines = words.map((w) => textShape(w, { rows, dot: false }));
+    const gap = rows * 0.35, out = [];
+    const heights = lines.map((l) => Math.max(...l.map((p) => p.y)) - Math.min(...l.map((p) => p.y)) + 1);
+    let y = 0;
+    lines.forEach((l, i) => {
+      const top = Math.max(...l.map((p) => p.y));
+      l.forEach((p) => out.push({ ...p, y: p.y - top + y }));
+      y -= heights[i] + gap;
+    });
+    if (dot) {
+      const last = out.filter((p) => p.y <= y + heights[heights.length - 1] + gap + 1);
+      const maxX = Math.max(...last.map((p) => p.x)), minY = Math.min(...last.map((p) => p.y));
+      [[2, 1], [3, 1], [2, 2], [3, 2]].forEach(([dx, dy]) => out.push({ x: maxX + dx, y: minY + dy, z: 0, c: RED }));
+    }
+    return center(out, 1e9);
+  }
   if (typeof document === 'undefined') return shapeBC();
   const fs = rows * 4, cv = document.createElement('canvas'), g = cv.getContext('2d');
   const font = `900 ${fs}px "DM Sans", Inter, Arial, sans-serif`;

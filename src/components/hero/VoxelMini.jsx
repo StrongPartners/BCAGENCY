@@ -23,6 +23,9 @@ const VoxelMini = forwardRef(function VoxelMini(
 
   useImperativeHandle(ref, () => ({
     toDataURL: () => api.current.snapshot?.(),
+    // Story videosu için: küpleri dağıtıp baştan uçarak toplat, WebGL tuvaline eriş
+    replay: () => api.current.replay?.(),
+    canvas: () => api.current.canvas?.(),
   }));
 
   useEffect(() => {
@@ -157,6 +160,14 @@ const VoxelMini = forwardRef(function VoxelMini(
     raf = requestAnimationFrame(tick);
 
     api.current.snapshot = () => { renderer.render(scene, camera); return renderer.domElement.toDataURL('image/png'); };
+    api.current.canvas = () => renderer.domElement;
+    api.current.replay = () => {
+      for (let i = 0; i < CAP; i++) {
+        const a = Math.random() * Math.PI * 2, b = Math.acos(2 * Math.random() - 1), r = 40 + Math.random() * 30;
+        pos[i].set(Math.sin(b) * Math.cos(a) * r, Math.sin(b) * Math.sin(a) * r, Math.cos(b) * r - 25);
+        vel[i].set(0, 0, 0); scl[i] = 0;
+      }
+    };
 
     return () => {
       cancelAnimationFrame(raf); ro.disconnect(); io.disconnect();

@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowRight, Download } from 'lucide-react';
+import { ArrowRight, Download, Film } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { textShape } from './hero/voxelShapes';
 
@@ -66,6 +67,9 @@ const BrandTyper = () => {
             placeholder={tr ? 'Markanın adını yaz…' : 'Type your brand name…'} autoComplete="off"
             className="flex-1 min-w-0 rounded-full border border-white/15 bg-transparent px-6 py-4 text-lg outline-none focus:border-secondary-300 transition-colors placeholder:text-white/35" />
           <div className="flex gap-3">
+            <Link to={`/kup${name ? `?m=${encodeURIComponent(name)}` : ''}`} className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-5 py-4 text-sm font-medium hover:border-white/40 transition-colors">
+              <Film size={16} /> {tr ? 'Story yap' : 'Make a Story'}
+            </Link>
             <button onClick={download} className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-5 py-4 text-sm font-medium hover:border-white/40 transition-colors">
               <Download size={16} /> {tr ? 'Görseli indir' : 'Download'}
             </button>

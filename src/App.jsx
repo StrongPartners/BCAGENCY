@@ -25,6 +25,7 @@ const ReelsVideo = lazy(() => import('./components/ReelsVideo'));
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./components/TermsOfService'));
 const NotFound = lazy(() => import('./components/NotFound'));
+const KupPage = lazy(() => import('./components/kup/KupPage'));
 import Intro from './components/Intro';
 import CubeLoader from './components/cubes/CubeLoader';
 import CubeBurst from './components/cubes/CubeBurst';
@@ -70,6 +71,7 @@ function App() {
                 <Route path="/hizmetler/reels-video-edit" element={<ReelsVideo />} />
                 <Route path="/gizlilik-politikasi" element={<PrivacyPolicy />} />
                 <Route path="/kullanim-sartlari" element={<TermsOfService />} />
+                <Route path="/kup" element={<KupPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
