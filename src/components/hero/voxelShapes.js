@@ -346,7 +346,33 @@ export function shapeCheck() {
 
 // Yazıyı küplere çevir: her harf kendi renginde, sonunda BC'nin kırmızı karesi
 const TEXT_COLORS = [NAVY, LIGHT2, NAVY2, LIGHT];
-export function textShape(str, { rows = 15, dot = true, multiline = false } = {}) {
+
+// Firma renkleri: iki ana renkten harf harf değişen dört ton (ana, ikinci, ana açık, ikinci koyu)
+const shade = (hex, k) => {
+  const r = (hex >> 16) & 255, g = (hex >> 8) & 255, b = hex & 255;
+  const f = (v) => Math.round(k > 0 ? v + (255 - v) * k : v * (1 + k));
+  return (f(r) << 16) | (f(g) << 8) | f(b);
+};
+export function brandPalette(c1, c2) {
+  if (c1 == null) return { letters: TEXT_COLORS, dot: RED };
+  const b = c2 ?? shade(c1, 0.35);
+  return { letters: [c1, b, shade(c1, 0.22), shade(b, -0.18)], dot: c2 != null ? shade(c2, -0.1) : RED };
+}
+export const PRESETS = [
+  { id: 'bc', label: 'BC', c: null },
+  { id: 'kirmizi', label: 'Kırmızı', c: [0xd7141a, 0x1c1c1c] },
+  { id: 'turuncu', label: 'Turuncu', c: [0xf26b1d, 0x2b2b2b] },
+  { id: 'yesil', label: 'Yeşil', c: [0x1f8a4c, 0xa7d676] },
+  { id: 'mor', label: 'Mor', c: [0x5b2a86, 0xe0a3ff] },
+  { id: 'altin', label: 'Altın', c: [0xc9a227, 0x1a1a1a] },
+  { id: 'pembe', label: 'Pembe', c: [0xe8457c, 0xffc2d6] },
+  { id: 'siyah', label: 'Siyah', c: [0x111111, 0x8a8a8a] },
+];
+export const hexToInt = (h) => parseInt(String(h).replace('#', ''), 16);
+export const intToHex = (n) => '#' + n.toString(16).padStart(6, '0');
+
+export function textShape(str, { rows = 15, dot = true, multiline = false, colors = null } = {}) {
+  const pal = brandPalette(colors?.[0] ?? null, colors?.[1] ?? null);
   const text = (str || '').trim() || 'BC';
   // Dikey kareler (Story) için çok kelimeli adlar alt alta: her satır ayrı yazılıp üst üste dizilir
   const words = text.split(/\s+/);
@@ -357,7 +383,7 @@ export function textShape(str, { rows = 15, dot = true, multiline = false } = {}
       const last = rowsTxt[rowsTxt.length - 1];
       if (last && (last + ' ' + w).length <= 11) rowsTxt[rowsTxt.length - 1] = last + ' ' + w; else rowsTxt.push(w);
     });
-    const lines = rowsTxt.map((w) => textShape(w, { rows, dot: false }));
+    const lines = rowsTxt.map((w) => textShape(w, { rows, dot: false, colors }));
     const gap = rows * 0.35, out = [];
     const heights = lines.map((l) => Math.max(...l.map((p) => p.y)) - Math.min(...l.map((p) => p.y)) + 1);
     let y = 0;
@@ -369,7 +395,7 @@ export function textShape(str, { rows = 15, dot = true, multiline = false } = {}
     if (dot) {
       const last = out.filter((p) => p.y <= y + heights[heights.length - 1] + gap + 1);
       const maxX = Math.max(...last.map((p) => p.x)), minY = Math.min(...last.map((p) => p.y));
-      [[2, 1], [3, 1], [2, 2], [3, 2]].forEach(([dx, dy]) => out.push({ x: maxX + dx, y: minY + dy, z: 0, c: RED }));
+      [[2, 1], [3, 1], [2, 2], [3, 2]].forEach(([dx, dy]) => out.push({ x: maxX + dx, y: minY + dy, z: 0, c: pal.dot }));
     }
     return center(out, 1e9);
   }
@@ -386,17 +412,17 @@ export function textShape(str, { rows = 15, dot = true, multiline = false } = {}
   const d = g.getImageData(0, 0, w, h).data, step = 4, out = [];
   let ci = -1;
   const colorAt = (px) => bounds.findIndex(([x0, x1]) => px >= x0 && px < x1);
-  const letterColor = []; bounds.forEach(([, , ch]) => { if (ch.trim()) ci++; letterColor.push(TEXT_COLORS[Math.max(0, ci) % TEXT_COLORS.length]); });
+  const letterColor = []; bounds.forEach(([, , ch]) => { if (ch.trim()) ci++; letterColor.push(pal.letters[Math.max(0, ci) % pal.letters.length]); });
   for (let y = 0; y < h; y += step) for (let x = 0; x < w; x += step) {
     if (d[((y + 2) * w + (x + 2)) * 4 + 3] > 110) {
       const b = colorAt(x + 2);
-      out.push({ x: x / step, y: -y / step, z: 0, c: letterColor[b] ?? NAVY });
+      out.push({ x: x / step, y: -y / step, z: 0, c: letterColor[b] ?? pal.letters[0] });
     }
   }
   if (!out.length) return shapeBC();
   if (dot) {
     const maxX = Math.max(...out.map(p => p.x)), minY = Math.min(...out.map(p => p.y));
-    out.push({ x: maxX + 2, y: minY + 1, z: 0, c: RED }, { x: maxX + 3, y: minY + 1, z: 0, c: RED }, { x: maxX + 2, y: minY + 2, z: 0, c: RED }, { x: maxX + 3, y: minY + 2, z: 0, c: RED });
+    [[2, 1], [3, 1], [2, 2], [3, 2]].forEach(([dx, dy]) => out.push({ x: maxX + dx, y: minY + dy, z: 0, c: pal.dot }));
   }
   return center(out, 1e9);
 }

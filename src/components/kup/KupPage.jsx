@@ -3,6 +3,7 @@ import { Download, Film, Image as ImageIcon, Link2, Share2 } from 'lucide-react'
 import useSEO from '../../hooks/useSEO';
 import { useLanguage } from '../../context/LanguageContext';
 import { textShape } from '../hero/voxelShapes';
+import ColorPicker, { colorsToParam, paramToColors } from './ColorPicker';
 import { fileName, KUP_URL, pickVideoType, recordStory, storyPng } from './story';
 
 const VoxelMini = lazy(() => import('../hero/VoxelMini'));
@@ -21,6 +22,7 @@ const KupPage = () => {
   const tr = lang === 'tr';
   const [value, setValue] = useState('');
   const [shown, setShown] = useState('');
+  const [colors, setColors] = useState(null);
   const [busy, setBusy] = useState(false);
   const [progress, setProgress] = useState(0);
   const [video, setVideo] = useState(null); // { url, file }
@@ -33,22 +35,29 @@ const KupPage = () => {
     canonical: 'https://bccreative.agency/kup',
   });
 
-  useEffect(() => { const m = readParam(); setValue(m); setShown(m); }, []);
+  useEffect(() => {
+    const m = readParam(); setValue(m); setShown(m);
+    try { setColors(paramToColors(new URLSearchParams(window.location.search).get('c'))); } catch { /* yok say */ }
+  }, []);
   useEffect(() => { const id = setTimeout(() => setShown(value), 280); return () => clearTimeout(id); }, [value]);
   useEffect(() => {
     // paylaşılan link o markayla açılsın
     try {
       const u = new URL(window.location.href);
       if (shown.trim()) u.searchParams.set('m', shown.trim()); else u.searchParams.delete('m');
+      if (colors) u.searchParams.set('c', colorsToParam(colors)); else u.searchParams.delete('c');
       window.history.replaceState(null, '', u.pathname + u.search);
     } catch { /* yok say */ }
     setVideo((v) => { if (v) URL.revokeObjectURL(v.url); return null; });
-  }, [shown]);
+  }, [shown, colors]);
 
   const fallback = tr ? 'Markan' : 'Your brand';
   const name = shown.trim() || fallback;
-  const shape = useMemo(() => textShape(name, { multiline: true }), [name]);
-  const shareUrl = `https://${KUP_URL}${shown.trim() ? `?m=${encodeURIComponent(shown.trim())}` : ''}`;
+  const shape = useMemo(() => textShape(name, { multiline: true, colors }), [name, colors]);
+  const qs = new URLSearchParams();
+  if (shown.trim()) qs.set('m', shown.trim());
+  if (colors) qs.set('c', colorsToParam(colors));
+  const shareUrl = `https://${KUP_URL}${qs.toString() ? `?${qs}` : ''}`;
   const caption = tr
     ? `Markamı küplerle yazdım 🧊 Sen de yaz: ${shareUrl} #KüpleYaz @bccreative.agency`
     : `I wrote my brand in cubes 🧊 Try yours: ${shareUrl} #KüpleYaz @bccreative.agency`;
@@ -144,6 +153,7 @@ const KupPage = () => {
           <input id="kup-input" value={value} maxLength={MAX} onChange={(e) => setValue(e.target.value)} autoComplete="off"
             placeholder={tr ? 'Markanın adını yaz…' : 'Type your brand name…'}
             className="w-full rounded-2xl border-2 border-white/15 bg-transparent px-6 py-5 text-2xl font-bold outline-none focus:border-secondary-300 transition-colors placeholder:text-white/30" />
+          <ColorPicker value={colors} onChange={setColors} tr={tr} />
 
           <div className="mt-4 grid sm:grid-cols-2 gap-3">
             {!video ? (

@@ -3,6 +3,7 @@ import { ArrowRight, Download, Film } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { textShape } from './hero/voxelShapes';
+import ColorPicker, { colorsToParam } from './kup/ColorPicker';
 
 const VoxelMini = lazy(() => import('./hero/VoxelMini'));
 
@@ -14,13 +15,14 @@ const BrandTyper = () => {
   const tr = lang === 'tr';
   const [value, setValue] = useState('');
   const [shown, setShown] = useState('');
+  const [colors, setColors] = useState(null);
   const mini = useRef(null);
 
   // yazarken her harfte değil, kısa bir duraksamada şekil değişsin
   useEffect(() => { const id = setTimeout(() => setShown(value), 280); return () => clearTimeout(id); }, [value]);
 
   const fallback = tr ? 'Markan' : 'Your brand';
-  const shape = useMemo(() => textShape(shown || fallback, { multiline: (shown || "").length > 14 }), [shown, fallback]);
+  const shape = useMemo(() => textShape(shown || fallback, { multiline: (shown || "").length > 14, colors }), [shown, fallback, colors]);
   const name = (shown || '').trim();
 
   const wa = `https://wa.me/905488321919?text=${encodeURIComponent(tr
@@ -67,7 +69,7 @@ const BrandTyper = () => {
             placeholder={tr ? 'Markanın adını yaz…' : 'Type your brand name…'} autoComplete="off"
             className="flex-1 min-w-0 rounded-full border border-white/15 bg-transparent px-6 py-4 text-lg outline-none focus:border-secondary-300 transition-colors placeholder:text-white/35" />
           <div className="grid grid-cols-2 md:flex gap-3">
-            <Link to={`/kup${name ? `?m=${encodeURIComponent(name)}` : ''}`} className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-5 py-4 text-sm font-medium hover:border-white/40 transition-colors">
+            <Link to={`/kup?${new URLSearchParams({ ...(name ? { m: name } : {}), ...(colors ? { c: colorsToParam(colors) } : {}) })}`} className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-5 py-4 text-sm font-medium hover:border-white/40 transition-colors">
               <Film size={16} /> {tr ? 'Story yap' : 'Make a Story'}
             </Link>
             <button onClick={download} className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-5 py-4 text-sm font-medium hover:border-white/40 transition-colors">
@@ -78,6 +80,7 @@ const BrandTyper = () => {
             </a>
           </div>
         </div>
+        <ColorPicker value={colors} onChange={setColors} tr={tr} />
       </div>
     </section>
   );
