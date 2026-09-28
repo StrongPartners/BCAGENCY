@@ -11,7 +11,7 @@ const VoxelMini = lazy(() => import('../hero/VoxelMini'));
  * #KüpleYaz kampanya sayfası: marka adını yaz, küpler toplansın, 9:16 Story videosu ya da
  * görseli al, Instagram'da paylaş. Link marka adını taşır (?m=), görenler kendi markasını yazar.
  */
-const MAX = 16;
+const MAX = 28;
 const readParam = () => {
   try { return (new URLSearchParams(window.location.search).get('m') || '').slice(0, MAX); } catch { return ''; }
 };
@@ -113,7 +113,7 @@ const KupPage = () => {
             </div>
             <div className="absolute inset-x-[3%] top-[29%] h-[43%]">
               <Suspense fallback={null}>
-                <VoxelMini ref={mini} shape={shape} capacity={2200} preserve className="w-full h-full" label={`${name} ${tr ? 'küplerle' : 'in cubes'}`} />
+                <VoxelMini ref={mini} shape={shape} capacity={4000} preserve className="w-full h-full" label={`${name} ${tr ? 'küplerle' : 'in cubes'}`} />
               </Suspense>
             </div>
             <div className="absolute inset-x-0 bottom-[7%] text-center px-4">

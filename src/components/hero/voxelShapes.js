@@ -351,7 +351,13 @@ export function textShape(str, { rows = 15, dot = true, multiline = false } = {}
   // Dikey kareler (Story) için çok kelimeli adlar alt alta: her satır ayrı yazılıp üst üste dizilir
   const words = text.split(/\s+/);
   if (multiline && words.length > 1 && text.length > 8) {
-    const lines = words.map((w) => textShape(w, { rows, dot: false }));
+    // kısa kelimeleri aynı satırda topla (en fazla ~11 karakter/satır)
+    const rowsTxt = [];
+    words.forEach((w) => {
+      const last = rowsTxt[rowsTxt.length - 1];
+      if (last && (last + ' ' + w).length <= 11) rowsTxt[rowsTxt.length - 1] = last + ' ' + w; else rowsTxt.push(w);
+    });
+    const lines = rowsTxt.map((w) => textShape(w, { rows, dot: false }));
     const gap = rows * 0.35, out = [];
     const heights = lines.map((l) => Math.max(...l.map((p) => p.y)) - Math.min(...l.map((p) => p.y)) + 1);
     let y = 0;

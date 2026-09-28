@@ -7,7 +7,7 @@ import { textShape } from './hero/voxelShapes';
 const VoxelMini = lazy(() => import('./hero/VoxelMini'));
 
 /* "Markanı küplerle yaz" — ziyaretçi marka adını yazar, küpler o yazıya dönüşür. */
-const MAX = 16;
+const MAX = 28;
 
 const BrandTyper = () => {
   const { lang } = useLanguage();
@@ -20,7 +20,7 @@ const BrandTyper = () => {
   useEffect(() => { const id = setTimeout(() => setShown(value), 280); return () => clearTimeout(id); }, [value]);
 
   const fallback = tr ? 'Markan' : 'Your brand';
-  const shape = useMemo(() => textShape(shown || fallback), [shown, fallback]);
+  const shape = useMemo(() => textShape(shown || fallback, { multiline: (shown || "").length > 14 }), [shown, fallback]);
   const name = (shown || '').trim();
 
   const wa = `https://wa.me/905488321919?text=${encodeURIComponent(tr
@@ -56,7 +56,7 @@ const BrandTyper = () => {
 
         <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.03]">
           <Suspense fallback={<div className="h-[34svh] md:h-[46vh]" />}>
-            <VoxelMini ref={mini} shape={shape} capacity={2200} preserve className="h-[34svh] md:h-[46vh] w-full cursor-crosshair"
+            <VoxelMini ref={mini} shape={shape} capacity={4000} preserve className="h-[34svh] md:h-[46vh] w-full cursor-crosshair"
               label={tr ? `${name || fallback} yazısı küplerle` : `${name || fallback} in cubes`} />
           </Suspense>
         </div>
@@ -66,14 +66,14 @@ const BrandTyper = () => {
           <input id="brand-typer" value={value} maxLength={MAX} onChange={(e) => setValue(e.target.value)}
             placeholder={tr ? 'Markanın adını yaz…' : 'Type your brand name…'} autoComplete="off"
             className="flex-1 min-w-0 rounded-full border border-white/15 bg-transparent px-6 py-4 text-lg outline-none focus:border-secondary-300 transition-colors placeholder:text-white/35" />
-          <div className="flex gap-3">
+          <div className="grid grid-cols-2 md:flex gap-3">
             <Link to={`/kup${name ? `?m=${encodeURIComponent(name)}` : ''}`} className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-5 py-4 text-sm font-medium hover:border-white/40 transition-colors">
               <Film size={16} /> {tr ? 'Story yap' : 'Make a Story'}
             </Link>
             <button onClick={download} className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-5 py-4 text-sm font-medium hover:border-white/40 transition-colors">
               <Download size={16} /> {tr ? 'Görseli indir' : 'Download'}
             </button>
-            <a href={wa} target="_blank" rel="noopener noreferrer" className="on-dark flex-1 md:flex-none inline-flex items-center justify-center gap-2 rounded-full bg-accent-500 hover:bg-accent-600 px-6 py-4 text-sm font-semibold transition-colors">
+            <a href={wa} target="_blank" rel="noopener noreferrer" className="on-dark col-span-2 md:flex-none inline-flex items-center justify-center gap-2 rounded-full bg-accent-500 hover:bg-accent-600 px-6 py-4 text-sm font-semibold transition-colors">
               {tr ? 'Bunu markam için yapın' : 'Do this for my brand'} <ArrowRight size={16} />
             </a>
           </div>
