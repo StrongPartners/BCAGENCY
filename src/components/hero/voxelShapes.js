@@ -353,7 +353,9 @@ const shade = (hex, k) => {
   const f = (v) => Math.round(k > 0 ? v + (255 - v) * k : v * (1 + k));
   return (f(r) << 16) | (f(g) << 8) | f(b);
 };
-export function brandPalette(c1, c2) {
+export function brandPalette(c1, c2, all = null) {
+  // 3+ renk: harfler sırayla bu renklerde, nokta son renkte
+  if (all && all.length > 2) return { letters: all, dot: all[all.length - 1] };
   if (c1 == null) return { letters: TEXT_COLORS, dot: RED };
   const b = c2 ?? shade(c1, 0.35);
   return { letters: [c1, b, shade(c1, 0.22), shade(b, -0.18)], dot: c2 != null ? shade(c2, -0.1) : RED };
@@ -361,18 +363,34 @@ export function brandPalette(c1, c2) {
 export const PRESETS = [
   { id: 'bc', label: 'BC', c: null },
   { id: 'kirmizi', label: 'Kırmızı', c: [0xd7141a, 0x1c1c1c] },
+  { id: 'bordo', label: 'Bordo', c: [0x7a1c2b, 0xd9a86c] },
   { id: 'turuncu', label: 'Turuncu', c: [0xf26b1d, 0x2b2b2b] },
-  { id: 'yesil', label: 'Yeşil', c: [0x1f8a4c, 0xa7d676] },
-  { id: 'mor', label: 'Mor', c: [0x5b2a86, 0xe0a3ff] },
+  { id: 'sari', label: 'Sarı', c: [0xf2c200, 0x1a1a1a] },
   { id: 'altin', label: 'Altın', c: [0xc9a227, 0x1a1a1a] },
+  { id: 'yesil', label: 'Yeşil', c: [0x1f8a4c, 0xa7d676] },
+  { id: 'zeytin', label: 'Zeytin', c: [0x5d6b2e, 0xd8c99b] },
+  { id: 'turkuaz', label: 'Turkuaz', c: [0x00a3a3, 0x0c3d4a] },
+  { id: 'deniz', label: 'Deniz', c: [0x0077b6, 0x90e0ef] },
+  { id: 'lacivert', label: 'Lacivert', c: [0x0b1f4b, 0xc9a227] },
+  { id: 'mor', label: 'Mor', c: [0x5b2a86, 0xe0a3ff] },
+  { id: 'lila', label: 'Lila', c: [0x9d7bd8, 0x3b2a5c] },
   { id: 'pembe', label: 'Pembe', c: [0xe8457c, 0xffc2d6] },
+  { id: 'fusya', label: 'Fuşya', c: [0xc2187a, 0x1a1a1a] },
+  { id: 'kahve', label: 'Kahve', c: [0x5c3a21, 0xc89f73] },
   { id: 'siyah', label: 'Siyah', c: [0x111111, 0x8a8a8a] },
+  { id: 'gri', label: 'Gri', c: [0x6b7078, 0xc9ccd1] },
+  { id: 'gokkusagi', label: 'Gökkuşağı', c: [0xe53935, 0xfb8c00, 0xfdd835, 0x43a047, 0x1e88e5, 0x8e24aa] },
+  { id: 'pastel', label: 'Pastel', c: [0xf4a6b8, 0xf9d5a7, 0xb8e0d2, 0xa8c8f0, 0xcdb4f0] },
+  { id: 'neon', label: 'Neon', c: [0xff2bd6, 0x00e5ff, 0x39ff14, 0xfff200] },
+  { id: 'gunbatimi', label: 'Gün batımı', c: [0xff5e62, 0xff9966, 0xffc371, 0x8e2de2] },
+  { id: 'okyanus', label: 'Okyanus', c: [0x023e8a, 0x0096c7, 0x48cae4, 0xade8f4] },
+  { id: 'orman', label: 'Orman', c: [0x1b4332, 0x2d6a4f, 0x52b788, 0xb7e4c7] },
 ];
 export const hexToInt = (h) => parseInt(String(h).replace('#', ''), 16);
 export const intToHex = (n) => '#' + n.toString(16).padStart(6, '0');
 
 export function textShape(str, { rows = 15, dot = true, multiline = false, colors = null } = {}) {
-  const pal = brandPalette(colors?.[0] ?? null, colors?.[1] ?? null);
+  const pal = brandPalette(colors?.[0] ?? null, colors?.[1] ?? null, colors);
   const text = (str || '').trim() || 'BC';
   // Dikey kareler (Story) için çok kelimeli adlar alt alta: her satır ayrı yazılıp üst üste dizilir
   const words = text.split(/\s+/);
