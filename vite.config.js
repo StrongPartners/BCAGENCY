@@ -435,6 +435,7 @@ export default defineConfig({
         '/blog/kktc-ciplak-goz-3d-led-reklam-rehberi-girne-lefkosa',
         '/blog/kktc-estetik-guzellik-klinigi-google-ads-instagram-reklam-girne-lefkosa',
         '/blog/kktc-ozel-okul-kurs-merkezi-google-ads-ogrenci-kayit-girne',
+        '/blog/kktc-kuafor-guzellik-salonu-whatsapp-randevu-google-isletme-profili-girne',
       ],
     }),
   ],
