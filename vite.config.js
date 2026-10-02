@@ -438,6 +438,7 @@ export default defineConfig({
         '/blog/kktc-kuafor-guzellik-salonu-whatsapp-randevu-google-isletme-profili-girne',
         '/blog/kktc-restoran-kafe-meta-reklamlari-whatsapp-rezervasyon-girne',
         '/blog/kktc-emlak-drone-videosu-proje-tanitimi-girne-lefkosa',
+        '/blog/kktc-yerel-seo-hizmet-sayfalari-yapisal-veri-girne-lefkosa',
       ],
     }),
   ],
