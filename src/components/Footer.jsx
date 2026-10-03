@@ -4,7 +4,19 @@ import { SERVICES } from './shared/services';
 const VoxelMini = lazy(() => import('./hero/VoxelMini'));
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Instagram } from 'lucide-react';
+import { Phone, Mail, MapPin, Instagram, Youtube, Facebook } from 'lucide-react';
+
+const TikTokIcon = ({ size = 16, className = '' }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+        <path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-2.59-2.6c.27 0 .53.04.77.12V9.77a5.7 5.7 0 0 0-.77-.05 5.69 5.69 0 1 0 5.69 5.69V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.3 4.3 0 0 1-3.25-1.48z" />
+    </svg>
+);
+const SOCIALS = [
+    { label: 'Instagram', href: 'https://www.instagram.com/bccreative.agency/', Icon: Instagram },
+    { label: 'TikTok', href: 'https://www.tiktok.com/@bccreative.agency', Icon: TikTokIcon },
+    { label: 'YouTube', href: 'https://www.youtube.com/@bc_medya', Icon: Youtube },
+    { label: 'Facebook', href: 'https://www.facebook.com/978954551969501', Icon: Facebook },
+];
 import { useLanguage } from '../context/LanguageContext';
 
 const Footer = () => {
@@ -41,15 +53,20 @@ const Footer = () => {
                         <p className="text-white/65 text-sm leading-relaxed mb-6">
                             {t('footer_desc')}
                         </p>
-                        <div className="flex items-center gap-3">
-                            <a
-                                href="https://www.instagram.com/bccreative.agency/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-white transition-colors"
-                            >
-                                <Instagram size={16} className="text-white/65 hover:text-white" />
-                            </a>
+                        <div className="flex flex-wrap items-center gap-3">
+                            {SOCIALS.map(({ label, href, Icon }) => (
+                                <a
+                                    key={label}
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={label}
+                                    title={label}
+                                    className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-white transition-colors"
+                                >
+                                    <Icon size={16} className="text-white/65 hover:text-white" />
+                                </a>
+                            ))}
                             <a
                                 href="https://wa.me/905488321919"
                                 target="_blank"

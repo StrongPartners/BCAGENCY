@@ -322,6 +322,25 @@ function shapeQuestion() {
   return center(thick(fromRows(rows, 0, 4, (ch, r) => (ch === 'R' ? RED : r % 2 ? NAVY : NAVY2))));
 }
 
+function shapeYoutube() { // YouTube — oynat düğmesi
+  const rows = ['.RRRRRRRRRRRRR.', 'RRRRRRRRRRRRRRR', 'RRRRRRWRRRRRRRR', 'RRRRRRWWRRRRRRR', 'RRRRRRWWWRRRRRR', 'RRRRRRWWWWRRRRR',
+    'RRRRRRWWWRRRRRR', 'RRRRRRWWRRRRRRR', 'RRRRRRWRRRRRRRR', 'RRRRRRRRRRRRRRR', '.RRRRRRRRRRRRR.'];
+  return center(thick(fromRows(rows, 0, 5, (ch, r) => (ch === 'W' ? WHITE : r % 2 ? RED : RED2))));
+}
+function shapeTiktok() { // TikTok — nota, arkasında açık mavi ve kırmızı gölge
+  const rows = ['......NN....', '......NNN...', '......NNNN..', '......NN.NN.', '......NN..N.', '......NN....', '......NN....',
+    '......NN....', '..NNNNNN....', '.NNNNNNN....', 'NNNNNNNN....', 'NNNNNNN.....', '.NNNNN......'];
+  const base = fromRows(rows, 0, 6, (ch, r) => (r % 2 ? NAVY : NAVY2));
+  const out = [...base];
+  base.forEach(p => { out.push({ ...p, x: p.x - 0.6, y: p.y + 0.6, z: -1, c: LIGHT }); out.push({ ...p, x: p.x + 0.6, y: p.y - 0.6, z: -1.6, c: RED }); });
+  return center(out);
+}
+function shapeFacebook() { // Facebook — yuvarlak köşeli kare ve "f"
+  const rows = ['.NNNNNNNNNNN.', 'NNNNNNNNNNNNN', 'NNNNNNNWWWWNN', 'NNNNNNWWNNNNN', 'NNNNNNWWNNNNN', 'NNNNWWWWWWNNN', 'NNNNNNWWNNNNN',
+    'NNNNNNWWNNNNN', 'NNNNNNWWNNNNN', 'NNNNNNWWNNNNN', 'NNNNNNWWNNNNN', 'NNNNNNWWNNNNN', '.NNNNNWWNNNN.'];
+  return center(thick(fromRows(rows, 0, 6, (ch, r) => (ch === 'W' ? WHITE : r % 2 ? NAVY : NAVY2))));
+}
+
 // Sıra önemli: 0–5 ana sayfanın kaydırma hikâyesi, sonrakiler menü sayfaları
 export const SHAPE_DEFS = [
   ['bc', shapeBC], ['phone', shapePhone], ['browser', shapeBrowser], ['layers', shapeLayers], ['chart', shapeChart], ['bc-end', shapeBC],
@@ -329,6 +348,7 @@ export const SHAPE_DEFS = [
   ['drone', shapeDrone], ['camera', shapeCamera], ['coffee', shapeCoffee], ['pencil', shapePencil], ['chat', shapeChat],
   ['eye', shapeEye], ['bolt', shapeBolt], ['quote', shapeQuote], ['pin', shapePin], ['clock', shapeClock], ['mail', shapeMail],
   ['insta', shapeInsta], ['arrow-up', shapeArrowUp], ['question', shapeQuestion],
+  ['youtube', shapeYoutube], ['tiktok', shapeTiktok], ['facebook', shapeFacebook],
 ];
 export const SHAPES = SHAPE_DEFS.map(([, f]) => f());
 export const SHAPE_INDEX = Object.fromEntries(SHAPE_DEFS.map(([n], i) => [n, i]));
