@@ -72,7 +72,7 @@ export const OPENING_HOURS = Object.freeze([
 export const SOCIAL_PROFILES = Object.freeze([
   'https://www.instagram.com/bccreative.agency/',
   'https://www.tiktok.com/@bccreative.agency',
-  'https://www.youtube.com/@bc_medya',
+  'https://www.youtube.com/@BCCreativeAgency',
   'https://www.facebook.com/978954551969501',
   'https://www.linkedin.com/company/bc-creative-agencyy',
 ]);

@@ -62,7 +62,7 @@ const Contact = () => {
         { label: isTr ? 'E-posta' : 'Email us', value: 'info@bccreative.agency', href: 'mailto:info@bccreative.agency' },
         { label: 'Instagram', value: '@bccreative.agency', href: 'https://www.instagram.com/bccreative.agency/' },
         { label: 'TikTok', value: '@bccreative.agency', href: 'https://www.tiktok.com/@bccreative.agency' },
-        { label: 'YouTube', value: '@bc_medya', href: 'https://www.youtube.com/@bc_medya' },
+        { label: 'YouTube', value: '@BCCreativeAgency', href: 'https://www.youtube.com/@BCCreativeAgency' },
         { label: 'Facebook', value: 'BC Creative Agency', href: 'https://www.facebook.com/978954551969501' },
         { label: 'LinkedIn', value: 'BC Creative Agency', href: 'https://www.linkedin.com/company/bc-creative-agencyy' },
     ];
