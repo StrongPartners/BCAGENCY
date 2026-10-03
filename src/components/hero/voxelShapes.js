@@ -341,6 +341,12 @@ function shapeFacebook() { // Facebook — yuvarlak köşeli kare ve "f"
   return center(thick(fromRows(rows, 0, 6, (ch, r) => (ch === 'W' ? WHITE : r % 2 ? NAVY : NAVY2))));
 }
 
+function shapeLinkedin() { // LinkedIn — "in"
+  const rows = ['.NNNNNNNNNNNNN.', 'NNNNNNNNNNNNNNN', 'NNWWNNNNNNNNNNN', 'NNWWNNNNNNNNNNN', 'NNNNNNNNNNNNNNN', 'NNWWNNWWNWWWNNN', 'NNWWNNWWWWNWWNN',
+    'NNWWNNWWNNNNWWN', 'NNWWNNWWNNNNWWN', 'NNWWNNWWNNNNWWN', 'NNWWNNWWNNNNWWN', 'NNNNNNNNNNNNNNN', '.NNNNNNNNNNNNN.'];
+  return center(thick(fromRows(rows, 0, 6, (ch, r) => (ch === 'W' ? WHITE : r % 2 ? NAVY : NAVY2))));
+}
+
 // Sıra önemli: 0–5 ana sayfanın kaydırma hikâyesi, sonrakiler menü sayfaları
 export const SHAPE_DEFS = [
   ['bc', shapeBC], ['phone', shapePhone], ['browser', shapeBrowser], ['layers', shapeLayers], ['chart', shapeChart], ['bc-end', shapeBC],
@@ -348,7 +354,7 @@ export const SHAPE_DEFS = [
   ['drone', shapeDrone], ['camera', shapeCamera], ['coffee', shapeCoffee], ['pencil', shapePencil], ['chat', shapeChat],
   ['eye', shapeEye], ['bolt', shapeBolt], ['quote', shapeQuote], ['pin', shapePin], ['clock', shapeClock], ['mail', shapeMail],
   ['insta', shapeInsta], ['arrow-up', shapeArrowUp], ['question', shapeQuestion],
-  ['youtube', shapeYoutube], ['tiktok', shapeTiktok], ['facebook', shapeFacebook],
+  ['youtube', shapeYoutube], ['tiktok', shapeTiktok], ['facebook', shapeFacebook], ['linkedin', shapeLinkedin],
 ];
 export const SHAPES = SHAPE_DEFS.map(([, f]) => f());
 export const SHAPE_INDEX = Object.fromEntries(SHAPE_DEFS.map(([n], i) => [n, i]));

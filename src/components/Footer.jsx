@@ -4,7 +4,7 @@ import { SERVICES } from './shared/services';
 const VoxelMini = lazy(() => import('./hero/VoxelMini'));
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Instagram, Youtube, Facebook } from 'lucide-react';
+import { Phone, Mail, MapPin, Instagram, Youtube, Facebook, Linkedin } from 'lucide-react';
 
 const TikTokIcon = ({ size = 16, className = '' }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -16,6 +16,7 @@ const SOCIALS = [
     { label: 'TikTok', href: 'https://www.tiktok.com/@bccreative.agency', Icon: TikTokIcon },
     { label: 'YouTube', href: 'https://www.youtube.com/@bc_medya', Icon: Youtube },
     { label: 'Facebook', href: 'https://www.facebook.com/978954551969501', Icon: Facebook },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/company/bc-creative-agencyy', Icon: Linkedin },
 ];
 import { useLanguage } from '../context/LanguageContext';
 

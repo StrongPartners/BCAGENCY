@@ -13,8 +13,8 @@ const API_KEY = '36ee59119b9aa5590032763a6079e1a899485ad9d8850e447676441b71e26ad
 
 const VoxelMini = lazy(() => import('./hero/VoxelMini'));
 const CHECK = shapeCheck();
-// kanal sırası: WhatsApp, telefon, e-posta, Instagram, TikTok, YouTube, Facebook
-const CHANNEL_SHAPES = ['chat', 'phone', 'mail', 'insta', 'tiktok', 'youtube', 'facebook'];
+// kanal sırası: WhatsApp, telefon, e-posta, Instagram, TikTok, YouTube, Facebook, LinkedIn
+const CHANNEL_SHAPES = ['chat', 'phone', 'mail', 'insta', 'tiktok', 'youtube', 'facebook', 'linkedin'];
 
 const Contact = () => {
     const { lang, t } = useLanguage();
@@ -64,6 +64,7 @@ const Contact = () => {
         { label: 'TikTok', value: '@bccreative.agency', href: 'https://www.tiktok.com/@bccreative.agency' },
         { label: 'YouTube', value: '@bc_medya', href: 'https://www.youtube.com/@bc_medya' },
         { label: 'Facebook', value: 'BC Creative Agency', href: 'https://www.facebook.com/978954551969501' },
+        { label: 'LinkedIn', value: 'BC Creative Agency', href: 'https://www.linkedin.com/company/bc-creative-agencyy' },
     ];
 
     return (
