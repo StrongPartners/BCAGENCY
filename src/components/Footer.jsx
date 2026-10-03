@@ -14,7 +14,7 @@ const TikTokIcon = ({ size = 16, className = '' }) => (
 const SOCIALS = [
     { label: 'Instagram', href: 'https://www.instagram.com/bccreative.agency/', Icon: Instagram },
     { label: 'TikTok', href: 'https://www.tiktok.com/@bccreative.agency', Icon: TikTokIcon },
-    { label: 'YouTube', href: 'https://www.youtube.com/@bc_medya', Icon: Youtube },
+    { label: 'YouTube', href: 'https://www.youtube.com/@BCCreativeAgency', Icon: Youtube },
     { label: 'Facebook', href: 'https://www.facebook.com/978954551969501', Icon: Facebook },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/company/bc-creative-agencyy', Icon: Linkedin },
 ];
