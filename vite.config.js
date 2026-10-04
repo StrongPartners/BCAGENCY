@@ -440,6 +440,7 @@ export default defineConfig({
         '/blog/kktc-emlak-drone-videosu-proje-tanitimi-girne-lefkosa',
         '/blog/kktc-yerel-seo-hizmet-sayfalari-yapisal-veri-girne-lefkosa',
         '/blog/kktc-otel-drone-ve-video-produksiyonu-planlama-girne-lefkosa',
+        '/blog/kktc-perakende-magaza-meta-reklamlari-whatsapp-girne-lefkosa',
       ],
     }),
   ],
