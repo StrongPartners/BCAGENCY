@@ -442,6 +442,7 @@ export default defineConfig({
         '/blog/kktc-otel-drone-ve-video-produksiyonu-planlama-girne-lefkosa',
         '/blog/kktc-perakende-magaza-meta-reklamlari-whatsapp-girne-lefkosa',
         '/blog/kktc-meta-potansiyel-musteri-formu-whatsapp-girne-lefkosa',
+        '/blog/kktc-meta-reklam-yorgunlugu-kreatif-yenileme-girne-lefkosa',
       ],
     }),
   ],
