@@ -2,11 +2,15 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import sitemap from 'vite-plugin-sitemap'
 
+// Site haritasında tekrar olmasın: aynı rota iki kez ve '/' (eklenti ana sayfayı zaten ekliyor) çıkarılır.
+// Liste aşağıda olduğu gibi kalır; blog botları yeni rotayı son '/blog/...' satırının ardına eklemeye devam eder.
+const dedupeRoutes = (o) => ({ ...o, dynamicRoutes: [...new Set(o.dynamicRoutes)].filter((r) => r !== '/') })
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    sitemap({
+    sitemap(dedupeRoutes({
       hostname: 'https://bccreative.agency',
       generateRobotsTxt: true,
       dynamicRoutes: [
@@ -445,6 +449,6 @@ export default defineConfig({
         '/blog/kktc-meta-reklam-yorgunlugu-kreatif-yenileme-girne-lefkosa',
         '/blog/kktc-emlak-whatsapp-potansiyel-musteri-takibi-girne-lefkosa',
       ],
-    }),
+    })),
   ],
 })
