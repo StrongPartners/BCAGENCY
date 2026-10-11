@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import VoxelIcon from './hero/VoxelIcon';
 import { shapeForPath } from './hero/voxelBus';
+import { withViewTransition } from '../lib/viewTransition';
 
 const Header = () => {
     const [isHovering, setIsHovering] = useState(false);
@@ -12,6 +13,7 @@ const Header = () => {
     const [menuTop, setMenuTop] = useState(72);
     const headerRef = useRef(null);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [pillPath, setPillPath] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
     const { lang, setLang, t, LANGUAGES } = useLanguage();
@@ -33,7 +35,7 @@ const Header = () => {
     }, [isMobileMenuOpen]);
 
     const go = (path) => {
-        navigate(path);
+        withViewTransition(() => navigate(path));
         window.scrollTo({ top: 0, behavior: 'smooth' });
         setIsMobileMenuOpen(false);
         setIsHovering(false);
@@ -63,7 +65,7 @@ const Header = () => {
     return (
         <header
             ref={headerRef}
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-ink-900/95 backdrop-blur-md border-b border-white/10 py-3' : 'bg-transparent py-5'}`}
+            className={`vt-header fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-ink-900/95 backdrop-blur-md border-b border-white/10 py-3' : 'bg-transparent py-5'}`}
         >
             <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
 
@@ -79,16 +81,26 @@ const Header = () => {
                 </button>
 
                 {/* Desktop Navigation */}
-                <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
+                <nav className="hidden lg:flex items-center gap-2 xl:gap-4" onMouseLeave={() => setPillPath(null)}>
                     {navLinks.map((item) => {
                         const active = location.pathname === item.path;
+                        const pillHere = (pillPath ?? (navLinks.some((n) => n.path === location.pathname) ? location.pathname : null)) === item.path;
                         return (
                             <button
                                 key={item.label}
                                 onClick={() => go(item.path)}
-                                className={`font-medium text-[15px] tracking-tight transition-colors ${active ? 'text-white' : 'text-white/80 hover:text-white'}`}
+                                onMouseEnter={() => setPillPath(item.path)}
+                                onFocus={() => setPillPath(item.path)}
+                                className={`relative px-4 py-2 rounded-full font-medium text-[15px] tracking-tight transition-colors ${pillHere ? 'text-ink-900' : active ? 'text-white' : 'text-white/80 hover:text-white'}`}
                             >
-                                {item.label}
+                                {pillHere && (
+                                    <motion.span
+                                        layoutId="nav-pill"
+                                        className="absolute inset-0 rounded-full bg-white"
+                                        transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                                    />
+                                )}
+                                <span className="relative z-10">{item.label}</span>
                             </button>
                         );
                     })}
@@ -154,8 +166,9 @@ const Header = () => {
                     {/* CTA pill */}
                     <button
                         onClick={() => window.open('https://wa.me/905488321919', '_blank')}
-                        className="on-dark group inline-flex items-center gap-2 bg-brand-600 text-white font-medium text-sm pl-3 pr-6 py-2 rounded-full hover:bg-brand-700 transition-colors"
+                        className="aurora-btn on-dark group inline-flex items-center gap-2 bg-brand-600 text-white font-medium text-sm pl-3 pr-6 py-2 rounded-full transition-colors"
                     >
+                        <span className="aurora-btn__glow" aria-hidden="true" />
                         <VoxelIcon name="coffee" palette="dark" className="w-7 h-7 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110" />
                         {t('btn_offer')}
                     </button>
@@ -220,8 +233,9 @@ const Header = () => {
 
                             <button
                                 onClick={() => window.open('https://wa.me/905488321919', '_blank')}
-                                className="on-dark mt-4 w-full inline-flex items-center justify-center gap-2 bg-brand-600 text-white font-medium py-3 rounded-full hover:bg-brand-700 transition-colors"
+                                className="aurora-btn on-dark mt-4 w-full inline-flex items-center justify-center gap-2 bg-brand-600 text-white font-medium py-3 rounded-full transition-colors"
                             >
+                                <span className="aurora-btn__glow" aria-hidden="true" />
                                 <VoxelIcon name="coffee" palette="dark" className="w-8 h-8" />
                                 {t('btn_offer')}
                             </button>

@@ -176,8 +176,9 @@ const Home = () => {
                 <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">{c.ctaTitle}</h2>
                 <p className="mt-5 text-white/70 text-lg max-w-xl mx-auto">{c.ctaDesc}</p>
                 <div className="mt-9 flex flex-wrap justify-center gap-4">
-                  <a href={WA} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 bg-white text-ink-900 font-semibold px-7 py-4 rounded-full hover:bg-brand-600 transition-colors">
-                    {t('btn_whatsapp')} <ArrowRight size={18} />
+                  <a href={WA} target="_blank" rel="noopener noreferrer" className="aurora-btn inline-flex items-center gap-3 bg-white text-ink-900 font-semibold px-7 py-4 rounded-full transition-colors">
+                    <span className="aurora-btn__glow" aria-hidden="true" />
+                    {t('btn_whatsapp')} <ArrowRight size={18} className="aurora-btn__arrow" />
                   </a>
                   <a href="mailto:info@bccreative.agency" className="inline-flex items-center px-7 py-4 rounded-full border border-white/25 hover:border-white/60 transition-colors">info@bccreative.agency</a>
                 </div>

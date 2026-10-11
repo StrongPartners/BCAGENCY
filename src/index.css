@@ -132,3 +132,34 @@
 @keyframes cube-bob { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-6px) rotate(-4deg); } }
 .cube-bob { animation: cube-bob 3.2s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .cube-bob { animation: none; } }
+
+/* ── Sayfa geçişi: kameranın odak kaydırması (rack focus). View Transitions API, JS kütüphanesi yok ── */
+@keyframes rack-out { to { opacity: 0; filter: blur(14px); transform: scale(1.03); } }
+@keyframes rack-in { from { opacity: 0; filter: blur(14px); transform: scale(0.985); } }
+::view-transition-old(root) { animation: rack-out 0.38s cubic-bezier(0.4, 0, 1, 1) both; }
+::view-transition-new(root) { animation: rack-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both; }
+::view-transition-old(site-header), ::view-transition-new(site-header) { animation: none; }
+.vt-header { view-transition-name: site-header; }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}
+
+/* ── Aurora buton: üzerine gelince içinde dönen marka renkleri ── */
+.aurora-btn { position: relative; overflow: hidden; isolation: isolate; }
+.aurora-btn__glow {
+  position: absolute; left: 50%; top: 50%; width: 260%; aspect-ratio: 1; translate: -50% -50%;
+  z-index: -1; opacity: 0; pointer-events: none; border-radius: 9999px;
+  background: conic-gradient(from 0deg, #1B2A5C, #3d5a9e, #A8D0E0, #E03C31, #1B2A5C);
+  transition: opacity 0.4s ease; animation: aurora-spin 6s linear infinite; animation-play-state: paused;
+}
+.aurora-btn:hover .aurora-btn__glow, .aurora-btn:focus-visible .aurora-btn__glow { opacity: 1; animation-play-state: running; }
+.aurora-btn::after {
+  content: ""; position: absolute; inset: 2px; border-radius: inherit; z-index: -1; opacity: 0;
+  background: rgba(16, 16, 20, 0.55); transition: opacity 0.4s ease;
+}
+.aurora-btn:hover::after, .aurora-btn:focus-visible::after { opacity: 1; }
+.aurora-btn:hover, .aurora-btn:focus-visible { color: #fff; }
+.aurora-btn .aurora-btn__arrow { transition: transform 0.3s ease; }
+.aurora-btn:hover .aurora-btn__arrow { transform: translateX(4px); }
+@keyframes aurora-spin { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .aurora-btn__glow { animation: none; } }
