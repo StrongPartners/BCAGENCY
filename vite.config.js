@@ -451,6 +451,7 @@ export default defineConfig({
         '/blog/kktc-arac-kiralama-rent-a-car-google-ads-whatsapp-rezervasyon-girne-lefkosa',
         '/blog/kktc-google-isletme-profili-fotograf-video-yonetimi-girne-lefkosa',
         '/blog/kktc-butik-otel-meta-reklamlari-whatsapp-dogrudan-rezervasyon-girne',
+        '/blog/kktc-cok-dilli-web-sitesi-hreflang-seo-girne-lefkosa',
       ],
     })),
   ],
