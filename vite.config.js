@@ -455,6 +455,7 @@ export default defineConfig({
         '/blog/kktc-sezonluk-sosyal-medya-icerik-takvimi-girne-lefkosa',
         '/blog/kktc-google-ads-performance-max-kampanya-rehberi-girne-lefkosa',
         '/blog/kktc-restoran-kafe-tanitim-videosu-cekim-plani-girne-lefkosa',
+        '/blog/kktc-google-ads-yeniden-pazarlama-remarketing-whatsapp-girne-lefkosa',
       ],
     })),
   ],
