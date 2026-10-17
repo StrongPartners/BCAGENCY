@@ -11,6 +11,10 @@ p = json.load(open(sys.argv[1], encoding='utf-8'))
 data = root / 'src/data/blogPosts.js'; s = open(data, encoding='utf-8', newline='').read()
 if f'"{p["slug"]}"' in s or f"'{p['slug']}'" in s:
     sys.exit(f'HATA: slug zaten var: {p["slug"]}')
+# Birleştirilip yönlendirilen eski adresler yeniden kullanılmaz
+redir = root / 'worker/blog-redirects.json'
+if redir.exists() and f"/blog/{p['slug']}" in json.load(open(redir, encoding='utf-8')):
+    sys.exit(f'HATA: bu slug birleştirilip yönlendirildi: {p["slug"]}')
 nid = max(int(x) for x in re.findall(r'^\s*id:\s*(\d+)', s, re.M)) + 1
 AY = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık']
 d = datetime.date.today()

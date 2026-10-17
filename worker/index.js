@@ -1,3 +1,6 @@
+// Aynı konuyu tekrar eden yazılar tek yazıda birleştirildi (scripts/merge-posts.mjs)
+import BLOG_REDIRECTS from './blog-redirects.json';
+
 // BC Creative sitesi — Cloudflare Workers (statik varlıklar + SPA).
 // - http → https ve www → bccreative.agency 301
 // - sondaki "/" olan sayfa adresleri tek adrese 301 (örn. /about/ → /about)
@@ -32,7 +35,7 @@ const PAGES = {
 };
 
 // Kaldırılmış eski adresler → en yakın canlı sayfa (Search Console'da tıklama alıyorlardı)
-const REDIRECTS = { '/fiyat': '/contact', '/hizmetler': '/' };
+const REDIRECTS = { '/fiyat': '/contact', '/hizmetler': '/', ...BLOG_REDIRECTS };
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const inline = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')

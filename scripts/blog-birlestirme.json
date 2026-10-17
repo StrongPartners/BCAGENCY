@@ -1,0 +1,370 @@
+[
+ {
+  "keep": "kktc-influencer-pazarlama",
+  "merge": [
+   "kktc-influencer-pazarlama-stratejisi-girne",
+   "kktc-mikro-influencer-pazarlama-girne-stratejileri"
+  ],
+  "min_cos": 0.52
+ },
+ {
+  "keep": "kktc-saglik-sektoru-landing-page-tasarimi-girne",
+  "merge": [
+   "kktc-emlak-sektoru-landing-page-tasarimi-girne",
+   "kktc-google-ads-landing-page-tasarimi-donusum-artirma-girne",
+   "kktc-landing-page-optimizasyonu",
+   "kktc-landing-page-tasarimi-donusum-optimizasyonu-girne"
+  ],
+  "min_cos": 0.28
+ },
+ {
+  "keep": "kktc-e-posta-pazarlama-otomasyonu-girne",
+  "merge": [
+   "kktc-e-posta-pazarlama-otomasyonu-rehberi",
+   "kktc-isletmeleri-icin-e-posta-pazarlama-otomasyonu"
+  ],
+  "min_cos": 0.32
+ },
+ {
+  "keep": "kktc-affiliate-gelir-ortakligi-pazarlama-girne",
+  "merge": [
+   "kktc-gelir-ortakligi-pazarlama-rehberi"
+  ],
+  "min_cos": 0.76
+ },
+ {
+  "keep": "sosyal-medya-icerik-takvimi-kktc-markalar",
+  "merge": [
+   "kktc-sosyal-medya-icerik-takvimi-girne",
+   "sosyal-medya-icerik-takvimi-gazimagusa-kktc",
+   "sosyal-medya-icerik-takvimi-kktc",
+   "sosyal-medya-icerik-takvimi-kktc-turizm",
+   "sosyal-medya-icerik-takvimi-kktc-turizm-isletmeleri",
+   "sosyal-medya-icerik-takvimi-lefko-a-kktc"
+  ],
+  "min_cos": 0.31
+ },
+ {
+  "keep": "e-ticaret-seo-urun-sayfasi-optimizasyonu-kktc",
+  "merge": [
+   "kktc-e-ticaret-seo-urun-sayfasi-optimizasyonu"
+  ],
+  "min_cos": 0.38
+ },
+ {
+  "keep": "instagram-hesap-yonetimi-lefko-a-kktc",
+  "merge": [
+   "kktc-instagram-hesap-yonetimi-girne"
+  ],
+  "min_cos": 0.48
+ },
+ {
+  "keep": "kktc-outdoor-reklam-tasarimi-billboard-tabela-girne",
+  "merge": [
+   "kktc-acik-hava-reklam-tasarimi-billboard-girne",
+   "kktc-outdoor-reklam-tasarimi-tabela-billboard-girne"
+  ],
+  "min_cos": 0.32
+ },
+ {
+  "keep": "kktc-marka-kimligi-olusturma-girne-logo-tasarimi",
+  "merge": [
+   "kktc-logo-tasarimi-marka-kimligi-girne",
+   "kktc-logo-tasarimi-marka-kimligi-olusturma-girne",
+   "kktc-marka-kimligi-logo-tasarimi-sureci-girne",
+   "kktc-marka-kimligi-olusturma-logo-tasarimi-girne",
+   "kktc-marka-kimligi-olusturma-rehberi-girne",
+   "kktc-marka-kimligi-stratejisi-logo-tasarimi-girne"
+  ],
+  "min_cos": 0.25
+ },
+ {
+  "keep": "kktc-linkedin-reklam-b2b-pazarlama-girne",
+  "merge": [
+   "linkedin-reklam-kktc-b2b-pazarlama"
+  ],
+  "min_cos": 0.34
+ },
+ {
+  "keep": "kktc-kobi-dijital-reklam-butcesi-optimizasyonu-girne",
+  "merge": [
+   "kktc-dijital-reklam-butcesi-yonetimi-roas-optimizasyonu-girne",
+   "kktc-reklam-butcesi-optimizasyonu-roas-analizi-girne",
+   "kktc-reklam-butcesi-optimizasyonu-roas-hesaplama-girne"
+  ],
+  "min_cos": 0.31
+ },
+ {
+  "keep": "kktc-pazar-arastirmasi-rakip-analizi-girne-lefkoa",
+  "merge": [
+   "kktc-dijital-pazarlama-rakip-analizi-adim-adim-rehber-girne",
+   "kktc-dijital-pazarlama-rakip-analizi-pazar-arastirmasi-girne",
+   "kktc-dijital-pazarlama-rekabet-analizi-girne",
+   "kktc-pazar-arastirmasi-rakip-analizi-dijital-pazarlama-girne",
+   "kktc-pazar-arastirmasi-rakip-analizi-girne",
+   "kktc-pazar-arastirmasi-rakip-analizi-girne-dijital-pazarlama"
+  ],
+  "min_cos": 0.3
+ },
+ {
+  "keep": "kktc-programatik-reklamcilik-veri-odakli-pazarlama-girne",
+  "merge": [
+   "kktc-programatik-reklam-veri-odakli-pazarlama-girne"
+  ],
+  "min_cos": 0.79
+ },
+ {
+  "keep": "kktc-kurumsal-kimlik-tasarimi-guven-insasi-girne",
+  "merge": [
+   "kktc-kurumsal-kimlik-dijital-entegrasyon-girne",
+   "kktc-kurumsal-kimlik-tasarimi-girne-lefkoa",
+   "kktc-kurumsal-kimlik-tasarimi-marka-imaji-girne",
+   "kktc-kurumsal-kimlik-tasarimi-marka-insasi-girne",
+   "kktc-kurumsal-kimlik-tasarimi-marka-kimligi-girne",
+   "kktc-kurumsal-kimlik-tasarimi-marka-stratejisi-girne",
+   "kktc-kurumsal-kimlik-tasarimi-marka-tutarliligi-girne",
+   "kktc-yeni-isletmeler-kurumsal-kimlik-tasarimi-girne"
+  ],
+  "min_cos": 0.29
+ },
+ {
+  "keep": "kktc-teknik-seo-rehberi-site-hizi-girne",
+  "merge": [
+   "kktc-teknik-seo-rehberi-site-hizi-core-web-vitals-girne"
+  ],
+  "min_cos": 0.31
+ },
+ {
+  "keep": "kktc-donusum-orani-optimizasyonu-ab-testi-rehberi-girne",
+  "merge": [
+   "kktc-ab-testi-donusum-optimizasyonu-cro-girne",
+   "kktc-donusum-orani-optimizasyonu-cro-ab-testi-girne",
+   "kktc-donusum-orani-optimizasyonu-cro-girne"
+  ],
+  "min_cos": 0.34
+ },
+ {
+  "keep": "kktc-universite-dijital-pazarlama-ogrenci-rekrutmani",
+  "merge": [
+   "kktc-universite-uluslararasi-ogrenci-dijital-pazarlama-girne",
+   "kktc-universite-video-pazarlama-ogrenci-kazanimi-girne"
+  ],
+  "min_cos": 0.31
+ },
+ {
+  "keep": "kktc-saglik-sektoru-dijital-pazarlama-girne",
+  "merge": [
+   "kktc-medikal-seo-saglik-sektoru-dijital-pazarlama-girne",
+   "kktc-saglik-sektoru-dijital-pazarlama-hasta-kazanimi-girne",
+   "kktc-saglik-sektoru-etik-dijital-pazarlama-girne",
+   "kktc-saglik-sektoru-etik-dijital-pazarlama-rehberi-girne",
+   "kktc-saglik-sektoru-video-pazarlama-girne",
+   "kktc-saglik-sektoru-web-tasarim-hasta-kazanimi-girne",
+   "kktc-saglik-turizmi-dijital-pazarlama-yabanci-hasta-kazanimi-girne"
+  ],
+  "min_cos": 0.41
+ },
+ {
+  "keep": "kktc-proaktif-dijital-itibar-yonetimi-girne",
+  "merge": [
+   "kktc-dijital-itibar-yonetimi-kriz-iletisimi-girne",
+   "kktc-dijital-itibar-yonetimi-marka-koruma-girne",
+   "kktc-dijital-kriz-iletisimi-itibar-yonetimi-girne",
+   "kktc-kriz-iletisimi-itibar-yonetimi-girne",
+   "kktc-online-itibar-yonetimi-kriz-iletisimi-girne",
+   "kktc-sosyal-medya-kriz-yonetimi-itibar-koruma-girne",
+   "kktc-twitter-kriz-iletisimi-itibar-yonetimi-girne",
+   "kktc-twitter-kriz-yonetimi-itibar-koruma-girne"
+  ],
+  "min_cos": 0.27
+ },
+ {
+  "keep": "kktc-profesyonel-katalog-sunum-tasarimi-girne",
+  "merge": [
+   "kktc-emlak-insaat-katalog-sunum-tasarimi-girne",
+   "kktc-emlak-katalog-sunum-tasarimi-girne",
+   "kktc-katalog-sunum-tasarimi-satis-artirma-girne",
+   "kktc-profesyonel-katalog-sunum-tasarimi-girne-satis-artirma",
+   "kktc-sunum-katalog-tasarimi-b2b-satis-artirma-girne"
+  ],
+  "min_cos": 0.22
+ },
+ {
+  "keep": "kktc-turizm-otel-etkinlik-video-cekimi-girne",
+  "merge": [
+   "kktc-etkinlik-organizasyon-video-fotograf-cekimi-girne",
+   "kktc-etkinlik-video-cekimi-girne-lefkoa"
+  ],
+  "min_cos": 0.32
+ },
+ {
+  "keep": "kktc-otomotiv-dijital-pazarlama-test-surusu-artirma-girne",
+  "merge": [
+   "kktc-otomotiv-dijital-pazarlama-360-derece-strateji-girne",
+   "kktc-otomotiv-dijital-pazarlama-eposta-musteri-sadakati-girne",
+   "kktc-otomotiv-dijital-pazarlama-girne-lefkoa",
+   "kktc-otomotiv-sektoru-dijital-pazarlama-rehberi"
+  ],
+  "min_cos": 0.22
+ },
+ {
+  "keep": "kktc-infografik-tasarim-veri-gorsellestirme-girne",
+  "merge": [
+   "kktc-infografik-veri-gorsellestirme-girne-finans-emlak",
+   "kktc-infografik-veri-gorsellestirme-marka-mesaji-guclendirme-girne",
+   "kktc-veri-gorsellestirme-infografik-tasarim-girne"
+  ],
+  "min_cos": 0.46
+ },
+ {
+  "keep": "kktc-finans-sektoru-otorite-icerik-guven-stratejileri-girne",
+  "merge": [
+   "kktc-finans-danismanlik-dijital-guven-insasi-girne",
+   "kktc-finans-danismanlik-dijital-pazarlama-girne",
+   "kktc-finans-danismanlik-dijital-pazarlama-guven-insasi-girne",
+   "kktc-finans-sektoru-dijital-guven-insasi-girne",
+   "kktc-finans-sektoru-dijital-pazarlama-guven-girne"
+  ],
+  "min_cos": 0.32
+ },
+ {
+  "keep": "kktc-motion-design-animasyon-sosyal-medya-girne",
+  "merge": [
+   "kktc-motion-design-animasyon-girne",
+   "kktc-motion-design-animasyon-marka-pazarlama-girne"
+  ],
+  "min_cos": 0.62
+ },
+ {
+  "keep": "kktc-moda-lifestyle-fotograf-cekimi-gorsel-hikaye-anlatimi-girne",
+  "merge": [
+   "kktc-moda-lifestyle-fotograf-cekimi-girne",
+   "kktc-moda-lifestyle-fotograf-cekimi-girne-marka-imaji",
+   "kktc-moda-lifestyle-fotograf-cekimi-perakende-markalari-girne"
+  ],
+  "min_cos": 0.35
+ },
+ {
+  "keep": "kktc-google-search-console-rehberi-girne-seo",
+  "merge": [
+   "kktc-google-analytics-search-console-rehberi-girne",
+   "kktc-google-analytics-search-console-veri-analizi-girne",
+   "kktc-google-analytics-search-console-veri-odakli-buyume-girne",
+   "kktc-google-search-console-seo-rehberi-girne",
+   "kktc-veri-odakli-buyume-google-analytics-search-console-girne"
+  ],
+  "min_cos": 0.35
+ },
+ {
+  "keep": "kktc-web-sitesi-guvenligi-bakimi-hacker-korumasi-girne",
+  "merge": [
+   "kktc-web-sitesi-guvenligi-bakimi-girne",
+   "kktc-web-sitesi-guvenligi-bakimi-rehberi-girne"
+  ],
+  "min_cos": 0.43
+ },
+ {
+  "keep": "kktc-marka-hikayeciligi-video-produksiyon-girne",
+  "merge": [
+   "kktc-belgesel-roportaj-cekimi-marka-hikayesi-girne",
+   "kktc-marka-hikayeciligi-belgesel-roportaj-cekimi-girne",
+   "kktc-marka-hikayeciligi-belgesel-roportaj-video-girne"
+  ],
+  "min_cos": 0.3
+ },
+ {
+  "keep": "kktc-web-sitesi-mobil-uyum-hiz-optimizasyonu-girne",
+  "merge": [
+   "kktc-mobil-uyumlu-web-tasarim-hiz-optimizasyonu-girne"
+  ],
+  "min_cos": 0.35
+ },
+ {
+  "keep": "kktc-sosyal-medya-topluluk-yonetimi-girne-lefkoa",
+  "merge": [
+   "kktc-sosyal-medya-etkilesim-yonetimi-girne"
+  ],
+  "min_cos": 0.3
+ },
+ {
+  "keep": "kktc-otel-sezon-disi-doluluk-artirma-girne",
+  "merge": [
+   "kktc-turizm-sezon-disi-doluluk-artirma-girne"
+  ],
+  "min_cos": 0.46
+ },
+ {
+  "keep": "kktc-google-shopping-reklamlari-e-ticaret-girne",
+  "merge": [
+   "kktc-perakende-google-shopping-reklamlari-rehberi-girne"
+  ],
+  "min_cos": 0.54
+ },
+ {
+  "keep": "kktc-mimari-fotografcilik-emlak-turizm-girne",
+  "merge": [
+   "kktc-emlak-turizm-mimari-fotografcilik-drone-cekimi-girne"
+  ],
+  "min_cos": 0.33
+ },
+ {
+  "keep": "kktc-google-ads-reklam-uzantilari-ctr-artirma-girne",
+  "merge": [
+   "kktc-google-ads-reklam-uzantilari-butce-optimizasyonu-girne",
+   "kktc-google-ads-reklam-uzantilari-donusum-artirma-girne"
+  ],
+  "min_cos": 0.68
+ },
+ {
+  "keep": "kktc-google-goruntulu-reklam-stratejileri-girne",
+  "merge": [
+   "kktc-google-goruntulu-reklam-marka-bilinirligi-girne"
+  ],
+  "min_cos": 0.38
+ },
+ {
+  "keep": "kktc-twitter-x-pazarlama-stratejileri-girne",
+  "merge": [
+   "kktc-twitter-x-pazarlama-marka-yonetimi-girne"
+  ],
+  "min_cos": 0.39
+ },
+ {
+  "keep": "kktc-perakende-omnichannel-pazarlama-stratejileri-girne",
+  "merge": [
+   "kktc-perakende-omnichannel-pazarlama-fiziksel-dijital-deneyim-girne"
+  ],
+  "min_cos": 0.38
+ },
+ {
+  "keep": "kktc-kurumsal-tanitim-filmi-adim-adim-rehber-girne",
+  "merge": [
+   "kktc-kurumsal-tanitim-filmi-reklam-cekimi-sureci-girne"
+  ],
+  "min_cos": 0.36
+ },
+ {
+  "keep": "kktc-kurumsal-tanitim-filmi-marka-hikayeciligi-girne",
+  "merge": [
+   "kktc-kurumsal-tanitim-filmi-marka-hikayesi-anlatimi-girne",
+   "kktc-kurumsal-tanitim-filmi-marka-imaji-girne",
+   "kktc-kurumsal-tanitim-filmi-rehberi-girne",
+   "kktc-kurumsal-tanitim-filmi-roi-stratejisi-girne"
+  ],
+  "min_cos": 0.28
+ },
+ {
+  "keep": "kktc-universite-dijital-marka-yonetimi-girne",
+  "merge": [
+   "kktc-universite-sosyal-medya-yonetimi-girne"
+  ],
+  "min_cos": 0.33
+ },
+ {
+  "keep": "kktc-banner-tasarimi-gdn-reklam-stratejileri-girne",
+  "merge": [
+   "kktc-programatik-reklam-banner-tasarimi-girne"
+  ],
+  "min_cos": 0.4
+ }
+]
