@@ -243,7 +243,6 @@ export default defineConfig({
         '/blog/kktc-cok-dilli-dijital-pazarlama-stratejileri-girne',
         '/blog/kktc-perakende-musteri-sadakati-dijital-pazarlama-girne',
         '/blog/kktc-dijital-varlik-yonetimi-girne-stratejileri',
-        '/blog/kktc-finans-danismanlik-dijital-pazarlama-guven-insasi-girne',
         '/blog/kktc-web-tasarim-wordpress-vs-ozel-yazilim-girne',
         '/blog/kktc-b2b-pazarlama-kurumsal-musteri-ulasma-rehberi',
         '/blog/kktc-turizm-sektoru-entegre-dijital-pazarlama-girne',
