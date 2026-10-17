@@ -93,7 +93,6 @@ const SEO = () => {
         canonical: serviceUrl,
         alternates: [
             { hreflang: 'tr', href: serviceUrl },
-            { hreflang: 'en', href: 'https://bccreative.agency/en/hizmetler/seo' },
         ],
         schemas: [
             buildServiceSchema({

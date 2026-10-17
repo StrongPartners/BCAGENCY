@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect, useRef, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Clock, ArrowLeft, Tag, ChevronRight } from 'lucide-react';
 import latestPosts from '../data/blogLatest.json';
@@ -14,6 +14,19 @@ import {
 } from '../lib/geoSchemas';
 
 const VoxelMini = lazy(() => import('./hero/VoxelMini'));
+
+const SERVICE_NAMES = {
+  '/hizmetler/seo': { tr: 'SEO hizmetimiz', en: 'Our SEO service' },
+  '/hizmetler/google-ads': { tr: 'Google Ads yönetimi', en: 'Google Ads management' },
+  '/hizmetler/sosyal-medya': { tr: 'Sosyal medya yönetimi', en: 'Social media management' },
+  '/hizmetler/web-tasarim': { tr: 'Web tasarım hizmetimiz', en: 'Our web design service' },
+  '/hizmetler/produksiyon': { tr: 'Video prodüksiyon', en: 'Video production' },
+  '/hizmetler/drone-cekim': { tr: 'Drone çekim', en: 'Drone filming' },
+  '/hizmetler/fotograf-video': { tr: 'Fotoğraf ve video çekimi', en: 'Photo and video shoots' },
+  '/hizmetler/uygulama-gelistirme': { tr: 'Mobil uygulama geliştirme', en: 'Mobile app development' },
+  '/hizmetler/crm-yazilim': { tr: 'CRM ve iş yazılımları', en: 'CRM and business software' },
+  '/hizmetler/reels-video-edit': { tr: 'Reels üretimi ve video edit', en: 'Reels production and video editing' },
+};
 const categoryLabels = {
   'SEO': { tr: 'SEO', en: 'SEO' },
   'Google Ads': { tr: 'Google Ads', en: 'Google Ads' },
@@ -230,7 +243,6 @@ const BlogPost = () => {
     ogImage: post?.image,
     alternates: [
       { hreflang: 'tr', href: canonicalUrl },
-      { hreflang: 'en', href: `https://bccreative.agency/en/blog/${slug}` }
     ],
     schemas: articleSchemas,
   });
@@ -252,7 +264,8 @@ const BlogPost = () => {
     );
   }
 
-  const otherPosts = latestPosts.filter(p => p.slug !== slug).slice(0, 3);
+  const otherPosts = post.related?.length ? post.related : latestPosts.filter(p => p.slug !== slug).slice(0, 3);
+  const serviceName = SERVICE_NAMES[post.service];
 
   return (
     <div className="min-h-screen bg-ink-900">
@@ -307,6 +320,16 @@ const BlogPost = () => {
             {renderContent(postContent)}
           </motion.div>
 
+          {serviceName && (
+            <Link to={post.service} className="mt-14 flex items-center justify-between gap-4 rounded-2xl border border-secondary-300/30 bg-white/5 px-6 py-5 md:px-8 hover:bg-white/10 transition-colors">
+              <span className="text-white/60 text-base md:text-lg">
+                {lang === 'tr' ? 'Bu konuda Girne ve Lefkoşa’da destek mi lazım?' : 'Need help with this in Kyrenia or Nicosia?'}
+                <strong className="block text-white text-xl md:text-2xl mt-1">{serviceName[lang] || serviceName.tr}</strong>
+              </span>
+              <ChevronRight className="text-secondary-300 shrink-0" />
+            </Link>
+          )}
+
           {/* CTA */}
           <div className="mt-20 p-10 md:p-14 bg-ink-900 rounded-2xl text-center">
             <Suspense fallback={<div className="h-32" />}>
@@ -335,10 +358,10 @@ const BlogPost = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-10 tracking-tight">{t('blog_other_posts')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {otherPosts.map((other) => (
-                <div
+                <Link
                   key={other.id}
-                  onClick={() => navigate(`/blog/${other.slug}`)}
-                  className="bg-white/5 rounded-xl overflow-hidden border border-white/10 cursor-pointer group hover:bg-white/10 transition-all"
+                  to={`/blog/${other.slug}`}
+                  className="block bg-white/5 rounded-xl overflow-hidden border border-white/10 cursor-pointer group hover:bg-white/10 transition-all"
                 >
                   <div className="h-44 overflow-hidden">
                     <img
@@ -358,7 +381,7 @@ const BlogPost = () => {
                       {t('blog_read_more')} <ChevronRight size={14} />
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

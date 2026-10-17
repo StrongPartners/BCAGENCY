@@ -90,7 +90,6 @@ const WebDesign = () => {
         canonical: serviceUrl,
         alternates: [
             { hreflang: 'tr', href: serviceUrl },
-            { hreflang: 'en', href: 'https://bccreative.agency/en/hizmetler/web-tasarim' },
         ],
         schemas: [
             buildServiceSchema({ name: isTr ? 'Web Tasarım' : 'Web Design', description: content.description, url: serviceUrl, serviceType: 'WebDesign' }),

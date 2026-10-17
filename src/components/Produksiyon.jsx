@@ -90,7 +90,6 @@ const Produksiyon = () => {
         canonical: serviceUrl,
         alternates: [
             { hreflang: 'tr', href: serviceUrl },
-            { hreflang: 'en', href: 'https://bccreative.agency/en/hizmetler/produksiyon' },
         ],
         schemas: [
             buildServiceSchema({ name: isTr ? 'Video Prodüksiyon' : 'Video Production', description: content.description, url: serviceUrl, serviceType: 'VideoProduction' }),

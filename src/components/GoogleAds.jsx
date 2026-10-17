@@ -92,7 +92,6 @@ const GoogleAds = () => {
         canonical: serviceUrl,
         alternates: [
             { hreflang: 'tr', href: serviceUrl },
-            { hreflang: 'en', href: 'https://bccreative.agency/en/hizmetler/google-ads' },
         ],
         schemas: [
             buildServiceSchema({

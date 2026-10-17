@@ -90,7 +90,6 @@ const FotografVideo = () => {
         canonical: serviceUrl,
         alternates: [
             { hreflang: 'tr', href: serviceUrl },
-            { hreflang: 'en', href: 'https://bccreative.agency/en/hizmetler/fotograf-video' },
         ],
         schemas: [
             buildServiceSchema({ name: isTr ? 'Fotoğraf & Video' : 'Photography & Video', description: content.description, url: serviceUrl, serviceType: 'Photography' }),

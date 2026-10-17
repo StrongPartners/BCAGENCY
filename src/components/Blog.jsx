@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Clock, ArrowUpRight } from 'lucide-react';
 import blogPosts from '../data/blogIndex.json';
@@ -145,7 +145,7 @@ const Blog = () => {
                     <VoxelIcon name={categoryShape(post.category)} className="ml-auto w-9 h-9 -my-2" />
                   </div>
                   <h2 className="text-xl font-bold text-white mb-3 leading-snug line-clamp-2 group-hover:text-secondary-300 group-hover:-translate-y-0.5 transition-all duration-300">
-                    {post.title[lang] || post.title.tr}
+                    <Link to={`/blog/${post.slug}`} onClick={(e) => e.stopPropagation()}>{post.title[lang] || post.title.tr}</Link>
                   </h2>
                   <p className="text-white/40 text-sm leading-relaxed mb-4 line-clamp-3">
                     {post.excerpt[lang] || post.excerpt.tr}

@@ -90,7 +90,6 @@ const DroneCekim = () => {
         canonical: serviceUrl,
         alternates: [
             { hreflang: 'tr', href: serviceUrl },
-            { hreflang: 'en', href: 'https://bccreative.agency/en/hizmetler/drone-cekim' },
         ],
         schemas: [
             buildServiceSchema({ name: isTr ? 'Drone Çekim' : 'Drone Filming', description: content.description, url: serviceUrl, serviceType: 'AerialPhotography' }),

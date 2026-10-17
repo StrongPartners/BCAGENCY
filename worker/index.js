@@ -31,6 +31,42 @@ const PAGES = {
   '/kullanim-sartlari': ['Kullanım Şartları | BC Creative Agency', 'BC Creative Agency web sitesi kullanım şartları ve koşulları.'],
 };
 
+// Kaldırılmış eski adresler → en yakın canlı sayfa (Search Console'da tıklama alıyorlardı)
+const REDIRECTS = { '/fiyat': '/contact', '/hizmetler': '/' };
+
+const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const inline = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+  .replace(/\[([^\]]+)\]\((\/[^)\s]*|https:\/\/[^)\s]+)\)/g, '<a href="$2">$1</a>');
+
+// Yazının markdown içeriği → JS çalıştırmayan tarayıcılar için sade HTML
+function mdToHtml(md) {
+  const out = []; let list = false;
+  for (const raw of (md || '').split('\n')) {
+    const l = raw.trim();
+    const li = l.match(/^[-*] (.+)/) || l.match(/^\d+\. (.+)/);
+    if (list && !li) { out.push('</ul>'); list = false; }
+    if (!l || /^\|?[\s:-]+\|[\s:|-]*$/.test(l)) continue;
+    const h = l.match(/^(#{1,4}) (.+)/);
+    if (h) out.push(`<h${Math.min(h[1].length + 1, 4)}>${inline(h[2])}</h${Math.min(h[1].length + 1, 4)}>`);
+    else if (li) { if (!list) { out.push('<ul>'); list = true; } out.push(`<li>${inline(li[1])}</li>`); }
+    else if (l.startsWith('|')) out.push(`<p>${inline(l.split('|').map((c) => c.trim()).filter(Boolean).join(' · '))}</p>`);
+    else out.push(`<p>${inline(l)}</p>`);
+  }
+  if (list) out.push('</ul>');
+  return out.join('');
+}
+
+// Sayfaya özel tarayıcısız içerik: başlık + açıklama, yazılarda tam metin ve iç bağlantılar
+function fallbackMain(meta) {
+  if (!meta.post) return `<h1>${esc(meta.title.split(' | ')[0])}</h1><p>${esc(meta.desc)}</p>`;
+  const p = meta.post;
+  const body = typeof p.content === 'object' ? (p.content.tr || p.content.en) : p.content;
+  const rel = (p.related || []).map((r) => `<li><a href="/blog/${esc(r.slug)}">${esc(r.title.tr || r.title.en)}</a></li>`).join('');
+  return `<article><h1>${esc(p.title.tr || p.title.en)}</h1>${mdToHtml(body)}</article>`
+    + (p.service ? `<p><a href="${esc(p.service)}">BC Creative Agency hizmet sayfası</a></p>` : '')
+    + (rel ? `<h2>İlgili yazılar</h2><ul>${rel}</ul>` : '');
+}
+
 const clip = (s, n) => (s.length > n ? s.slice(0, n - 1).trimEnd() + '…' : s);
 
 // Bir sayfanın meta bilgisi: { title, desc, image?, article? } ya da null (sayfa yok → 404)
@@ -45,7 +81,7 @@ async function pageMeta(path, env) {
     const title = (p.title && (p.title.tr || p.title.en)) || '';
     const desc = (p.excerpt && (p.excerpt.tr || p.excerpt.en)) || '';
     if (!title) return null;
-    return { title: `${title} | BC Creative Agency`, desc: clip(desc, 300), image: p.image, article: true };
+    return { title: `${title} | BC Creative Agency`, desc: clip(desc, 300), image: p.image, article: true, post: p };
   } catch { return null; }
 }
 
@@ -79,6 +115,7 @@ export default {
     }
 
     const path = url.pathname;
+    if (REDIRECTS[path]) return Response.redirect(ORIGIN + REDIRECTS[path], 301);
     const [meta, res] = await Promise.all([pageMeta(path, env), env.ASSETS.fetch(request)]);
     if (!(res.headers.get('content-type') || '').includes('text/html')) return res;
 
@@ -92,7 +129,9 @@ export default {
     }
 
     const canon = ORIGIN + path;
-    return new HTMLRewriter()
+    const rw = new HTMLRewriter();
+    if (path !== '/') rw.on('#static-fallback main', { element: (e) => e.setInnerContent(fallbackMain(meta), { html: true }) });
+    return rw
       .on('link[rel="canonical"]', setAttr('href', canon))
       .on('meta[property="og:url"]', setAttr('content', canon))
       .on('title', { element: (e) => e.setInnerContent(meta.title) })

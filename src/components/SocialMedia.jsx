@@ -90,7 +90,6 @@ const SocialMedia = () => {
         canonical: serviceUrl,
         alternates: [
             { hreflang: 'tr', href: serviceUrl },
-            { hreflang: 'en', href: 'https://bccreative.agency/en/hizmetler/sosyal-medya' },
         ],
         schemas: [
             buildServiceSchema({ name: isTr ? 'Sosyal Medya Yönetimi' : 'Social Media Management', description: content.description, url: serviceUrl, serviceType: 'SocialMediaMarketing' }),

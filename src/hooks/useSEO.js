@@ -27,7 +27,7 @@ const useSEO = ({
   ogImage,
   ogType = 'website',
   twitterCard = 'summary_large_image',
-  alternates = [], // [{ hreflang: 'en', href: '...' }]
+  alternates = [], // [{ hreflang: 'tr', href: '...' }]
   schema = null,   // single JSON-LD object (legacy)
   schemas = null,  // array of JSON-LD objects (preferred)
   noindex = false,
