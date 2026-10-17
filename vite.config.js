@@ -457,6 +457,7 @@ export default defineConfig({
         '/blog/kktc-restoran-kafe-tanitim-videosu-cekim-plani-girne-lefkosa',
         '/blog/kktc-google-ads-yeniden-pazarlama-remarketing-whatsapp-girne-lefkosa',
         '/blog/kktc-emlak-google-ads-arama-kampanyasi-satilik-kiralik-girne-lefkosa',
+        '/blog/kktc-klinik-whatsapp-randevu-sistemi-girne-lefkosa',
       ],
     })),
   ],
