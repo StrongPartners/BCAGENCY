@@ -1,10 +1,38 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import sitemap from 'vite-plugin-sitemap'
+import { readFileSync } from 'node:fs'
+
+// Site haritasında gerçek tarihler: yazılar kendi yayın tarihi, sayfalar elle güncellenen tarih.
+// (Önce her derlemede 438 adresin hepsi "bugün" yazıyordu; Google böyle lastmod'u yok sayar.)
+const PAGES_UPDATED = new Date('2026-10-17')
+const TR_MONTHS = ['ocak', 'şubat', 'mart', 'nisan', 'mayıs', 'haziran', 'temmuz', 'ağustos', 'eylül', 'ekim', 'kasım', 'aralık']
+const postDates = (() => {
+  try {
+    const index = JSON.parse(readFileSync('src/data/blogIndex.json', 'utf8'))
+    return Object.fromEntries(index.flatMap((p) => {
+      const [d, m, y] = String(p.date?.tr || '').toLocaleLowerCase('tr').split(/\s+/)
+      const mi = TR_MONTHS.indexOf(m)
+      return mi < 0 || !+d || !+y ? [] : [[`/blog/${p.slug}`, new Date(Date.UTC(+y, mi, +d))]]
+    }))
+  } catch { return {} }
+})()
+const lastmodFor = (route) => postDates[route] || PAGES_UPDATED
+const priorityFor = (route) => route === '/' ? 1.0 : route.startsWith('/hizmetler/') ? 0.9 : route.startsWith('/blog/') ? 0.5 : 0.7
 
 // Site haritasında tekrar olmasın: aynı rota iki kez ve '/' (eklenti ana sayfayı zaten ekliyor) çıkarılır.
 // Liste aşağıda olduğu gibi kalır; blog botları yeni rotayı son '/blog/...' satırının ardına eklemeye devam eder.
-const dedupeRoutes = (o) => ({ ...o, dynamicRoutes: [...new Set(o.dynamicRoutes)].filter((r) => r !== '/') })
+// Her rotaya kendi lastmod ve priority değeri (ana sayfa dahil) eklenir.
+const dedupeRoutes = (o) => {
+  const routes = [...new Set(o.dynamicRoutes)].filter((r) => r !== '/')
+  const all = ['/', ...routes]
+  return {
+    ...o,
+    dynamicRoutes: routes,
+    lastmod: Object.fromEntries(all.map((r) => [r, lastmodFor(r)])),
+    priority: Object.fromEntries(all.map((r) => [r, priorityFor(r)])),
+  }
+}
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -13,6 +41,7 @@ export default defineConfig({
     sitemap(dedupeRoutes({
       hostname: 'https://bccreative.agency',
       generateRobotsTxt: true,
+      changefreq: 'weekly',
       dynamicRoutes: [
         // ── Main Pages ─────────────────────────────────────────────────────
         '/',
